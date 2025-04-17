@@ -1,0 +1,21 @@
+version: "3"
+
+interval: "500ms" # Interval for --watch mode
+
+tasks:
+    default:
+        deps: [build]
+
+    build:
+        description: Compile Sass into Css
+        cmds:
+            - pwd
+            - |
+                sass \
+                  --no-source-map \
+                  src/style.scss \
+                | postcss --use autoprefixer --output ../../lib/css/style.css --no-map
+        sources:
+            - ./**/*.scss
+        generates:
+            - ../../lib/css/style.css

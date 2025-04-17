@@ -1,0 +1,310 @@
+.global-nav {
+    width: 100%;
+    @include size(height, 60);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    background-color: $white;
+    @include size(line-height, 60);
+    @include size(font-size, 15);
+    font-weight: 400;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.13);
+    font-family: $secondaryFontFamily;
+}
+
+.global-nav__logo {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    margin-left: 2rem;
+    transition: transform 0.3s;
+    transform-origin: left center;
+    font-size: 2rem;
+    color: $mainThemeColor;
+    -webkit-font-smoothing: antialiased;
+
+    img {
+        width: 40px;
+        margin-right: 7px;
+        position: relative;
+        top: -5px;
+    }
+
+    .-methodology {
+        color: $grey;
+    }
+
+    @include setInteractive {
+        color: $mainThemeColor;
+        text-decoration: none;
+        transform: scale(1.1);
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        margin-left: 0;
+        font-size: 2.8rem;
+
+        img {
+            width: 50px;
+            top: -3px;
+        }
+    }
+}
+
+.global-nav__menu {
+    display: block;
+    width: 100%;
+    position: fixed;
+    @include size(top, 120);
+    right: 0;
+    z-index: 1000;
+    background-color: $menuMobileBgColor;
+    transform: translateX(100%);
+    transition: all 250ms ease-out;
+
+    ul {
+        margin-bottom: 0;
+        list-style-type: none;
+    }
+
+    li {
+        display: block;
+        @include size(line-height, 18);
+        border-bottom: 1px solid color-mix(in srgb, $typographyColor 40%, white);
+    }
+
+    a {
+        display: block;
+        @include size(padding, 12, 14);
+        transition: background 250ms linear;
+        text-align: left;
+        color: $grey;
+        transition: color 0.3s;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $mainThemeColor;
+            text-decoration: none;
+        }
+    }
+
+    .is-active > a {
+        color: $mainThemeColor;
+
+        a:hover,
+        &:active,
+        &:focus {
+            color: inherit;
+        }
+    }
+
+    .is-open & {
+        transform: translateX(0);
+    }
+
+    ul {
+        display: none;
+    }
+
+    &.-methodology {
+        justify-content: flex-end;
+        top: 60px;
+    }
+
+    @include mq(min-width, $smallBreakpoint) {
+        width: 35%;
+        height: 100%;
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        display: flex;
+        align-items: center;
+        width: auto;
+        margin-top: 10px;
+        position: static;
+        transform: none;
+        background: none;
+        transition: none;
+
+        > li {
+            border: none;
+        }
+
+        a {
+            padding: 0 15px;
+        }
+
+        > li:first-child a {
+            padding-left: 0;
+        }
+    }
+}
+
+// Actions
+
+.global-nav__actions {
+    width: 100%;
+    @include size(height, 60);
+    position: fixed;
+    @include size(top, 60);
+    right: 0;
+    z-index: 1000;
+    background: $mainThemeColor;
+    @include size(line-height, 60);
+    transform: translateX(100%);
+    transition: all 250ms ease-out;
+
+    .is-open & {
+        transform: translateX(0);
+    }
+
+    ul {
+        margin-bottom: 0;
+        list-style: none;
+    }
+
+    @include mq(min-width, $smallBreakpoint) {
+        width: 35%;
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        width: auto;
+        position: absolute;
+        top: 0.3rem;
+        right: 10rem;
+        background: none;
+        transform: none;
+        transition: none;
+    }
+}
+
+.login--global-nav,
+.profile--global-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: $white;
+    transition: color 0.3s;
+
+    @include setInteractive {
+        color: $white;
+        text-decoration: none;
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        color: $grey;
+
+        @include setInteractive {
+            color: $mainThemeColor;
+
+            i {
+                background-color: $mainThemeColor;
+                color: $white;
+            }
+        }
+    }
+}
+
+.login--global-nav {
+    i {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        position: relative;
+        z-index: 10;
+        background: $white;
+        border-radius: 50%;
+        font-size: 16px;
+        color: $mainThemeColor;
+        transition: background 0.3s, color 0.4s;
+
+        &:before {
+            position: relative;
+            z-index: 10;
+        }
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        span {
+            order: 1;
+        }
+
+        i {
+            order: 2;
+            width: 50px;
+            height: 50px;
+            margin: 0 0 0 15px;
+            background: rgba($grey, 0.2);
+            font-size: 25px;
+            color: rgba($grey, 0.8);
+        }
+    }
+}
+
+.profile--global-nav {
+    .avatar__image {
+        display: inline-block;
+        @include size(width, 30);
+        @include size(height, 30);
+        margin: 0 10px;
+        position: relative;
+        top: -2px;
+        border-radius: 50%;
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        .avatar__image {
+            order: 2;
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-height: 400px) {
+    .global-nav__menu {
+        height: calc(100% - 120px);
+        overflow: scroll;
+    }
+}
+
+@include mq(min-width, $largeBreakpoint) {
+    .global-nav {
+        position: static;
+        height: auto;
+    }
+
+    .global-nav__logo {
+        //flex: 100%;
+    }
+
+    .global-nav__menu {
+        flex: 100%;
+    }
+
+    .global-nav__container {
+        display: flex;
+        flex-flow: row wrap;
+        width: 90%;
+        @include size(max-width, 1000);
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .toggle-menu {
+        display: none;
+    }
+}
+
+@include mq(max-height, 500) {
+    .is-open .global-nav__menu {
+        height: calc(100% - (#{$globalNavHeight + $globalNavHeight}px));
+        overflow-y: scroll;
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "rsc": {
+        "category": "remark",
+        "is_published": true,
+        "title": "Ik vind dit niets"
+    },
+    "edges": [
+        {
+            "object_id": 1,
+            "predicate_name": "about"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "id": 407,
+    "rsc": {
+        "title": "Ik vind dit geweldig"
+    },
+    "edges": [
+        {
+            "object_id": 1,
+            "predicate_name": "about"
+        }
+    ]
+}

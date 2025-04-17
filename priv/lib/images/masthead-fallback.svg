@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1316px" height="271px" viewBox="0 0 1316 271" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>KC_Logo Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="-0.68003182%" y1="42.7957795%" x2="100.759878%" y2="38.6848478%" id="linearGradient-1">
+            <stop stop-color="#00A2B6" offset="0%"></stop>
+            <stop stop-color="#057F8E" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="1316" height="271"></rect>
+    </defs>
+    <g id="Kenniscloud" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="KC_Logo-Copy">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <use id="Mask" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+            <g id="Group-19" mask="url(#mask-3)" stroke="#0D7A87" stroke-linecap="round" stroke-width="81">
+                <g transform="translate(109.000000, -125.000000)">
+                    <path d="M97.1563232,573.689305 C42.8099282,569.502181 0,523.514484 0,467.4 C0,415.258117 36.9630652,371.859931 85.7985884,362.617231 C85.2782035,357.299587 85.0117828,351.906305 85.0117828,346.45 C85.0117828,257.007485 156.602846,184.5 244.914898,184.5 C288.383571,184.5 327.801127,202.066921 356.624146,230.573582 C356.369691,227.549962 356.239852,224.490338 356.239852,221.4 C356.239852,162.526446 403.363083,114.8 461.492535,114.8 C491.906724,114.8 519.307919,127.865292 538.523009,148.756544 C556.577788,63.7306064 631.228452,0 720.576063,0 C823.420478,0 906.792349,84.4390962 906.792349,188.6 C906.792349,215.306398 901.311591,240.71631 891.427103,263.738918 C966.81129,273.78262 1025,339.108973 1025,418.2 C1025,503.150217 957.87052,572.2208 874.406915,573.966175 L874.406908,574 L97.1563232,574 L97.1563232,573.689305 Z" id="Combined-Shape" stroke-linejoin="round"></path>
+                    <path d="M821,429 C821,361.068976 763.851074,306 693.3543,306 C653.780701,306 618.413243,323.353202 595,350.593525" id="Oval-3-Copy-5" stroke-linejoin="round" transform="translate(708.000000, 367.500000) rotate(10.000000) translate(-708.000000, -367.500000) "></path>
+                    <path d="M1025,429 C1025,338.425301 955.996774,265 870.876982,265 C826.824141,265 787.088074,284.666744 759,316.19919" id="Oval-3-Copy-3" stroke-linejoin="round"></path>
+                    <path d="M184,410.876972 C165.621067,384.924605 135.464481,368 101.379008,368 C45.3889277,368 0,413.666956 0,470" id="Oval-3"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

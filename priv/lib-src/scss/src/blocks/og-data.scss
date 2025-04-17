@@ -1,0 +1,69 @@
+.og-data {
+    display: block;
+    color: $typographyColor;
+
+    img {
+        width: 100%;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+}
+
+a.og-data {
+    margin: 0 0 20px;
+    opacity: 1;
+    color: $white;
+    transition: opacity 0.3s;
+
+    .og-data__content {
+        border: 1px solid $white;
+        border-top: 0;
+
+        &.-no-image {
+            border-top: 1px solid $white;
+        }
+    }
+
+    @include setInteractive {
+        opacity: 0.8;
+        text-decoration: none;
+    }
+
+    @include mq(min-width, $smallBreakpoint) {
+        max-width: 175px;
+        margin: 0 30px 0 0;
+        flex-shrink: 0;
+    }
+}
+
+.og-data__content {
+    padding: 15px 15px 10px;
+    border: 1px solid #ECEBEB;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: 0;
+
+    &.-no-image {
+        border-top: 1px solid #ECEBEB;
+    }
+
+    small {
+        font-size: $superDuperSmallFont;
+    }
+
+    h3 {
+        margin: .25em 0 .375em;
+        font-family: $bodyFontFamily;
+        font-size: $smallFont;
+        hyphens: auto;
+    }
+
+    p {
+        margin: 0;
+        font-size: $superSmallFont;
+    }
+}
+
+.break-word {
+    word-break: break-all;
+}

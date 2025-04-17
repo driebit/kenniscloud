@@ -1,0 +1,191 @@
+.toggle-notifications {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: $white;
+    border: 1px solid rgba($black, 0.3);
+
+    @include setInteractive {
+        border-color: $mainThemeColor;
+        color: $mainThemeColor;
+    }
+
+    &.-active {
+        background: $secondaryThemeColor;
+        border-color: $secondaryThemeColor;
+        color: $white;
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        right: 6.8rem;
+    }
+}
+
+@keyframes rinkling {
+  0%   { transform: rotate(0) }
+  33%   { transform: rotate(15deg) }
+  66%   { transform: rotate(-15deg) }
+  100% { transform: rotate(0deg) }
+}
+
+.notifications {
+    position: absolute;
+    top: 1.7rem;
+    right: 6.5rem;
+    z-index: 1100;
+
+    .-alert {
+        background: #FF5834;
+        border-color: #FF5834;
+        color: $white;
+
+        i {
+            transform-origin: top center;
+            animation: rinkling 1.5s 3; /* IE 10+, Fx 29+ */
+
+        }
+    }
+}
+
+.notifications__list {
+    min-width: 70vw;
+    position: absolute;
+    top: 4.2rem;
+    right: -0.6rem;
+    background: $remarkGrey;
+    border: 1px solid rgba($typographyColor, 0.3);
+    font-family: $extraFontFamily;
+    transition: all .3s;
+
+    &:after {
+        content: '';
+        height: 5rem;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to bottom, rgba($remarkGrey,0) 0%,rgba($remarkGrey,1) 99%,rgba($remarkGrey,1) 100%);
+        pointer-events: none;
+    }
+
+    &:before {
+        content: '';
+        width: 1.5rem;
+        height: 1.5rem;
+        position: absolute;
+        top: -0.8rem;
+        right: 1rem;
+        background: $remarkGrey;
+        border-top: 1px solid rgba($typographyColor, 0.3);
+        border-right: 1px solid rgba($typographyColor, 0.3);
+        transform: rotate(-45deg);
+    }
+
+    h3 {
+        padding: 1rem;
+        margin: 0;
+        font-size: 1.5rem;
+        border-bottom: 1px solid rgba($typographyColor, 0.3);
+    }
+
+    h4 {
+        margin: 0 0 1rem;
+        font-weight: normal;
+        font-family: $tertiaryFontFamily;
+        font-size: 1.3rem;
+    }
+
+    ul {
+        max-height: 70vh;
+        overflow-y: scroll;
+        padding: 0 0 4rem;
+        margin: 0;
+        list-style: none;
+        line-height: 1.2;
+    }
+
+    p {
+        font-size: 1.4rem;
+    }
+
+    a {
+        color: $typographyColor;
+        text-decoration: underline;
+
+        @include setInteractive {
+            color: $mainThemeColor;
+        }
+    }
+
+    li {
+        padding: 1rem;
+    }
+
+    li + li {
+        border-top: 1px solid rgba($typographyColor, 0.3);
+    }
+
+    time {
+        font-size: 1.3rem;
+        font-family: $tertiaryFontFamily;
+    }
+
+    ul > li > p {
+        div {
+            display: inline;
+        }
+
+        p {
+            display: inline;
+        }
+    }
+
+    @include mq(min-width, $mediumBreakpoint) {
+        min-width: 0;
+        width: 40rem;
+    }
+}
+
+.notifications__remove {
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    line-height: 1;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    text-indent: -9999px;
+    border-radius: 50%;
+
+    &:before {
+        @extend .has-icon;
+        @extend .icon--bin;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        text-indent: 0;
+        transform: translate(-50%, -50%);
+        font-size: 1.3rem;
+    }
+
+    @include setInteractive {
+        color: $mainThemeColor;
+    }
+}
+
+.notifications__closetarget {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}

@@ -1,0 +1,66 @@
+.meta {
+    @include size(padding, 10, 0);
+    position: relative;
+    border-top: 1px solid $mainThemeColor;
+    border-bottom: 1px solid $mainThemeColor;
+
+    [class*="__header" ] {
+        @include size(margin-bottom, 10);
+
+        i {
+            @include size(margin-right, 10);
+            vertical-align: middle;
+        }
+    }
+
+    [class*="__link"] {
+        display: block;
+        text-align: right;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+.meta-location {
+    @extend .meta;
+    border-bottom: 0px;
+}
+
+.meta-participants {
+    @extend .meta;
+    border-top: 0px;
+
+    .icon--person {
+        position: relative;
+        top: -2px;
+        @include size(font-size, 16);
+    }
+}
+
+
+@include mq(min-width, $mediumBreakpoint){
+    .meta {
+        @include size(padding, 20, 0);
+        overflow: hidden;
+
+        [class*="__header" ] {
+            width: 30%;
+            margin-bottom: 0;
+            float: left;
+        }
+
+        [class*="__content" ] {
+            width: 70%;
+            float: left;
+        }
+
+        [class*="__link"] {
+            width: auto;
+            position: absolute;
+            right: 0px;
+            bottom: 20px;
+        }
+    }
+}

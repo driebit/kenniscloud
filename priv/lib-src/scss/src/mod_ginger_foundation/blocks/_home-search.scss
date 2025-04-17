@@ -1,0 +1,92 @@
+.home__search {
+    @include size(padding, 40, 0);
+    position: relative;
+    z-index: 100;
+    background: $secondaryThemeColor;
+    color: $white;
+
+    input[type="text"] {
+        width: 100%;
+        @include size(height, 45);
+        @include size(padding, 0, 55, 0, 10);
+        @include size(line-height, 45);
+        border: none;
+        color: $typographyColor;
+        border-radius: 3px;
+    }
+
+    .btn--search {
+        @include size(width, 45);
+        @include size(height, 45);
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background: $mainThemeColor;
+        color: $white;
+        @include size(font-size, 29);
+        text-indent: -9999px;
+        border-radius: 0;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        @include size(padding-top, 6);
+        border: none;
+
+        i {
+            text-indent: 0;
+            position: absolute;
+            top: 8px;
+            left: 16px;
+            @include size(font-size, 29);
+        }
+    }
+}
+
+.home__search__container {
+    @extend .main-container;
+    position: relative;
+}
+
+.home__search__suggestions {
+    width: 100%;
+    @include size(padding, 20);
+    position: absolute;
+    background: $white;
+    @include size(font-size, 15);
+    color: $typographyColor;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+
+    ul {
+        list-style: none;
+    }
+
+    a {
+        color: $typographyColor;
+    }
+
+    .global-search__suggestions__title {
+        margin-bottom: 4px;
+        color: $mainThemeColor;
+        font-family: $secondaryFontFamily;
+        @include size(font-size, 18);
+    }
+}
+
+@include mq(min-width, $mediumBreakpoint) {
+    .home__search {
+
+        input[type="text"] {
+            width: calc(100% - 45px);
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+    }
+
+    .home__search__suggestions {
+        width: 80%;
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+}

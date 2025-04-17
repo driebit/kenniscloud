@@ -1,0 +1,39 @@
+.t--region {
+    main {
+        @include mq(min-width, $mediumBreakpoint) {
+            margin-top: 170px;
+        }
+    }
+
+    .kg-intro,
+    .kg-intro__content {
+        background: $grey;
+
+        .category-of {
+            background: $greyDark;
+        }
+
+        .keywords {
+            li {
+                .btn--secondary {
+                    background: $greyDark;
+    
+                    @include setInteractive {
+                        background: $greyDarker;
+                    }
+                }
+            }
+        }
+    }
+
+
+    .person-list {
+        .btn--primary {
+            margin: 0;
+        }
+    }
+}
+
+.region-members {
+    margin-top: 20px;
+}

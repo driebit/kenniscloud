@@ -1,0 +1,80 @@
+main {
+    @extend %cf;
+    position: relative;
+    z-index: 100;
+    transition: margin-top 0.3s;
+}
+
+.main-content-extend {
+    width: 90%;
+    @include size(max-width, 720);
+    margin: 0 auto;
+    @include size(margin-bottom, $standardOffset);
+    position: relative;
+}
+
+.main-content {
+    @extend .main-content-extend;
+    @include size(padding, 25, 15);
+    background-color: $white;
+}
+
+.main-content--sided,
+article.main-content--sided {
+    @extend .main-content;
+    @include size(max-width, 645);
+    @include size(margin-top, 80);
+
+    > article {
+        background: $white;
+    }
+}
+
+.main-content--sided {
+    background: none;
+}
+
+article.main-content--sided {
+    background-color: $white;
+}
+
+.t--article-sided {
+    main {
+        margin-top: 0;
+    }
+}
+
+.page--sided {
+    padding-top: 0;
+    @include size(max-width, 995);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@include mq(min-width, $mediumBreakpoint) {
+    main {
+        min-height: 100%;
+        margin-top: 250px;
+    }
+
+    .main-content {
+        @include size(padding, 30);
+    }
+
+    .main-content--sided {
+        padding: 0;
+        float: left;
+
+        > article {
+            @include size(padding, 30);
+        }
+    }
+
+    article.main-content--sided {
+        @include size(padding, 30);
+    }
+
+    .main-aside--sided {
+        z-index: 30;
+    }
+}

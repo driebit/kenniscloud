@@ -1,0 +1,4 @@
+%% -*- mode: erlang -*-
+[
+ {crowdparticipant_admin_overview, [ "admin", "crowdparticipant" ], controller_admin, [ {template, "admin_crowdparticipant.tpl"} ]}
+].

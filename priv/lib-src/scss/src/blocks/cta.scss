@@ -1,0 +1,55 @@
+.cta {
+	padding: 50px 15px;
+	background: $kgColor;
+	color: $white;
+	text-align: center;
+	-webkit-font-smoothing: antialiased;
+
+	h2 {
+		max-width: 500px;
+		margin: 0 auto 20px;
+	}
+
+	.btn--primary {
+		margin-bottom: 10px;
+		margin-right: 10px;
+		background-color: $grey;
+		border-color: $grey;
+
+		@include setInteractive {
+			background-color: $black;
+			border-color: $black;
+		}
+	}
+
+	@include mq(min-width, $mediumBreakpoint) {
+
+		h2 {
+			margin-bottom: 40px;
+		}
+
+		.btn--primary {
+			min-width: 210px;
+			text-align: center;
+
+				+ .btn--primary {
+				margin-top: 0;
+				margin-left: 20px;
+			}
+		}
+	}
+}
+
+[class^="cta--"],
+[class*=" cta--"] {
+	@extend .cta;
+}
+
+.cta--event {
+	background: $meetup;
+}
+
+.cta--contribution,
+.cta--reference {
+	background: $green;
+}

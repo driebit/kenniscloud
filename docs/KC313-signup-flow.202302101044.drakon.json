@@ -1,0 +1,556 @@
+{
+  "name": "Signup flow",
+  "type": "drakon",
+  "nodes": {
+    "1": {
+      "id": "1",
+      "type": "beginend",
+      "isLine": false,
+      "x": -170,
+      "y": -440,
+      "w": 70,
+      "h": 40,
+      "content": {
+        "txt": "Signup flow",
+        "txt2": "",
+        "font": "bold 22px 'Liberation Sans'"
+      },
+      "role": "header"
+    },
+    "2": {
+      "id": "2",
+      "type": "end",
+      "isLine": false,
+      "x": -170,
+      "y": 740,
+      "w": 40,
+      "h": 20,
+      "content": {
+        "txt": "End",
+        "txt2": ""
+      }
+    },
+    "7": {
+      "id": "7",
+      "type": "action",
+      "isLine": false,
+      "x": -170,
+      "y": -340,
+      "w": 100,
+      "h": 40,
+      "content": {
+        "txt": "Fill out registration form, with\n- Region\n- Project\nand submit",
+        "txt2": ""
+      }
+    },
+    "10": {
+      "id": "10",
+      "type": "action",
+      "isLine": false,
+      "x": -170,
+      "y": -110,
+      "w": 100,
+      "h": 30,
+      "content": {
+        "txt": "Get a confirmation email with link, click the link",
+        "txt2": ""
+      }
+    },
+    "16": {
+      "id": "16",
+      "type": "action",
+      "isLine": false,
+      "x": -170,
+      "y": -220,
+      "w": 100,
+      "h": 60,
+      "content": {
+        "txt": "Region is stored in property signup_region of the created user resource;\nproject is not stored - it should be passed on via the request page parameter",
+        "txt2": ""
+      }
+    },
+    "134": {
+      "id": "134",
+      "type": "action",
+      "isLine": false,
+      "x": -170,
+      "y": 350,
+      "w": 100,
+      "h": 30,
+      "content": {
+        "txt": "Signup confirm redirect observer",
+        "txt2": ""
+      }
+    },
+    "170": {
+      "id": "170",
+      "type": "question",
+      "isLine": false,
+      "x": -170,
+      "y": 440,
+      "w": 100,
+      "h": 40,
+      "content": {
+        "txt": "No request page\npresent in url,\nor was signup on home?\n(/ or /nl/ or /en/ etc)",
+        "txt2": ""
+      },
+      "flag1": 1
+    },
+    "171": {
+      "id": "171",
+      "type": "junction",
+      "isLine": false,
+      "x": 310,
+      "y": 440,
+      "w": 0,
+      "h": 0
+    },
+    "182": {
+      "id": "182",
+      "type": "action",
+      "isLine": false,
+      "x": 310,
+      "y": 640,
+      "w": 100,
+      "h": 40,
+      "content": {
+        "txt": "Redirect to request page (through default signup confirm redirect behaviour)",
+        "txt2": ""
+      }
+    },
+    "186": {
+      "id": "186",
+      "type": "action",
+      "isLine": false,
+      "x": -170,
+      "y": 520,
+      "w": 100,
+      "h": 20,
+      "content": {
+        "txt": "Start controller",
+        "txt2": ""
+      }
+    },
+    "187": {
+      "id": "187",
+      "type": "question",
+      "isLine": false,
+      "x": -170,
+      "y": 590,
+      "w": 100,
+      "h": 30,
+      "content": {
+        "txt": "Was a region registered with this user?",
+        "txt2": ""
+      },
+      "flag1": 1
+    },
+    "188": {
+      "id": "188",
+      "type": "junction",
+      "isLine": false,
+      "x": 70,
+      "y": 590,
+      "w": 0,
+      "h": 0
+    },
+    "189": {
+      "id": "189",
+      "type": "junction",
+      "isLine": false,
+      "x": 70,
+      "y": 700,
+      "w": 0,
+      "h": 0
+    },
+    "190": {
+      "id": "190",
+      "type": "junction",
+      "isLine": false,
+      "x": -170,
+      "y": 700,
+      "w": 0,
+      "h": 0
+    },
+    "238": {
+      "id": "238",
+      "type": "action",
+      "isLine": false,
+      "x": -170,
+      "y": 660,
+      "w": 100,
+      "h": 20,
+      "content": {
+        "txt": "Redirect to region",
+        "txt2": ""
+      }
+    },
+    "242": {
+      "id": "242",
+      "type": "action",
+      "isLine": false,
+      "x": 70,
+      "y": 650,
+      "w": 100,
+      "h": 30,
+      "content": {
+        "txt": "Redirect to user profile frontend edit",
+        "txt2": ""
+      }
+    },
+    "249": {
+      "id": "249",
+      "type": "junction",
+      "isLine": false,
+      "x": 310,
+      "y": 700,
+      "w": 0,
+      "h": 0
+    },
+    "251": {
+      "id": "251",
+      "type": "action",
+      "isLine": false,
+      "x": -170,
+      "y": -40,
+      "w": 100,
+      "h": 20,
+      "content": {
+        "txt": "Signup confirm observer",
+        "txt2": ""
+      }
+    },
+    "254": {
+      "id": "254",
+      "type": "question",
+      "isLine": false,
+      "x": -170,
+      "y": 40,
+      "w": 100,
+      "h": 40,
+      "content": {
+        "txt": "Does de user have a region associated yet (hasregion edges)?",
+        "txt2": ""
+      },
+      "flag1": 0
+    },
+    "255": {
+      "id": "255",
+      "type": "junction",
+      "isLine": false,
+      "x": -10,
+      "y": 40,
+      "w": 0,
+      "h": 0
+    },
+    "268": {
+      "id": "268",
+      "type": "question",
+      "isLine": false,
+      "x": -170,
+      "y": 140,
+      "w": 100,
+      "h": 40,
+      "content": {
+        "txt": "Is the name in signup_region property an existing region?",
+        "txt2": ""
+      },
+      "flag1": 1
+    },
+    "271": {
+      "id": "271",
+      "type": "junction",
+      "isLine": false,
+      "x": -170,
+      "y": 300,
+      "w": 0,
+      "h": 0
+    },
+    "278": {
+      "id": "278",
+      "type": "action",
+      "isLine": false,
+      "x": -170,
+      "y": 240,
+      "w": 100,
+      "h": 40,
+      "content": {
+        "txt": "Insert\nuser - hasregion - signup region",
+        "txt2": ""
+      }
+    },
+    "284": {
+      "id": "284",
+      "type": "junction",
+      "isLine": false,
+      "x": -10,
+      "y": 300,
+      "w": 0,
+      "h": 0
+    },
+    "289": {
+      "id": "289",
+      "type": "junction",
+      "isLine": false,
+      "x": -10,
+      "y": 140,
+      "w": 0,
+      "h": 0
+    }
+  },
+  "edges": {
+    "8": {
+      "id": "8",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "1",
+      "tail": "7",
+      "role": "down"
+    },
+    "18": {
+      "id": "18",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "16",
+      "tail": "10",
+      "role": "down"
+    },
+    "174": {
+      "id": "174",
+      "type": "horizontal",
+      "isLine": true,
+      "isVertical": false,
+      "head": "170",
+      "tail": "171"
+    },
+    "180": {
+      "id": "180",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "134",
+      "tail": "170",
+      "role": "down"
+    },
+    "183": {
+      "id": "183",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "171",
+      "tail": "182",
+      "role": "down"
+    },
+    "197": {
+      "id": "197",
+      "type": "horizontal",
+      "isLine": true,
+      "isVertical": false,
+      "head": "187",
+      "tail": "188"
+    },
+    "198": {
+      "id": "198",
+      "type": "horizontal",
+      "isLine": true,
+      "isVertical": false,
+      "head": "190",
+      "tail": "189",
+      "role": "left"
+    },
+    "199": {
+      "id": "199",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "186",
+      "tail": "187",
+      "role": "down"
+    },
+    "209": {
+      "id": "209",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "170",
+      "tail": "186",
+      "role": "down"
+    },
+    "216": {
+      "id": "216",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "7",
+      "tail": "16",
+      "role": "down"
+    },
+    "239": {
+      "id": "239",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "187",
+      "tail": "238",
+      "role": "down"
+    },
+    "240": {
+      "id": "240",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "238",
+      "tail": "190",
+      "role": "down"
+    },
+    "243": {
+      "id": "243",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "188",
+      "tail": "242",
+      "role": "down"
+    },
+    "245": {
+      "id": "245",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "242",
+      "tail": "189",
+      "role": "down"
+    },
+    "246": {
+      "id": "246",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "190",
+      "tail": "2",
+      "role": "down"
+    },
+    "247": {
+      "id": "247",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "182",
+      "tail": "249",
+      "role": "down"
+    },
+    "250": {
+      "id": "250",
+      "type": "horizontal",
+      "isLine": true,
+      "isVertical": false,
+      "head": "189",
+      "tail": "249",
+      "role": "left"
+    },
+    "252": {
+      "id": "252",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "10",
+      "tail": "251",
+      "role": "down"
+    },
+    "258": {
+      "id": "258",
+      "type": "horizontal",
+      "isLine": true,
+      "isVertical": false,
+      "head": "254",
+      "tail": "255"
+    },
+    "262": {
+      "id": "262",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "251",
+      "tail": "254",
+      "role": "down"
+    },
+    "276": {
+      "id": "276",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "254",
+      "tail": "268",
+      "role": "down"
+    },
+    "279": {
+      "id": "279",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "268",
+      "tail": "278",
+      "role": "down"
+    },
+    "280": {
+      "id": "280",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "278",
+      "tail": "271",
+      "role": "down"
+    },
+    "281": {
+      "id": "281",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "271",
+      "tail": "134",
+      "role": "down"
+    },
+    "286": {
+      "id": "286",
+      "type": "horizontal",
+      "isLine": true,
+      "isVertical": false,
+      "head": "271",
+      "tail": "284",
+      "role": "left"
+    },
+    "287": {
+      "id": "287",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "255",
+      "tail": "289",
+      "role": "down"
+    },
+    "288": {
+      "id": "288",
+      "type": "vertical",
+      "isLine": true,
+      "isVertical": true,
+      "head": "289",
+      "tail": "284",
+      "role": "down"
+    },
+    "294": {
+      "id": "294",
+      "type": "horizontal",
+      "isLine": true,
+      "isVertical": false,
+      "head": "268",
+      "tail": "289"
+    }
+  },
+  "background": "",
+  "diaLine": "",
+  "diaLineThickness": "",
+  "font": "14px 'Liberation Sans'",
+  "version": 20180619
+}

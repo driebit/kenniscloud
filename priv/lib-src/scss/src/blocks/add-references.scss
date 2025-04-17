@@ -1,0 +1,38 @@
+.add-references {
+    width: 100%;
+    padding: 1.5rem;
+    margin: 2rem 0 0;
+    background: $greyLight;
+    clear: both;
+
+    &.is-open {
+        .add-references__title i {
+            transform: rotateX(180deg);
+        }
+    }
+
+    @include breakpoint($largeBreakpoint) {
+        padding: 3rem;
+        margin: 4rem 0 0;
+    }
+}
+
+.add-references__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 2rem;
+
+    i {
+        width: 50px;
+        flex-shrink: 0;
+        text-align: center;
+        transform: rotate(0deg);
+        transition: transform 0.3s;
+    }
+}
+
+.add-references__button {
+    border: 0;
+    background: none;
+}

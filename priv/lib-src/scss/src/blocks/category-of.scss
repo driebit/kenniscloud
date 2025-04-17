@@ -1,0 +1,35 @@
+.category-of {
+    padding: 0 0 10px;
+    margin: 0 auto 20px;
+    display: inline-block;
+    border-bottom: 5px solid $white;
+    font-family: $secondaryFontFamily;
+    font-size: $smallFont;
+
+    a {
+        margin-left: 10px;
+        color: $white;
+
+        + span {
+            margin-left: 10px;
+        }
+
+        i {
+            margin: 0 5px 0 0;
+        }
+    }
+
+    i {
+        margin: 0 5px 0 10px;
+        position: relative;
+        top: 2px;
+    }
+
+    span + span {
+        margin-left: 10px;
+    }
+}
+
+.page-intro .category-of {
+    margin: 0 auto;
+}

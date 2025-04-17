@@ -1,0 +1,49 @@
+.contributions-bar {
+    padding: 1.5rem 2rem;
+    margin: 0 0 3rem;
+    border-radius: 3px;
+    background: $white;
+
+    > div {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+
+        p {
+            font-size: $smallFont;
+        }
+
+        + div {
+            margin-top: 2rem;
+        }
+    }
+
+    .btn--dark {
+        margin-bottom: 1rem;
+    }
+
+    @include breakpoint($mediumBreakpoint) {
+        padding: 2rem 4rem;
+        display: flex;
+
+        > div {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: center;
+
+            + div {
+                margin-top: 0;
+                margin-left: 8rem;
+            }
+
+            .btn--primary {
+                margin-top: auto;
+            }
+        }
+
+        .btn--dark {
+            margin: 0 1rem 0 0;
+        }
+    }
+}

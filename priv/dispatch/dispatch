@@ -1,0 +1,42 @@
+%% -_- mode: erlang -_-
+[
+%% The home page, just shows the "home.tpl" template.
+{home, [], controller_template, [ {template, "home.tpl"}, {id, page_home} ]},
+
+    %% Normal page to show a resource.
+    {page, ["page", id],       controller_page, [ {template, {cat, "page.tpl"}} ]},
+    {page, ["page", id, slug], controller_page, [ {template, {cat, "page.tpl"}} ]},
+
+    %% Search page.
+    {search, ["search"], controller_template, [ {template, "search.tpl"} ]},
+
+    {members, ["members", id], controller_page, [{template, "page_members.tpl"}, {is_canonical, false}]},
+    {start, ["start"], controller_start, []},
+
+    {contribution_edit, ["bijdrage"], controller_template, [{acl_action, view}, {template, "page_contribution_edit.tpl"} ]},
+    {contribution_edit, ["bijdrage", id], controller_page, [{acl_action, view}, {template, {cat, "page_contribution_edit.tpl"}}, {is_canonical, false}]},
+
+    {meetup_edit, ["meetup"], controller_template, [{acl_action, view}, {template, "page_meetup_edit.tpl"} ]},
+    {meetup_edit, ["meetup", id], controller_page, [{acl_action, view}, {template, {cat, "page_meetup_edit.tpl"}}, {is_canonical, false}]},
+
+    {reference_edit, ["bron"], controller_template, [{acl_action, view}, {template, "page_reference_edit.tpl"} ]},
+    {reference_edit, ["bron", id], controller_page, [{acl_action, view}, {template, {cat, "page_reference_edit.tpl"}}, {is_canonical, false}]},
+
+    {unsubscribe, ["unsubscribe", mailing], controller_template, [{template, "page_unsubscribe.tpl"}]},
+
+    {dcat, ["dcat"], controller_template, [{template, "dcat.tpl"}, {content_type, "text/turtle"}]},
+    {hdt, ["hdt", '*'], controller_file, [{root, ["hdt"]}]},
+
+    {crowd,        ["crowd", id],         controller_page, [{template, "crowd/crowd.tpl"}, {is_canonical, false}]},
+    {crowd_signup, ["crowd", id, "join"], controller_page, [{template, "crowd/participant_signup.tpl"}, {is_canonical, false}]},
+    {crowd_mode,   ["crowd", id, mode],   controller_page, [{template, "crowd/crowd.tpl"}, {is_canonical, false}]},
+
+    % Alternative path to 'image' dispatch (see 'zotonic_mod_base') for docs
+    {document, ["document",'*'], controller_file, []},
+
+    {extra_images, ["extras", id, "images"], controller_page, [ {template, "acl_collaboration_group/additional-images.tpl"}, {is_canonical, false} ]},
+    {extra_documents, ["extras", id, "documents"], controller_page, [ {template, "acl_collaboration_group/additional-documents.tpl"}, {is_canonical, false} ]},
+    {extra_resources, ["extras", id, "resources"], controller_page, [ {template, "acl_collaboration_group/additional-resources.tpl"}, {is_canonical, false} ]},
+    {extra_faqs, ["extras", id, "faq"], controller_page, [ {template, "acl_collaboration_group/additional-faqs.tpl"}, {is_canonical, false} ]}
+
+].

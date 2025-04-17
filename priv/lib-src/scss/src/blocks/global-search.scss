@@ -1,0 +1,196 @@
+.search-suggestions__toggle-search {
+    @extend .global-nav-toggle;
+}
+
+.search-suggestions__toggle-search {
+    top: 1.1rem;
+    right: 11rem;
+    color: $mainThemeColor;
+
+    &:after {
+        @extend :before, .icon--search;
+        @include size(font-size, 25);
+        transition: color 0.3s;
+    }
+
+    &.is-active {
+        top: 10px;
+        right: 15px;
+        z-index: 2100;
+        background: $white;
+        color: $mainThemeColor;
+
+        &:after {
+            @extend :before, .icon--close;
+        }
+    }
+
+    @include setInteractive {
+        &:after {
+            color: $black;
+        }
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+
+        &.is-active {
+            top: 10px;
+            right: 10px;
+        }
+
+        &:after {
+            font-size: 25px;
+            color: $black;
+        }
+    }
+}
+
+.search-suggestions__searchform {
+    position: fixed;
+    top: 0;
+    z-index: 2000;
+    width: 100%;
+    @include size(height, 60);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+    background-color: $white;
+    text-indent: 0px;
+
+    &.is-visible {
+        transform: translateX(0);
+    }
+
+    [type="text"] {
+        display: block;
+        border: none;
+        width: 100%;
+        height: 100%;
+        @include size(padding, 0, 50);
+        background: #fff;
+        font: inherit;
+        font-size: 16px;
+        @include size(line-height, 60);
+        outline: none;
+
+        &::-ms-clear {
+            display: none;
+        }
+    }
+
+    [type="submit"] {
+        display: block;
+        width: 40px;
+        //width: 45px;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background: none;
+        text-indent: -9999px;
+        border: none;
+        color: $mainThemeColor;
+        font-size: 25px;
+
+        &:before {
+            @extend .has-icon;
+            @extend :before, .icon--search;
+            position: absolute;
+            top: 20px;
+            right: 4px;
+            text-indent: 0;
+        }
+    }
+
+    @include mq(min-width, $mediumBreakpoint) {
+        @include size(height, $globalNavHeight);
+
+        [type="text"] {
+            @include size(line-height, $globalNavHeight);
+        }
+
+        [type="submit"] {
+            width: 42px;
+            font-size: 26px;
+
+            &:before {
+                top: 15px;
+            }
+        }
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        border-bottom: 1px solid rgba($black, 0.1);
+        height: 55px;
+
+        [type="text"] {
+            line-height: 55px;
+            font-size: 18px;
+        }
+    }
+}
+
+.search-suggestions__searchform__group {
+    height: 100%;
+
+    .search-form__label {
+        display: none;
+    }
+}
+
+.search-suggestions__suggestions {
+    width: 100%;
+    @include size(padding, 10, 15);
+    background: $white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+
+    ul {
+        @include size(padding-left, 20);
+        @include size(margin, 0, 0, 15, 0);
+
+        li {
+            list-style-type: none;
+            @include size(font-size, 14);
+            @include size(line-height, 18);
+
+            + li {
+                @include size(margin-top, 4);
+            }
+        }
+    }
+
+    a {
+        color: color-mix(in srgb, $typographyColor 80%, white);
+    }
+
+    &.is-scrollable {
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+    @media (max-height: 400px) {
+        &.is-scrollable {
+            height: 200px;
+        }
+    }
+
+    @include mq(min-width, $mediumBreakpoint) {
+        @include size(max-width, 440);
+        @include size(margin-left, 50);
+    }
+}
+
+.search-suggestions__suggestions__title {
+    @include size(margin, 0, 0, 4, 0);
+    font-family: $secondaryFontFamily;
+    color: $mainThemeColor;
+
+    &.no-results {
+        margin: 0;
+        padding: 0;
+    }
+}

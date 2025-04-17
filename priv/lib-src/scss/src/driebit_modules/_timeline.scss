@@ -1,0 +1,216 @@
+.c-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-height: 100%;
+    margin-bottom: 4rem;
+    margin: 0 auto 4rem;
+    width: 100%;
+
+    @include breakpoint($mediumBreakpoint) {
+        width: 60rem;
+        align-items: center;
+    }
+
+    @include breakpoint($largeBreakpoint) {
+        width: 100%;
+    }
+}
+
+.c-timeline__line {
+    position: absolute;
+    width: 0.5rem;
+    background-color: $kgColor;
+    bottom: 0;
+    left: 5%;
+    top: 0;
+    z-index: 0;
+
+    @include breakpoint($mediumBreakpoint) {
+        transform: translateX(-50%);
+        left: 50%;
+        top: 50px;
+    }
+}
+
+.c-timeline__line::after {
+    content: "";
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 3px solid $kgColor;
+    z-index: 1;
+    background-color: $kgColor;
+    bottom: 0;
+    transform: translate(-0.75rem);
+}
+
+.c-timeline__item {
+    width: 100%;
+    position: relative;
+
+    @include breakpoint($mediumBreakpoint) {
+        position: absolute;
+        width: 25rem;
+    }
+
+    @include breakpoint($largeBreakpoint) {
+        width: 45rem;
+    }
+}
+
+.c-timeline__item--left {
+    left: 0;
+}
+
+.c-timeline__item--right {
+    right: 0;
+}
+
+.c-timeline__dot {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 3px solid $kgColor;
+    z-index: 1;
+    top: calc(50% - 1rem);
+    background-color: $offwhite;
+    left: calc(-5% - 1rem);
+
+    @include breakpoint($mediumBreakpoint) {
+        left: unset;
+    }
+
+    @include setInteractive {
+        background-color: $kgColor;
+    }
+}
+
+.c-timeline__item--left .c-timeline__dot {
+    right: 0px;
+    transform: translate(6rem);
+}
+.c-timeline__item--right .c-timeline__dot {
+    left: 0px;
+    transform: translate(-6rem);
+}
+
+.c-timeline-card {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+    margin-bottom: 1.5rem;
+
+    @include breakpoint($mediumBreakpoint) {
+        margin-bottom: 0;
+
+        @include setInteractive {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            scale: 1.05;
+            transition: 0.3s ease;
+        }
+    }
+}
+
+.c-timeline-card::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 10px 6px 0;
+    border-color: transparent #fff transparent transparent;
+    transform: translateY(-50%);
+
+    @include breakpoint($mediumBreakpoint) {
+        all: unset;
+    }
+}
+
+.c-timeline-card__image {
+    height: 10rem;
+    object-fit: cover;
+    object-position: center;
+}
+
+.c-timeline__item--left .c-timeline-card::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 0 6px 10px;
+    border-color: transparent transparent transparent #fff;
+    transform: translateY(-50%);
+}
+
+.c-timeline__item--right .c-timeline-card::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 10px 6px 0;
+    border-color: transparent #fff transparent transparent;
+    transform: translateY(-50%);
+}
+
+.c-timeline__link {
+    all: unset;
+    width: 90%;
+
+    @include breakpoint($mediumBreakpoint) {
+        width: fit-content;
+    }
+
+    @include setInteractive {
+        cursor: pointer;
+        color: initial;
+    }
+}
+
+.c-timeline__date {
+    display: block;
+    font-weight: 600;
+    font-size: 1.75rem;
+}
+
+.c-timeline__category {
+    color: $kgColor;
+    font-weight: 500;
+    font-size: 1.6rem;
+    text-transform: capitalize;
+}
+
+.c-timeline__separator {
+    border-top: 0.5rem solid grey;
+    margin: 1rem 0;
+    border-radius: 1rem;
+}
+
+.c-timeline-card-title {
+    font-size: 2.25rem;
+    margin-top: 1rem;
+}
+
+.c-timeline-card .person-author {
+    margin-bottom: 0;
+}
+
+.c-timeline-card .list-item-kg__content,
+.c-timeline-card .remark-item__body {
+    padding: 1rem;
+}

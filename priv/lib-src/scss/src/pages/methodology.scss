@@ -1,0 +1,96 @@
+.t--methodology-homepage {
+    background: none;
+}
+
+.methodology-masthead {
+    width: 100%;
+    max-width: 100rem;
+    margin: 0 auto 0;
+    background-color: $mainThemeColor !important;
+
+    .page-title {
+        max-width: 80%;
+        padding: 1rem 0;
+        color: $offwhite;
+    }
+}
+
+.methodology-masthead__bg {
+    width: 100%;
+    height: 15rem;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 0 0 0 100% / 0 0 0 60%;
+
+    @include breakpoint($mediumBreakpoint){
+        height: 30rem;
+    }
+}
+
+.methodology-container {
+    width: 100%;
+    max-width: 100rem;
+    margin: 0 auto;
+
+    @include breakpoint($mediumBreakpoint){
+        display: flex;
+    }
+}
+
+.methodology-masthead, .methodology-container {
+    > div, > aside {
+        padding: 2.5rem 1.5rem;
+
+        @include breakpoint($smallBreakpoint){
+            padding: 2.5rem 4rem;
+        }
+    }
+}
+
+.methodology-container__body {
+    @extend .body-text;
+    width: 100%;
+}
+
+.methodology-container__relation {
+    @extend .body-text;
+    width: 100%;
+    background-color: $greyLight;
+
+    img {
+        margin-bottom: 3rem;
+    }
+
+    section {
+        margin-bottom: 2rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    @include breakpoint($mediumBreakpoint){
+        flex-shrink: 0;
+        width: 30%;
+    }
+}
+
+.methodology-container__relation__details {
+    display: flex;
+    align-items: center;
+
+    @include breakpoint($mediumBreakpoint){
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.methodology-container__relation__photo {
+    align-self: center;
+    height: 10rem;
+    width: 10rem;
+    margin-right: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
+}

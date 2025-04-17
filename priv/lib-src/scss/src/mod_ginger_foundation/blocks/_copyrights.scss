@@ -1,0 +1,44 @@
+.copyrights {
+    display: block;
+    text-align: right;
+
+    i {
+        background: none;
+        @include size(font-size, 20);
+
+        + i {
+            margin-left: 3px;
+        }
+    }
+
+    a:hover,
+    a:focus,
+    a:active {
+        text-decoration: none;
+        opacity: 0.9;
+    }
+}
+
+.edit-copyrights__icons {
+    display: inline-block;
+}
+
+figcaption {
+    .copyrights {
+        display: inline-block;
+        vertical-align: middle;
+        color: inherit;
+
+        a {
+            color: inherit;
+        }
+
+        i {
+            @include size(font-size, 16);
+
+            + i {
+                margin-left: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.published-bar {
+    width: 100%;
+    padding: 20px 0;
+    background: $mainThemeColor;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 200;
+    color: $white;
+
+    a {
+        @extend .btn--dark;
+        margin: 0 2rem;
+    }
+
+    .main-container {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,423 @@
+main {
+    @include mq(min-width, $mediumBreakpoint) {
+        margin-top: 0;
+    }
+}
+
+.main-container {
+    .list {
+        width: 100%;
+    }
+}
+
+.main-content {
+    width: 100%;
+    max-width: 900px;
+    background-color: transparent;
+}
+
+.page-container {
+    @include mq(min-width, $mediumBreakpoint) {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        flex-flow: row wrap;
+        position: relative;
+    }
+}
+
+.page-intro {
+    width: 100%;
+    padding: 0 15px 20px;
+    position: relative;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    -webkit-font-smoothing: antialiased;
+    color: $white;
+    background: $meetup;
+
+    .page-title {
+        margin: 1em 0;
+
+        @include mq(min-width, $mediumBreakpoint) {
+            @include size(font-size, 32);
+        }
+    }
+
+    .category-of {
+        max-width: calc(100% - 100px);
+        padding: 0.5em 1em;
+        border: 0;
+        font-family: $extraFontFamily;
+        font-size: $superSmallFont;
+        font-weight: 500;
+        background: $purpleDark;
+    }
+
+    .btn--like {
+        position: absolute;
+        top: 15px;
+        right: 30px;
+    }
+
+    .keywords {
+        font-family: $extraFontFamily;
+
+        .btn--secondary {
+            border-color: transparent;
+            font-size: $superDuperSmallFont;
+            font-weight: 500;
+            background: $purpleDark;
+
+            @include setInteractive {
+                color: $white;
+                background: color-mix(in srgb, $purpleDark 80%, black);
+            }
+        }
+    }
+
+    time {
+        margin: 0 0 10px 0;
+        display: block;
+        font-family: $secondaryFontFamily;
+        font-size: 18px;
+    }
+
+    figure {
+        margin: 20px 0 0;
+    }
+
+    .media--image__lightbox:after {
+        display: none;
+    }
+
+    @include mq(min-width, $mediumBreakpoint) {
+        padding: 0 30px 20px;
+
+        time {
+            font-size: 26px;
+        }
+
+        figure {
+            margin: 40px 0 0;
+        }
+    }
+}
+
+.page-intro .og-data {
+    width: 100%;
+    max-width: none;
+    padding: 2rem;
+    margin: 2rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    background: $white;
+
+    .og-data__image {
+        text-align: center;
+        background: $greyLight;
+
+        img {
+            width: auto;
+            max-width: 100%;
+            max-height: 25rem;
+        }
+    }
+
+    .og-data__content {
+        padding: 15px 0 0;
+        border: 0;
+        color: $typographyColor;
+    }
+}
+
+.page-under-intro {
+    padding: 0 15px;
+    margin: 10px 0 1.5em;
+    display: flex;
+    flex-wrap: wrap;
+
+    .page-meta {
+        padding-top: 0;
+        font-size: $superSmallFont;
+    }
+
+    .summary {
+        width: 100%;
+        margin: 1.5em 0 0;
+        font-size: $largerFont;
+        font-weight: 500;
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        padding: 0;
+    }
+}
+
+.page-under-intro__talk-along {
+    width: 100%;
+    margin-top: 0.5em;
+
+    @include mq(min-width, $smallBreakpoint) {
+        width: auto;
+        margin-top: 0;
+        margin-left: auto;
+    }
+}
+
+.c-document-info {
+    display: flex;
+    align-items: center;
+    color: $white;
+}
+
+.page-intro__documents {
+    display: none;
+    list-style: none;
+
+    a {
+        display: flex;
+        align-items: center;
+        color: $white;
+
+        @include setInteractive {
+            text-decoration: none;
+            color: $black;
+        }
+    }
+
+    i {
+        margin-right: 10px;
+    }
+}
+
+.page-intro__documents:has(li) {
+    display: initial;
+}
+
+.page-left {
+    @include breakpoint($mediumBreakpoint) {
+        width: calc(100% - 290px);
+    }
+}
+
+.t--contribution {
+    .page-container {
+        @include breakpoint($mediumBreakpoint) {
+            overflow: hidden;
+        }
+    }
+
+    .page-aside {
+        @include breakpoint($mediumBreakpoint) {
+            width: 280px;
+            padding: 30px 15px;
+            bottom: 0;
+        }
+
+        @include breakpoint($mediumBreakpoint) {
+            padding: 30px;
+        }
+    }
+}
+
+.page-header {
+    @extend .page-container;
+    max-width: 100rem;
+    margin: 0 auto 40px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    -webkit-font-smoothing: antialiased;
+    color: $white;
+    background: $kgColor;
+
+    .page-intro {
+        color: inherit;
+        background: none;
+    }
+
+    &.-allin {
+        padding: 3rem;
+        text-align: center;
+    }
+
+    &.-text {
+        padding-top: 3rem;
+        background-color: $grey;
+
+        h1 {
+            position: relative;
+
+            &::before {
+                content: "";
+                width: 70px;
+                height: 4px;
+                position: absolute;
+                top: -3px;
+                background-color: $offwhite;
+            }
+        }
+    }
+
+    &.-news {
+        padding-top: 3rem;
+        background-color: $grey;
+
+        h1 {
+            position: relative;
+        }
+
+        time {
+            font-family: unset;
+        }
+    }
+
+    @include mq(min-width, $mediumBreakpoint) {
+        display: flex;
+        flex-flow: row nowrap;
+
+        .page-intro {
+            width: 100%;
+            padding: 0 0 1rem 5rem;
+            margin-right: 5rem;
+            margin-bottom: 0;
+        }
+
+        .page-aside {
+            width: 320px;
+            padding-right: 3rem;
+            flex-shrink: 0;
+        }
+
+        &.-allin {
+            min-height: 200px;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.page-body {
+    padding: 0 15px;
+    margin-bottom: 20px;
+
+    p {
+        margin: 0;
+
+        + p {
+            margin-top: 1em;
+        }
+    }
+
+    @include mq(min-width, $mediumBreakpoint) {
+        margin-bottom: 40px;
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        padding: 0;
+    }
+}
+
+.page-remarks {
+    width: 100%;
+    padding: 0 15px;
+    margin-bottom: 20px;
+
+    a {
+        word-break: break-all;
+    }
+
+    @include mq(min-width, $mediumBreakpoint) {
+        min-height: 200px;
+        padding: 0 2rem;
+        margin-bottom: 0;
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        padding: 0;
+    }
+}
+
+.page-meta {
+    padding-top: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    border-top: 1px solid $white;
+    font-family: $tertiaryFontFamily;
+    font-size: $superSmallFont;
+
+    .total-likes,
+    .total-remarks {
+        margin-right: 20px;
+    }
+
+    i {
+        font-size: 12px;
+    }
+}
+
+.page-meta + h3 {
+    margin-top: 20px;
+    font-size: 2rem;
+}
+
+.page-intro--contribution,
+.page-intro--reference {
+    background: $green;
+
+    .category-of {
+        background: $greenDark;
+    }
+
+    .keywords {
+        .btn--secondary {
+            background: $greenDark;
+
+            @include setInteractive {
+                background: $greenDarker;
+            }
+        }
+    }
+}
+
+.page-content__date {
+    display: block;
+}
+
+.page-filters {
+    @extend .page-container;
+    padding: 0 15px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        padding: 0;
+        margin-top: 30px;
+    }
+}
+
+.hidden-resource {
+    display: inline-block;
+    background-color: #f8f453;
+    color: $grey;
+    padding: 0.5em 1em;
+    font-family: $extraFontFamily;
+    font-size: $superSmallFont;
+    font-weight: 500;
+
+    .icon--hidden {
+        font-size: 1.5em;
+        vertical-align: text-bottom;
+        margin-right: 3px;
+    }
+}
+
+.pull-left {
+    margin-right: 2rem;
+}
+
+.pull-right {
+    margin-left: 2rem;
+}

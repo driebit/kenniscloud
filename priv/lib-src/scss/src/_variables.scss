@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400&display=swap");
+
+@font-face {
+    src: url("/lib/fonts/themixbold.woff") format("woff");
+    font-family: "Themix bold";
+}
+
+@font-face {
+    src: url("/lib/fonts/themixsemilight.woff") format("woff");
+    font-family: "Themix semilight";
+}
+
+// TODO ZOTONIC1: copied from mod_ginger_foundation. Check which ones are actually needed
+
+// START COPY GINGER FOUNDATION
+
+$black: #000;
+$white: #fff;
+$alto: #ddd;
+$error: #a94442;
+$ginger: #fe7600;
+
+$bodyBgColor: #ebebeb;
+$bodyFontFamily: arial, times;
+$primaryFontFamily: $bodyFontFamily, arial, times;
+$secondaryFontFamily: arial, times;
+
+$typographyColor: #000;
+$mainThemeColor: #0087d2;
+$secondaryThemeColor: #0087d2;
+$tertiaryThemeColor: #0087d2;
+
+$btnRadius: 18px;
+$interfaceRadius: 4px;
+
+$mainNavPagesColor: #8d8d8d;
+$mainNavActionsColor: $mainThemeColor;
+$mainNavActionsSeperator: $alto;
+
+$globalNavHeight: 70;
+
+$contentGroupNavHeight: 85;
+$minifiedcontentGroupNavHeight: 55;
+
+$listBgColor: #ebebeb;
+$listHeaderBgColor: color-mix(in srgb, $listBgColor 90%, black);
+
+$relatedItemsBgColor: #1f1f25;
+$relatedItemsTextColor: $white;
+$relatedItemsHeaderBgColor: #2c2e36;
+
+$menuMobileActionsBgColor: #e0e0e0;
+$menuMobileBgColor: #f1f1f1;
+
+$footerHeight: 300;
+$footerBgColor: #23232a;
+
+$standardOffset: 30;
+
+$smallBreakpoint: 600px;
+$mediumBreakpoint: 800px;
+$largeBreakpoint: 1024px;
+$hugeBreakpoint: 1200px;
+
+// END COPY GINGER FOUNDATION
+
+$offwhite: #f5f5f5;
+$remarkGrey: #f3f3f3;
+$greyLight: #e7e6e6;
+$altoGrey: #d0d0d0;
+$grey: #505450;
+$greyDark: #3f433f;
+$greyDarker: #343734;
+$bodyBgColor: $white;
+$mainThemeColor: #ff5f00;
+$secondaryThemeColor: $grey;
+$orange: $mainThemeColor;
+$orangeDark: #c03c00;
+$kgColor: #089db0;
+$blue: $kgColor;
+$blueDark: #197c87;
+$blueDarker: #255964;
+$blueKgListItem: #397d8b;
+$blueKgListItemDark: color-mix(in srgb, $blueKgListItem 90%, black);
+$meetup: #a600ff;
+$purple: $meetup;
+$purpleDark: #8322b9;
+$green: #00a495;
+$greenDark: #21847a;
+$greenDarker: #15665e;
+
+// methodology scheme
+
+$stepFallBack: color-mix(in srgb, $altoGrey 80%, black);
+$stepPreliminaryInterview: #afd81f;
+$stepCheckNeed: #afd81f;
+$stepNetwork: #2ad958;
+$stepSearchPartnersMeeting: #2ad958;
+$stepFormGroup: #3fb16d;
+$stepOrganiseMeetings: #00b3a1;
+$stepCommunicating: #05b1e4;
+$stepMeeting: #346fc0;
+$stepDisclose: #955ab2;
+$stepMakeAccessible: #d14b7e;
+$stepRecordAndShareProcess: #e53333;
+$stepCycleOnOrOffline: $orange;
+$typographyColor: $secondaryThemeColor;
+$mixFontFamily: "Themix semilight", arial, sans-serif;
+$bodyFontFamily: "Roboto", arial, sans-serif;
+$secondaryFontFamily: "TheMix bold", arial;
+$tertiaryFontFamily: "Roboto Condensed", arial;
+$extraFontFamily: "Roboto", arial;
+$superDuperSmallFont: 11px;
+$superSmallFont: 13px;
+$smallFont: 15px;
+$regularFont: 16px;
+$largerFont: 17px;
+$btnRadius: 2px;
+$globalNavHeight: 70;

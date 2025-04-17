@@ -1,0 +1,43 @@
+version: "3"
+
+tasks:
+    default:
+        deps: [build]
+
+    build:
+        description: Compile Elm code into JavaScript
+        cmds:
+            - mkdir -p ../../lib/js
+            - |
+                elm make src/Tips.elm \
+                         src/Notifications.elm \
+                         src/Main.elm \
+                         src/AddReference.elm \
+                         src/Crowd.elm \
+                         src/AddEdgeToNewResource.elm \
+                         src/Edit/Edge.elm \
+                         --optimize --output ../../lib/js/main.js
+
+    build-dev:
+        description: Compile Elm code into JavaScript
+        cmds:
+            - |
+                elm make --output ../../lib/js/main.js \
+                         --debug \
+                         src/Tips.elm \
+                         src/Notifications.elm \
+                         src/Main.elm \
+                         src/AddReference.elm \
+                         src/Crowd.elm \
+                         src/AddEdgeToNewResource.elm \
+                         src/Edit/Edge.elm
+
+    analyse:
+        cmds:
+            - elm-analyse --serve src
+
+    format:
+        cmds:
+            - elm-fomrat --yes src
+
+    test: elm-test

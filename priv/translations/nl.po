@@ -1,0 +1,608 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# NB: Consider using poEdit <http://poedit.sourceforge.net>
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2023-05-09 14:48+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-like.tpl:9
+#: user/sites/kenniscloud/templates/page-actions/page-action-connect-user.tpl:114
+#: user/sites/kenniscloud/templates/_ginger_edit.person.tpl:55
+msgid " "
+msgstr ""
+
+#: _build/default/lib/kenniscloud/priv/templates/_ginger_edit.contribution.tpl:43
+msgid "+ Upload a document"
+msgstr "+ Upload een document"
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-flag.tpl:10
+msgid ""
+"<i class='icon--flag'></i><span>Aangemeld als ongepast - melding intrekken</"
+"span>"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-flag.tpl:9
+msgid "<i class='icon--flag'></i><span>Meld deze bijdrage als ongepast</span>"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/about/about.tpl:1
+msgid "About:"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content.acl_collaboration_group.tpl:4
+msgid "Additional copy"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.event.tpl:6
+msgid "Address"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_date_range.tpl:25
+msgid "All day"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page.keyword.tpl:10
+msgid "Everything for:"
+msgstr "Alles voor:"
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.collection.tpl:5
+msgid "Author"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.event.tpl:14
+msgid "Banner"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.acl_collaboration_group.tpl:11
+msgid "Beheerder"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.acl_collaboration_group.tpl:13
+msgid "Subgroup"
+msgstr "Subgroep"
+
+#: user/sites/kenniscloud/templates/_ginger_edit_website.tpl:3
+#: user/sites/kenniscloud/templates/cta/cta.reference.tpl:6
+msgid "Bron"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page_meetup_edit.tpl:23
+#: user/sites/kenniscloud/templates/page_meetup_edit.tpl:65
+#: user/sites/kenniscloud/templates/page_contribution_edit.tpl:25
+#: user/sites/kenniscloud/templates/page_contribution_edit.tpl:68
+#: user/sites/kenniscloud/templates/page-actions/action-dialog-create-group.tpl:35
+#: user/sites/kenniscloud/templates/page-actions/action-dialog-delete-profile.tpl:19
+#: user/sites/kenniscloud/templates/_action_dialog_new_collabgroup.tpl:12
+#: user/sites/kenniscloud/templates/page_ginger_edit.tpl:17
+#: user/sites/kenniscloud/templates/_action_ginger_dialog_media_upload_tab_upload.tpl:44
+#: user/sites/kenniscloud/templates/page_reference_edit.tpl:25
+#: user/sites/kenniscloud/templates/page_reference_edit.tpl:68
+msgid "Cancel"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-rsvp.tpl:13
+msgid "Cancel RSVP"
+msgstr "Afmelden"
+
+#: user/sites/kenniscloud/templates/_action_dialog_new_rsc_tab.tpl:5
+msgid "Category"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_signup_form_fields_tos.tpl:9
+msgid "Check our Terms of Service and Privacy policies"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.event.tpl:33
+msgid "City"
+msgstr "Stad"
+
+#: user/sites/kenniscloud/templates/_translations.tpl:1
+msgid "Collaboration groups"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/top-aside/top-aside.event.tpl:47
+msgid "Community Librarian"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.event.tpl:14
+msgid "Country"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_date_range.tpl:6
+msgid "Date range"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_date_range.tpl:8
+msgid "Date ranges"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page_ginger_edit.contribution.tpl:9
+#: user/sites/kenniscloud/templates/page_ginger_edit.tpl:31
+msgid "Delete"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page_ginger_edit.contribution.tpl:9
+#: user/sites/kenniscloud/templates/page_ginger_edit.tpl:31
+msgid "Delete this page."
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_rsc_edge.tpl:16
+#: user/sites/kenniscloud/templates/_rsc_edge_media.tpl:26
+msgid "Disconnect"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_logon_login_form_fields.tpl:3
+msgid "E-mail"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page_contribution_edit.tpl:3
+#: user/sites/kenniscloud/templates/page_ginger_edit.tpl:20
+msgid "Edit"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_logon_login_form_fields.tpl:14
+msgid "Enter your password"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_date_range.tpl:8
+msgid ""
+"Every page can have a date range. For example if the page is an event or "
+"description of someone’s life."
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.person.tpl:15
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.event.tpl:51
+msgid "Facebook"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/aside-connection/aside-add-connection.tpl:12
+msgid "Field is required"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.person.tpl:10
+msgid "First"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_date_range.tpl:43
+msgid "From"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/action-dialog-join-group.tpl:9
+msgid "Ja, helaas"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/action-dialog-join-group.tpl:24
+msgid "Ja, ik doe mee"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-join-group.tpl:35
+msgid "Je wilt de kennisgroep verlaten"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_logon_login_form_fields.tpl:23
+msgid "Keep me signed in"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.tpl:8
+msgid "Language"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.acl_collaboration_group.tpl:9
+msgid "Lid"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-connect-user.tpl:4
+msgid "Like"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.person.tpl:30
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.event.tpl:80
+msgid "LinkedIn"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.tpl:7
+msgid "Location"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/comments/comments.tpl:10
+#: user/sites/kenniscloud/templates/cta/cta.page_subjects.tpl:16
+#: user/sites/kenniscloud/templates/top-aside/top-aside.collection.tpl:10
+#: user/sites/kenniscloud/templates/top-aside/top-aside.region.tpl:21
+#: user/sites/kenniscloud/templates/top-aside/top-aside.page_kennisgroepen.tpl:9
+#: user/sites/kenniscloud/templates/page.event.tpl:69
+#: user/sites/kenniscloud/templates/_auth_link_live.tpl:21
+#: user/sites/kenniscloud/templates/masthead/masthead.home.tpl:14
+#: user/sites/kenniscloud/templates/contributions-bar/contributions-bar.tpl:17
+msgid "Log in"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/comments/comments.tpl:10
+#: user/sites/kenniscloud/templates/cta/cta.page_subjects.tpl:16
+#: user/sites/kenniscloud/templates/top-aside/top-aside.collection.tpl:10
+#: user/sites/kenniscloud/templates/top-aside/top-aside.region.tpl:21
+#: user/sites/kenniscloud/templates/top-aside/top-aside.page_kennisgroepen.tpl:9
+#: user/sites/kenniscloud/templates/page.event.tpl:69
+#: user/sites/kenniscloud/templates/_auth_link_live.tpl:21
+#: user/sites/kenniscloud/templates/masthead/masthead.home.tpl:14
+#: user/sites/kenniscloud/templates/contributions-bar/contributions-bar.tpl:17
+msgid "Log in or sign up"
+msgstr "Log in / registreer"
+
+#: user/sites/kenniscloud/templates/page_meetup_edit.tpl:49
+#: user/sites/kenniscloud/templates/page_contribution_edit.tpl:52
+#: user/sites/kenniscloud/templates/page_reference_edit.tpl:52
+msgid "Logon"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-create-group.tpl:15
+msgid "Maak een nieuwe kennisgroep"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/action-dialog-create-group.tpl:36
+msgid "Make"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_action_ginger_dialog_media_upload_tab_upload.tpl:28
+msgid "Media file"
+msgstr "Mediabestand"
+
+#: user/sites/kenniscloud/templates/_action_ginger_dialog_media_upload_tab_upload.tpl:28
+msgid "file"
+msgstr "bestand"
+
+#: user/sites/kenniscloud/templates/_action_ginger_dialog_media_upload_tab_upload.tpl:20
+msgid "Media title"
+msgstr "Media titel"
+
+#: user/sites/kenniscloud/templates/cta/cta.event.tpl:6
+msgid "Meetup"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.person.tpl:16
+msgid "Middle"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_date_range.tpl:8
+msgid "Need more help?"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/map/map.tpl:63
+#: user/sites/kenniscloud/templates/list/list.tpl:12
+#: user/sites/kenniscloud/templates/list/list.tpl:73
+msgid "No results"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/search-suggestions/search-suggestions.tpl:32
+msgid "Nothing found"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/part-of/part-of.tpl:5
+msgid "Part of:"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_logon_login_form_fields.tpl:11
+#: user/sites/kenniscloud/templates/_logon_login_form_fields.tpl:12
+msgid "Password"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page_meetup_edit.tpl:20
+#: user/sites/kenniscloud/templates/page_meetup_edit.tpl:61
+#: user/sites/kenniscloud/templates/page_contribution_edit.tpl:22
+#: user/sites/kenniscloud/templates/page_reference_edit.tpl:22
+#: user/sites/kenniscloud/templates/page_reference_edit.tpl:64
+msgid "Plaatsen"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.event.tpl:38
+msgid "Postcode"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.person.tpl:54
+msgid "Profile picture"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-rsvp.tpl:12
+msgid "RSVP"
+msgstr "Aanmelden"
+
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.event.tpl:75
+msgid "Redirect to website on page view"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page_meetup_edit.tpl:50
+#: user/sites/kenniscloud/templates/page_contribution_edit.tpl:53
+#: user/sites/kenniscloud/templates/page_reference_edit.tpl:53
+msgid "Register"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.roadmap.tpl:9
+#: user/sites/kenniscloud/templates/page_ginger_edit.tpl:12
+#: user/sites/kenniscloud/templates/page_ginger_edit.tpl:40
+msgid "Save"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.roadmap.tpl:12
+msgid "Save &amp; view"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.roadmap.tpl:12
+msgid "Save and view the page."
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.roadmap.tpl:9
+msgid "Save this page."
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_signup_form_fields_region.tpl:5
+msgid "Select"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_action_dialog_new_rsc_tab.tpl:13
+msgid "Select category"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_basics_form.person.tpl:41
+msgid "Short title"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/list/list.tpl:9
+msgid "Show more results..."
+msgstr "Toon meer resultaten..."
+
+#: user/sites/kenniscloud/templates/_signup_form_fields.tpl:7
+msgid "Sign Up"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_signup_form_fields_email.tpl:37
+msgid "Prefix"
+msgstr "Tussenvoegsel"
+
+#: user/sites/kenniscloud/templates/_logon_login_form_fields.tpl:29
+msgid "Sign in"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/page-actions.person.tpl:4
+msgid "Sign out"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-join-group.tpl:17
+msgid "Sluit je bij ons aan"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.event.tpl:28
+msgid "Street"
+msgstr "Straat"
+
+#: user/sites/kenniscloud/templates/_admin_edit_basics_form.person.tpl:27
+msgid "Summary"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.person.tpl:22
+msgid "Sur. prefix"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.person.tpl:28
+msgid "Surname"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_date_range.tpl:51
+msgid "Till"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.event.tpl:42
+msgid "Titel van de locatie"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/action-dialog-create-group.tpl:27
+#: user/sites/kenniscloud/templates/_admin_edit_basics_form.person.tpl:5
+msgid "Title"
+msgstr "Titel"
+
+#: user/sites/kenniscloud/templates/page-actions/action-dialog-create-group.tpl:27
+#: user/sites/kenniscloud/templates/_admin_edit_basics_form.person.tpl:5
+msgid "title"
+msgstr "titel"
+
+#: user/sites/kenniscloud/templates/_signup_form_fields_tos.tpl:14
+msgid ""
+"To sign up you must agree with the Terms of Service and Privacy policies."
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.person.tpl:26
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.event.tpl:56
+msgid "Twitter"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-connect-user.tpl:5
+msgid "Unlike"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_action_ginger_dialog_media_upload_tab_upload.tpl:6
+msgid "Upload a file from your computer."
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_action_ginger_dialog_media_upload_tab_upload.tpl:45
+msgid "Upload file"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_basics.acl_collaboration_group.tpl:10
+msgid "Verborgen kennisgroep"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.person.tpl:10
+msgid "Verwijder je account"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.roadmap.tpl:14
+#: user/sites/kenniscloud/templates/page_ginger_edit.tpl:8
+#: user/sites/kenniscloud/templates/page_ginger_edit.tpl:36
+msgid "View"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_ginger_edit.roadmap.tpl:14
+msgid "View this page."
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_logon_login_form_fields.tpl:5
+msgid "Vul je e-mail in"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-like.tpl:8
+msgid "Waarderen"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_signup_form_fields_tos.tpl:13
+msgid ""
+"We will be very careful with all the information given to us and will never "
+"give your name or address away without your permission.\n"
+"    We do have some rules that we need you to agree with."
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content_address.event.tpl:64
+#: user/sites/kenniscloud/templates/meta/meta-website.tpl:6
+msgid "Website"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_admin_edit_content.acl_collaboration_group.tpl:17
+msgid "Welcome to kennisgroep email message"
+msgstr "Tekstje in welkomstmail"
+
+#: user/sites/kenniscloud/templates/_action_ginger_dialog_media_upload_tab_upload.tpl:8
+msgid ""
+"You have to specify a description of the file to make it easier to find and "
+"share."
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_signup_form_fields_tos.tpl:25
+msgid "You must agree to the Terms in order to sign up."
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_auth_link.tpl:12
+msgid "logon"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page-actions/page-action-connect-user.tpl:111
+msgid "logon or register"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_auth_link.tpl:12
+msgid "logon/signup"
+msgstr "Log in / registreer"
+
+#: user/sites/kenniscloud/templates/_admin_edit_basics_form.person.tpl:16
+msgid "subtitle"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/_rsc_edge_item.roadmap_step.tpl:9
+#: user/sites/kenniscloud/templates/_rsc_edge_media.tpl:18
+#: user/sites/kenniscloud/templates/_rsc_edge_item.keyword.tpl:9
+msgid "untitled"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/page_ginger_edit.tpl:36
+msgid "view"
+msgstr ""
+
+#: user/sites/kenniscloud/templates/email_verify.tpl:12
+msgid "Confirm my account"
+msgstr "Bevestig mijn account"
+
+#: user/sites/kenniscloud/templates/email_verify.tpl:6
+msgid "Dear"
+msgstr "Beste"
+
+#: user/sites/kenniscloud/templates/email_verify.tpl:14
+msgid "Hope to see you soon."
+msgstr "Hopelijk tot snel."
+
+#: _build/default/lib/kenniscloud/priv/templates/_action_dialog_media_upload_tab_upload.tpl:71
+msgid "I own the copyrights to this file and/or this file is public domain."
+msgstr "Ik bezit de auteursrechten op dit bestand en/of dit bestand is publiek domein."
+
+#: user/sites/kenniscloud/templates/email_verify.tpl:14
+msgid "If the link does not work then you can go to"
+msgstr "Indien de link niet werkt dan kan je gaan naar"
+
+#: user/sites/kenniscloud/templates/email_verify.tpl:16
+msgid "Kind regards,"
+msgstr "Met vriendelijke groet,"
+
+#: user/sites/kenniscloud/templates/email_verify.tpl:3
+msgid "Please confirm your account"
+msgstr "Bevestig uw account"
+
+#: user/sites/kenniscloud/templates/email_verify.tpl:10
+msgid "Please follow the link below."
+msgstr "Volg onderstaande link."
+
+#: user/sites/kenniscloud/templates/_action_dialog_media_upload_tab_upload.tpl:65
+msgid "Published"
+msgstr "Gepubliceerd"
+
+#: user/sites/kenniscloud/templates/email_verify.tpl:8
+msgid ""
+"Thank you for registering at our site. We request you to confirm your "
+"account before you can use it."
+msgstr ""
+"Bedankt voor het registreren bij onze website. Wij verzoeken je om je account "
+"te bevestigen voordat je het kan gebruiken."
+
+#: user/sites/kenniscloud/templates/email_verify.tpl:14
+msgid "and enter the key"
+msgstr "en vul de code in"
+
+#: user/sites/kenniscloud/templates/email_verify.tpl:14
+msgid "in the input field."
+msgstr "in het invoerveld"
+
+#: user/sites/kenniscloud/templates/_action_dialog_media_upload_tab_upload.tpl:65
+msgid "Insert image"
+msgstr "Afbeelding toevoegen"
+
+#: user/sites/kenniscloud/templates/contribution/task-actions.tpl:12
+msgid "Convert to a task"
+msgstr "Omzetten naar een taak"
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_add_to_timeline.tpl:3
+msgid "Add to timeline"
+msgstr "Toevoegen aan tijdlijn"
+
+#: user/sites/kenniscloud/templates/_admin_edit_basics.acl_collaboration_group.tpl:
+msgid "Timeline off"
+msgstr "Tijdlijn uit"
+
+#: user/sites/kenniscloud/templates/_admin_edit_basics.acl_collaboration_group.tpl:
+msgid "Automatic timeline"
+msgstr "Automatische tijdlijn"
+
+#: user/sites/kenniscloud/templates/_admin_edit_basics.acl_collaboration_group.tpl:
+msgid "Manual timeline"
+msgstr "Handmatige tijdlijn"
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_add_to_timeline.tpl:10
+msgid "This will add the item to the timeline of it's kennisgroep."
+msgstr "Dit voegt het item toe aan de tijdlijn van zijn kennisgroep."
+
+#: user/sites/kenniscloud/templates/_ginger_edit_event.tpl:29
+msgid "If you want to use the entered address here for the geolocation below, please save the page first."
+msgstr "Als u het ingevoerde adres hier wilt gebruiken voor de geolocatie hieronder, sla dan eerst de pagina op."
+
+#: user/sites/kenniscloud/templates/page.acl_collaboration_group.tpl:35
+msgid "Timeline"
+msgstr "Tijdlijn"
+

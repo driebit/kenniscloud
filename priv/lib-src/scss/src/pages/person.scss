@@ -1,0 +1,214 @@
+.t--person {
+	.bordered-title {
+		font-size: $smallFont;
+	}
+	.masthead--home {
+		padding: 20px 0;
+		background-color: $kgColor;
+
+		&:after {
+			opacity: 0;
+		}
+	}
+
+	.mediaclass-profile_avatar {
+		flex-shrink: 0;
+		display: block;
+		width: 150px;
+		margin: 0 auto 20px;
+		border-radius: 50%;
+		height: auto;
+	}
+
+	.masthead__content {
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		background: none;
+		text-align: center;
+
+		&.has-banner {
+			text-shadow: 0px 0px 8px rgba($black, 0.4);
+		}
+	}
+
+	.keywords {
+		margin-top: 20px;
+		justify-content: center;
+
+		a {
+			@include setInteractive {
+				text-shadow: none;
+			}
+		}
+	}
+
+	@include mq(min-width, $mediumBreakpoint) {
+		background-position: 0 350px;
+
+		.masthead--home {
+			padding-top: 40px;
+			min-height: 0;
+
+			.main-container {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 200px;
+			}
+		}
+
+		.mediaclass-profile_avatar {
+			width: 200px;
+			margin: 0 0 0 40px;
+			order: 2;
+		}
+
+		.masthead__content {
+			max-width: none;
+			order: 1;
+			margin: 0;
+			text-align: left;
+
+			* {
+				max-width: 650px;
+			}
+		}
+
+		.keywords {
+			justify-content: flex-start;
+		}
+	}
+}
+
+.person-info {
+	margin: 30px auto;
+
+	@include mq(min-width, $mediumBreakpoint) {
+		display: flex;
+		margin: 40px auto;
+	}
+}
+
+.person-info__contact {
+	@include mq(min-width, $mediumBreakpoint) {
+		width: 300px;
+	}
+
+	.page-action--edit  {
+		margin-top: 20px;
+	}
+}
+
+.person-info__contact__line {
+	display: flex;
+	margin: 0 0 1em;
+	line-height: 1.4;
+	font-family: "Roboto";
+
+	strong {
+		width: 200px;
+		flex-srink: 0;
+		flex-grow: 0;
+		font-family: $tertiaryFontFamily;
+		font-weight: 400;
+		font-size: $superSmallFont;
+	}
+
+	span, div {
+		display: block;
+		width: 100%;
+		flex-grow: 1;
+	}
+
+	a {
+		display: inline-block;
+		line-height: 1;
+	}
+}
+
+.person-info__contact + .person-info__summary {
+	margin-top: 20px;
+
+	@include mq(min-width, $mediumBreakpoint) {
+		margin: 0 0 0 40px;
+	}
+}
+
+.emailpreferences {
+    margin-bottom: 1rem;
+}
+
+.emailpreferences-group {
+    padding-left: 5rem;
+    position: relative;
+
+    input {
+        position: absolute;
+        top: .1rem;
+        left: .5rem;
+        z-index: 99999;
+        opacity: 0;
+        cursor: pointer;
+
+        &:hover {
+            ~ .emailpreferences-group__checkbox {
+                background: color-mix(in srgb, $greyLight 95%, black);
+            }
+        }
+
+        &:focus {
+            ~ .emailpreferences-group__checkbox {
+                box-shadow: 0px 0px 5px 3px DodgerBlue;
+            }
+        }
+
+        &:checked {
+            ~ .emailpreferences-group__checkbox:after {
+                display: block;
+            }
+        }
+    }
+
+    span {
+        display: block;
+        font-size: .9em;
+    }
+}
+
+.emailpreferences-group__checkbox {
+    width: 2.5rem;
+    height: 2.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    border: 1px solid $grey;
+    background: $greyLight;
+
+    &:after {
+        display: none;
+        content: '';
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 50%;
+        background: $grey;
+    }
+}
+
+// growl notification
+.alert.alert-info {
+    background-color: $remarkGrey;
+    border: 3px solid $grey;
+    color: $typographyColor;
+    font-family: $secondaryFontFamily;
+
+    .close {
+        color: $mainThemeColor;
+        font-size: 2.75rem;
+        opacity: 1;
+    }
+}

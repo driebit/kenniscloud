@@ -1,0 +1,57 @@
+.toggle-menu {
+    @extend .global-nav-toggle;
+}
+
+.toggle-menu span,
+.toggle-menu span:before,
+.toggle-menu span:after {
+    display: block;
+    content: '';
+    width: 27px;
+    height: 3px;
+    position: absolute;
+    background: $mainThemeColor;
+    cursor: pointer;
+    border-radius: 1px;
+    transition: transform 350ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toggle-menu {
+    span {
+        left: 5px;
+        top: 17px;
+
+        &:before {
+            top: -7px;
+            transform-origin: left top;
+        }
+
+        &:after {
+            bottom: -7px;
+            transform-origin: left bottom;
+        }
+    }
+}
+
+.toggle-menu.is-active {
+    span {
+        background-color: transparent;
+
+        &:before {
+            left: 5px;
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            bottom: -11px;
+            left: 5px;
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+@include mq(min-width, $largeBreakpoint) {
+    .toggle-menu {
+        display: none;
+    }
+}

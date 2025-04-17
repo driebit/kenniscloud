@@ -1,0 +1,139 @@
+.widget.widget-expanded .widget-header .widget-header-tools .z-btn-help,
+.widget.dark.widget-expanded .widget-header .widget-header-tools .z-btn-help {
+    color: $mainThemeColor;
+}
+
+ul.tree-list li.menu-item {
+    .btns {
+        top: 5px;
+    }
+
+    .btn {
+        border: none;
+        color: color-mix(in srgb, $mainThemeColor 95%, black);
+    }
+}
+
+.thumbnails {
+    list-style: none;
+    padding: 0;
+
+    .thumbnail {
+        display: flex;
+        min-height: 72px;
+        max-height: 72px;
+        overflow: hidden;
+        border-radius: 2px;
+        box-shadow: none;
+        cursor: pointer;
+        margin-bottom: 12px;
+        padding: 5px;
+        font-size: 12px;
+        line-height: 1.1em;
+        position: relative;
+        color: color-mix(in srgb, black 80%, white);
+
+        img {
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            margin: 0 7.5px 0 0;
+        }
+
+        .z-thumbnail-text {
+            margin-right: 5px;
+            height: 60px;
+            max-height: 60px;
+            overflow: hidden;
+        }
+
+        h6,
+        h5,
+        p {
+            text-transform: lowercase;
+            font-size: 12px;
+            line-height: 1.1em;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        h6 {
+            color: $black;
+        }
+
+        h5 {
+            font-weight: bold;
+            color: $black;
+        }
+    }
+}
+
+.thumbnails .thumbnail img + .z-thumbnail-text {
+    left: 92.5px;
+}
+
+img.admin-list-overview {
+    width: 80px;
+    height: 60px;
+}
+
+.connect-results {
+    max-height: 400px;
+    margin-top: 15px;
+    padding: 10px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .row {
+        margin-left: -6px;
+        margin-right: -6px;
+    }
+}
+
+.thumbnails [class*="col-"] {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.ginger-edit__aside {
+    @include size(padding, 20);
+    @include size(margin-bottom, $standardOffset);
+    background: color-mix(in srgb, $bodyBgColor 97.5%, black);
+
+    h3 {
+        @include size(margin-bottom, 20);
+    }
+}
+
+[class^="ginger-edit__aside"], [class*=" ginger-edit__aside"] {
+    @extend .ginger-edit__aside;
+}
+
+.ginger-edit__profile-picture {
+    padding: 15px;
+    border: 1px solid #BEBDBE;
+
+    .widget-header {
+        display: none;
+    }
+
+    .section-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .widget {
+        border: none;
+    }
+}
+
+
+.ginger-edit {
+    .modal-body {
+        .table-striped {
+            .btn-default + .btn-default {
+                display: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,86 @@
+.t--project {
+    main {
+        @include mq(min-width, $mediumBreakpoint) {
+            margin-top: 170px;
+        }
+    }
+
+    .kg-intro,
+    .kg-intro__content {
+        background: white;
+        color: $greyDark;
+
+        .category-of {
+            background: $greyDark;
+            color: white
+        }
+
+        .bordered-title {
+            font-size: 15px;
+
+            &:before {
+                background: $greyDark;
+            }
+        }
+
+        .keywords {
+            li {
+                .btn--secondary {
+                    background: $greyLight;
+                    color: $greyDark;
+
+                    @include setInteractive {
+                        background: $greyDark;
+                    }
+                }
+            }
+        }
+    }
+
+    .kg-intro__right__link {
+        color: $greyDark;
+    }
+
+    .person-list {
+        color: $greyDark;
+
+        .btn--primary {
+            margin: 0;
+        }
+    }
+}
+
+.project-members {
+    margin-top: 20px;
+}
+
+.project-initiators {
+    padding: 20px;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        width: 260px;
+        flex-shrink: 0;
+        padding: 0;
+    }
+}
+
+.project-initiators-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(30px, auto);
+    margin-bottom: 1em;
+}
+
+.initiator-logo__wrapper {
+    border: 2px $greyLight solid;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+
+    img {
+        width: auto;
+        height: auto;
+    }
+}

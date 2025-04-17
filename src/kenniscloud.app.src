@@ -1,0 +1,11 @@
+{application, kenniscloud, [
+    {description, "Kenniscloud Site"},
+    {vsn, "git"},
+    {registered, []},
+    {mod, []},
+    {applications, [kernel, stdlib, zotonic_core]},
+    {env, []},
+    {modules, []},
+    {maintainers, []},
+    {licenses, ["Apache 2.0"]}
+]}.

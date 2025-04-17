@@ -1,0 +1,141 @@
+@media print {
+    .global-nav,
+    .main-footer,
+    .btn,
+    .foldout__button,
+    .foldout.is-collapsed .foldout__button,
+    .foldout.is-expanded .foldout__button,
+    .page-action--favorite,
+    .share,
+    .attached-media,
+    .main-aside--sided,
+    .page-action--edit {
+        display: none;
+    }
+
+    body {
+        padding: 0;
+    }
+
+    a {
+        word-break: break-all;
+    }
+
+    img {
+        page-break-before: auto;
+        page-break-after: auto;
+        page-break-inside: avoid;
+    }
+
+    .list__item {
+        display: block;
+        page-break-inside: avoid;
+    }
+
+    .list {
+        li + li {
+            border: none;
+        }
+    }
+
+    .page-header,
+    .page-header.-text {
+        padding: 0;
+        min-height: 0;
+        border: none;
+    }
+
+    .page-intro {
+        padding: 0;
+        margin: 0;
+    }
+
+    // methodology
+    .main-content {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .roadmap__actions {
+        display: none;
+    }
+
+    .roadmap__step__option-list__info {
+        display: none;
+    }
+
+    .roadmap__step__option-list {
+        padding-left: 4rem;
+        margin-left: 0;
+    }
+
+    .roadmap__step__option-list li {
+        min-height: 0;
+
+        .roadmap__step__option-list__option {
+            &:checked {
+                + label {
+                    &::before {
+                        display: list-item;
+                        margin: 0;
+                        height: 0;
+                        width: 0;
+                        list-style-type: circle;
+                    }
+
+                    &::after {
+                        display: none;
+                    }
+                }
+            }
+
+            &:not(:checked) {
+                + label {
+                    display: none;
+                }
+            }
+        }
+
+        .roadmap__step__option-list__other {
+            border: none;
+
+            &:placeholder-shown {
+                display: none;
+
+                + label {
+                    display: none;
+                }
+            }
+
+            + label {
+                &::before {
+                    content: '';
+                    display: list-item;
+                    position: absolute;
+                    top: 2px;
+                    left: 0;
+                    list-style-type: circle;
+                }
+            }
+        }
+    }
+
+    .roadmap__step {
+        margin-bottom: 1rem;
+        page-break-inside: avoid;
+
+        @include roadmapColors();
+
+        &::before {
+            display: none;
+        }
+
+        .roadmap__step__title {
+            padding-left: 4rem;
+            text-align: left;
+            font-size: 1.6rem;
+            border: none;
+            border-bottom: 1px solid $stepFallBack;
+        }
+    }
+}

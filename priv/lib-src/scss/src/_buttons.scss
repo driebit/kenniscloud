@@ -1,0 +1,440 @@
+@include mq(min-width, 0) {
+    %btn {
+        @include size(padding, 8, 20, 10);
+        display: inline-block;
+        border: none;
+        border-radius: $btnRadius;
+        font-weight: 400;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        cursor: pointer;
+        vertical-align: top;
+
+        &:hover,
+        &:active,
+        &:focus,
+        &.is-active {
+            text-decoration: none;
+        }
+    }
+}
+
+.btn {
+    @extend %btn;
+}
+
+%btn--primary,
+.btn--primary {
+    @extend %btn;
+    padding-right: 45px;
+    position: relative;
+    border: 1px solid $mainThemeColor;
+    font-family: $secondaryFontFamily;
+    font-size: 1.6rem;
+    color: $white;
+    background: $mainThemeColor;
+    transition: all 0.3s;
+
+    &.-large {
+        width: 100%;
+        height: 7rem;
+        min-height: 7rem;
+        padding: 1rem 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        word-break: normal;
+
+        &:first-of-type {
+            margin-right: 3rem;
+        }
+
+        @media (min-width: 40rem) {
+            width: calc(50% - 2rem);
+            margin-top: 2rem;
+        }
+    }
+
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus:active,
+    &.is-active {
+        border-color: color-mix(in srgb, $mainThemeColor 95%, black);
+        color: $white;
+        background-color: color-mix(in srgb, $mainThemeColor 95%, black);
+    }
+
+    &::after {
+        @extend .has-icon;
+        @extend :before, .icon--ob-arrow;
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+    }
+
+    &.-is-anchor {
+        &::after {
+            transform: rotate(90deg) translateY(-50%);
+            transform-origin: top;
+        }
+    }
+
+    &.-blue {
+        border-color: $kgColor;
+        background: $kgColor;
+
+        &:hover,
+        &:active,
+        &:focus,
+        &:focus:active {
+            border-color: color-mix(in srgb, $kgColor 95%, black);
+            color: $white;
+            background-color: color-mix(in srgb, $kgColor 95%, black);
+        }
+    }
+
+    &.-blue-border {
+        border-color: $white;
+        background: $kgColor;
+
+        &:hover,
+        &:active,
+        &:focus,
+        &:focus:active {
+            color: $white;
+            background-color: $blueDark;
+        }
+    }
+}
+
+%btn--secondary,
+.btn--secondary {
+    @extend %btn;
+    border: 1px solid $mainThemeColor;
+    color: $mainThemeColor;
+    background: $white;
+
+    &:hover,
+    &:active,
+    &:focus,
+    &:active:focus,
+    &.is-active {
+        border-color: $mainThemeColor;
+        color: $white;
+        background-color: $mainThemeColor;
+    }
+
+    .icon--ob-arrow {
+        position: absolute;
+        top: 12px;
+        right: 5px;
+        font-size: 10px;
+    }
+}
+
+.btn--dark {
+    @extend .btn--primary;
+    border-color: $grey;
+    background: $grey;
+
+    &.-icon {
+        padding-right: 45px;
+    }
+
+    @include setInteractive {
+        border-color: color-mix(in srgb, $grey 90%, black);
+        background: color-mix(in srgb, $grey 90%, black);
+    }
+}
+
+.btn--cancel,
+.btn--save,
+.btn--delete {
+    @extend %btn--secondary;
+}
+
+.btn--cancel,
+.btn--save {
+    font-family: $secondaryFontFamily;
+}
+
+.btn--cancel {
+    border-color: $grey;
+    color: $grey;
+    background: $greyLight;
+
+    @include setInteractive {
+        border-color: color-mix(in srgb, $grey 90%, black);
+        background: color-mix(in srgb, $grey 90%, black);
+    }
+}
+
+.btn--save {
+    color: $white;
+    background: $orange;
+
+    @include setInteractive {
+        border-color: $orangeDark;
+        background: $orangeDark;
+    }
+}
+
+.page-action--edit,
+.page-action--add,
+.page-action--rsvp,
+.page-action--remove,
+.page-action--logoff {
+    @extend %btn;
+    @extend %btn--secondary;
+}
+
+.page-action--edit {
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-color: $black;
+    color: $white;
+    background: $black;
+    transition: all 0.3s;
+
+    &:before {
+        @extend .has-icon;
+        @extend .icon--pen;
+        margin-right: 10px;
+    }
+
+    @include setInteractive {
+        border-color: $black;
+        color: $black;
+        background: $white;
+    }
+}
+
+.page-action--logoff {
+    @extend .page-action--edit;
+
+    &:before {
+        display: none;
+    }
+}
+
+.page-action--remove {
+    width: 100%;
+    margin-bottom: 20px;
+    border-color: color-mix(in srgb, $grey 83%, white);
+    text-align: center;
+    color: $white;
+    background: color-mix(in srgb, $grey 83%, white);
+
+    &:before {
+        @extend .has-icon;
+        @extend .icon--bin;
+        margin-right: 7px;
+        font-size: 14px;
+    }
+}
+
+.btn--like {
+    width: 5.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    font-family: $tertiaryFontFamily;
+    font-size: $superSmallFont;
+    color: $white;
+    background: none;
+    outline: none;
+    transition: all 0.3s;
+
+    &:before {
+        @extend .has-icon;
+        @extend .icon--like;
+        margin-bottom: 0.25rem;
+        font-size: 2.25rem;
+    }
+
+    &:focus {
+        &:before {
+            outline: 2px solid dodgerblue;
+            outline-offset: 3px;
+        }
+    }
+
+    &.is-active {
+        color: $grey;
+    }
+
+    @include setInteractive {
+        color: $grey;
+    }
+}
+
+.btn--filters {
+    width: 140px;
+    height: 35px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #505450;
+    font-family: $secondaryFontFamily;
+    font-size: $smallFont;
+    background: none;
+    outline: none;
+    transition: all 0.3s;
+
+    @include setInteractive {
+        border-color: $kgColor;
+        color: $kgColor;
+    }
+}
+
+/* FLAG AS OFFENSIVE */
+
+.btn--remark-flag {
+    position: relative;
+    z-index: 200;
+
+    .icon--flag ~ span {
+        /* ACCESIBILITY: Instead of display:none; this allows screen readers to read what the button is about */
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        clip: rect(1px, 1px, 1px, 1px);
+        border-radius: 5px;
+        font-family: $secondaryFontFamily;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: $white;
+        background: rgba($typographyColor, 0.9);
+        overflow: hidden;
+        transition: opacity 0.2s;
+    }
+
+    &:hover,
+    &:focus {
+        .icon--flag ~ span {
+            width: 15rem;
+            height: 8.5rem;
+            padding: 1.5rem;
+            opacity: 1;
+            top: 50%;
+            left: 3.25rem;
+            clip: auto;
+            overflow: visible;
+            pointer-events: none;
+            transform: translateY(-50%);
+
+            &:before {
+                content: "";
+                position: absolute;
+                left: -2rem;
+                top: 50%;
+                border: 1rem solid transparent;
+                border-right: 1rem solid rgba($typographyColor, 0.9);
+                transform: translateY(-50%);
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &:active {
+        .icon--flag ~ span {
+            text-decoration: underline;
+        }
+    }
+}
+
+.btn--flag {
+    @extend .btn--remark-flag;
+
+    .icon--flag {
+        font-size: 2rem;
+    }
+
+    &.is-active {
+        @extend .btn--remark-flag;
+        color: $orange;
+    }
+
+    &:focus {
+        .icon--flag {
+            outline: 2px solid dodgerblue;
+            outline-offset: 3px;
+        }
+    }
+}
+
+/* Buttons in zotonic */
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:focus,
+.nav-pills > li.active > a:hover {
+    @extend %btn--primary;
+}
+
+.nav-pills > li > a {
+    @extend %btn;
+}
+
+.btn-primary {
+    @extend %btn--primary;
+}
+
+.btn-default {
+    @extend %btn--secondary;
+}
+
+button.z-btn-help {
+    background: none;
+}
+
+.btn--inside-field {
+    margin-top: 0.3rem;
+    margin-left: -14.5rem;
+}
+
+.c-btn--orange {
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s;
+    border: 1px $orange solid;
+    background-color: white;
+    color: $orange;
+    margin-bottom: 2rem;
+
+    @include setInteractive {
+        color: white;
+        background: $orange;
+
+    }
+}
+
+.c-btn--primary-no-icon {
+    @extend %btn--primary;
+    margin-bottom: 1rem;
+    padding: 0.8rem 2rem;
+
+    &::after {
+        content: "";
+    }
+}

@@ -1,0 +1,10 @@
+{application, zotonic_mod_crowdlink, [
+    {description, "Crowd Links for Meetup Crowd"},
+    {vsn, "git"},
+    {registered, []},
+    {applications, [kernel, stdlib, zotonic_core]},
+    {env, []},
+    {modules, []},
+    {maintainers, []},
+    {licenses, ["Apache 2.0"]}
+]}.

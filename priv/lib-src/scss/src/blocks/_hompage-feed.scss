@@ -1,0 +1,93 @@
+.c-homepage__feed-container {
+    padding: 2rem 0 5rem;
+    background-color: $remarkGrey;
+}
+
+.c-homepage__feed {
+    max-width: 78rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding: 0 0rem 1rem 0;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        padding: 0 2rem 1rem 0;
+    }
+}
+
+.c-card--feed {
+    flex-direction: column;
+    align-items: flex-end;
+    height: 11rem;
+    display: flex;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        flex-direction: row;
+        height: 9.5rem;
+        align-items: center;
+    }
+}
+
+.c-card--feed__avatar {
+    display: none;
+    border-radius: 50%;
+    width: 5rem;
+    min-width: 5rem;
+    height: 5rem;
+    min-height: 5rem;
+    margin-right: 1rem;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        display: initial;
+    }
+}
+
+.c-card--feed__text {
+    font-size: 14px;
+    margin-bottom: auto;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-right: auto;
+}
+
+.c-card--feed__text strong {
+    font-weight: bold;
+}
+
+.c-card--feed__time {
+    font-size: 12px;
+    color: $grey;
+    margin-left: auto;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        min-width: 10ch;
+        margin-left: 1rem;
+    }
+}
+
+.c-card--feed__link {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.c-card--feed__author-link {
+    color: $grey;
+    z-index: 2;
+    position: relative;
+}
+
+.c-card--feed--empty {
+    color: mix(white, $grey, 30%);
+}

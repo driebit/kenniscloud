@@ -1,0 +1,16 @@
+.DS_Store
+.sass-cache
+files/*
+!files/fixtures
+!files/hdt
+files/hdt/*.hdt
+priv/lib/css/*
+priv/lib/js/*
+node_modules
+npm-debug.log
+config.d
+translations/template/
+tmp/*
+.task
+**/dist/*
+lib/elm/elm-stuff/*

@@ -1,0 +1,84 @@
+.c-document-upload .caption a {
+    text-shadow: none !important;
+    font-weight: 400 !important;
+}
+
+ul.media > li .bottom .caption a {
+    color: black;
+    text-shadow: none;
+    width: 90%;
+}
+
+ul.media > li .z-btn-remove::before {
+    font-size: 18px;
+}
+
+ul.media > li .z-btn-remove {
+    top: 3px;
+    width: 18px;
+    height: 18px;
+}
+
+ul.media > li .bottom {
+    background-color: white;
+}
+
+ul.media > li img {
+    border: white;
+}
+
+.c-copyright-logo {
+    margin-bottom: 0.25rem;
+}
+
+.ginger-edit.edit-contribution .c-edit__add-attachement,
+.ginger-edit.edit-contribution .c-edit__add-document,
+.ginger-edit.edit-task .c-edit__add-attachement,
+.ginger-edit.edit-task .c-edit__add-document {
+    border: 5px solid white;
+}
+.ginger-edit.edit-contribution .c-edit__add-attachement ul.media > li .bottom {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.ginger-edit.edit-contribution .c-edit__add-attachement ul.media > li .bottom .caption a,
+.ginger-edit.edit-task .c-edit__add-attachement ul.media > li .bottom .caption a {
+    font-weight: 400;
+}
+
+.ginger-edit.edit-contribution .c-edit__add-attachement .widget-header,
+.ginger-edit.edit-contribution .c-edit__add-document .widget-header,
+.ginger-edit.edit-task .c-edit__add-attachement .widget-header,
+.ginger-edit.edit-task .c-edit__add-document .widget-header {
+    background: white;
+    border-radius: 0;
+}
+
+.ginger-edit.edit-contribution .c-edit__add-document .widget-header,
+.ginger-edit.edit-task .c-edit__add-document .widget-header {
+    margin: 0rem -1rem 1rem -1rem;
+    padding: 1.5rem;
+    font-size: 1.7rem;
+    font-weight: normal;
+    line-height: 1.5rem;
+    color: #777777;
+}
+
+.c-edit__add-document {
+    border-radius: 1rem;
+    padding: 0 1rem 1rem 1rem;
+}
+.c-edit__add-document .c-document-upload {
+    margin: 0 0 0 auto;
+    width: fit-content;
+}
+
+.c-edit__add-attachement .widget,
+.c-edit__add-document .widget {
+    margin-bottom: 0;
+}
+
+.c-edit__add-attachement .edit-address,
+.c-edit__add-document .edit-address {
+    margin-bottom: 3rem;
+}
+

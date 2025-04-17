@@ -1,0 +1,568 @@
+<rdf:RDF xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:bibframe="http://bibframe.org/vocab/"
+         xmlns:bibo="http://purl.org/ontology/bibo/" xmlns:lh="http://vocab.inf.ed.ac.uk/library/holdings#"
+         xmlns:ggc="http://data.bibliotheek.nl/ns/nbc/ggc#"
+         xmlns:nbcaggregate="http://data.bibliotheek.nl/ns/nbc/aggregate#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+         xmlns:nbcbooks="http://data.bibliotheek.nl/ns/nbc/books#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:oa="http://www.w3.org/ns/oa#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:schema="http://schema.org/">
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ggc/ppn/411094467">
+        <nbcaggregate:a rdf:resource="http://data.bibliotheek.nl/nbc/aggregate/a/174280"/>
+        <nbcaggregate:b rdf:resource="http://data.bibliotheek.nl/nbc/aggregate/b/101690"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ggc/ppn/411094467">
+        <rdf:type rdf:resource="http://dbpedia.org/ontology/Book"/>
+        <dcterms:identifier rdf:resource="http://data.bibliotheek.nl/ggc/ppn/411094467"/>
+        <dcterms:identifier rdf:resource="urn:ISBN:9789018042141"/>
+        <dcterms:identifier rdf:resource="urn:ISBN:9789018042165"/>
+        <dcterms:identifier rdf:resource="http://www.worldcat.org/oclc/1006904512"/>
+        <dcterms:identifier>500099342</dcterms:identifier>
+        <dcterms:title>Rijbewijs B; Theorieboek</dcterms:title>
+        <dcterms:alternative>Theorieboek rijbewijs B</dcterms:alternative>
+        <dcterms:date>2018</dcterms:date>
+        <dcterms:description>Uitleg in woord en beeld van de verkeersregels, -aanwijzingen, -tekens en -borden
+            ter voorbereiding op het theorie-examen rijbewijs B voor personenauto's.
+        </dcterms:description>
+        <dcterms:extent>270 pagina's</dcterms:extent>
+        <schema:numberOfPages>270</schema:numberOfPages>
+        <nbcbooks:siso>377.2</nbcbooks:siso>
+        <bibframe:originDate>2018</bibframe:originDate>
+        <dcterms:creator>
+            <rdf:Description>
+                <rdfs:label>Uitgeverij Smit</rdfs:label>
+                <dcterms:isFormatOf rdf:resource="http://data.kb.nl/thesaurus/194932710"/>
+            </rdf:Description>
+        </dcterms:creator>
+        <dcterms:contributor>
+            <rdf:Description>
+                <rdfs:label>Hoog, Joop de</rdfs:label>
+                <dcterms:isFormatOf rdf:resource="http://data.kb.nl/thesaurus/070557276"/>
+                <foaf:firstName>Joop</foaf:firstName>
+                <foaf:lastName>de Hoog</foaf:lastName>
+                <vcard:fn>Joop de Hoog</vcard:fn>
+            </rdf:Description>
+        </dcterms:contributor>
+        <dcterms:contributor>
+            <rdf:Description>
+                <rdfs:label>Koninklijke Nederlandse Toeristenbond ANWB</rdfs:label>
+                <dcterms:isFormatOf rdf:resource="http://data.kb.nl/thesaurus/075331209"/>
+            </rdf:Description>
+        </dcterms:contributor>
+        <dcterms:subject
+            rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#078064732"/>
+        <dcterms:subject
+            rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#077980921"/>
+        <dcterms:subject rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/pim#15"/>
+        <dcterms:subject rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/siso#377.2"/>
+        <dcterms:subject rdf:resource="http://data.bibliotheek.nl/ns/nbc/NUV/nur#462"/>
+        <dcterms:subject rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/UNESCO/kmc112X#f"/>
+        <dcterms:language rdf:resource="urn:iso:std:iso:639:-2:dut"/>
+        <dcterms:publisher>ANWB, Den Haag</dcterms:publisher>
+        <bibo:isbn rdf:resource="urn:ISBN:9789018042141"/>
+        <dcterms:isPartOf>
+            <rdf:Description>
+                <rdfs:label>Rijbewijs B</rdfs:label>
+                <dcterms:isFormatOf rdf:resource="http://data.bibliotheek.nl/ggc/ppn/339351152"/>
+            </rdf:Description>
+        </dcterms:isPartOf>
+        <dcterms:format>23 cm</dcterms:format>
+        <dcterms:format>illustraties</dcterms:format>
+        <dcterms:audience rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/audience#VLW"/>
+        <dcterms:medium rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/rdamediadut#n"/>
+        <dcterms:medium rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/obdrager#A"/>
+        <dcterms:medium rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/rdacarrierdut#nc"/>
+        <bibo:edition>1e druk</bibo:edition>
+        <lh:item rdf:resource="http://data.bibliotheek.nl/ggc/ppn/411094467"/>
+        <schema:genre rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/genre#NFC"/>
+        <schema:genre rdf:resource="http://data.bibliotheek.nl/ns/nbc/fiction#false"/>
+        <bibframe:subtitle>auto</bibframe:subtitle>
+        <ggc:countryOfPublication rdf:resource="urn:iso:std:iso:3166:nl"/>
+        <ggc:kmc0500par103 rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/kmc0500par103#v"/>
+        <ggc:pp001apetail_0>
+            2,13,16,19,25,27,28,33,34,40,41,62,180,286,331,333,337,339,342,345,347,348,350,351,353,354,355,359,361,362,364,365,366,369,370,371,374,375,376,377,378,380,385,387,388,391,393,394,396,397,398,400,404,405,406,407,408,409,410,411,413,417,418,422,423,424,425,426,427,428,433,434,437,441,442,443,445,452,453,454,455,457,461,462,463,464,466,467,468,469,470,471,472,474,475,477,484,485
+        </ggc:pp001apetail_0>
+        <ggc:pp001A_0>1003:21-06-17</ggc:pp001A_0>
+        <ggc:pp001B_0>1995:09-11-17</ggc:pp001B_0>
+        <ggc:pp001B_t>19:00:40.000</ggc:pp001B_t>
+        <ggc:pp001D_0>1003:17-10-17</ggc:pp001D_0>
+        <ggc:pp002apetail_0>Afv</ggc:pp002apetail_0>
+        <ggc:pp002C_2>rdacontent/dut</ggc:pp002C_2>
+        <ggc:pp002C_a>tekst</ggc:pp002C_a>
+        <ggc:pp002C_b>txt</ggc:pp002C_b>
+        <ggc:pp002D_2>rdamedia/dut</ggc:pp002D_2>
+        <ggc:pp002D_a>zonder medium</ggc:pp002D_a>
+        <ggc:pp002D_b>n</ggc:pp002D_b>
+        <ggc:pp002E_2>obdrager</ggc:pp002E_2>
+        <ggc:pp002E_a>boek</ggc:pp002E_a>
+        <ggc:pp002E_b>A</ggc:pp002E_b>
+        <ggc:pp002E_2>rdacarrier/dut</ggc:pp002E_2>
+        <ggc:pp002E_a>band</ggc:pp002E_a>
+        <ggc:pp002E_b>nc</ggc:pp002E_b>
+        <ggc:pp003apetail_0>411094467</ggc:pp003apetail_0>
+        <ggc:pp003O_0>1006904512</ggc:pp003O_0>
+        <ggc:pp003O_a>OCoLC</ggc:pp003O_a>
+        <ggc:pp004A_A>9789018042141</ggc:pp004A_A>
+        <ggc:pp004A_g>paperback</ggc:pp004A_g>
+        <ggc:pp004B_A>9789018042165</ggc:pp004B_A>
+        <ggc:pp004B_g>theorieboek+online</ggc:pp004B_g>
+        <ggc:pp004E_0>500099342</ggc:pp004E_0>
+        <ggc:pp004E_l>NSTC</ggc:pp004E_l>
+        <ggc:pp006C_0>28409164</ggc:pp006C_0>
+        <ggc:pp007D_0>9789018042141</ggc:pp007D_0>
+        <ggc:pp007D_l>ONIX</ggc:pp007D_l>
+        <ggc:pp009L_i>411094467.jpg</ggc:pp009L_i>
+        <ggc:pp009L_s>biblion</ggc:pp009L_s>
+        <ggc:pp009L_t>cover</ggc:pp009L_t>
+        <ggc:pp010apetail_a>ned</ggc:pp010apetail_a>
+        <ggc:pp010E_b>dut</ggc:pp010E_b>
+        <ggc:pp010E_e>rda</ggc:pp010E_e>
+        <ggc:pp011apetail_a>2018</ggc:pp011apetail_a>
+        <ggc:pp011apetail_n>[2018]</ggc:pp011apetail_n>
+        <ggc:pp011F_c>©2018</ggc:pp011F_c>
+        <ggc:pp013apetail_0>NFC</ggc:pp013apetail_0>
+        <ggc:pp013apetail_0>VLW</ggc:pp013apetail_0>
+        <ggc:pp019apetail_a>nl</ggc:pp019apetail_a>
+        <ggc:pp021A_9>339351152</ggc:pp021A_9>
+        <ggc:pp021A_a>@Rijbewijs B</ggc:pp021A_a>
+        <ggc:pp021A_d>auto</ggc:pp021A_d>
+        <ggc:pp021A_x>theo</ggc:pp021A_x>
+        <ggc:pp021B_h>tekst: Uitgeverij Smit</ggc:pp021B_h>
+        <ggc:pp021B_j>bewerkt door: Joop de Hoog, Henk Gielen</ggc:pp021B_j>
+        <ggc:pp021B_l>Theorieboek</ggc:pp021B_l>
+        <ggc:pp027A_S>10</ggc:pp027A_S>
+        <ggc:pp027A_a>@Theorieboek rijbewijs B</ggc:pp027A_a>
+        <ggc:pp028C_9>070557276</ggc:pp028C_9>
+        <ggc:pp028C_B>edt</ggc:pp028C_B>
+        <ggc:pp028C_a>Hoog</ggc:pp028C_a>
+        <ggc:pp028C_a>Hoog</ggc:pp028C_a>
+        <ggc:pp028C_c>de</ggc:pp028C_c>
+        <ggc:pp028C_c>de</ggc:pp028C_c>
+        <ggc:pp028C_d>Joop</ggc:pp028C_d>
+        <ggc:pp028C_d>Joop</ggc:pp028C_d>
+        <ggc:pp029F_9>194932710</ggc:pp029F_9>
+        <ggc:pp029F_B>aut</ggc:pp029F_B>
+        <ggc:pp029F_a>@Uitgeverij Smit</ggc:pp029F_a>
+        <ggc:pp029F_c>Eindhoven</ggc:pp029F_c>
+        <ggc:pp029F_9>075331209</ggc:pp029F_9>
+        <ggc:pp029F_B>pbl</ggc:pp029F_B>
+        <ggc:pp029F_a>@Koninklijke Nederlandse Toeristenbond ANWB</ggc:pp029F_a>
+        <ggc:pp032apetail_a>1e druk</ggc:pp032apetail_a>
+        <ggc:pp032apetail_g>1</ggc:pp032apetail_g>
+        <ggc:pp033A_n>ANWB</ggc:pp033A_n>
+        <ggc:pp033A_p>Den Haag</ggc:pp033A_p>
+        <ggc:pp034D_a>270 pagina's</ggc:pp034D_a>
+        <ggc:pp034I_a>23 cm</ggc:pp034I_a>
+        <ggc:pp034M_a>illustraties</ggc:pp034M_a>
+        <ggc:pp044M_9>078064732</ggc:pp044M_9>
+        <ggc:pp044M_a>Rijexamens</ggc:pp044M_a>
+        <ggc:pp044M_9>077980921</ggc:pp044M_9>
+        <ggc:pp044M_a>Auto's</ggc:pp044M_a>
+        <ggc:pp044M_y>Gebruik voor beschrijvingen per merk de term: Automerken</ggc:pp044M_y>
+        <ggc:pp044Q_9>078064732</ggc:pp044Q_9>
+        <ggc:pp044Q_a>Rijexamens</ggc:pp044Q_a>
+        <ggc:pp045B_a>462</ggc:pp045B_a>
+        <ggc:pp045K_a>15 Verkeer en Vervoer</ggc:pp045K_a>
+        <ggc:pp045K_a>377.2</ggc:pp045K_a>
+        <ggc:pp045M_a>f</ggc:pp045M_a>
+        <ggc:pp047K_a>Uitleg in woord en beeld van de verkeersregels, -aanwijzingen, -tekens en -borden ter
+            voorbereiding op het theorie-examen rijbewijs B voor personenauto's.
+        </ggc:pp047K_a>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/UNESCO/kmc112X#f">
+        <rdfs:label xml:lang="nl">Recht, Overheidsadministratie</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/UNESCO/kmc112X#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/genre#NFC">
+        <rdfs:label xml:lang="nl">Non-Fictie</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/genre#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/rdamediadut#n">
+        <rdfs:label xml:lang="nl">zonder medium</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/rdamediadut#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/obdrager#A">
+        <rdfs:label xml:lang="nl">boek</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/obdrager#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/kmc0500par103#v">
+        <rdfs:label xml:lang="nl">Bibliografisch volledig, niet muteerbaar</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/kmc0500par103#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.kb.nl/thesaurus/075331209">
+        <rdfs:label>Koninklijke Nederlandse Toeristenbond ANWB</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/audience#VLW">
+        <rdfs:label xml:lang="nl">Volwassenen</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/audience#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/fiction#false">
+        <rdfs:label xml:lang="nl">Non-Fictie</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/fiction#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#078064732">
+        <skos:broader
+            rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#078082110"/>
+        <skos:broader
+            rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#078006171"/>
+        <skos:broader
+            rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#077980905"/>
+        <rdfs:label xml:lang="nl">Rijexamens</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.kb.nl/thesaurus/194932710">
+        <skos:altLabel>Uitgeverij Smit</skos:altLabel>
+        <rdfs:label>Uitgeverij Smit (Eindhoven)</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/pim#15">
+        <rdfs:label xml:lang="nl">Verkeer en Vervoer</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/pim#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.kb.nl/thesaurus/070557276">
+        <foaf:lastName>de Hoog</foaf:lastName>
+        <foaf:firstName>Joop</foaf:firstName>
+        <rdfs:label>Hoog, Joop de</rdfs:label>
+        <vcard:fn>Joop de Hoog</vcard:fn>
+    </rdf:Description>
+    <rdf:Description rdf:about="urn:iso:std:iso:639:-2:dut">
+        <rdfs:label>Nederlands</rdfs:label>
+        <rdfs:label xml:lang="nl">Nederlands</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#077980921">
+        <skos:broader
+            rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#077973003"/>
+        <rdfs:label xml:lang="nl">Auto's</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/rdacarrierdut#nc">
+        <rdfs:label xml:lang="nl">band</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/rdacarrierdut#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ggc/ppn/339351152">
+        <rdfs:label>Rijbewijs B</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NUV/nur#462">
+        <skos:broader rdf:resource="http://data.bibliotheek.nl/ns/nbc/NUV/nur#460-479"/>
+        <rdfs:label xml:lang="nl">Auto's</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/NUV/nur#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/siso#377.2">
+        <skos:broader rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/siso#377"/>
+        <rdfs:label xml:lang="nl">Verkeerswetgeving en -regeling</rdfs:label>
+        <skos:inScheme rdf:resource="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/siso#"/>
+    </rdf:Description>
+    <oa:Annotation
+        rdf:about="http://data.bibliotheek.nl/nbc/summary#aHR0cDovL2RhdGEuYmlibGlvdGhlZWsubmwvZ2djL3Bwbi80MTEwOTQ0Njc=">
+        <oa:annotatedBy rdf:resource="http://data.bibliotheek.nl/id/bnl"/>
+        <oa:motivatedBy rdf:resource="http://data.bibliotheek.nl/ns/nbc/oa#summarizing"/>
+        <oa:hasTarget rdf:resource="http://data.bibliotheek.nl/ggc/ppn/411094467"/>
+        <oa:hasBody>
+            <rdf:Description>
+                <dcterms:source rdf:resource="urn:nbc:source:nbcaggregate"/>
+                <dcterms:source rdf:resource="urn:nbc:source:webggc.oclc.nl"/>
+                <rdf:type rdf:resource="http://dbpedia.org/ontology/Book"/>
+                <dcterms:type rdf:resource="http://dbpedia.org/ontology/Book"/>
+                <dcterms:type rdf:resource="http://data.bibliotheek.nl/ns/nbc/type#Gedrukt_boek"/>
+                <dcterms:title>Rijbewijs B; Theorieboek</dcterms:title>
+                <dcterms:alternative>Theorieboek rijbewijs B</dcterms:alternative>
+                <dcterms:creator>
+                    <rdf:Description rdf:about="http://data.kb.nl/thesaurus/194932710">
+                        <rdfs:label>Uitgeverij Smit (Eindhoven)</rdfs:label>
+                        <skos:altLabel>Uitgeverij Smit</skos:altLabel>
+                    </rdf:Description>
+                </dcterms:creator>
+                <dcterms:contributor>
+                    <rdf:Description rdf:about="http://data.kb.nl/thesaurus/070557276">
+                        <rdfs:label>Hoog, Joop de</rdfs:label>
+                        <foaf:firstName>Joop</foaf:firstName>
+                        <foaf:lastName>de Hoog</foaf:lastName>
+                        <vcard:fn>Joop de Hoog</vcard:fn>
+                    </rdf:Description>
+                </dcterms:contributor>
+                <dcterms:contributor>
+                    <rdf:Description rdf:about="http://data.kb.nl/thesaurus/075331209">
+                        <rdfs:label>Koninklijke Nederlandse Toeristenbond ANWB</rdfs:label>
+                    </rdf:Description>
+                </dcterms:contributor>
+                <dcterms:date>2018</dcterms:date>
+                <dcterms:publisher>ANWB, Den Haag</dcterms:publisher>
+                <dcterms:language>
+                    <rdf:Description rdf:about="urn:iso:std:iso:639:-2:dut">
+                        <rdfs:label>Nederlands</rdfs:label>
+                    </rdf:Description>
+                </dcterms:language>
+                <dcterms:description>Uitleg in woord en beeld van de verkeersregels, -aanwijzingen, -tekens en
+                    -borden ter voorbereiding op het theorie-examen rijbewijs B voor personenauto's.
+                </dcterms:description>
+                <dcterms:extent>270 pagina's</dcterms:extent>
+                <dcterms:subject>
+                    <rdf:Description
+                        rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#077980921">
+                        <rdfs:label>Auto's</rdfs:label>
+                    </rdf:Description>
+                </dcterms:subject>
+                <dcterms:subject>
+                    <rdf:Description
+                        rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/Trefwoordenthesaurus#078064732">
+                        <rdfs:label>Rijexamens</rdfs:label>
+                    </rdf:Description>
+                </dcterms:subject>
+                <dcterms:subject>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/pim#15">
+                        <rdfs:label>Verkeer en Vervoer</rdfs:label>
+                    </rdf:Description>
+                </dcterms:subject>
+                <dcterms:subject>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/siso#377.2">
+                        <rdfs:label>Verkeerswetgeving en -regeling</rdfs:label>
+                    </rdf:Description>
+                </dcterms:subject>
+                <dcterms:subject>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NUV/nur#462">
+                        <rdfs:label>Auto's</rdfs:label>
+                    </rdf:Description>
+                </dcterms:subject>
+                <dcterms:subject>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/UNESCO/kmc112X#f">
+                        <rdfs:label>Recht, Overheidsadministratie</rdfs:label>
+                    </rdf:Description>
+                </dcterms:subject>
+                <dcterms:audience>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/audience#VLW">
+                        <rdfs:label>Volwassenen</rdfs:label>
+                    </rdf:Description>
+                </dcterms:audience>
+                <dcterms:format>23 cm</dcterms:format>
+                <dcterms:format>illustraties</dcterms:format>
+                <nbcaggregate:a rdf:resource="http://data.bibliotheek.nl/nbc/aggregate/a/174280"/>
+                <nbcaggregate:b rdf:resource="http://data.bibliotheek.nl/nbc/aggregate/b/101690"/>
+                <dcterms:isPartOf>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ggc/ppn/339351152">
+                        <rdfs:label>Rijbewijs B</rdfs:label>
+                    </rdf:Description>
+                </dcterms:isPartOf>
+                <bibframe:classification>377.2</bibframe:classification>
+                <dcterms:identifier>9789018042141</dcterms:identifier>
+                <dcterms:identifier>500099342</dcterms:identifier>
+                <dcterms:identifier rdf:resource="http://data.bibliotheek.nl/ggc/ppn/411094467"/>
+                <dcterms:identifier rdf:resource="http://www.worldcat.org/oclc/1006904512"/>
+                <dcterms:identifier rdf:resource="urn:ISBN:9789018042141"/>
+                <dcterms:identifier rdf:resource="urn:ISBN:9789018042165"/>
+                <bibo:isbn rdf:resource="urn:ISBN:9789018042141"/>
+                <dcterms:medium>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/obdrager#A">
+                        <rdfs:label>boek</rdfs:label>
+                    </rdf:Description>
+                </dcterms:medium>
+                <dcterms:medium>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/rdacarrierdut#nc">
+                        <rdfs:label>band</rdfs:label>
+                    </rdf:Description>
+                </dcterms:medium>
+                <dcterms:medium>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/rdamediadut#n">
+                        <rdfs:label>zonder medium</rdfs:label>
+                    </rdf:Description>
+                </dcterms:medium>
+                <bibframe:subtitle>auto</bibframe:subtitle>
+                <bibframe:originDate>2018</bibframe:originDate>
+                <schema:genre>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/NBD_Biblion/genre#NFC">
+                        <rdfs:label>Non-Fictie</rdfs:label>
+                    </rdf:Description>
+                </schema:genre>
+                <schema:genre>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/fiction#false">
+                        <rdfs:label>Non-Fictie</rdfs:label>
+                    </rdf:Description>
+                </schema:genre>
+                <bibo:edition>1e druk</bibo:edition>
+                <ggc:kmc0500par103 rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/kmc0500par103#v"/>
+                <lh:item rdf:resource="http://data.bibliotheek.nl/ggc/ppn/411094467"/>
+            </rdf:Description>
+        </oa:hasBody>
+    </oa:Annotation>
+    <oa:Annotation
+        rdf:about="http://data.bibliotheek.nl/nbc/summary#aHR0cDovL2RhdGEua2IubmwvdGhlc2F1cnVzLzE5NDkzMjcxMA==">
+        <oa:annotatedBy rdf:resource="http://data.bibliotheek.nl/id/bnl"/>
+        <oa:motivatedBy rdf:resource="http://data.bibliotheek.nl/ns/nbc/oa#summarizing"/>
+        <oa:hasTarget rdf:resource="http://data.kb.nl/thesaurus/194932710"/>
+        <oa:hasBody>
+            <rdf:Description>
+                <dcterms:source rdf:resource="urn:nbc:source:kbGgcThes"/>
+                <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+                <dcterms:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+                <rdf:type rdf:resource="http://dbpedia.org/ontology/Organisation"/>
+                <dcterms:type rdf:resource="http://dbpedia.org/ontology/Organisation"/>
+                <dcterms:title>Uitgeverij Smit (Eindhoven)</dcterms:title>
+                <dcterms:language>
+                    <rdf:Description rdf:about="urn:iso:std:iso:639:-2:dut">
+                        <rdfs:label>Nederlands</rdfs:label>
+                    </rdf:Description>
+                </dcterms:language>
+                <skos:prefLabel>Uitgeverij Smit (Eindhoven)</skos:prefLabel>
+                <skos:editorialNote>! iw</skos:editorialNote>
+                <skos:editorialNote>B0031921</skos:editorialNote>
+                <skos:editorialNote>E-mail: info@rijschoolservice.nl</skos:editorialNote>
+                <skos:editorialNote>LET OP verdubbel alleen in geval aut./red. etc vermelding!!!!
+                </skos:editorialNote>
+                <skos:editorialNote>Voorheen Valkenswaard</skos:editorialNote>
+                <skos:inScheme rdf:resource="http://schemas.kb.nl/thesaurus/"/>
+                <skos:inScheme rdf:resource="http://schemas.kb.nl/thesaurus/Corporaties"/>
+                <lh:item rdf:resource="http://data.kb.nl/thesaurus/194932710"/>
+            </rdf:Description>
+        </oa:hasBody>
+    </oa:Annotation>
+    <oa:Annotation
+        rdf:about="http://data.bibliotheek.nl/nbc/summary#aHR0cDovL2RhdGEua2IubmwvdGhlc2F1cnVzLzA3NTMzMTIwOQ==">
+        <oa:annotatedBy rdf:resource="http://data.bibliotheek.nl/id/bnl"/>
+        <oa:motivatedBy rdf:resource="http://data.bibliotheek.nl/ns/nbc/oa#summarizing"/>
+        <oa:hasTarget rdf:resource="http://data.kb.nl/thesaurus/075331209"/>
+        <oa:hasBody>
+            <rdf:Description>
+                <dcterms:source rdf:resource="urn:nbc:source:kbGgcThes"/>
+                <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+                <dcterms:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+                <rdf:type rdf:resource="http://dbpedia.org/ontology/Organisation"/>
+                <dcterms:type rdf:resource="http://dbpedia.org/ontology/Organisation"/>
+                <dcterms:title>Koninklijke Nederlandse Toeristenbond ANWB</dcterms:title>
+                <dcterms:language>
+                    <rdf:Description rdf:about="urn:iso:std:iso:639:-2:dut">
+                        <rdfs:label>Nederlands</rdfs:label>
+                    </rdf:Description>
+                </dcterms:language>
+                <skos:prefLabel>Koninklijke Nederlandse Toeristenbond ANWB</skos:prefLabel>
+                <skos:altLabel>ANWB</skos:altLabel>
+                <skos:altLabel>Royal Dutch Touring Club ANWB</skos:altLabel>
+                <skos:editorialNote>&lt;1&gt;D2</skos:editorialNote>
+                <skos:editorialNote>Homepage: www.anwb.nl</skos:editorialNote>
+                <skos:editorialNote>In 1885 werd de naam veranderd in de Algemene Nederlandsche
+                    Wielrijdersbond.
+                </skos:editorialNote>
+                <skos:editorialNote>In 1935 werd de naam wederom veranderd; de bond kreeg zijn huidige naam
+                    namelijk Koninklijke Nederlandse Toeristenbond ANWB.
+                </skos:editorialNote>
+                <skos:editorialNote>Ook gebruiken voor "ANWB bv"</skos:editorialNote>
+                <skos:editorialNote>Oorspronkelijk opgezet om de belangen van de toen weinige wielrijders te
+                    behartigen, groeide de ANWB al spoedig uit tot een organisatie die zich bezighoudt met
+                    o.a. verkeer, toerisme en recreatie.
+                </skos:editorialNote>
+                <skos:editorialNote>Op 1 juli 1883 werd de Nederlandsche Velocipedistenbond opgericht.
+                </skos:editorialNote>
+                <skos:editorialNote>Publicaties van deze instelling moeten worden ingevoerd onder de naam die
+                    in gebruik was ten tijde van de datum van publicatie.
+                </skos:editorialNote>
+                <skos:editorialNote>Pytt. -1976-1977- "Koninklijke Nederlandse Toeristenbond ANWB"
+                </skos:editorialNote>
+                <skos:editorialNote>Uitgaven van deze instelling worden ingedeeld onder de naam die in gebruik
+                    was ten tijde van publicatie.
+                </skos:editorialNote>
+                <skos:editorialNote>Vandaar dat de naam in 1904 werd veranderd in A.N.W.B. Toeristenbond voor
+                    Nederland. Daar bleef het niet bij: in 1935 werd het de Koninklijke Nederlandsche
+                    Toeristenbond A.N.W.B. en in 1974 verdwenen de sch en de puntjes: Koninklijke Nederlandse
+                    Toeristenbond ANWB. En zo heten we nog steeds, hoewel we meestal kortweg de ANWB worden
+                    genoemd. De naam van het verenigingsblad Kampioen is overigens nooit meer veranderd,
+                    alleen het lidwoord De is verdwenen.
+                </skos:editorialNote>
+                <skos:editorialNote>iw!</skos:editorialNote>
+                <skos:historyNote xml:lang="nl">Voortz. van: Koninklijke Nederlandsche Toeristenbond ANWB
+                </skos:historyNote>
+                <skos:inScheme rdf:resource="http://schemas.kb.nl/thesaurus/"/>
+                <skos:inScheme rdf:resource="http://schemas.kb.nl/thesaurus/Corporaties"/>
+                <skos:related rdf:resource="http://data.kb.nl/thesaurus/102042934"/>
+                <lh:item rdf:resource="http://data.kb.nl/thesaurus/075331209"/>
+            </rdf:Description>
+        </oa:hasBody>
+    </oa:Annotation>
+    <oa:Annotation
+        rdf:about="http://data.bibliotheek.nl/nbc/summary#aHR0cDovL2RhdGEuYmlibGlvdGhlZWsubmwvZ2djL3Bwbi8zMzkzNTExNTI=">
+        <oa:annotatedBy rdf:resource="http://data.bibliotheek.nl/id/bnl"/>
+        <oa:motivatedBy rdf:resource="http://data.bibliotheek.nl/ns/nbc/oa#summarizing"/>
+        <oa:hasTarget rdf:resource="http://data.bibliotheek.nl/ggc/ppn/339351152"/>
+        <oa:hasBody>
+            <rdf:Description>
+                <dcterms:source rdf:resource="urn:nbc:source:webggc.oclc.nl"/>
+                <rdf:type rdf:resource="http://purl.org/ontology/bibo/MultiVolumeBook"/>
+                <dcterms:type rdf:resource="http://purl.org/ontology/bibo/MultiVolumeBook"/>
+                <dcterms:type rdf:resource="http://data.bibliotheek.nl/ns/nbc/type#Meerdelig_boek"/>
+                <dcterms:title>Rijbewijs B</dcterms:title>
+                <dcterms:alternative>Rijbewijs B auto</dcterms:alternative>
+                <dcterms:date>2012</dcterms:date>
+                <dcterms:publisher>ANWB, Den Haag</dcterms:publisher>
+                <dcterms:language>
+                    <rdf:Description rdf:about="urn:iso:std:iso:639:-2:dut">
+                        <rdfs:label>Nederlands</rdfs:label>
+                    </rdf:Description>
+                </dcterms:language>
+                <dcterms:extent>.. delen</dcterms:extent>
+                <dcterms:subject>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/UNESCO/kmc112X#u">
+                        <rdfs:label>Technologie, Nijverheid, Ambachten</rdfs:label>
+                    </rdf:Description>
+                </dcterms:subject>
+                <dcterms:subject>
+                    <rdf:Description rdf:about="http://data.kb.nl/thesaurus/075620987">
+                        <rdfs:label>rijexamens</rdfs:label>
+                    </rdf:Description>
+                </dcterms:subject>
+                <dcterms:format>23 cm</dcterms:format>
+                <dcterms:identifier rdf:resource="http://data.bibliotheek.nl/ggc/ppn/339351152"/>
+                <dcterms:identifier rdf:resource="http://www.worldcat.org/oclc/770003430"/>
+                <dcterms:medium>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/rdacarrierdut#nc">
+                        <rdfs:label>band</rdfs:label>
+                    </rdf:Description>
+                </dcterms:medium>
+                <dcterms:medium>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/Oclc/rdamediadut#n">
+                        <rdfs:label>zonder medium</rdfs:label>
+                    </rdf:Description>
+                </dcterms:medium>
+                <bibframe:subtitle>auto</bibframe:subtitle>
+                <bibframe:originDate>2012</bibframe:originDate>
+                <schema:genre>
+                    <rdf:Description rdf:about="http://data.bibliotheek.nl/ns/nbc/fiction#false">
+                        <rdfs:label>Non-Fictie</rdfs:label>
+                    </rdf:Description>
+                </schema:genre>
+                <ggc:kmc0500par103 rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/kmc0500par103#x"/>
+                <lh:item rdf:resource="http://data.bibliotheek.nl/ggc/ppn/339351152"/>
+            </rdf:Description>
+        </oa:hasBody>
+    </oa:Annotation>
+    <oa:Annotation
+        rdf:about="http://data.bibliotheek.nl/nbc/summary#aHR0cDovL2RhdGEua2IubmwvdGhlc2F1cnVzLzA3MDU1NzI3Ng==">
+        <oa:annotatedBy rdf:resource="http://data.bibliotheek.nl/id/bnl"/>
+        <oa:motivatedBy rdf:resource="http://data.bibliotheek.nl/ns/nbc/oa#summarizing"/>
+        <oa:hasTarget rdf:resource="http://data.kb.nl/thesaurus/070557276"/>
+        <oa:hasBody>
+            <rdf:Description>
+                <dcterms:source rdf:resource="urn:nbc:source:kbGgcThes"/>
+                <dcterms:source rdf:resource="urn:nbc:source:webggc.oclc.nl"/>
+                <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+                <dcterms:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+                <rdf:type rdf:resource="http://dbpedia.org/ontology/Person"/>
+                <dcterms:type rdf:resource="http://dbpedia.org/ontology/Person"/>
+                <dcterms:title>Hoog, Joop de</dcterms:title>
+                <dcterms:language>
+                    <rdf:Description rdf:about="urn:iso:std:iso:639:-2:dut">
+                        <rdfs:label>Nederlands</rdfs:label>
+                    </rdf:Description>
+                </dcterms:language>
+                <dcterms:identifier rdf:resource="http://data.kb.nl/thesaurus/070557276"/>
+                <skos:exactMatch rdf:resource="http://viaf.org/viaf/290637448"/>
+                <foaf:name>Hoog, Joop de</foaf:name>
+                <foaf:name>Joop de Hoog</foaf:name>
+                <foaf:firstName>Joop</foaf:firstName>
+                <foaf:lastName>de Hoog</foaf:lastName>
+                <vcard:fn>Joop de Hoog</vcard:fn>
+                <skos:prefLabel>Hoog, Joop de</skos:prefLabel>
+                <skos:editorialNote xml:lang="nl">Verkeersrecht</skos:editorialNote>
+                <skos:inScheme rdf:resource="http://schemas.kb.nl/thesaurus/"/>
+                <skos:inScheme rdf:resource="http://schemas.kb.nl/thesaurus/Persoonsnamen"/>
+                <ggc:kmc0500par103 rdf:resource="http://data.bibliotheek.nl/ns/nbc/Oclc/kmc0500par103#v"/>
+                <lh:item rdf:resource="http://data.kb.nl/thesaurus/070557276"/>
+            </rdf:Description>
+        </oa:hasBody>
+    </oa:Annotation>
+</rdf:RDF>

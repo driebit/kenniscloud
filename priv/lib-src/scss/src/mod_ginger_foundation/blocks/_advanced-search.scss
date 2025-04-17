@@ -1,0 +1,79 @@
+.advanced-search {
+    position: relative;
+
+    input, input[type="text"], input[type="website"] {
+        width: 100%;
+        @include size(font-size, 16);
+    }
+
+    select {
+        width: 80%;
+        @include size(font-size, 16);
+    }
+
+    .is-error,
+    .is-undefined {
+        border: 2px solid $error;
+    }
+
+    .btn--add-rule {
+        margin-top: 15px;
+    }
+
+    .btn--remove-rule {
+        width: 40px;
+        position: absolute;
+        top: 10px;
+        right: 0px;
+        margin-top: 0;
+    }
+
+    .advanced-search__rule:first-child {
+
+        .btn--remove-rule {
+          top: 0px;
+        }
+    }
+
+    .global-search__submit {
+        width: 100%;
+        @include size(max-width, 400);
+        @include size(margin-top, 20);
+        @include size(padding-top, 5);
+        text-indent: 0px;
+        line-height: 1;
+
+        &:before {
+            display: none;
+        }
+    }
+}
+
+.advanced-search__rule__input {
+    margin-top: 6px;
+}
+
+.advanced-search__rule {
+    @include size(max-width, 400);
+    position: relative;
+
+    + .advanced-search__rule {
+        @include size(margin-top, 10);
+        @include size(padding-top, 10);
+        border-top: 1px solid $alto;
+    }
+}
+
+.advanced-search__rule__and {
+    display: none;
+}
+
+.advanced-search__rule__date {
+    select {
+        width: 31.5%;
+    }
+}
+
+@include mq(min-width, $mediumBreakpoint) {
+
+}

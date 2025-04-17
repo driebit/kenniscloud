@@ -1,0 +1,11 @@
+.locations {
+	position: relative;
+
+	#map {
+		height: 300px !important;
+
+		@include mq(min-width, $mediumBreakpoint) {
+			height: 550px !important;
+		}
+	}
+}

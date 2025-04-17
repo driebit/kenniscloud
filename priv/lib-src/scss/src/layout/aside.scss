@@ -1,0 +1,207 @@
+.main-aside {
+    padding: 0;
+    background: none;
+}
+
+.page-aside {
+    width: 100%;
+    padding: 0 15px;
+    margin: 20px 0;
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    strong,
+    small {
+        font-family: $bodyFontFamily;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .btn--primary {
+        text-align: center;
+    }
+
+    .page-aside__author {
+        .person-author {
+            margin-bottom: 0;
+        }
+    }
+
+    .person__content {
+        strong {
+            font-size: $superSmallFont;
+        }
+
+        small {
+            font-size: $superDuperSmallFont;
+        }
+    }
+
+    .page-action--edit {
+        margin-bottom: 20px;
+    }
+
+    .bordered-title {
+        margin-bottom: 15px;
+        font-size: $superSmallFont;
+        color: $grey;
+
+        &:before {
+            width: 100%;
+            height: 3px;
+            margin-bottom: 8px;
+            background: $greyLight;
+        }
+
+        + .share {
+            width: 100%;
+            margin: -25px 0 -15px;
+            justify-content: flex-end;
+        }
+    }
+
+    .person-list {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .btn--primary {
+        width: 100%;
+    }
+
+    @include mq(min-width, $mediumBreakpoint) {
+        width: 230px;
+        padding: 30px 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: auto;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+}
+
+[class^="page-aside__"],
+[class*=" page-aside__"] {
+    margin-bottom: 25px;
+}
+
+.page-aside__date time,
+.page-aside__location {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+    font-family: $secondaryFontFamily;
+
+    i {
+        width: 30px;
+        position: relative;
+        top: 5px;
+    }
+
+    span {
+        display: block;
+    }
+}
+
+.page-aside__date {
+    margin-bottom: 20px;
+
+    p {
+        margin: 5px 0 0;
+        font-size: $superSmallFont;
+    }
+
+    time {
+        margin-bottom: 0;
+    }
+}
+
+.page-aside__involvement {
+    .btn--primary {
+        margin-top: 20px;
+    }
+}
+
+.page-aside__talk-along {
+    p {
+        margin: 0 0 10px;
+    }
+}
+
+.page-aside__location {
+    @include mq(min-width, $mediumBreakpoint) {
+        margin-bottom: 40px;
+    }
+}
+
+.page-aside__organisation {
+}
+
+.page-aside__share {
+}
+
+// HOMEPAGE FEED ASIDE
+
+.c-homepage__aside {
+    display: none;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        display: initial;
+        z-index: 2;
+        background-color: $white;
+        width: 27rem;
+        padding: 2rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 6.75rem;
+        height: fit-content;
+    }
+}
+
+.c-homepage__aside-link {
+    margin-left: 1.5rem;
+}
+
+.c-homepage__aside-title {
+    padding-bottom: 1rem;
+    font-size: 1.7rem;
+    border-bottom: 2px $remarkGrey solid;
+}
+
+.c-homepage__aside-section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $mainThemeColor;
+    margin-top: 1.5rem;
+    display: flex;
+}
+
+.c-homepage__aside-section-title .icon--location,
+.c-homepage__aside-section-title .icon--ob-arrow {
+    font-size: 2rem;
+    color: $mainThemeColor;
+    margin: 0 0.5rem 0 -1rem;
+}
+
+.c-homepage__aside-list {
+    list-style: none;
+    padding: 0;
+}
+
+.c-homepage__aside-list li a {
+    text-decoration: none;
+    color: $grey;
+    font-weight: 400;
+    display: block;
+    padding: 0.5rem 0;
+    text-decoration: underline;
+}
+
+.c-homepage__aside-list li a:hover {
+    color: $mainThemeColor;
+}

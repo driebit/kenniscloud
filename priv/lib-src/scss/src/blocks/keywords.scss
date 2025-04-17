@@ -1,0 +1,27 @@
+.keywords {
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    list-style: none;
+    font-family: $tertiaryFontFamily;
+
+    .btn--secondary {
+        padding: 5px 15px;
+        margin: 0 8px 8px 0;
+        border-color: $white;
+        font-size: $superSmallFont;
+        color: $white;
+        background: none;
+        transition: all .2s;
+
+        &.is-active {
+            color: $mainThemeColor;
+            background: $white;
+        }
+
+        @include setInteractive {
+            color: $mainThemeColor;
+            background: $white;
+        }
+    }
+}

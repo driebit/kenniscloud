@@ -1,0 +1,247 @@
+.person-list {
+    .btn--primary {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    h3 {
+        font-size: 15px;
+    }
+
+    @include mq(min-width, $mediumBreakpoint) {
+        width: 260px;
+        padding: 0;
+        margin-bottom: 40px;
+        flex-shrink: 0;
+        color: $white;
+        background: none;
+
+        h3 {
+            &:before {
+                background: $white;
+            }
+        }
+
+        .btn--primary {
+            margin: 0 0 40px;
+        }
+    }
+}
+
+
+
+.person-list__items {
+    display: flex;
+    flex-flow: row wrap;
+
+    .bordered-title {
+        width: 100%;
+    }
+
+    a {
+        margin: 0 10px 10px 0;
+    }
+}
+
+.person {
+    position: relative;
+
+    img {
+        width: 45px;
+        height: 45px;
+        position: relative;
+        border-radius: 50%;
+        z-index: 20;
+    }
+
+    &:hover {
+        .person__content {
+            opacity: 1;
+            top: 55px;
+            left: 0px;
+            transform: scale(1);
+            z-index: 30;
+        }
+    }
+
+    @include setInteractive {
+        text-decoration: none;
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+
+        &:hover,
+        .is-hovered {
+            z-index: 60;
+
+            .person__content {
+                left: 50%;
+                transform: scale(1) translateX(-50%);
+            }
+        }
+    }
+}
+
+.avatar__wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.person--manager,
+.person--cl,
+.person--pl,
+.person--specialist {
+    .avatar__wrapper:before {
+        @extend .has-icon;
+        @extend .icon--vaantje;
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        z-index: 30;
+    }
+}
+
+.person--manager .avatar__wrapper:before {
+    color: $offwhite;
+}
+
+.person--cl .avatar__wrapper:before {
+    color: $mainThemeColor;
+}
+
+.person--pl .avatar__wrapper:before {
+    color: $blueDark;
+}
+
+.person--specialist .avatar__wrapper:before {
+    color: $purpleDark;
+}
+
+.person__content {
+    width: 220px;
+    padding: 15px;
+    opacity: 1;
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 15px;
+    color: $white;
+    background: rgba($black, 0.6);
+    transform: scale(0);
+    transform-origin: top left;
+    z-index: 60;
+    transition: all 0.3s;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: -14px;
+        left: 20px;
+        border-bottom: 7px solid rgba($black, 0.6);
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 7px solid transparent;
+    }
+
+    strong {
+        display: block;
+        font-family: $secondaryFontFamily;
+        line-height: 1;
+    }
+
+    strong+small {
+        margin-top: 5px;
+    }
+
+    em {
+        margin-bottom: 5px;
+        display: block;
+        font-style: normal;
+    }
+
+    small {
+        margin: 0;
+        display: block;
+        font-family: $tertiaryFontFamily;
+        font-size: 13px;
+        line-height: 1.1;
+    }
+
+    p {
+        margin: 5px 0 0;
+        font-size: $superSmallFont;
+        line-height: 1.2;
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        &:before {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}
+
+.person-author {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    color: $typographyColor;
+
+    .avatar__wrapper {
+        margin-right: 20px;
+    }
+
+    .avatar__image {
+        width: 45px;
+        height: 45px;
+        margin-right: 0;
+    }
+
+    .person__content {
+        padding: 0;
+        opacity: 1;
+        flex-grow: 1;
+        position: static;
+        color: inherit;
+        background: none;
+        transform: none;
+        transition: none;
+
+        &:before {
+            display: none;
+        }
+    }
+
+    span {
+        margin: 0;
+    }
+
+    @include setInteractive {
+        text-decoration: none;
+    }
+}
+
+.person--total {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $grey;
+    border-radius: 50%;
+    font-family: $secondaryFontFamily;
+    line-height: 1;
+    color: $grey;
+
+    span {
+        position: relative;
+        top: -2px;
+    }
+
+    @include setInteractive {
+        border-color: $mainThemeColor;
+        text-decoration: none;
+    }
+}

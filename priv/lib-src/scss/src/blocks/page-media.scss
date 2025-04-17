@@ -1,0 +1,29 @@
+.page-media {
+    padding: 4rem 1.5rem;
+    position: relative;
+
+    @include breakpoint($mediumBreakpoint) {
+        padding: 0 0 5rem;
+    }
+}
+
+.lightbox-video-embed {
+    &:before {
+        @extend .has-icon;
+        @extend .icon--video;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 4rem;
+        height: 4rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: $mainThemeColor;
+        color: $white;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-font-smoothing: antialiased;
+        text-indent: 3px;
+    }
+}

@@ -1,0 +1,63 @@
+.toggle-menu {
+    @extend .global-nav-toggle;
+
+    @include mq(min-width, $largeBreakpoint) {
+        display: none;
+    }
+}
+
+.toggle-menu span,
+.toggle-menu span:before,
+.toggle-menu span:after {
+    display: block;
+    content: '';
+    width: 27px;
+    height: 4px;
+    position: absolute;
+    left: 5px;
+    background: $grey;
+    cursor: pointer;
+    border-radius: 1px;
+    transition: transform 500ms cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.toggle-menu span:before,
+.toggle-menu span:after {
+    left: 0px;
+}
+
+.toggle-menu span {
+    top: 20px;
+}
+
+.toggle-menu span:before {
+    top: -9px;
+}
+
+.toggle-menu span:after {
+    bottom: -9px;
+}
+
+.toggle-menu.is-active span {
+    background-color: transparent;
+}
+
+.toggle-menu.is-active span:before,
+.toggle-menu.is-active span:after {
+    // top: 0;
+}
+
+.toggle-menu.is-active span:before {
+    transform: rotate(45deg);
+}
+
+.toggle-menu.is-active span:after {
+    transform: rotate(-45deg);
+    bottom: -9px;
+}
+
+@include mq(min-width, $largeBreakpoint) {
+    .toggle-menu {
+        display: none;
+    }
+}

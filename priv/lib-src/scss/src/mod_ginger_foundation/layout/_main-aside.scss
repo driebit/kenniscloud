@@ -1,0 +1,51 @@
+.main-aside {
+    @include size(padding-bottom, $standardOffset);
+    background: $listBgColor;
+}
+
+.main-aside__title {
+    color: $mainThemeColor;
+    font-family: $secondaryFontFamily;
+    @include size(font-size, 20);
+}
+
+.main-aside--sided {
+    width: 90%;
+    @include size(padding-bottom, $standardOffset);
+    margin: 0 auto;
+    position: relative;
+    background: none;
+
+    .list-header {
+        padding: 0;
+        @include size(margin-bottom, 10);
+        background: none;
+    }
+
+    .list-header__title {
+        @extend .main-aside__title;
+        width: 100%;
+    }
+
+    .list {
+        padding-top: 0;
+    }
+
+    .list-header:first-child {
+        @include size(margin-top, 20);
+    }
+}
+
+@include mq(min-width, $smallBreakpoint) {
+    .main-aside--sided {
+        @include size(max-width, 320);
+    }
+}
+
+@include mq(min-width, $mediumBreakpoint) {
+    .main-aside--sided {
+        @include size(margin-top, 80);
+        @include size(margin-left, $standardOffset);
+        float: left;
+    }
+}

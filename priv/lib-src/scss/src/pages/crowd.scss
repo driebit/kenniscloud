@@ -1,0 +1,295 @@
+div.crowd-wrapper {
+    margin: auto;
+
+    &.-normal {
+        max-width: 1000px;
+        margin: auto;
+        position: relative;
+
+        .crowd-controls {
+            position: absolute;
+            margin: 20px;
+        }
+
+        button {
+            margin: 5px;
+        }
+    }
+
+    &.-present {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: $offwhite;
+        z-index: 5000;
+
+        h4 {
+            a, a:hover, a:active {
+                color: white;
+            }
+        }
+
+        .person-card {
+            width: 400px;
+        }
+
+        .crowd-controls {
+            padding-right: 0;
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 5px;
+
+            .crowd-control-buttons {
+                button:not(.btn) {
+                    border-color: white;
+                    color: white;
+                    background: none;
+
+                    @include setInteractive {
+                        border-color: $offwhite;
+                        background: $offwhite;
+                    }
+                }
+            }
+        }
+    }
+
+    @include breakpoint(480px) {
+        &.-present {
+            .crowd-present-header {
+                padding-top: 35px;
+                padding-left: 40px;
+
+                .crowd-controls {
+                    padding: 20px;
+                    position: absolute;
+
+                    .crowd-control-buttons {
+                        padding: 5px 5px 50px 5px;
+
+                        .crowd-control {
+                            margin: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.crowd-text-box-container {
+    position: absolute;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.crowd-canvas {
+    display: block;
+    background-color: $remarkGrey;
+}
+
+.crowd-text-box {
+    text-rendering: optimizeLegibility;
+    padding: 5px 10px;
+    border-radius: 2px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 35px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: white;
+}
+
+.crowd-text-box-wrapper {
+    -webkit-user-select: none;
+    width: 500px;
+    position: absolute;
+    text-align: center;
+    transform-style: preserve-3d;
+    pointer-events: none;
+    user-select: none;
+}
+
+.crowd-controls {
+    padding: 0;
+    top: 0px;
+    right: 0px;
+    text-align: right;
+    z-index: 100;
+
+    aside {
+        height: fit-content;
+        margin: 1em;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .list__item {
+        margin: 0;
+        text-align: left;
+
+        .person-card-close {
+            margin: 0;
+            color: white;
+            background: color-mix(in srgb, $grey 50%, white);
+        }
+    }
+
+    .crowd-control-buttons {
+        padding: 0;
+        text-align: right;
+
+        button:not(.btn) {
+            @include setInteractive {
+                border-color: $offwhite;
+                background: $offwhite;
+            }
+        }
+
+        div {
+            margin-top: 5px;
+        }
+    }
+
+    .crowd-control {
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        margin-top: 0;
+        margin-right: 0;
+        margin-bottom: 0;
+        margin-left: 5px;
+        border: 1px solid black;
+        border-radius: 5px;
+        background-color: $remarkGrey;
+        transition: .2s all;
+
+        span img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .crowd-person-card-wrapper {
+        padding: 20px 20px 100px 20px;
+        position: absolute;
+    }
+}
+
+.crowd-present-header-wrapper {
+    color: $offwhite;
+    background-color: $grey;
+}
+
+.crowd-present-header {
+    max-width: 1000px;
+    padding: 20px;
+    z-index: 2000;
+}
+
+.crowd-page-header {
+    margin-bottom: 0px;
+    background-color: $meetup;
+}
+
+.daycrowdevent {
+    .crowd-present-header-wrapper {
+        background-color: $orange;
+    }
+
+    .crowd-date {
+        font-family: $mixFontFamily;
+        padding-left: 1rem;
+    }
+
+    .crowd-present-qr-wrapper {
+        position: absolute;
+        padding: 20px;
+        margin: 20px;
+        top: 0px;
+        right: 0px;
+        display: flex;
+        background-color: $grey;
+        max-width: 450px;
+    }
+
+    .crowd__qr {
+        position: static;
+        padding: 10px;
+        margin-right: 20px;
+        height: 100%;
+    }
+
+    .crowd-bieb-logo {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+    }
+}
+
+.daycrowd .list__item.person-card {
+    &.wide {
+        width: min(80vw, 40em);
+    }
+
+    .list__item__intro {
+        margin: 1em 1em 1em 0.5em;
+    }
+
+    .list__item__title {
+        margin: 1em 0;
+    }
+
+    .emphasis {
+        font-weight: bold;
+    }
+
+    input[type=checkbox] {
+        margin-right: 0.5em;
+    }
+}
+
+.list__item.person-card {
+    width: 300px;
+    background: $white;
+    color: $grey;
+
+    article .list__item__content .list__item__title {
+        color: $offwhite;
+        background-color: $grey;
+
+        .category-of {
+            border-color: $offwhite;
+        }
+    }
+
+    a article .list__item__image img {
+        transform: translateY(-25%);
+    }
+}
+
+.person-card-close {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    margin: 10px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border: none;
+    color: white;
+    background: none;
+    z-index: 1;
+    transition: .2s all;
+}
+
+.crowd__qr {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    text-align: right;
+    background-color: $remarkGrey;
+}

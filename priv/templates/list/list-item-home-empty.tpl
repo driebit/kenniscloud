@@ -1,0 +1,1 @@
+<strong class="c-card--feed--empty">Er zijn geen updates beschijkbaar</strong>

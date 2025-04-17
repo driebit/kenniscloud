@@ -1,0 +1,214 @@
+.cluster {
+    div {
+        color: #fff !important;
+    }
+}
+
+.locations__map {
+    position: relative;
+}
+
+.map__sidebar {
+    position: relative;
+    top: -300px;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        position: static;
+    }
+}
+
+.infobox__close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 45px;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    z-index: 100;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: $white;
+}
+
+.infobox__close--multiple {
+    @extend .infobox__close;
+    width: 100%;
+    padding-right: 10px;
+    background: $grey;
+    justify-content: flex-end;
+    position: static;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        width: 300px;
+        position: absolute;
+    }
+}
+
+.infobox__results {
+    width: 100%;
+    min-height: 300px;
+    padding: 0;
+    margin: 0;
+    max-height: none;
+    overflow: hidden;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        height: auto;
+        min-height: 0px;
+        width: 300px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+
+    .list__item {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .list__item__content {
+        border-right: 0;
+        border-left: 0;
+        border-bottom: 0;
+        border-color: $white;
+    }
+
+    .list__item__image {
+        height: 160px;
+    }
+
+    .list__item__image img {
+        border-radius: 0;
+    }
+}
+
+.infobox__results--multipe {
+    @extend .infobox__results;
+    overflow-y: scroll;
+    height: auto;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        padding-top: 45px;
+        bottom: 0px;
+        height: 550px;
+    }
+}
+
+.infobox__results__dropdown__title {
+    padding: 10px 15px;
+    margin: 0;
+    position: relative;
+    font-size: $superSmallFont;
+    border-bottom: 1px solid rgba($black, 0.1);
+    cursor: pointer;
+
+    &:first-child {
+        &:before {
+            display: block;
+            height: 40px;
+            background: $grey;
+        }
+    }
+
+    span {
+        display: block;
+    }
+
+    strong {
+        display: block;
+    }
+
+    &:after {
+        @extend .has-icon;
+        @extend :before, .icon--arrow-down;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 17px;
+        right: 5px;
+        font-size: 10px;
+        transition: transform 0.3s;
+        transform-origin: center center;
+    }
+
+    .is-open & {
+        &:after {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.infobox__results__dropdown {
+    ul {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 1s;
+    }
+
+    &.is-open {
+        ul {
+            max-height: 900px;
+            transition: max-height 1s;
+        }
+    }
+}
+
+.c-map-container {
+    height: 50rem;
+}
+
+.maplibregl-popup-content {
+    padding: 0 !important;
+    border-radius: 5rem;
+}
+
+.maplibregl-popup {
+    max-width: 50rem !important;
+    cursor: pointer !important;
+    width: 90% !important;
+    transform: translate(0%, 0px) translate(5vw, 55%) !important;
+    scale: 0.8;
+
+    @include breakpoint($smallBreakpoint) {
+        scale: 1;
+        width: 35% !important;
+        transform: translate(0%, 0px) translate(65vw, 60%) !important;
+    }
+}
+
+.maplibregl-popup-close-button {
+    right: 0.75rem !important;
+    font-size: 2rem !important;
+}
+
+.maplibregl-popup-tip {
+    display: none !important;
+}
+
+.c-map-card__category {
+    display: block;
+    font-weight: 600;
+    border: 1px solid $greyLight;
+    width: 60%;
+    padding: 1rem;
+    margin: -4rem auto 0rem;
+    border-radius: 0.5rem;
+    background: white;
+    text-align: center;
+    color: inherit;
+    font-size: 1.5rem;
+}
+
+.c-map-card {
+    padding: 1rem;
+
+    @include breakpoint($smallBreakpoint) {
+        padding: 0rem;
+    }
+}

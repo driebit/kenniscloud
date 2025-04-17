@@ -1,0 +1,50 @@
+.add-source {
+    width: 100%;
+    margin: 2rem 0;
+    background: $greyLight;
+
+    .bordered-title {
+        display: block;
+        margin: 0 0 1rem;
+        font-weight: 600;
+        font-size: 1.5rem;
+        font-family: $secondaryFontFamily;
+    }
+
+    a {
+        color: $grey;
+        text-decoration: underline;
+
+        @include setInteractive {
+            color: $mainThemeColor;
+        }
+    }
+
+    @include breakpoint($largeBreakpoint) {
+        margin: 4rem 0;
+    }
+}
+
+.add-source__input {
+    display: flex;
+
+    input {
+        width: calc(80% - 2rem);
+        height: 3.5rem;
+        border: 0;
+        border-radius: 3px;
+        padding: 1rem;
+        margin: 0 2rem 0 0;
+    }
+
+    button {
+        &:hover {
+            background-color: color-mix(in srgb, $grey 90%, black);
+            color: $white;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
+}

@@ -1,0 +1,122 @@
+.t--knowledge-group,
+.t--region,
+.t--project {
+    .person-list {
+        padding: 20px;
+        margin-bottom: 20px;
+        background: #EAE8E8;
+
+        .btn--primary {
+            margin: 15px 0 8px;
+        }
+
+        @include mq(min-width, $mediumBreakpoint) {
+            padding: 0;
+            background: none;
+        }
+    }
+
+    main {
+        @include mq(min-width, $mediumBreakpoint) {
+            margin-top: 250px;
+        }
+    }
+}
+
+.t--region,
+.t--project {
+    @include mq(min-width, $mediumBreakpoint) {
+        background-position: 0 350px;
+    }
+}
+
+.t--knowledge-group {
+    background: $remarkGrey;
+}
+
+.kg-intro {
+    max-width: 100rem;
+    -webkit-font-smoothing: antialiased;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        padding: 0 30px 30px;
+        margin: 0 auto;
+        display: flex;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        background: $kgColor;
+
+        &>div:nth-of-type(2) {
+            padding-top: 30px;
+        }
+    }
+}
+
+.kg-intro__content {
+    @extend .page-intro;
+    padding: 0 20px 20px;
+    background: $kgColor;
+
+    .category-of {
+        background: $blueDark;
+    }
+
+    .page-title {
+        margin: .5em 0;
+
+        @include mq(min-width, $mediumBreakpoint) {
+            @include size(font-size, 40);
+        }
+    }
+
+    .summary {
+        font-family: $mixFontFamily;
+    }
+
+    .keywords {
+        .btn--secondary {
+            background: $blueDark;
+
+            @include setInteractive {
+                background: $blueDarker;
+            }
+        }
+    }
+
+    @include mq(min-width, $mediumBreakpoint) {
+        padding: 0;
+        margin-right: 40px;
+        margin-bottom: 0;
+        flex-grow: 1;
+    }
+}
+
+.kg-intro__right {
+    background: #EAE8E8;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        width: 260px;
+        flex-shrink: 0;
+        background: none;
+    }
+}
+
+.kg-intro__right__link {
+    font-size: 1.3rem;
+    text-decoration: underline;
+    color: $black;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        display: block;
+        color: $white;
+
+        @include setInteractive {
+            color: $black;
+        }
+    }
+}
+
+.kg-contributions {
+    @extend .main-container;
+    margin-top: 30px;
+}

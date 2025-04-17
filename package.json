@@ -1,0 +1,21 @@
+{
+  "name": "kenniscloud",
+  "version": "1.0.0",
+  "description": "Knowledge sharing platform",
+  "main": "base.tpl",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/"
+  },
+  "author": "Driebit",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@go-task/cli": "^3.42.1",
+    "breakpoint-sass": "^3.0.0",
+    "normalize": "^0.3.1",
+    "sass": "^1.86.3"
+  }
+}

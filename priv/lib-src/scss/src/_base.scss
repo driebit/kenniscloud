@@ -1,0 +1,258 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    min-height: 100%;
+    position: relative;
+    font-size: 10px;
+}
+
+body {
+    @include size(padding-top, 60);
+    font-family: $bodyFontFamily;
+    font-size: $smallFont;
+    font-weight: 300;
+    line-height: 1.5;
+    color: $typographyColor;
+    background: $bodyBgColor;
+    background-image: url('/lib/images/body-bg.svg');
+    background-repeat: no-repeat;
+
+    &.-no-bg {
+        background-image: none;
+    }
+
+    &.is-menu-visible {
+        overflow: hidden;
+    }
+
+    &.modal-open {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        padding-top: 0;
+        background-size: 100% auto;
+    }
+}
+
+body.contribution,
+body.event,
+body.reference {
+    background-image: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a, a:hover, a:active {
+    color: $mainThemeColor;
+}
+
+.form-control {
+    height: 40px;
+    font-size: 16px;
+    line-height: 1;
+}
+
+a[href*="youtube"],
+a[href*="google"],
+a[href*="vimeo"] {
+    word-break: break-all;
+}
+
+img {
+    max-width: 100%;
+    border-radius: 0;
+    height: auto;
+}
+
+h1, h2, h3, h4, h6 {
+    font-family: $secondaryFontFamily;
+    font-weight: 500;
+}
+
+h1, h2, h3, h4, p, ol, ul, table {
+    margin: 0 0 1em 0;
+}
+
+h1,
+.page-title {
+    @include size(font-size, 36);
+    @include size(margin-bottom, 10);
+    line-height: 1.2;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        @include size(font-size, 45);
+    }
+}
+
+h2 {
+    @include size(font-size, 26);
+    @include size(margin-bottom, 10);
+    line-height: 1.2;
+}
+
+h3 {
+    @include size(font-size, 25);
+    @include size(margin-bottom, 0);
+    line-height: 1.2;
+}
+
+h4 {
+    margin: 0 0 10px;
+    font-size: 1.8rem;
+}
+
+strong {
+    font-family: $secondaryFontFamily;
+    font-weight: 500;
+}
+
+.subtitle {
+    @include size(margin-top, 10);
+    margin-bottom: 1.5rem;
+}
+
+.bordered-title {
+    margin-bottom: 20px;
+    font-size: $regularFont;
+
+    &:before {
+        content: '';
+        width: 50px;
+        height: 4px;
+        margin-bottom: 10px;
+        display: block;
+        background: #505450;
+    }
+
+    .z-btn-help {
+        margin-left: 1rem;
+    }
+
+    @include mq(min-width, $mediumBreakpoint) {
+        font-size: 20px;
+    }
+}
+
+@include mq(min-width, 0) {
+    %cf {
+        &:before {
+            content: '';
+            display: table;
+        }
+
+        &:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+    }
+}
+
+.cf {
+    @extend %cf;
+}
+
+figure {
+    @include size(margin-bottom, 30);
+    position: relative;
+}
+
+figcaption {
+    @include size(margin-top, 5);
+    @include size(font-size, 14);
+    position: relative;
+    color: color-mix(in srgb, $typographyColor 50%, white);
+
+    p {
+        margin: 0 15px 0 0;
+        display: inline-block;
+    }
+}
+
+blockquote {
+    @include size(font-size, 18);
+    border-left: 5px solid $mainThemeColor;
+}
+
+iframe {
+    @include size(height, 370);
+    width: 100%;
+}
+
+@include mq(max-width, $smallBreakpoint) {
+    iframe {
+        @include size(height, 250);
+    }
+}
+
+.body-text,
+.block--text {
+    @extend %cf;
+    font-family: $extraFontFamily;
+
+    ul,
+    ol {
+        @include size(margin-left, 20);
+    }
+
+    h2 {
+        @include size(font-size, 22);
+        margin-top: 2rem;
+        position: relative;
+
+        &::before {
+            content: '';
+            width: 50px;
+            height: 4px;
+            position: absolute;
+            top: -8px;
+            background-color: $grey;
+        }
+    }
+
+    h3 {
+        @include size(margin-bottom, 10);
+        @include size(font-size, 19);
+    }
+}
+
+
+// Editor generated
+
+.align-left {
+    @include size(margin-right, 10);
+    float: left;
+}
+
+.align-right {
+    @include size(margin-right, 10);
+    float: right;
+}
+
+
+// Zotonic
+
+.z-logon-box.error_duplicate_username #signup_error_tos_agree,
+.z-logon-box.error_duplicate_username #signup_error_duplicate_username,
+.z-logon-box.error_duplicate_username #signup_error_duplicate_identity {
+    display: block;
+}
+.z-logon-box input#surprefix.form-control {
+    width: 100%;
+}
+
+// Ginger overrides
+
+label {
+    margin-bottom: 0;
+    font-weight: 300;
+}

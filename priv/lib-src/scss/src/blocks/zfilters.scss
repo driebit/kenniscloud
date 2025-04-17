@@ -1,0 +1,57 @@
+.filters {
+	position: relative;
+
+	&:hover {
+		.filters__inner {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+}
+
+.filters__inner {
+	width: 88vw;
+	max-width: 400px;
+	padding: 20px;
+	position: absolute;
+	right: 0;
+	z-index: 100;
+	background: #BDE0E5;
+	border-radius: 2px;
+	color: $typographyColor;
+	opacity: 0;
+	transform: scale(0);
+	transition: all 0.3s;
+	transform-origin: top right;
+
+	h3 {
+		font-size: 18px;
+		margin-bottom: 10px;
+	}
+
+	input[type="checkbox"] {
+		position: absolute;
+		left: -9999px;
+	}
+
+	.btn--secondary {
+		color: $typographyColor;
+		border-color: $typographyColor;
+
+		@include setInteractive {
+			background: $kgColor;
+			color: $white;
+			border-color: $kgColor;
+		}
+	}
+
+	input[type="checkbox"]:checked + label {
+		background: $kgColor;
+		color: $white;
+		border-color: $kgColor;
+	}
+
+	ul + h3 {
+		margin-top: 20px;
+	}
+}

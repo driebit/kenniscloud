@@ -1,0 +1,30 @@
+.media--image__lightbox {
+    display: block;
+
+    &:hover {
+        &:after {
+            opacity: 1;
+        }
+    }
+
+    &:after {
+        @extend .has-icon;
+        @extend :before, .icon--expand;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: $mainThemeColor;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+}
+
+
+.lightbox-pdf-wrapper {
+    display: none;
+}
+
+.lightbox-pdf {
+    padding-left: 70px;
+    padding-right: 70px;
+}

@@ -1,0 +1,54 @@
+version: "3"
+
+interval: "500ms" # Interval for --watch mode
+
+includes:
+    elm:
+        taskfile: priv/lib-src/elm/Taskfile.yml
+        dir: priv/lib-src/elm
+    sass:
+        taskfile: priv/lib-src/scss/Taskfile.yml
+        dir: priv/lib-src/scss
+
+tasks:
+    default:
+        deps: [build]
+
+    clean:
+        description: Cleanup the project instance
+        cmds:
+            - |
+                read -p "Stop the site and remove this project's database (kenniscloud1) (y/N)?" choice
+                case "$choice" in
+                  y|Y ) ../../bin/zotonic stopsite oramsterdam && psql -U zotonic -d zotonic -c 'DROP DATABASE kenniscloud1' && echo "Database deleted, restart the project to recreate from scratch.";;
+                  * ) echo "Aborted";;
+                esac
+
+    update:
+        description: Update by pulling the source of this project and modules it depends on
+        cmds:
+            - cd ../../apps_user/zotonic_mod_driebit_base && git pull
+            - cd ../../apps_user/zotonic_mod_driebit_edit && git pull
+            - cd ../../apps_user/zotonic_mod_driebit_acl && git pull
+            - cd ../../apps_user/zotonic_mod_sensitive && git pull
+            - git pull
+
+    build:
+        description: Build js and css from elm and sass
+        deps:
+            - elm:build
+            - sass:build
+        cmds:
+            - mkdir -p ./priv/lib/js
+            - |
+                babel ./priv/lib-src/js -d ./priv/lib/js --presets=@babel/preset-env
+
+    build-dev:
+        description: Build js and css from elm and sass
+        deps:
+            - elm:build-dev
+            - sass:build
+        cmds:
+            - mkdir -p ./priv/lib/js
+            - |
+                babel ./priv/lib-src/js -d ./priv/lib/js --presets=@babel/preset-env

@@ -1,0 +1,12 @@
+.source-summary {
+	margin-bottom: 20px;
+	@include mq(min-width, $smallBreakpoint) {
+		display: flex;
+	    flex-flow: row nowrap;
+	    align-items: flex-start;
+	}
+
+	.summary {
+		margin-bottom: 0;
+	}
+}

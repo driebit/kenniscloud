@@ -1,0 +1,10 @@
+{application, zotonic_mod_driebit_timeline, [
+    {description, "Mapping resources on a timeline."},
+    {vsn, "git"},
+    {registered, []},
+    {applications, [kernel, stdlib, zotonic_core]},
+    {env, []},
+    {modules, []},
+    {maintainers, []},
+    {licenses, ["EUPL"]}
+]}.

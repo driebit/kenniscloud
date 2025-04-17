@@ -1,0 +1,1 @@
+{% include "search-suggestions/search-query.tpl" pagelen=20 cat_exclude=['media', 'menu', 'remark', 'categorization', 'category', 'predicate', 'acl_user_group', 'content_group', 'query'] cat_exclude_defaults="false" %}

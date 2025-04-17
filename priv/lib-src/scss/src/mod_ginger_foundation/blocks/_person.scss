@@ -1,0 +1,97 @@
+.person-author {
+    display: inline-block;
+    margin-bottom: 20px;
+
+    .avatar__image {
+        width: 40px;
+        margin-right: 5px;
+        border-radius: 50%;
+        vertical-align: middle;
+    }
+
+    + .person-author {
+        margin-top: 10px;
+    }
+}
+
+.person-author__text {
+    display: inline-block;
+}
+
+
+.person-author__text__by {
+    display: inline-block;
+}
+
+.person-profile {
+    @include size(width, 150);
+    @include size(height, 150);
+    margin: 0 auto;
+    @include size(margin-top, 20);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid $mainThemeColor;
+
+}
+
+.person-details {
+    width: 100%;
+    list-style-type: none;
+    @extend %cf;
+
+    li {
+        display: block;
+        width: 100%;
+        @include size(padding, 10, 0);
+        @extend %cf;
+
+        + li {
+            border-top: 2px dotted $alto;
+        }
+    }
+}
+
+
+.person-detail__label {
+    width: 25%;
+    position: relative;
+    float: left;
+    text-transform: lowercase;
+    text-indent: -9999px;
+
+    i {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-indent: 0;
+        //@include size(width, 30);
+        @include size(font-size, 16);
+
+        &.icon--envelope {
+            @include size(font-size, 14);
+        }
+    }
+}
+
+.person-detail__link {
+    width: 75%;
+    float: left;
+}
+
+@include mq(min-width, $smallBreakpoint) {
+    .person-detail__label {
+        width: 40%;
+        text-indent: 0;
+
+        i {
+            display: inline-block;
+            @include size(width, 30);
+            position: static;
+        }
+    }
+
+    .person-detail__link {
+        width: 60%;
+    }
+}

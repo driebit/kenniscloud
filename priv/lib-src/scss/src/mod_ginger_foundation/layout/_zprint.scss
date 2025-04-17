@@ -1,0 +1,35 @@
+@media print {
+    .global-nav,
+    .main-footer,
+    .btn,
+    .foldout__button,
+    .foldout.is-collapsed .foldout__button,
+    .foldout.is-expanded .foldout__button,
+    .page-action--favorite,
+    .share,
+    .attached-media,
+    .main-aside--sided {
+        display: none;
+    }
+
+    a {
+        word-break: break-all;
+    }
+
+    img {
+        page-break-before: auto;
+        page-break-after: auto;
+        page-break-inside: avoid;
+    }
+
+    .list__item {
+        display: block;
+        page-break-inside: avoid;
+    }
+
+    .list {
+        li + li {
+            border: none;
+        }
+    }
+}

@@ -1,0 +1,9 @@
+.modal-body {
+    .nav {
+        @include size(margin-bottom, 20);
+    }
+
+    form h3 {
+        @include size(margin-bottom, 10);
+    }
+}

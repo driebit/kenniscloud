@@ -1,0 +1,57 @@
+.add-suggestion {
+    @extend .add-source;
+    margin-top: 0;
+
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .bordered-title {
+        margin-bottom: 2rem;
+    }
+
+    .list-item-small a {
+        margin-bottom: 10px;
+        color: $mainThemeColor;
+        font-size: 0.825em;
+    }
+
+    .library-suggestions p {
+        margin-bottom: 2rem;
+    }
+
+    @include breakpoint($mediumBreakpoint) {
+        .list-item-small {
+            display: flex;
+            position: relative;
+
+            p {
+                max-width: 300px;
+            }
+
+            button {
+                width: auto;
+                position: absolute;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        .list-item-small__img {
+            align-items: center;
+            width: 150px;
+            height: auto;
+            margin: 0 20px 0 0;
+
+            img {
+                max-height: 120px;
+            }
+        }
+    }
+}
+
+.add-source + .add-suggestion {
+    padding-top: 0;
+}

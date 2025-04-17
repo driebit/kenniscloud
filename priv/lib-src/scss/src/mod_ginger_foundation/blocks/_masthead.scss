@@ -1,0 +1,62 @@
+body.has-content-group .masthead {
+    top: calc(60px + #{$contentGroupNavHeight}px);
+}
+
+.masthead {
+    width: 100%;
+    @include size(height, 300);
+    position: absolute;
+    @include size(top, 60);
+    left: 0;
+    z-index: 10;
+    background: #FFF url(/lib/images/bg_rectangle.png?embed) 50% 0 repeat;
+    transition: height 0.3s;
+}
+
+.masthead--map {
+    @extend .masthead;
+    position: static;
+}
+
+@include mq(min-width, $mediumBreakpoint) {
+    .masthead {
+        @include size(height, 450);
+        @include size(top, $globalNavHeight);
+    }
+
+    .masthead--small {
+        @include size(height, 250);
+    }
+
+    .masthead--map {
+        position: absolute;
+
+        &.is-active {
+            + main {
+                margin-top: 400px;
+            }
+        }
+    }
+}
+
+@include mq(min-width, $largeBreakpoint) {
+    body.has-content-group .masthead {
+        top: calc(#{$globalNavHeight}px + #{$contentGroupNavHeight}px);
+    }
+
+    .masthead {
+        @include size(height, 550);
+    }
+
+    .masthead--small {
+        @include size(height, 250);
+    }
+
+    .masthead--map {
+        &.is-active {
+            + main {
+                margin-top: 500px;
+            }
+        }
+    }
+}

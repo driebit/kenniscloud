@@ -1,0 +1,49 @@
+.map--location {
+    @extend .masthead;
+    background: none;
+
+     > div {
+        bottom: -25px !important;
+    }
+}
+
+.infoBox {
+    @include size(font-size, 14);
+}
+
+.infoBox > img {
+    // close button
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    right: 10px;
+    top: 7px;
+}
+
+.infobox__header {
+    background-color: $mainThemeColor;
+    @include size(padding, 7);
+    color: $typographyColor;
+    text-align: center;
+    @include size(font-size, 13);
+}
+
+.infobox__results {
+    width: 300px;
+    max-height: 350px;
+    overflow-y: scroll;
+    background-color: white;
+
+    .list__item__image {
+        @include size(height, 140);
+        overflow: hidden;
+    }
+}
+
+.main-aside--sided {
+    .map--location {
+        height: 250px;
+        position: static;
+        top: 0;
+    }
+}

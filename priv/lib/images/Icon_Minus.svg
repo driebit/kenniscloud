@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>-</title>
+    <g id="Community-Crowd" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Meetup-Crowd" transform="translate(-862.000000, -346.750000)" fill="#505450" fill-rule="nonzero">
+            <g id="Group" transform="translate(874.000000, 358.500000) rotate(-45.000000) translate(-874.000000, -358.500000) translate(825.000000, 310.000000)">
+                <g id="Group-3" transform="translate(0.000000, 0.000000)">
+                    <path d="M42.124055,42.5189326 C42.5577974,42.0851903 43.2430664,42.0562742 43.7103456,42.4321842 L43.8069692,42.5189326 L55.7069692,54.4189326 C56.1716931,54.8836565 56.1716931,55.6371229 55.7069692,56.1018468 C55.2732269,56.5355891 54.5879578,56.5645052 54.1206786,56.1885952 L54.024055,56.1018468 L42.124055,44.2018468 C41.6593311,43.7371229 41.6593311,42.9836565 42.124055,42.5189326 Z" id="Icon-"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

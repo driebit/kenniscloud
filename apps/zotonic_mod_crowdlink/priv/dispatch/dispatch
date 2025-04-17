@@ -1,0 +1,4 @@
+%% -*- mode: erlang -*-
+[
+ {crowdlink_admin_overview, [ "admin", "crowdlink" ], controller_admin, [ {template, "admin_crowdlink.tpl"} ]}
+].
