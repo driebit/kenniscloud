@@ -15,6 +15,11 @@ tasks:
                   --no-source-map \
                   src/style.scss \
                 | postcss --use autoprefixer --output ../../lib/css/style.css --no-map
+            # - |
+            #     npx sass \
+            #       --no-source-map \
+            #       src/style.scss \
+            #     | npx postcss --use autoprefixer --output ../../lib/css/style.css --no-map
         sources:
             - ./**/*.scss
         generates:
