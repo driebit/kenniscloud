@@ -72,6 +72,12 @@ insert_opengraph_data(ReferenceUrl, SubjectId, Context) ->
     Context :: z:context(),
     Metadata :: m_rsc:props().
 get_opengraph_data(Url, Context) ->
+    z:debug(
+        "KennisCloud: fetching opengraph data for Url '~s'",
+        [Url],
+        [],
+        Context
+    ),
     Url1 = z_convert:to_list(Url),
     case z_url_metadata:fetch(Url1) of
         {ok, MD} ->
