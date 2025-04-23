@@ -731,7 +731,7 @@ observe_tick_1h(tick_1h, Context) ->
     end.
 
 observe_tick_24h(tick_24h, Context) ->
-    StaleDays = m_config:get_value(site, stale_reference_days, 7, Context),
+    StaleDays = z_convert:to_integer(m_config:get_value(site, stale_reference_days, 7, Context)),
     Now = calendar:universal_time(),
     % Check all references and if the last update was done more than 'StaleDays'
     % days ago, trigger an update on the same URI ('website').
@@ -750,7 +750,9 @@ observe_tick_24h(tick_24h, Context) ->
                     ok
             end
         end,
-        Context
+        % Note: we use sudo here to have the permission to update all references
+        % (regardless of who initially created them).
+        z_acl:sudo(Context)
     ).
 
 observe_validate_subjects({validate_subjects, {postback, Id, Value, Args}}, Context) ->
