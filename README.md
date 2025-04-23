@@ -13,12 +13,18 @@ If you would like to contribute to this project make sure to review the [contrib
 
 -   Using `nixpkgs`:
 
-    -   run `task`
+    -   running `task` will compile all the frontend code
 
--   Using `npm`: (temporary fix)
+-   Using `npm`: (WIP)
+    -   current version is set to v22.14.0.
     -   run `npm i` to install the frontend deps and task-go
     -   in the [`style.scss`](priv/lib-src/scss/src/style.scss) stylesheet replace the first 2 lines with the below commented out lines
+    -   in the sass [Taskfile](priv/lib-src/scss/Taskfile.yml) uncomment the `npx sass` script and remove the `sass` lines above.
     -   run `task` to compile the stylesheets
+
+**TODO:**
+
+-   import the module stylsheets from ginger foundation into the repository
 
 ### Concepts
 
