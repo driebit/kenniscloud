@@ -13,9 +13,18 @@
   "author": "Driebit",
   "license": "Apache-2.0",
   "dependencies": {
-    "@go-task/cli": "^3.42.1",
+    "@go-task/cli": "^3",
+    "autoprefixer": "^10.4.21",
     "breakpoint-sass": "^3.0.0",
-    "normalize": "^0.3.1",
+    "elm": "^0.19.1-6",
+    "elm-analyse": "^0.16.5",
+    "elm-format": "^0.8.7",
+    "elm-test": "^0.19.1-revision15",
+    "normalize.css": "^8.0.1",
     "sass": "^1.86.3"
+  },
+  "devDependencies": {
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1"
   }
 }

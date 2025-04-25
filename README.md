@@ -9,16 +9,53 @@ libraries.
 
 If you would like to contribute to this project make sure to review the [contribution policy](docs/CONTRIBUTION-POLICY.md) first.
 
+### Stack
+
+-   Frontend
+    -   SCSS (css)
+    -   Templating (html)
+    -   [Elm](https://elm-lang.org/) (js)
+-   Backend
+    -   [Zotonic](https://zotonic.com/)
+    -   Erlang
+
 ### Setup
 
--   Using `nixpkgs`:
+To run this project and make contributions you will need to follow this checklist:
 
-    -   run `task`
+-   Clone [Zotonic](git@github.com:zotonic/zotonic.git) on your machine and build it
+-   Clone this repository into the `zotonic/apps_user` directory
+-   Install the frontend dependencies using the below instructions
+    With nixOs:
+    -   This project was built using [NixOs](https://nixos.org/) as a dependency management system via `nixpkgs`:
+        -   Add this list of nixpkgs:
+            -   sass
+            -   uglify-js
+            -   elm
+            -   elm-format
+            -   elm-analyse
+            -   elm-test
+            -   elm-upgrade
+            -   elm-review
+            -   go-task
+        -   non-nix packages (these you will need to fetch from github or use another dependency management system):
+            -   autprefixer
+            -   breakpoint-sass
+            -   normalize.css
+        -   running `task` will compile all the frontend code
 
--   Using `npm`: (temporary fix)
-    -   run `npm i` to install the frontend deps and task-go
-    -   in the [`style.scss`](priv/lib-src/scss/src/style.scss) stylesheet replace the first 2 lines with the below commented out lines
-    -   run `task` to compile the stylesheets
+    Without nixOs:
+
+    -   Using `npm`: (WIP)
+        -   current version is set to v22.14.0.
+        -   run `npm i` to install the frontend deps and task-go
+        -   in the [`style.scss`](priv/lib-src/scss/src/style.scss) stylesheet replace the first 2 lines with the below commented out lines
+        -   in the sass [Taskfile](priv/lib-src/scss/Taskfile.yml) uncomment the `npx sass` script and remove the `sass` lines above.
+        -   run `task` to compile the stylesheets
+
+**TODO:**
+
+-   import the module stylsheets from ginger foundation into the repository
 
 ### Concepts
 
