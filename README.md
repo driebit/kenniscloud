@@ -26,26 +26,22 @@ To run this project and make contributions you will need to follow this checklis
 -   Clone [Zotonic](git@github.com:zotonic/zotonic.git) on your machine and build it
 -   Clone this repository into the `zotonic/apps_user` directory
 -   Install the frontend dependencies using the below instructions
-
-        -   This project was built using [NixOs](https://nixos.org/) as a dependency management system via `nixpkgs`:
-
-            -   Add this list of nixpkgs:
-
-                -   sass
-                -   uglify-js
-                -   elm
-                -   elm-format
-                -   elm-analyse
-                -   elm-test
-                -   elm-upgrade
-                -   elm-review
-                -   go-task
-
-            -   non-nix packages (these you will need to fetch from github or use another dependency management system):
-
-                -   autprefixer
-                -   breakpoint-sass
-                -   normalize.css
+    With nixOs:
+    -   This project was built using [NixOs](https://nixos.org/) as a dependency management system via `nixpkgs`:
+        -   Add this list of nixpkgs:
+            -   sass
+            -   uglify-js
+            -   elm
+            -   elm-format
+            -   elm-analyse
+            -   elm-test
+            -   elm-upgrade
+            -   elm-review
+            -   go-task
+        -   non-nix packages (these you will need to fetch from github or use another dependency management system):
+            -   autprefixer
+            -   breakpoint-sass
+            -   normalize.css
         -   running `task` will compile all the frontend code
 
     Without nixOs:
