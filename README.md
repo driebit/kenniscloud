@@ -21,7 +21,7 @@ If you would like to contribute to this project make sure to review the [contrib
 
 ### Setup
 
-To run this project and make contributions you will need to follow the following checklist:
+To run this project and make contributions you will need to follow this checklist:
 
 -   Clone [Zotonic](git@github.com:zotonic/zotonic.git) on your machine and build it
 -   Clone this repository into the `zotonic/apps_user` directory
