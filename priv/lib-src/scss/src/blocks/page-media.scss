@@ -1,6 +1,7 @@
 .page-media {
     padding: 4rem 1.5rem;
     position: relative;
+    clear: both;
 
     @include breakpoint($mediumBreakpoint) {
         padding: 0 0 5rem;
