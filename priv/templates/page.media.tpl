@@ -11,6 +11,7 @@
 
 			<div class="page-intro page-intro--{{id.category.name}}">
 				{% catinclude "category-of/category-of.tpl" id rsc_id=id.content_group_id %}
+				{% button text=_"Back" class="btn--primary c-btn--back" action={redirect back} %}
 
 				{% block page_actions %}{% endblock %}
 
@@ -27,6 +28,7 @@
 				{% with id.media|without_embedded_media:id|first as dep %}
 	                {% catinclude "media/media.tpl" dep %}
 	            {% endwith %}
+
 			</div>
 
 			{% if id.body %}
