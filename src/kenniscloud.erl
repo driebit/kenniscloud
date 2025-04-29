@@ -446,6 +446,10 @@ on_rsc_update({region, Id}, {_, Props}, Context) ->
                 Props
         end,
     {ok, PropsWithName};
+on_rsc_update({library_keyword, Id}, Acc, Context) ->
+    % When a library keyword is inserted/updated, schedule a fetch to find more:
+    kenniscloud_azb:update_keywords(Id, Context),
+    Acc;
 on_rsc_update(_, Acc, _) ->
     Acc.
 
@@ -715,6 +719,8 @@ observe_tick_1h(tick_1h, Context) ->
     case {DayOfWeek, H} of
         {2, 10} -> % Tuesdays at 10:00 UTC (11:00/12:00 +01:00)
             kenniscloud_weekly:send(Context);
+        {1, 22} -> % Mondays at 22:00 UTC (23:00/24:00 +01:00)
+            kenniscloud_azb:update_keywords(Context);
         {_, 1} ->
             generate_hdt_dataset(dataset_contributions, Context);
         {_, 2} -> % Process the most active category at quiet time (3/4 am in our timezone)
@@ -731,10 +737,13 @@ observe_tick_1h(tick_1h, Context) ->
     end.
 
 observe_tick_24h(tick_24h, Context) ->
-    StaleDays = z_convert:to_integer(m_config:get_value(site, stale_reference_days, 7, Context)),
-    Now = calendar:universal_time(),
+    % Update the token for AZB:
+    kenniscloud_azb:refresh_token(Context),
+
     % Check all references and if the last update was done more than 'StaleDays'
     % days ago, trigger an update on the same URI ('website').
+    StaleDays = z_convert:to_integer(m_config:get_value(site, stale_reference_days, 7, Context)),
+    Now = calendar:universal_time(),
     % Note: if nothing has changed (including the metadata fetched in 'on_rsc_update'),
     % then this leaves the resource unmodified.
     m_category:foreach(
