@@ -574,6 +574,42 @@ msgstr "in het invoerveld"
 msgid "Insert image"
 msgstr "Afbeelding toevoegen"
 
+#: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-content-buttons.tpl:4
+msgid "Images"
+msgstr "Afbeeldingen"
+
+#: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-content-buttons.tpl:8
+msgid "Documents"
+msgstr "Documenten"
+
+#: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-content-buttons.tpl:4
+msgid "Resources"
+msgstr "Pagina's"
+
+#: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-content-buttons.tpl:4
+msgid "FAQ"
+msgstr "FAQ"
+
+#: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-documents.tpl:4
+msgid "Additional Documents"
+msgstr "Aanvullende Documenten"
+
+#: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-faqs.tpl:4
+msgid "Frequently Asked Questions"
+msgstr "Veelgestelde Vragen"
+
+#: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-faqs.tpl:4
+msgid "Frequently Asked Questions"
+msgstr "Veelgestelde Vragen"
+
+#: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-images.tpl:4
+msgid "Additional Images"
+msgstr "Aanvullende Afbeeldingen"
+
+#: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-images.tpl:4
+msgid "Additional Resources"
+msgstr "Aanvullende Pagina's"
+
 #: user/sites/kenniscloud/templates/contribution/task-actions.tpl:12
 msgid "Convert to a task"
 msgstr "Omzetten naar een taak"

@@ -18,7 +18,7 @@
     "js/global-nav.js"
     "js/search-suggestions.js"
     "bootstrap/js/bootstrap.min.js"
-    "js/touch-hover.js"
+    "js/jquery.fancybox.js"
 %}
 
 

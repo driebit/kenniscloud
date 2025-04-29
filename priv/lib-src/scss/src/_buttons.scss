@@ -425,14 +425,13 @@ button.z-btn-help {
     @include setInteractive {
         color: white;
         background: $orange;
-
     }
 }
 
 .c-btn--primary-no-icon {
     @extend %btn--primary;
-    margin-bottom: 1rem;
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 1rem;
+    width: fit-content;
 
     &::after {
         content: "";
