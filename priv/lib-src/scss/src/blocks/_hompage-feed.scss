@@ -57,6 +57,7 @@
     line-clamp: 3;
     -webkit-box-orient: vertical;
     margin-right: auto;
+    height: 100%;
 }
 
 .c-card--feed__text strong {
@@ -80,6 +81,22 @@
     position: absolute;
     left: 0;
     top: 0;
+}
+
+.c-card--feed__link--event {
+    z-index: 1;
+}
+
+.c-card--feed__background {
+    width: calc(100% - 2rem);
+    height: calc(100% - 2rem);
+    left: 1rem;
+    margin: auto;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.15;
+    border-radius: 8px;
 }
 
 .c-card--feed__author-link {

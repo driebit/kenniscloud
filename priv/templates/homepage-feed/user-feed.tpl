@@ -5,17 +5,17 @@
 
         <div>
             <h2 class="bordered-title">Actuele updates en nieuws uit jouw kennisgroepen en regio's</h2>
+            {% if m.search[{query cat=['event', 'contribution', 'remark'] sort='-rsc.created' is_published="true" content_group=m.acl.user.o.hascollabmember region=m.acl.user.s.hasregion pagelen=5 }] as results %}
 
-            {% if m.search[{query cat='remark' sort='-rsc.modified' is_published="true" pagelen=5 content_group=m.acl.user.s.hascollabmember }] as remarks %}
-
-                <ul class="c-homepage__feed" id="remarks">
-                    {% for remark in remarks %}
-                        {% include "list/list-item-home.tpl" id=remark %}
+                <ul class="c-homepage__feed" id="results">
+                    {% for rsc in results %}
+                        {% catinclude "list/list-item-home.tpl" rsc.id %}
                     {% endfor %}
                 </ul>
 
-                {% button text="Meer updates" class="btn--primary u-margin-none" action={moreresults result=remarks
-                                target="remarks"
+                {% button text="Meer updates" class="btn--primary u-margin-none" action={moreresults result=results
+                                target="results"
+                                catinclude
                                 template="list/list-item-home.tpl"}
                 %}
                 
