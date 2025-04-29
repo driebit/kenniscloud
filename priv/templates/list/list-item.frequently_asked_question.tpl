@@ -10,21 +10,11 @@
             <article>
                 <div class="list__item__content--faq">
                     <div class="list__item__title list__item__short-title u-margin-none">
-                        <h3>
-                            {% if id.short_title %}
-                                {{ id.short_title|truncate:40 }}
-                            {% else %}
-                                {{ id.title|truncate:40 }}
-                            {% endif %}
-                        </h3>
+                        <h3>{{ id.title }}</h3>
                     </div>
 
                     <div class="list__item__summary">
-                       <b>{{ id.summary }}</b>
-                    </div>
-
-                    <div class="list__item__summary">
-                        {{ id.body }}
+                       <b>{{ id.summary|truncate:600 }}</b>
                     </div>
 
                     {% if id.is_a.event and id.date_start|date:"Y" %}

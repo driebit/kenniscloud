@@ -492,7 +492,7 @@
     background: $white;
 
     @include mq(min-width, $mediumBreakpoint) {
-        height: 19rem;
+        height: fit-content;
         padding-bottom: 0rem;
     }
 }
