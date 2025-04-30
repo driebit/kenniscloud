@@ -622,3 +622,7 @@ msgstr "Voltooide taak"
 msgid "Mark task as done"
 msgstr "Markeer taak als voltooid"
 
+#: user/sites/kenniscloud/templates/_ginger_edit_content_publication_date.tpl:3
+msgid "Publication date"
+msgstr "Publicatie datum"
+

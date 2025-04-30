@@ -2,10 +2,12 @@
     <div class="c-timeline__item">
         <div class="c-timeline__dot"></div>
         <div class="c-timeline-card">
-            <span class="c-timeline__date">{{ id.publication_start|date:"j F Y" }}</span>
-            {% block card_category %}
-                <span class="c-timeline__category">{{ id.category.name }}</span>
-            {% endblock %}
+            <div class="u-d-flex u-flex-justify-between">
+                <span class="c-timeline__date">{{ id.publication_start|date:"j F Y" }}</span>
+                {% block card_category %}
+                    <span class="c-timeline__category">{{ id.category.name }}</span>
+                {% endblock %}
+            </div>
             <hr class="c-timeline__separator"></hr>
 
             {% block card_content %}
