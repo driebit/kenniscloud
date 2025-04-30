@@ -15,7 +15,7 @@
 				<h2 class="bordered-title">Ook Interessant</h2>
 			</div>
 
-			{% if m.kc_user.recommended_knowledge_groups|slice:[,4] as items  %}
+			{% if m.kc_user.recommended_knowledge_groups as items  %}
 				{% include "list/list.tpl" items=items hide_showmore_button extraClasses="c-card-list--scroll" id=id %}
 			{% endif %}
 
