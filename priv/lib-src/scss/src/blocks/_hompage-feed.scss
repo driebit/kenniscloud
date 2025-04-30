@@ -29,7 +29,7 @@
 
     @include mq(min-width, $mediumBreakpoint) {
         flex-direction: row;
-        height: 9.5rem;
+        height: 10.5rem;
         align-items: center;
     }
 }
