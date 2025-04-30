@@ -3,15 +3,23 @@
         {% button
             text=_"Mark task as done"
             class="btn c-btn--orange"
-            postback={complete_task id=id}
-            delegate=`kenniscloud`
+            action={dialog_open
+                template="contribution/task-action-dialog-done.tpl"
+                title=_"Are you sure?"
+                id=id
+                dispatch_to=dispatch_to
+            }
         %}
     {% elseif id.is_a.contribution %}
         {% button
-            class="btn c-btn--orange"
             text=_"Convert to a task"
-            postback={contribution_to_task id=id}
-            delegate=`kenniscloud`
+            class="btn c-btn--orange"
+            action={dialog_open
+                template="contribution/task-action-dialog-convert.tpl"
+                title=_"Are you sure?"
+                id=id
+                dispatch_to=dispatch_to
+            }
         %}
     {% endif %}
 {% endif %}
