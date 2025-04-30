@@ -23,7 +23,7 @@
         
         {% include "page-actions/page-action-edit-thing.tpl" %}
 
-        {% include "contribution/task-actions.tpl" id=id %}
+        {% include "contribution/task-actions.tpl" id=id dispatch_to='page' %}
 
         {% catinclude "top-aside/top-aside.tpl" id %}
     </aside>

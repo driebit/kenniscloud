@@ -38,7 +38,7 @@
     </div>
 
     <div class="form-group label-floating">
-        {% include "contribution/task-actions.tpl" id=id %}
+        {% include "contribution/task-actions.tpl" id=id dispatch_to='admin_edit_rsc' %}
     </div>
 
     {% include "_ginger_edit_content_add_to_timeline.tpl" %}

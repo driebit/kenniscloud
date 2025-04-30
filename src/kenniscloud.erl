@@ -140,18 +140,22 @@ generate_hdt_dataset(QueryId, Context) ->
     %% Done
     ok.
 
-event(#postback{message={contribution_to_task, [{id, ContributionId}]}}, Context) ->
+event(#postback{message={contribution_to_task, [{id, ContributionId}, {dispatch_to, DispatchTo}]}}, Context) ->
     case m_rsc:update(ContributionId, #{<<"category_id">> => task}, Context) of
         {ok, ContributionId} ->
-            z_render:wire({reload, []}, Context);
+            % Note: we redirect here instead of reloading to edit new resources
+            % (reloading the frontend URL for a new resource would create another one)
+            z_render:wire({redirect, [ {dispatch, DispatchTo}, {id, ContributionId} ]}, Context);
         _ ->
             z_render:growl_error(?__("Something went wrong. Sorry.", Context), Context)
     end;
 
-event(#postback{message={complete_task, [{id, ContributionId}]}}, Context) ->
+event(#postback{message={complete_task, [{id, ContributionId}, {dispatch_to, DispatchTo}]}}, Context) ->
     case m_rsc:update(ContributionId, #{<<"is_completed">> => true}, Context) of
         {ok, ContributionId} ->
-            z_render:wire({reload, []}, Context);
+            % Note: we redirect here instead of reloading to edit new resources
+            % (reloading the frontend URL for a new resource would create another one)
+            z_render:wire({redirect, [ {dispatch, DispatchTo}, {id, ContributionId} ]}, Context);
         _ ->
             z_render:growl_error(?__("Something went wrong. Sorry.", Context), Context)
     end;
