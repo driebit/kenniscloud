@@ -740,3 +740,20 @@ li.c-card-list--scroll {
         max-width: 31.5rem;
     }
 }
+
+.c-card--reference {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    color: black;
+
+    @include setInteractive {
+        background-color: $greyLight;
+        color: black;
+    }
+}
+
+.c-card--reference .og-data__content {
+    border: 0;
+}
