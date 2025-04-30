@@ -12,15 +12,11 @@
         latest_remark,
         topic
     %}
-        <div class="list-item-kg__top">
-            {% block list_author %}
-            <div class="list-item-kg__author">
-                {% with id.o.author[1]|default:id.creator_id as creator %}
-                    {% include "list/list-item-person-small.tpl" id=creator context_rsc=id class="person-author" nolink="true" %}
-                {% endwith %}
-            </div>
-            {% endblock %}
-        </div>
+        {% block list_author %}
+            {% with id.o.author[1]|default:id.creator_id as creator %}
+                <strong>{% include "person/person-title.tpl" id=creator %}</strong>
+            {% endwith %}
+        {% endblock %}
 
         {% with id.og_title|if:id:id.about as topic %}
         {% if topic.og_title %}

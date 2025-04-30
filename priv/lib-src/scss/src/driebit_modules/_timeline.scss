@@ -185,19 +185,19 @@
 .c-timeline__date {
     display: block;
     font-weight: 600;
-    font-size: 1.75rem;
+    font-size: 1.25rem;
 }
 
 .c-timeline__category {
     color: $kgColor;
     font-weight: 500;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     text-transform: capitalize;
 }
 
 .c-timeline__separator {
-    border-top: 0.5rem solid grey;
-    margin: 1rem 0;
+    border-top: 0.25rem solid grey;
+    margin: 0.5rem 0;
     border-radius: 1rem;
 }
 
