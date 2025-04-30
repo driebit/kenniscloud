@@ -479,8 +479,9 @@ viewNewRemarkEditor editor profile =
                     ]
                     [ text "Annuleer" ]
                 , button
-                    [ onClick PostRemark
-                    , disabled editor.busy
+                    [ class "c-btn--add-remark"
+                    , onClick PostRemark
+                    , disabled (editor.depiction /= NoDepiction && not editor.isCheckboxChecked)
                     ]
                     [ text "Voeg reactie toe" ]
                 ]
