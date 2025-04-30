@@ -5,7 +5,7 @@
 
         <div>
             <h2 class="bordered-title">Actuele updates en nieuws uit jouw kennisgroepen en regio's</h2>
-            {% if m.search[{query cat=['event', 'contribution', 'remark'] sort='-rsc.created' is_published="true" content_group=m.acl.user.o.hascollabmember hasanyobject=m.acl.user.o.hasregion pagelen=5 }] as results %}
+            {% if m.search[{query cat=['event', 'contribution', 'remark'] sort='-rsc.created' is_published="true" user_kg_or_region pagelen=5 }] as results %}
 
                 <ul class="c-homepage__feed" id="results">
                     {% for rsc in results %}
