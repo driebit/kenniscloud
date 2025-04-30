@@ -164,6 +164,7 @@ event(#postback{message={join, [{target, TargetId}]}}, Context) ->
 event(#postback{message={leave, [{target, TargetId}]}}, Context) ->
     User = z_acl:user(Context),
     m_edge:delete(TargetId, hascollabmember, User, z_acl:sudo(Context)),
+    m_edge:delete(TargetId, hascollabmanager, User, z_acl:sudo(Context)),
     Context;
 event(#postback{message={link_rsvp,
         [{subject_id, Subject}, {predicate, <<"rsvp">>}, {object_id, Object} | _AndActionEtc]
