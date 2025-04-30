@@ -606,3 +606,19 @@ msgstr "Als u het ingevoerde adres hier wilt gebruiken voor de geolocatie hieron
 msgid "Timeline"
 msgstr "Tijdlijn"
 
+#: user/sites/kenniscloud/templates/contribution/task-actions.tpl:12
+msgid "Convert to a task"
+msgstr "Converteer naar een taak"
+
+#: user/sites/kenniscloud/templates/meta/task-status.tpl:12
+msgid "Incomplete task"
+msgstr "Open taak"
+
+#: user/sites/kenniscloud/templates/meta/task-status.tpl:12
+msgid "Completed task"
+msgstr "Voltooide taak"
+
+#: user/sites/kenniscloud/templates/contribution/task-actions.tpl:12
+msgid "Mark task as done"
+msgstr "Markeer taak als voltooid"
+
