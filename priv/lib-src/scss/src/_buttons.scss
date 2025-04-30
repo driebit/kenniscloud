@@ -360,6 +360,19 @@
     }
 }
 
+.c-btn--add-remark:disabled {
+    background-color: $greyLight;
+    color: $grey;
+    border: 1px solid $greyLight;
+    cursor: not-allowed;
+
+    @include setInteractive {
+        background-color: $greyLight;
+        color: $grey;
+        border: 1px solid $greyLight;
+    }
+}
+
 .btn--flag {
     @extend .btn--remark-flag;
 
@@ -425,7 +438,6 @@ button.z-btn-help {
     @include setInteractive {
         color: white;
         background: $orange;
-
     }
 }
 
