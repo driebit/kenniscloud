@@ -40,16 +40,6 @@
         {% endfor %}
         {% endwith %}
 
-        {% if id.s.hascollabmember as projects %}
-        <div class="person-info__contact__line"><strong>Aangemeld voor project</strong>
-            <div>
-                {% for project in projects %}
-                <a href="{{ project.page_url }}" class="person-info__contact__line">{{ project.title }}</a>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
         {% if id.o.hasregion as regions %}
         <div class="person-info__contact__line"><strong>Aangemeld voor regio</strong>
             <div>

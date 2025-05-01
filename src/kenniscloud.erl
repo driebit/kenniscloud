@@ -571,6 +571,26 @@ observe_search_query_term(#search_query_term{ term = <<"match_many_objects">>, a
         <<"terms">> => [MatchObjectIds | IdExcludes]
     };
 
+% Combine multiple filters to select resources that are part of any of the
+% current user's kennisgroepen or connected to any of their regions.
+observe_search_query_term(#search_query_term{ term = <<"user_kg_or_region">> }, Context) ->
+    UserId = z_acl:user(Context),
+    #{
+        <<"operator">> => <<"anyof">>,
+        <<"terms">> =>
+            lists:map(
+                fun(GgId) ->
+                    #{<<"term">> => <<"content_group">>, <<"value">> => GgId}
+                end,
+                m_kc_user:knowledge_groups(UserId, Context)
+            ) ++ lists:map(
+                fun(RegioId) ->
+                    #{<<"term">> => <<"hasobject">>, <<"value">> => [ RegioId, hasregion ]}
+                end,
+                m_kc_user:regions(UserId, Context)
+            )
+    };
+
 observe_search_query_term(_, _Context) ->
     undefined.
 

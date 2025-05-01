@@ -40,6 +40,14 @@
     padding: 1rem !important;
 }
 
+.u-padding-horizontal-mobile {
+    padding: 0 1rem !important;
+
+    @include breakpoint($mediumBreakpoint) {
+        padding: 0 !important;
+    }
+}
+
 .u-margin-none {
     margin: 0 !important;
 }
@@ -54,4 +62,12 @@
 
 .u-d-hidden {
     display: none !important;
+}
+
+.u-flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+.u-flex-gap-1 {
+    gap: 1rem !important;
 }

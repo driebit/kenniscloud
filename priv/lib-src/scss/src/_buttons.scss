@@ -443,10 +443,15 @@ button.z-btn-help {
 
 .c-btn--primary-no-icon {
     @extend %btn--primary;
-    margin-bottom: 1rem;
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 1rem;
+    width: fit-content;
 
     &::after {
         content: "";
     }
+}
+
+.c-btn--back {
+    position: absolute;
+    right: 3rem;
 }

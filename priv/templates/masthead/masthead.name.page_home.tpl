@@ -3,7 +3,9 @@
 		<div class="main-container">
 			<div class="masthead__content">
 				{% include "page-title/page-title.tpl" %}
-				{% include "summary/summary.tpl" %}
+				{% if not m.acl.user %}
+					{% include "summary/summary.tpl" %}
+				{% endif %}
 			</div>
 			{% if not m.acl.user %}
 				<a href="{% url logon p={page id=id}|url %}" class="btn--primary">Doe mee!</a>

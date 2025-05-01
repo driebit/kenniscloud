@@ -34,7 +34,7 @@
 	}
 
 	@include mq(min-width, $mediumBreakpoint) {
-		min-height: 460px;
+		min-height: fit-content;
 	}
 
 	@include mq(min-width, $largeBreakpoint) {
