@@ -25,10 +25,10 @@
 
             {% catinclude "top-aside/top-aside.tpl" id collab_group=collab_group %}
         </div>
-
-        {% include "maplibre/map.tpl" %}
-
+        
         <div class="kg-contributions">
+        
+            {% include "maplibre/map.tpl" %}
 
             {% if m.search[{query cat=['contribution', 'event'] content_group=id pagelen=50 }]|sort:"publication_start" as results %}
                 {% if id.timeline_status == "automatic" %}

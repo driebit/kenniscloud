@@ -33,16 +33,27 @@
         return popup;
     }
 
+    const bounds = new maplibregl.LngLatBounds();
+
     points.features.forEach(feature => {
         const coordinates = feature.geometry.coordinates;
-        const properties = feature.properties;
         const popup = getPopup(feature.properties.id);
 
         new maplibregl.Marker()
             .setLngLat(coordinates)
             .setPopup(popup)
-            .addTo(map)
+            .addTo(map);
+
+        bounds.extend(coordinates);
     });
+
+    if (!bounds.isEmpty()) {
+        map.fitBounds(bounds, {
+            padding: 50,
+            linear: true,
+            duration: 1000
+        });
+    }
 {% endjavascript %}
 {% endif %}
 
