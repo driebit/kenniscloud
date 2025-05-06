@@ -18,7 +18,7 @@
 
     map.addControl(new maplibregl.NavigationControl());
 
-    const points = JSON.parse(`{{ m.search[{query cat=['contribution', 'event'] content_group=id pagelen=3000}]|geojson|to_json }}`);
+    const points = JSON.parse(`{{ m.search[{query cat=['contribution', 'event'] unfinished_or_nodate content_group=id pagelen=3000}]|geojson|to_json }}`);
 
     function getPopup(id) {
         var popup = new maplibregl.Popup();
