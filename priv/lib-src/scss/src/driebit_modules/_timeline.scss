@@ -119,6 +119,12 @@
     }
 }
 
+.c-timeline__map-card .c-timeline-card {
+    @include setInteractive {
+        scale: 1;
+    }
+}
+
 .c-timeline-card::after {
     content: "";
     position: absolute;
@@ -213,4 +219,13 @@
 .c-timeline-card .list-item-kg__content,
 .c-timeline-card .remark-item__body {
     padding: 1rem;
+}
+
+// Reusing timeline cards for map
+.c-timeline__map-card {
+    width: 100%;
+}
+
+.c-timeline__map-card .c-timeline-card::after {
+    display: none;
 }

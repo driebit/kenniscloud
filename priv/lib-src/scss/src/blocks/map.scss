@@ -161,24 +161,32 @@
 
 .c-map-container {
     height: 50rem;
+    margin-bottom: 3rem;
+    position: relative;
 }
 
 .maplibregl-popup-content {
     padding: 0 !important;
-    border-radius: 5rem;
+    border-radius: 5rem !important;
 }
 
 .maplibregl-popup {
     max-width: 50rem !important;
     cursor: pointer !important;
     width: 90% !important;
-    transform: translate(0%, 0px) translate(5vw, 55%) !important;
     scale: 0.8;
+    transform: none !important;
+    left: 0rem !important;
+    right: unset !important;
+    bottom: unset !important;
+    top: 1rem !important;
+    display: block !important;
 
     @include breakpoint($smallBreakpoint) {
         scale: 1;
         width: 35% !important;
-        transform: translate(0%, 0px) translate(65vw, 60%) !important;
+        left: 3rem !important;
+        top: 3rem !important;
     }
 }
 
