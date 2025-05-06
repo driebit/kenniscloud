@@ -469,7 +469,8 @@ get_prod_data() ->
                     {nl, <<"FAQ">>},
                     {en, <<"FAQ">>}
                 ]}},
-                {language, [nl,en]}
+                {language, [nl,en]},
+                {is_feature_show_address, false}
             ]},
             {region, location, [
                 {title, {trans, [

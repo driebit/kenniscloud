@@ -39,5 +39,4 @@
         {_ Manual timeline _}
     </label>
 </div>
-{% include "" %}
 {% endblock %}
