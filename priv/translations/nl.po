@@ -630,6 +630,18 @@ msgstr "Automatische tijdlijn"
 msgid "Manual timeline"
 msgstr "Handmatige tijdlijn"
 
+#: user/sites/kenniscloud/templates/_admin_edit_basics.acl_collaboration_group.tpl:
+msgid "Sorting order"
+msgstr "Sorteervolgorde"
+
+#: user/sites/kenniscloud/templates/_admin_edit_basics.acl_collaboration_group.tpl:
+msgid "Ascending"
+msgstr "Oplopend"
+
+#: user/sites/kenniscloud/templates/_admin_edit_basics.acl_collaboration_group.tpl:
+msgid "Descending"
+msgstr "Aflopend"
+
 #: user/sites/kenniscloud/templates/_ginger_edit_content_add_to_timeline.tpl:10
 msgid "This will add the item to the timeline of it's kennisgroep."
 msgstr "Dit voegt het item toe aan de tijdlijn van zijn kennisgroep."
