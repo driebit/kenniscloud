@@ -11,7 +11,6 @@
     {search, ["search"], controller_template, [ {template, "search.tpl"} ]},
 
     {members, ["members", id], controller_page, [{template, "page_members.tpl"}, {is_canonical, false}]},
-    {start, ["start"], controller_start, []},
 
     {contribution_edit, ["bijdrage"], controller_template, [{acl_action, view}, {template, "page_contribution_edit.tpl"} ]},
     {contribution_edit, ["bijdrage", id], controller_page, [{acl_action, view}, {template, {cat, "page_contribution_edit.tpl"}}, {is_canonical, false}]},

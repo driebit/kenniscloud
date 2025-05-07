@@ -9,7 +9,7 @@
     zotonic_dispatch != `signup_confirm` and
     not m.acl.user
 %}
-    <a class="login--global-nav" href="{% url logon p=`start`|url %}" title="{_ logon/signup _}">
+    <a class="login--global-nav" href="{% url logon p=`home`|url %}" title="{_ logon/signup _}">
         <i class="icon--person"></i> <span>{_ logon/signup _}</span>
     </a>
 {% endif %}
