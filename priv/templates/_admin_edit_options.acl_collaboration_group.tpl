@@ -49,4 +49,19 @@
         {_ Manual timeline _}
     </label>
 </div>
+<div class="form-group row">
+    <h6 class="col-md-12">{_ Sorting order _}</h5>
+    <label class="control-label col-md-12" for="timeline_asc">
+        <input type="radio" id="timeline_asc" name="timeline_order"
+            value="asc"
+            {% if id.timeline_order == "asc" or not id.timeline_order %}checked{% endif %}/>
+        {_ Ascending _}
+    </label>
+    <label class="control-label col-md-12" for="timeline_desc">
+        <input type="radio" id="timeline_desc" name="timeline_order"
+            value="desc"
+            {% if id.timeline_order == "desc" %}checked{% endif %}/>
+        {_ Descending _}
+    </label>
+</div>
 {% endblock %}
