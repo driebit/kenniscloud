@@ -32,9 +32,9 @@
 
             {% if m.search[{query cat=['contribution', 'event'] content_group=id pagelen=50 }]|sort:["date_start", id.timeline_order] as results %}
                 {% if id.timeline_status == "automatic" %}
-                    {% include "_driebit_timeline.tpl" result=results title=_"Timeline" titleClass="bordered-title" list_item_template="timeline/_timeline-card.tpl" %}
+                    {% include "_driebit_timeline.tpl" result=results title=_"Timeline of highlights in this knowledge group" titleClass="bordered-title" list_item_template="timeline/_timeline-card.tpl" %}
                 {% elseif id.timeline_status == "manual" %}
-                    {% include "_driebit_timeline.tpl" result=results|filter:`included_in_timeline`:"1" title=_"Timeline" titleClass="bordered-title" list_item_template="timeline/_timeline-card.tpl" %}
+                    {% include "_driebit_timeline.tpl" result=results|filter:`included_in_timeline`:"1" title=_"Timeline of highlights in this knowledge group" titleClass="bordered-title" list_item_template="timeline/_timeline-card.tpl" %}
                 {% endif  %}
             {% endif  %}
         

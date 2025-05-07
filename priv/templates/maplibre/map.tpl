@@ -1,7 +1,5 @@
 {% if id.has_map %}
-<div class="kg-contributions">
-    <h3 class="bordered-title">Op de kaart</h3>
-</div>
+<h3 class="bordered-title">Op de kaart</h3>
 
 <div class="c-map-container" id="map"></div>
 {% javascript %}

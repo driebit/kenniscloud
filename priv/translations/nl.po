@@ -651,8 +651,8 @@ msgid "If you want to use the entered address here for the geolocation below, pl
 msgstr "Als u het ingevoerde adres hier wilt gebruiken voor de geolocatie hieronder, sla dan eerst de pagina op."
 
 #: user/sites/kenniscloud/templates/page.acl_collaboration_group.tpl:35
-msgid "Timeline"
-msgstr "Tijdlijn"
+msgid "Timeline of highlights in this knowledge group"
+msgstr "Tijdlijn van hoogtepunten in deze kennisgroep"
 
 #: user/sites/kenniscloud/templates/contribution/task-actions.tpl:12
 msgid "Convert to a task"
