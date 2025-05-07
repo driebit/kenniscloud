@@ -1,6 +1,7 @@
 <div class="ginger-edit__aside-item ginger-edit__aside--publicationdate" id="ginger-edit__aside--publicationdate">
 
-    <h3>{_ Publication date _}</h3>
+    <h3 class="section-title">{_ Publication date _}</h3>
+    <span class="helper-text">{_ You can choose the date or type it directly into the text box. _}</span>
     <div>
         <input
             type="date"
