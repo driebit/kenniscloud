@@ -1,6 +1,16 @@
-{% extends "_admin_edit_basics.tpl" %}
+{% extends "admin_edit_widget_i18n.tpl" %}
+
+{% block widget_title %}
+{_ Options _}
+<div class="widget-header-tools"></div>
+{% endblock %}
+
+{% block widget_i18n_tab_class %}item{% endblock %}
+{% block widget_show_minimized %}false{% endblock %}
+{% block widget_id %}edit-options{% endblock %}
 
 {% block widget_content_nolang %}
+<h3>{_ Options _}</h3>
 <div class="form-group row">
     <label class="control-label col-md-12" for="is_private">
         <input type="checkbox" id="is_private" name="is_private"
