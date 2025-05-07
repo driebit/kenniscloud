@@ -6,7 +6,8 @@
 
         {% include "subtitle/subtitle.tpl" %}
 
-        {% include "page-actions/page-action-edit-thing.tpl" %}
+        {% catinclude "keywords/keywords.tpl" id %}
 
+        {% include "page-actions/page-action-edit-thing.tpl" %}
     </div>
 </div>

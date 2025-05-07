@@ -497,6 +497,14 @@
     }
 }
 
+.list .list__item__summary b {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    line-clamp: 10;
+    -webkit-box-orient: vertical;
+}
+
 .list__item__short-title {
     width: fit-content;
 }
