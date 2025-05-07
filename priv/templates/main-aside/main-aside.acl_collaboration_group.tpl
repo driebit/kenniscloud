@@ -11,7 +11,7 @@
 	{% endif %}
 
 
-	{% if m.search.paged[{query is_published content_group=id sort=["-is_featured", "-rsc.publication_start", "id"] cat_exclude=["remark", "keyword", "reference", "frequently_asked_question"] cat_exclude_defaults id_exclude=upcoming_events|make_list pagelen=6 page=q.page}] as result %}
+	{% if m.search.paged[{query is_published content_group=id sort=["-is_featured", "-rsc.publication_start", "id"] cat=['contribution', 'event'] id_exclude=upcoming_events|make_list pagelen=6 page=q.page}] as result %}
 
 		<h3 class="bordered-title">Bijdragen</h3>
 		{% include "list/list.tpl" list_id="list--content" class="list--kg" list_template="list/list-item-kg.tpl" items=result extraClasses="" id=id noresults=" " exclude=upcoming_events|make_list %}
