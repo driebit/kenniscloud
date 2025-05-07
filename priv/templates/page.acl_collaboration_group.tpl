@@ -30,7 +30,7 @@
         
             {% include "maplibre/map.tpl" %}
 
-            {% if m.search[{query cat=['contribution', 'event'] content_group=id pagelen=50 }]|sort:"publication_start" as results %}
+            {% if m.search[{query cat=['contribution', 'event'] content_group=id pagelen=50 }]|sort:"date_start" as results %}
                 {% if id.timeline_status == "automatic" %}
                     {% include "_driebit_timeline.tpl" result=results title=_"Timeline" titleClass="bordered-title" list_item_template="timeline/_timeline-card.tpl" %}
                 {% elseif id.timeline_status == "manual" %}

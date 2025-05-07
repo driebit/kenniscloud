@@ -1,6 +1,7 @@
 {% extends "timeline/_timeline-card.tpl" %}
 
-{% block card_category %}
+{% block card_time_category %}
+    <span class="c-timeline__date">{{ id.publication_start|date:"j F Y" }}</span>
     <span class="c-timeline__category">{{ m.rsc[id.category.id].title }}</span>
 {% endblock %}
 

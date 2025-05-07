@@ -3,8 +3,8 @@
         <div class="c-timeline__dot"></div>
         <div class="c-timeline-card">
             <div class="u-d-flex u-flex-justify-between">
-                <span class="c-timeline__date">{{ id.publication_start|date:"j F Y" }}</span>
-                {% block card_category %}
+                {% block card_time_category %}
+                    <span class="c-timeline__date">{{ id.publication_start|date:"j F Y" }}</span>
                     <span class="c-timeline__category">{{ id.category.name }}</span>
                 {% endblock %}
             </div>
