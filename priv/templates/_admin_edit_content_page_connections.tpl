@@ -1,5 +1,5 @@
 {% overrules %}
-{# Overruled to have a more limited set of tabs enabled for the 'hasextra_faq' and 'hasextra_rsc' predicate #}
+{# Overruled to have a more limited set of tabs enabled for the 'hasextra_***' predicates #}
 
 {% block widget_content %}
 
