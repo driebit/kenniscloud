@@ -56,6 +56,18 @@ manage_schema({upgrade, 18}, _Context) ->
                     {acl_collaboration_group, acl_collaboration_group}
             ]}
         ]
+    };
+manage_schema({upgrade, 19}, _Context) ->
+    #datamodel{
+        predicates=[
+            {hasextra_rsc, [
+                {title, {trans, [{nl, <<"Extra: Resources">>},
+                                 {en, <<"Extra: Resources">>}]}},
+                {language, [en,nl]}
+            ], [
+                {acl_collaboration_group, reference}
+            ]}
+        ]
     }.
 
 manage_data(install, Context) ->
@@ -104,7 +116,9 @@ manage_data({upgrade, 18}, Context) ->
     remove_unused_predicate(hasproject, Context),
     remove_unused_predicate(hasprojectmanager, Context),
     remove_unused_predicate(hasexpert_pioneer, Context),
-    remove_unused_predicate(hasexpert_speaker, Context).
+    remove_unused_predicate(hasexpert_speaker, Context);
+manage_data({upgrade, 19}, _Context) ->
+    ok.
 
 migrate_project(ProjId, Context0) ->
     ?zInfo("Data upgrade, turning ~p into a kennisgroep", [ProjId], Context0),

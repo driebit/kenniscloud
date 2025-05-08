@@ -22,7 +22,7 @@
 -mod_description("").
 -mod_prio(10).
 -mod_depends([mod_crowdlink, mod_crowdparticipant, mod_driebit_activity2, mod_driebit_base, mod_driebit_edit, mod_image_edit]).
--mod_schema(18).
+-mod_schema(19).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
 
