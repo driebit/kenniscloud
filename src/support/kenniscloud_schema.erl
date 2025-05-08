@@ -1213,7 +1213,7 @@ get_prod_data() ->
                                      {en, <<"Extra: Resources">>}]}},
                     {language, [en,nl]}
                 ], [
-                    {acl_collaboration_group, undefined}
+                    {acl_collaboration_group, reference}
             ]},
             {hasextra_doc, [
                     {title, {trans, [{nl, <<"Extra: Documenten">>},
