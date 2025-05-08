@@ -29,7 +29,7 @@
                 %}
 
                 <hr>
-            {% elseif name == 'hasextra_img' %}
+            {% elseif name == 'hasextra_img' or name == 'hasextra_doc' %}
                 <h4>{{ p.title }}</h4>
 
                 {% live template="_admin_edit_content_page_connections_list.tpl"
@@ -46,28 +46,7 @@
                     unlink_action=unlink_action
                     undo_message_id="unlink-undo-message"
                     list_id=list_id
-                    tabs_enabled=["find", "new"]
-                %}
-
-                <hr>
-            {% elseif name == 'hasextra_doc' %}
-                <h4>{{ p.title }}</h4>
-
-                {% live template="_admin_edit_content_page_connections_list.tpl"
-                    topic={object id=id predicate=name}
-                    id=id
-                    predicate=name|as_atom
-                    button_label=button_label
-                    button_class=button_class
-                    dialog_title_add=dialog_title_add
-                    callback=callback
-                    action=action
-                    nocatselect=nocatselect
-                    content_group=content_group
-                    unlink_action=unlink_action
-                    undo_message_id="unlink-undo-message"
-                    list_id=list_id
-                    tabs_enabled=["find", "upload", "new"]
+                    tabs_enabled=["find", "new", "upload"]
                 %}
 
                 <hr>

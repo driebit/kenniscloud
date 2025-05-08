@@ -1,5 +1,5 @@
 {% overrules %}
-{# Overridden to simplify the dialog for 'hasextra_faq'/'frequently_asked_question' #}
+{# Overridden to simplify the dialog for the 'hasextra_***' predicates #}
 
 {% block new_rsc_header %}
     {% if predicate == 'hasextra_faq' %}
@@ -40,17 +40,7 @@
 {% endblock %}
 
 {% block rsc_props %}
-    {% if predicate == 'hasextra_faq' %}
-        {# Automatically set as dependent #}
-        <input type="hidden" name="is_dependent" value="1">
-        <div class="form-group form__is_published">
-            <label class="checkbox">
-                <input type="checkbox" id="{{ #published }}" name="is_published" value="1"
-                    {% if subject_id or m.admin.rsc_dialog_is_published %}checked{% endif %}>
-                {_ Published _}
-            </label>
-        </div>
-    {% elseif predicate == 'hasextra_rsc' %}
+    {% if predicate == 'hasextra_faq' or predicate == 'hasextra_rsc' %}
         {# Automatically set as dependent #}
         <input type="hidden" name="is_dependent" value="1">
         <div class="form-group form__is_published">
