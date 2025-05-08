@@ -32,6 +32,8 @@
         <input type="hidden" name="category_id" value="{{ m.rsc['reference'].id }}">
     {% elseif predicate == 'hasextra_doc' %}
         <input type="hidden" name="category_id" value="{{ m.rsc['document'].id }}">
+    {% elseif predicate == 'hasextra_img' %}
+        <input type="hidden" name="category_id" value="{{ m.rsc['image'].id }}">
     {% else %}
         {% inherit %}
     {% endif %}
