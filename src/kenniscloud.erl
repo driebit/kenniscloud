@@ -488,9 +488,9 @@ observe_rsc_update_done(#rsc_update_done{id = Id, pre_props = Pre, post_props = 
 observe_driebit_activity2_inserted(#driebit_activity2_inserted{activity = Activity}, Context) ->
     kenniscloud_activity:fan_out(Activity, Context).
 
-% When no request page was specified use '/start'
+% When no request page was specified use '/'
 observe_logon_ready_page(#logon_ready_page{ request_page = None }, Context) when None =:= undefined; None =:= <<>> ->
-    z_dispatcher:url_for(start, [], Context);
+    z_dispatcher:url_for(home, [], Context);
 % Otherwise let the default handler redirect the user
 observe_logon_ready_page(_LogonReadyPage, _Context) ->
     undefined.
@@ -547,7 +547,7 @@ observe_signup_confirm(#signup_confirm{ id = UserId }, Context) ->
     end.
 
 observe_signup_confirm_redirect(#signup_confirm_redirect{}, Context) ->
-    z_dispatcher:url_for(start, [], Context).
+    z_dispatcher:url_for(home, [], Context).
 
 observe_search_query_term(#search_query_term{ term = <<"cat_exclude_defaults">>, arg = true }, _Context) ->
     #search_sql_term{ cats_exclude = [ {<<"rsc">>, [meta, media, menu, admin_content_query]} ] };
