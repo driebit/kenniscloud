@@ -65,7 +65,7 @@
 
         <div class="c-edit__add-attachement" style="border-radius: 1rem; margin-bottom: 2rem;">
             {% include "_admin_edit_content_address_contribution.tpl" class="test" %}
-            <p class="u-padding-1"><b>Als u het ingevoerde adres hier wilt gebruiken voor de geolocatie hieronder, sla dan eerst de pagina op. </b>
+            <p class="u-padding-1"><b>Als u het hier ingevoerde adres wilt gebruiken voor de geolocatie hieronder, geef dan eerst de stad, de straat en het huisnummer op en sla vervolgens de pagina op. </b>
             {% button type="submit" id="save_stay" class="btn btn-default" text=_"Save" title=_"Save this page." disabled=not id.is_editable %}
             </p>
 
