@@ -6,7 +6,7 @@
         <input
             type="date"
             name="dt:ymd:0:publication_start"
-            value="{{ id.publication_start|date:'Y-m-d' }}"
+            value="{{ id.publication_start|default:now|date:'Y-m-d' }}"
             class="form-control"
         >
     </div>
