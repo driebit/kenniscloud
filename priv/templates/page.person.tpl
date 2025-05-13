@@ -16,16 +16,6 @@
         <p class="person-info__contact__line"><strong>Woonplaats</strong> <span>{{ id.address_city|truncate:30 }}</span></p>
         {% endif %}
 
-        {% if id.s.hascollabmanager as projects %}
-        <div class="person-info__contact__line"><strong>Projectleider van project</strong>
-            <div>
-                {% for project in projects %}
-                <a href="{{ project.page_url }}" class="person-info__contact__line">{{ project.title }}</a>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
         {% with m.rsc[`collection_expert_predicates`].o.haspart as expertpredicates %}
         {% for expertise in expertpredicates %}
         {% if id.s[expertise] as projects %}
@@ -72,17 +62,6 @@
             </div>
         </div>
         {% endif %}
-        {# {% if m.acl.user %}
-        {% if id.o.rsvp as meetups %}
-        <div class="person-info__contact__line"><strong>Bezochte meetups</strong>
-        <div>
-        {% for r in meetups %}
-        <a href="{{ r.page_url }}">{{ r.title }}</a>{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-        </div>
-        </div>
-        {% endif %}
-        {% endif %} #}
             {% catinclude "page-actions/page-actions.tpl" id %}
         </div>
         <div class="person-info__summary">
