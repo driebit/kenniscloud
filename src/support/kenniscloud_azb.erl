@@ -70,7 +70,7 @@ schedule_import_keywords(Term, Context) when is_binary(Term) ->
     z_pivot_rsc:insert_task(
         kenniscloud_azb,
         import_keywords,
-        <<"kenniscloud_azb:import_keywords:", Term/binary>>,
+        <<"kenniscloud_azb:import_keywords:", (z_string:to_name(Term))/binary>>,
         [Term, Context],
         Context
     ).
