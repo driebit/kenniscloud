@@ -21,6 +21,7 @@
 -module(kenniscloud_azb).
 
 -export([
+    event/2,
     update_keywords/1,
     update_keywords/2,
 
@@ -42,6 +43,15 @@
 -define(SEARCH_URL, "https://v1.azb.zbkb.nl/title/search").
 
 %% IMPORTING
+
+event(#postback{message=update_keywords}, Context) ->
+    case z_acl:is_admin(Context) of
+        true ->
+            update_keywords(Context),
+            z_render:growl("AZB: library keyword refresh started", Context);
+        _ ->
+            z_render:growl_error("Only admins are allowed to start this", Context)
+    end.
 
 % Schedules jobs to update the keywords imported from AZB.
 % This will trigger an import without term and an import for each existing
