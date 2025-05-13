@@ -1,3 +1,5 @@
+{% extends "_ginger_edit.tpl" %}
+
 {% block edit_blocks %}
     <div id="poststuff">
     {% optional include "_translation_init_languages.tpl" %}
