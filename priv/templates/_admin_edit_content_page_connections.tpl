@@ -46,7 +46,7 @@
                     unlink_action=unlink_action
                     undo_message_id="unlink-undo-message"
                     list_id=list_id
-                    tabs_enabled=["find", "new", "upload"]
+                    tabs_enabled=["find", "upload"]
                 %}
 
                 <hr>
