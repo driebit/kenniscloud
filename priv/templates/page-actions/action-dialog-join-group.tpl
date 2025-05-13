@@ -1,7 +1,5 @@
-{% with id.o.hascollabmember|make_list as members %}
-
-{% if m.acl.user as user %}
-    {% if user|member:members %}
+{% if m.acl.user %}
+    {% if leave|default:false %}
         <p>
            Wil je deze kennisgroep verlaten?
         </p>
@@ -27,5 +25,3 @@
         Om dit te doen moet je ingelogd zijn.
     </p>
 {% endif %}
-
-{% endwith %}
