@@ -70,7 +70,7 @@ schedule_import_keywords(Term, Context) when is_binary(Term) ->
     z_pivot_rsc:insert_task(
         kenniscloud_azb,
         import_keywords,
-        <<"kenniscloud_azb:import_keywords:", (z_string:to_name(Term))/binary>>,
+        <<"kenniscloud_azb:import_keywords:", (z_string:to_slug(Term))/binary>>,
         [Term, Context],
         Context
     ).
@@ -136,7 +136,7 @@ fetch_keywords(Term, Context) ->
                 % query for everything ('*') or for NBC terms:
                 {<<"query">>,
                     if
-                        is_binary(Term) -> <<"nbc:all:", Term/binary>>;
+                        is_binary(Term) -> <<"nbc:all:", (z_string:to_slug(Term))/binary>>;
                         Term =:= undefined -> <<"*">>
                     end
                 },
