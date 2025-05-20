@@ -49,7 +49,8 @@
         map.fitBounds(bounds, {
             padding: 50,
             linear: true,
-            duration: 1000
+            duration: 1000,
+            maxZoom: 9
         });
     }
 {% endjavascript %}
