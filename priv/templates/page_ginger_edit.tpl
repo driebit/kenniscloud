@@ -15,14 +15,11 @@
             {% endif %}
 
             {% if zotonic_dispatch == 'contribution_edit' %}
-                {# Make sure to delete temporary contributions right away, as
-                ## some actions in the edit page can change its version (e.g
-                ## change to task), making this resource survive the task to
-                ## cleanup temporary rscs #}
                 {% button
                     class="btn--cancel"
                     text=_"Delete"
-                    action={delete_rsc id=id on_success={redirect back}}
+                    postback={cancel_contribution id=id}
+                    delegate=`kenniscloud`
                     tag="a"
                 %}
             {% else %}

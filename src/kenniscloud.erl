@@ -160,6 +160,25 @@ event(#postback{message={complete_task, [{id, ContributionId}, {dispatch_to, Dis
             z_render:growl_error(?__("Something went wrong. Sorry.", Context), Context)
     end;
 
+event(#postback{message={cancel_contribution, [{id, ContributionId}]}}, Context) ->
+    % This postback makes sure to delete temporary contributions right away, as
+    % some actions in the edit page can change its version (e.g change to task),
+    % making this resource survive the task to cleanup temporary rscs.
+    % Note: this isn't done with a change to the ACL because we don't want users
+    % to be able to delete their contributions in general, but only to cancel
+    % making new ones.
+    UserId = z_acl:user(Context),
+    CreatorId = m_rsc:p(ContributionId, creator_id, Context),
+    IsContribution = m_rsc:is_a(ContributionId, contribution, Context),
+
+    if
+        IsContribution andalso UserId =:= CreatorId ->
+            m_rsc:delete(ContributionId, z_acl:sudo(Context)),
+            z_render:wire({redirect, [ back ]}, Context);
+        true ->
+            z_render:growl_error(?__("Something went wrong. Sorry.", Context), Context)
+    end;
+
 event(#postback{message={join, [{target, TargetId}]}}, Context) ->
     User = z_acl:user(Context),
     true = m_rsc:is_a(TargetId, acl_collaboration_group, Context),
