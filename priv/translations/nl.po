@@ -607,8 +607,8 @@ msgid "Additional Images"
 msgstr "Aanvullende Afbeeldingen"
 
 #: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-images.tpl:4
-msgid "Additional Resources"
-msgstr "Aanvullende Pagina's"
+msgid "External resources"
+msgstr "Externe links"
 
 #: user/sites/kenniscloud/templates/contribution/task-actions.tpl:12
 msgid "Convert to a task"
