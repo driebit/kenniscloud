@@ -10,11 +10,11 @@
             <a href="{{ id.creator_id.page_url}}" class="c-card--feed__author-link">
                 <strong>{{ id.creator_id.title }}</strong> 
             </a>
-            reageerde op de bijdrage van 
+            {_ reageerde op de bijdrage van _}
             <a href="{{ id.o.about.creator_id.page_url}}" class="c-card--feed__author-link">
-                <strong>{{ id.o.about.creator_id.title }}</strong>
-            </a>
-            : {{ id.body|truncate:180}}
+                <strong>{{ id.o.about.creator_id.title }}</strong></a>, {_ in de kennisgroep _}
+            <a href="{{ id.content_group_id.page_url }}" class="c-card--feed__author-link"><strong>{{ id.content_group_id.title }}</strong></a>{% if id.content_group_id.o.hasregion as region %}, {_ en de regio _} <a href="{{ region.page_url }}" class="c-card--feed__author-link"><strong>{{ region.title }}</strong></a>{% endif %}
+            : <em>{{ id.body|truncate:120}}</em>
         </div>
         <span class="c-card--feed__time">{{ now|timesince:id.created:"":1 }}</span>
     </a>
