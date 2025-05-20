@@ -68,7 +68,9 @@ manage_schema({upgrade, 19}, _Context) ->
                 {acl_collaboration_group, reference}
             ]}
         ]
-    }.
+    };
+manage_schema({upgrade, 20}, _Context) ->
+    ok.
 
 manage_data(install, Context) ->
     case m_site:environment(Context) of
@@ -118,7 +120,11 @@ manage_data({upgrade, 18}, Context) ->
     remove_unused_predicate(hasexpert_pioneer, Context),
     remove_unused_predicate(hasexpert_speaker, Context);
 manage_data({upgrade, 19}, _Context) ->
+    ok;
+manage_data({upgrade, 20}, Context) ->
+    remove_unused_predicate(hasattachment, Context),
     ok.
+
 
 migrate_project(ProjId, Context0) ->
     ?zInfo("Data upgrade, turning ~p into a kennisgroep", [ProjId], Context0),
