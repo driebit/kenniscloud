@@ -393,6 +393,10 @@
     margin-right: 0.5rem;
 }
 
+.remark-editor__checkbox--highlighted {
+    color: $mainThemeColor;
+}
+
 .c-file-upload__label {
     width: 20rem;
     min-height: 100%;
