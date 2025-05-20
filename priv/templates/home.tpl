@@ -16,7 +16,7 @@
 			</div>
 
 			{% if m.kc_user.recommended_knowledge_groups as items  %}
-				{% include "list/list.tpl" items=items hide_showmore_button extraClasses="" id=id %}
+				{% include "list/list.tpl" items=items hide_showmore_button extraClasses="c-card-list--suggestions" id=id %}
 			{% endif %}
 
 			<div class="main-container">
