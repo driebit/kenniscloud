@@ -583,8 +583,8 @@ msgid "Documents"
 msgstr "Documenten"
 
 #: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-content-buttons.tpl:4
-msgid "Resources"
-msgstr "Pagina's"
+msgid "External resources"
+msgstr "Externe links"
 
 #: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-content-buttons.tpl:4
 msgid "FAQ"
