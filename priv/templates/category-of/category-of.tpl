@@ -30,6 +30,18 @@ as
             <a href="{{ loc_id.page_url }}"><i class="icon--location"></i> {{ loc_id.title|truncate:35 }}</a>
         {% endif %}
 	{% endif %}
+
+	<span class="list__item__information">
+		<br/>
+		{% if id.o.hasregion as region %}
+			{_ In de regio _} {{ region.title}}.
+		{% endif %}
+
+		{% if id.s.has_subgroup as parentKg %}
+			{_ In de kennisgroep _} {{ parentKg.title }}.
+		{% endif %}
+	</span>
+	
 </div>
 
 {% endwith %}

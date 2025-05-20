@@ -106,7 +106,7 @@ recommended_knowledge_groups(UserId, Context) ->
             <<"cat_exact">> => acl_collaboration_group
         },
         1,
-        4,
+        3,
         Context
     ),
     Result.

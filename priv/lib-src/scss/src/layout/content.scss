@@ -310,6 +310,10 @@ main {
         }
     }
 
+    ul {
+        padding-left: 2rem;
+    }
+
     @include mq(min-width, $mediumBreakpoint) {
         margin-bottom: 40px;
     }

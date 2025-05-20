@@ -1,11 +1,23 @@
 {% overrules %}
 {# Overridden to simplify the dialog for the 'hasextra_***' predicates #}
+{# rsc_props_title was also added to make 'hasextra_faq' title a required field #}
+
+{% block rsc_props_title %}
+    <div class="form-group label-floating">
+        <input type="text" id="new_rsc_title" name="title"
+                value="{{ title|escape }}" class="form-control do_autofocus"
+                placeholder="{_ Title _}"
+                {% if predicate == 'hasextra_faq' %}required{% endif %}
+                autofocus {% if accept %}accept="{{ accept }}"{% endif %}>
+        <label for="new_rsc_title">{_ Title _}</label>
+    </div>
+{% endblock %}
 
 {% block new_rsc_header %}
     {% if predicate == 'hasextra_faq' %}
         <div class="form-group label-floating">
             {# Add a summary field (used for answers in 'frequently_asked_question's) #}
-            <input type="text" id="new_rsc_summary" name="summary"
+            <input required type="text" id="new_rsc_summary" name="summary"
                    value="{{ summary|escape }}" class="form-control do_autofocus"
                    placeholder="{_ Short answer _}"
             >

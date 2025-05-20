@@ -275,7 +275,7 @@ viewDepictionCheckbox : Depiction -> Bool -> Html Msg
 viewDepictionCheckbox depiction isCheckboxChecked =
     let
         checkBoxItem =
-            label [ class "remark-editor__checkbox" ]
+            label [ class "remark-editor__checkbox", classList [ ( "remark-editor__checkbox--highlighted", not isCheckboxChecked ) ] ]
                 [ input
                     [ type_ "checkbox"
                     , checked isCheckboxChecked

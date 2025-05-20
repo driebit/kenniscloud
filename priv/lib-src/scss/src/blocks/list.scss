@@ -497,6 +497,12 @@
     }
 }
 
+.list__item__content--faq .keywords {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
 .list .list__item__summary b {
     overflow: hidden;
     display: -webkit-box;
@@ -717,66 +723,6 @@
         width: auto;
         height: 100%;
         display: block;
-    }
-}
-
-ul.c-card-list--scroll {
-    padding-bottom: 2rem;
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: center;
-    scroll-snap-type: x mandatory;
-    width: 100vw;
-    overflow: hidden;
-    gap: 0;
-
-    li:not(:first-child) {
-        display: none;
-    }
-
-    @include mq(min-width, $smallBreakpoint) {
-        padding-bottom: 3rem;
-        margin: 0;
-        justify-content: space-evenly;
-
-        li:not(:first-child) {
-            display: block;
-        }
-
-        li:nth-child(n + 3) {
-            display: none;
-        }
-    }
-
-    @include mq(min-width, $mediumBreakpoint) {
-        padding-bottom: 3rem;
-        margin: 0 auto;
-
-        li:nth-child(n + 3) {
-            display: block;
-        }
-
-        li:nth-child(n + 4) {
-            display: none;
-        }
-    }
-
-    @include mq(min-width, 1400px) {
-        max-width: 140rem;
-
-        li:nth-child(n + 4) {
-            display: block;
-        }
-    }
-}
-
-li.c-card-list--scroll {
-    min-width: 28rem;
-    max-width: 28rem;
-
-    @include mq(min-width, $smallBreakpoint) {
-        min-width: 31.5rem;
-        max-width: 31.5rem;
     }
 }
 

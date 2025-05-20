@@ -583,8 +583,8 @@ msgid "Documents"
 msgstr "Documenten"
 
 #: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-content-buttons.tpl:4
-msgid "Resources"
-msgstr "Pagina's"
+msgid "External resources"
+msgstr "Externe links"
 
 #: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-content-buttons.tpl:4
 msgid "FAQ"
@@ -607,8 +607,8 @@ msgid "Additional Images"
 msgstr "Aanvullende Afbeeldingen"
 
 #: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-images.tpl:4
-msgid "Additional Resources"
-msgstr "Aanvullende Pagina's"
+msgid "External resources"
+msgstr "Externe links"
 
 #: user/sites/kenniscloud/templates/contribution/task-actions.tpl:12
 msgid "Convert to a task"
@@ -679,9 +679,13 @@ msgid "You can choose the date or type it directly into the text box."
 msgstr "U kunt de datum kiezen of direct in het tekstvak typen"
 
 #: user/sites/kenniscloud/templates/list/list-item.acl_collaboration_group.tpl.tpl:5
-msgid "In the region"
-msgstr "In de regio"
+msgid "and the region"
+msgstr "en de regio"
 
 #: user/sites/kenniscloud/templates/_ginger_edit_content_publication_date.tpl:5
 msgid "In the knowledge group"
 msgstr "In de kennisgroep"
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_publication_date.tpl:5
+msgid "reacted to the contribution of"
+msgstr "reageerde op de bijdrage van"
