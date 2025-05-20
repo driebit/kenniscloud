@@ -1,16 +1,17 @@
 %home-primary {
-	display: block;
-	width: 100%;
-	max-width: 300px;
-	text-align: center;
-	margin: 0 auto;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .t--home {
-	background: none;
+    background: none;
 
     .btn--primary {
         @extend %home-primary;
+        margin: 0;
 
         &.-blue {
             display: inline-block;
@@ -19,15 +20,15 @@
         }
     }
 
-	.masthead--home {
-		.btn--primary {
-			margin: 20px 0 0 0;
-		}
-	}
+    .masthead--home {
+        .btn--primary {
+            margin: 20px 0 0 0;
+        }
+    }
 }
 
 .home-kg {
-	padding: 30px 0;
+    padding: 30px 0;
 
     @include breakpoint($largeBreakpoint) {
         position: relative;
@@ -45,33 +46,33 @@
 }
 
 .home-members {
-	padding: 30px;
+    padding: 30px;
 }
 
 .home-members__list {
-	display: flex;
-	flex-flow: row wrap;
-	margin: 20px 0;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 20px 0;
 
-	.person {
-		flex-shrink: 0;
-		margin-right: 20px;
-		margin-bottom: 20px;
+    .person {
+        flex-shrink: 0;
+        margin-right: 20px;
+        margin-bottom: 20px;
 
-		&:hover {
-			.person__content {
+        &:hover {
+            .person__content {
                 top: 83px;
                 border-radius: 2px;
-			}
-		}
-	}
+            }
+        }
+    }
 
-	.avatar__image {
-		width: 70px;
-		height: 70px;
-	}
+    .avatar__image {
+        width: 70px;
+        height: 70px;
+    }
 
-	@include mq(min-width, $mediumBreakpoint) {
-		margin: 40px 0;
-	}
+    @include mq(min-width, $mediumBreakpoint) {
+        margin: 40px 0;
+    }
 }
