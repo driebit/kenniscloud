@@ -497,6 +497,12 @@
     }
 }
 
+.list__item__content--faq .keywords {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
 .list .list__item__summary b {
     overflow: hidden;
     display: -webkit-box;
