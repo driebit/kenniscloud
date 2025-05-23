@@ -157,32 +157,38 @@ is_allowed_explained(
         Context
     );
 % Project managers' permissions on resources:
-% - TODO
 is_allowed_explained(
     [<<"acl_user_group_project_manager">> | UserGroups],
     Query = #acl_is_allowed{ object = Rsc },
     Context
 ) when is_integer(Rsc) ->
     UserId = z_acl:user(Context),
-    case edge_exists(Rsc, hascollabmanager, UserId, Context) of
-        true ->
+
+    IsCollabManager = edge_exists(Rsc, hascollabmanager, UserId, Context),
+    IsOwner = m_rsc:p_no_acl(Rsc, creator_id, Context) == UserId,
+    NoMembers = m_edge:objects(Rsc, hascollabmember, Context) == [],
+    IsProjectManager = is_project_manager_of(Rsc, Context),
+    IsCollabGroup = m_rsc:is_a(Rsc, acl_collaboration_group, Context),
+    NameIsVproWaag = m_rsc:p_no_acl(Rsc, name, Context) =:= <<"vpro_waag_collaboration">>,
+
+    if
+        IsCollabManager ->
             is_allowed_explained(UserGroups, Query, Context);
-        _ ->
-            IsOwner = m_rsc:p_no_acl(Rsc, creator_id, Context) == UserId,
-            NoMembers = m_edge:objects(Rsc, hascollabmember, Context) == [],
-            case {
-                IsOwner andalso NoMembers, % Project managers should be allowed to edit and link collab groups they created as sub-groups, but we don't want them to keep these rights forever.
-                is_project_manager_of(Rsc, Context),
-                m_rsc:is_a(Rsc, acl_collaboration_group, Context),
-                m_rsc:is_a(Rsc, text, Context),
-                m_rsc:p_no_acl(Rsc, name, Context)
-            } of
-                {_NewCollabGroup = true, _, _IsCollabGroup = true, _, _} -> {"project manager can edit own collab groups", true};
-                {_, _IsProjectManager = true, _IsCollabGroup = true, _, _} -> {"allowed for project manager on managing collab group", true};
-                {_, _IsProjectManager = false, _IsCollabGroup = true, _, _} -> {"project manager does not manage collab group", false};
-                {_, _, _, _, _Name = <<"vpro_waag_collaboration">>} -> {"allowed for vpro_waag_collaboration for project manager", true};
-                _ -> is_allowed_explained(UserGroups, Query, Context)
-            end
+        IsOwner andalso NoMembers andalso IsCollabGroup ->
+            % Project managers should be allowed to edit and link collab groups
+            % they created as sub-groups, but we don't want them to keep these
+            % rights forever.
+            {"project manager can edit own collab groups", true};
+        IsProjectManager andalso IsCollabGroup ->
+            {"allowed for project manager on managing collab group", true};
+        IsProjectManager ->
+            {"allowed for project manager on collab group's resources", true};
+        IsCollabGroup ->
+            {"project manager does not manage collab group", false};
+        NameIsVproWaag ->
+            {"allowed for vpro_waag_collaboration for project manager", true};
+        true ->
+            is_allowed_explained(UserGroups, Query, Context)
     end;
 is_allowed_explained([_UserGroup | UserGroups], Query, Context) ->
     is_allowed_explained(UserGroups, Query, Context);
@@ -418,8 +424,7 @@ rules() ->
         {rsc, [
             {acl_user_group_id, acl_user_group_community_librarian},
             {actions, [view, insert, update, delete, link]},
-            {content_group_id, acl_collaboration_group},
-            {is_owner, true}
+            {content_group_id, acl_collaboration_group}
         ]},
         % Community librarian can add acl_collaboration_group in standard default
         % group otherwise they can't make a group

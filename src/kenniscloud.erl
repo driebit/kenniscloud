@@ -22,7 +22,7 @@
 -mod_description("").
 -mod_prio(10).
 -mod_depends([mod_crowdlink, mod_crowdparticipant, mod_driebit_activity2, mod_driebit_base, mod_driebit_edit, mod_image_edit]).
--mod_schema(19).
+-mod_schema(20).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
 
@@ -157,6 +157,25 @@ event(#postback{message={complete_task, [{id, ContributionId}, {dispatch_to, Dis
             % (reloading the frontend URL for a new resource would create another one)
             z_render:wire({redirect, [ {dispatch, DispatchTo}, {id, ContributionId} ]}, Context);
         _ ->
+            z_render:growl_error(?__("Something went wrong. Sorry.", Context), Context)
+    end;
+
+event(#postback{message={cancel_contribution, [{id, ContributionId}]}}, Context) ->
+    % This postback makes sure to delete temporary contributions right away, as
+    % some actions in the edit page can change its version (e.g change to task),
+    % making this resource survive the task to cleanup temporary rscs.
+    % Note: this isn't done with a change to the ACL because we don't want users
+    % to be able to delete their contributions in general, but only to cancel
+    % making new ones.
+    UserId = z_acl:user(Context),
+    CreatorId = m_rsc:p(ContributionId, creator_id, Context),
+    IsContribution = m_rsc:is_a(ContributionId, contribution, Context),
+
+    if
+        IsContribution andalso UserId =:= CreatorId ->
+            m_rsc:delete(ContributionId, z_acl:sudo(Context)),
+            z_render:wire({redirect, [ back ]}, Context);
+        true ->
             z_render:growl_error(?__("Something went wrong. Sorry.", Context), Context)
     end;
 

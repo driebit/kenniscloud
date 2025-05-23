@@ -15,7 +15,6 @@
 				<div class="list__item__content">
 					<div class="list__item__title">
 						{% include "category-of/category-of.tpl" nolink="true" %}
-
 						<h3>
                             {% if id.short_title %}
                                 {{ id.short_title|truncate:50 }}
@@ -23,15 +22,7 @@
                                 {{ id.title|truncate:50 }}
                             {% endif %}
                         </h3>
-						<span class="list__item__information">
-							{% if id.o.hasregion as region %}
-								{_ In de regio _} {{ region.title}}.
-							{% endif %}
 
-							{% if id.s.has_subgroup as parentKg %}
-								{_ In de kennisgroep _} {{ parentKg.title }}.
-							{% endif %}
-						</span>
 					</div>
 					{% include "keywords/keywords.tpl" nolink="true" slice_items=5 %}
 

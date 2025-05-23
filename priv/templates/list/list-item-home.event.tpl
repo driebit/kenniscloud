@@ -1,9 +1,9 @@
 <li class="c-card--feed c-card--feed--event">
     <a href="{{ id.page_url}}" class="c-card--feed__link c-card--feed__link--event">
     </a>
-            <a href="{{ id.creator_id.page_url}}">
-            {% include "avatar/avatar.tpl" image_class="c-card--feed__avatar" id=id.creator_id fallback_rsc_id=m.rsc.custom_avatar_fallback.id %}
-        </a>
+    <a href="{{ id.creator_id.page_url}}">
+        {% include "avatar/avatar.tpl" image_class="c-card--feed__avatar" id=id.creator_id fallback_rsc_id=m.rsc.custom_avatar_fallback.id %}
+    </a>
     <div class="c-card--feed__background" style="background-image: url('{% image_url id.depiction mediaclass='list-image' crop=dep.crop_center %}');" >
     </div>
     <div class="c-card--feed__text">
@@ -21,10 +21,7 @@
 
         <strong><p>
         {{ id.title }} 
-        | {{ id.date_start|date:"j.n.Y" }} 
-        {% if id.date_end %}
-        - {{ id.date_end|date:"j.n.Y" }}
-        {% endif %}
+        | {{ id.date_start|date:"j.n.Y" }}
         </p></strong>
 
     </div>

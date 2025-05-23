@@ -9,7 +9,7 @@
 {% endif %}
 
 {% if id.o.hasextra_rsc %}
-    {% button text=_"Resources" class="c-btn--primary-no-icon" action={redirect dispatch="extra_resources" id=id} %}
+    {% button text=_"External resources" class="c-btn--primary-no-icon" action={redirect dispatch="extra_resources" id=id} %}
 {% endif %}
 
 {% if id.o.hasextra_faq %}
