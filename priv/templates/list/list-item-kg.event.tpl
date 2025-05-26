@@ -3,7 +3,7 @@
 	{% with id.o.hasbanner[1]|default:id.depiction.id|default:m.rsc.fallback.id as dep %}
 	<li class="list-item-kg--event" style="background-image: url('{% image_url dep mediaclass='list-image' crop=dep.crop_center %}'); position: relative; overflow: hidden;">
 		<a href="{{ id.page_url }}">
-			{% if id.date_start < now %}
+			{% if id.date_end < now %}
 				<div class="event-status__past">Geweest</div>
 			{% endif %}
 			<div class="list-item-kg-event__content">
