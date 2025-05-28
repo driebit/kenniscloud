@@ -61,7 +61,7 @@ manage_schema({upgrade, 19}, _Context) ->
     #datamodel{
         predicates=[
             {hasextra_rsc, [
-                {title, {trans, [{nl, <<"Extra: Resources">>},
+                {title, {trans, [{nl, <<"Extra: Externe links">>},
                                  {en, <<"Extra: Resources">>}]}},
                 {language, [en,nl]}
             ], [
@@ -1229,7 +1229,7 @@ get_prod_data() ->
                     {acl_collaboration_group, frequently_asked_question}
             ]},
             {hasextra_rsc, [
-                    {title, {trans, [{nl, <<"Extra: Resources">>},
+                    {title, {trans, [{nl, <<"Extra: Externe links">>},
                                      {en, <<"Extra: Resources">>}]}},
                     {language, [en,nl]}
                 ], [
