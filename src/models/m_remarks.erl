@@ -250,7 +250,6 @@ m_post(_Path, _Payload, _Context) ->
 %% @doc Get contribution that a remark is about.
 -spec contribution(m_rsc:resource(), z:context()) -> m_rsc:resource().
 contribution(Id, Context) ->
-    % TODO: maybe move 'get_root' here and merge this with `m_remarks`?
     case m_rsc:is_a(Id, contribution, Context) of
         true ->
             Id;
