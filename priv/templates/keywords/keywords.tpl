@@ -6,7 +6,7 @@
 	                <li>
 	                	{% if nolink == "true" %}
 							<div class="btn--secondary" title="{{ m.rsc[id].title }}">{{ m.rsc[id].title|truncate:12 }}</div>
-	               	{% else %}
+	               		{% else %}
 	                		<a href="{% url page id=id type="subject" direction="object" %}" title="{{ m.rsc[id].title }}" class="btn--secondary">{{ m.rsc[id].title }}</a>
 	                	{% endif %}
 	                </li>
