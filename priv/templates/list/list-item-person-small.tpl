@@ -3,7 +3,7 @@
     class|default:"person",
     project|default:(collab_group.s.has_subgroup|first),
     m.kc_user[id].is_community_librarian,
-    m.kc_user[id].roles_in[collab_group|default:project]
+    m.kc_collab_group[collab_group|default:project].roles_of[id]
 as
     class,
     project,

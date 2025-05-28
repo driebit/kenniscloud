@@ -29,8 +29,7 @@
     regions/2,
     specialist_predicates_for/3,
     is_community_librarian/2,
-    is_project_leader_of/3,
-    roles_in/3
+    is_project_leader_of/3
 ]).
 
 -behaviour(zotonic_model).
@@ -63,10 +62,10 @@ m_get([<<"recommended_knowledge_groups">> | Rest ] = _Path, _Msg, Context) ->
     {ok, {recommended_knowledge_groups(z_acl:user(Context), Context), Rest}};
 
 % used in list items for other users then the current user
-m_get([ User, <<"roles_in">>, ProjectOrGroup | Rest ], _Msg, Context) ->
-    {ok, {roles_in(ProjectOrGroup, User, Context), Rest}};
 m_get([ User, <<"specialist_predicates_for">>, CollabGroup | Rest ], _Msg, Context) ->
     {ok, {specialist_predicates_for(User, CollabGroup, Context), Rest}};
+m_get([ User, <<"is_community_librarian">> | Rest ] = _Path, _Msg, Context) ->
+    {ok, {is_community_librarian(User, Context), Rest}};
 
 % Unexpected path
 m_get(_, _Msg, _Context) ->
@@ -78,19 +77,6 @@ is_community_librarian(UserId, Context) ->
 
 is_project_leader_of(GroupId, UserId, Context) ->
     m_edge:get_id(GroupId, hascollabmanager, UserId, Context) =/= undefined.
-
-roles_in(GroupId, UserId, Context) ->
-    case m_rsc:is_a(GroupId, acl_collaboration_group, Context) of
-        true ->
-            case is_project_leader_of(GroupId, UserId, Context) of
-                true ->
-                    [project_leader];
-                false ->
-                    []
-            end;
-        false ->
-            m_kc_collab_group:roles_of(UserId, GroupId, Context)
-    end.
 
 knowledge_groups(UserId, Context) ->
     m_rsc:s(UserId, hascollabmember, Context).
