@@ -37,9 +37,12 @@ function setupTimeline() {
         item.classList.add(isLeft ? 'c-timeline__item--left' : 'c-timeline__item--right');
 
         // Calculate the top position for the card
+        // it's either 'minSpacing' over the card just above in the same column
+        // or, if more space is necessary, it's the middle point of the previous
+        // element in the other column.
         let top = isLeft
-            ? lastBottomLeft + minSpacing
-            : lastBottomRight + minSpacing;
+            ? Math.max(minSpacing + lastBottomLeft, lastBottomRight - (cardHeight / 2))
+            : Math.max(minSpacing + lastBottomRight, lastBottomLeft - (cardHeight / 2));
 
         // Apply the offset for the first card on the right
         if (!isLeft && lastBottomRight === 0) {
