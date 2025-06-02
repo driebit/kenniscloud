@@ -4,9 +4,6 @@
     <span class="c-timeline__date">
         {% if id.date_start %}
             {{ id.date_start|date:"j F Y" }}
-            {% if id.date_end %}
-                - {{ id.date_end|date:"j F Y" }}
-            {% endif %}
         {% else %}
             {{ id.publication_start|date:"j F Y" }}
         {% endif %}
