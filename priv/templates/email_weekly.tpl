@@ -39,7 +39,7 @@
                             {{ (r.content_group_id.name == "default_content_group")|if:"KennisCloud":r.content_group_id.title }}
                         </strong>
                         <p style="margin: 0;">
-                            <a style="color:  #00A2B6 !important; font-size: 1.4em;" href="{{ r.page_url }}">
+                            <a style="color:  #00A2B6 !important; font-size: 1.4em;" href="{{ r.page_url_abs }}">
                                 {{ r.title }}
                             </a>
                         </p>
@@ -61,7 +61,7 @@
                         <p style="margin: .25em 0;">
                             Nieuwe {{ (r.category.name == "event")|if:"meetup":"bijdrage" }} van {{ r.creator_id.title }}:
                         </p>
-                        <a style="color:  #00A2B6 !important; font-size: 1.4em;" href="{{ r.page_url }}">
+                        <a style="color:  #00A2B6 !important; font-size: 1.4em;" href="{{ r.page_url_abs }}">
                             {{ r.title }}
                         </a>
                         <p style="margin: .25em 0;">
@@ -91,7 +91,7 @@
                     </strong>
                 </p>
                 <p style="margin: .25em 1.5em;">
-                    <a style="color:  inherit !important; font-size: 1.4em;" href="{{ highlight.page_url }}">
+                    <a style="color:  inherit !important; font-size: 1.4em;" href="{{ highlight.page_url_abs }}">
                         {{ highlight.title }}
                     </a>
                 </p>
@@ -118,7 +118,7 @@
                     </strong>
                 </p>
                 <p style="margin: .25em 1.5em;">
-                    <a style="color:  inherit !important; font-size: 1.4em;" href="{{ highlight.page_url }}">
+                    <a style="color:  inherit !important; font-size: 1.4em;" href="{{ highlight.page_url_abs }}">
                         {{ highlight.title }}
                     </a>
                 </p>
