@@ -598,10 +598,6 @@ msgstr "Aanvullende Documenten"
 msgid "Frequently Asked Questions"
 msgstr "Veelgestelde Vragen"
 
-#: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-faqs.tpl:4
-msgid "Frequently Asked Questions"
-msgstr "Veelgestelde Vragen"
-
 #: user/sites/kenniscloud/templates/_acl_collaboration_group/additional-images.tpl:4
 msgid "Additional Images"
 msgstr "Aanvullende Afbeeldingen"
@@ -705,3 +701,11 @@ msgstr "Inzichten"
 #priv/templates/keywords/status-tags.tpl
 msgid "Discussion"
 msgstr "Discussie"
+
+#priv/templates/keywords/knowledge-lvl-tags.tpl
+msgid "Question"
+msgstr "Vraag"
+
+#priv/templates/keywords/knowledge-lvl-tags.tpl
+msgid "Insight"
+msgstr "Inzicht"
