@@ -689,3 +689,19 @@ msgstr "In de kennisgroep"
 #: user/sites/kenniscloud/templates/_ginger_edit_content_publication_date.tpl:5
 msgid "reacted to the contribution of"
 msgstr "reageerde op de bijdrage van"
+
+#priv/templates/keywords/status-tags.tpl
+msgid "Preparation"
+msgstr "Voorwerk"
+
+#priv/templates/keywords/status-tags.tpl
+msgid "Meetup"
+msgstr "Meetup"
+
+#priv/templates/keywords/status-tags.tpl
+msgid "Insights"
+msgstr "Inzichten"
+
+#priv/templates/keywords/status-tags.tpl
+msgid "Discussion"
+msgstr "Discussie"
