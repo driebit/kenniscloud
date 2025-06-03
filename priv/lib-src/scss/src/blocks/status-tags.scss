@@ -60,3 +60,26 @@
         display: block;
     }
 }
+
+.c-contribution__lvl {
+    background-color: $greenDarker;
+    border: none;
+    text-transform: none;
+}
+
+.list-item-kg-contribution__lvl {
+    position: absolute;
+    bottom: 15px;
+    right: -45px;
+    width: 140px;
+    padding: 6px 0;
+    background-color: $greenDarker;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    transform: rotate(-45deg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    pointer-events: none;
+}
