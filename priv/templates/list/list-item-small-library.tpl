@@ -1,32 +1,21 @@
+{# Note: 'r' is expected to be a map for a suggestion as described in 'kenniscloud_azb' #}
 <li class="list-item-small">
-    {% if not add %}
-        <a href="https://www.bibliotheek.nl/catalogus/titel.{{ r['ppn'] }}.html" target="_blank">
-    {% endif %}
     <div class="list-item-small__content">
         <small>Bibliotheekcollectie</small>
 
-        <h3>{{ r['dcterms:title'] }}</h3>
+        <h3>{{ r['title'] }}</h3>
 
-        <p>{{ r['dcterms:creator']|join:", " }}</p>
-        <p>{{ r['schema:genre']|join:", " }} / {{ r['dcterms:date'] }}</p>
+        <p>{{ r['creator'] }}</p>
+        <p>{{ r['genre'] }} / {{ r['date'] }}</p>
 
-        {% if add %}
-            <a href="https://www.bibliotheek.nl/catalogus/titel.{{ r['ppn'] }}.html" target="_blank">Lees meer over deze titel</a>
-        {% else %}
-            <span>Lees meer over deze titel</span>
-        {% endif %}
+        <a href="{{ r['uri'] }}" target="_blank">Lees meer over deze titel</a>
     </div>
-    {% if not add %}
-        </a>
-    {% endif %}
-    {% if add %}
-        {% button text="Toevoegen"
-            class="btn--dark"
-            delegate=`kenniscloud_suggestion`
-            postback={confirm_suggestion
-                subject=id
-                uri=r.uri
-            }
-        %}
-    {% endif %}
+    {% button text="Toevoegen"
+        class="btn--dark"
+        delegate=`kenniscloud_suggestion`
+        postback={confirm_suggestion
+            subject=id
+            uri=r['uri']
+        }
+    %}
 </li>

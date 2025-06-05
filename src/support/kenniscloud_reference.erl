@@ -20,6 +20,8 @@
 
 -export([
     event/2,
+
+    insert_opengraph_data/3,
     get_opengraph_data/2,
     library_data_url_from_url/1
 ]).
