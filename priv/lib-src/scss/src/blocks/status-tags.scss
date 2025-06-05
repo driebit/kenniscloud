@@ -8,9 +8,11 @@
     border: 2px solid;
     text-transform: uppercase;
     color: $white;
+    justify-content: center;
+    border-radius: 2px;
 }
 
-.kg-intro_status--preparation {
+.kg-intro_status--status_keyword_preparation {
     border-color: $greenMint;
     background-color: rgba($greenMint, 0.6);
 
@@ -19,7 +21,7 @@
     }
 }
 
-.kg-intro_status--meetup {
+.kg-intro_status--status_keyword_meetup {
     border-color: $purpleLight; 
     background-color: rgba($purpleLight, 0.6);
 
@@ -28,7 +30,7 @@
     }
 }
 
-.kg-intro_status--insights {
+.kg-intro_status--status_keyword_insights {
     border-color: $blueSky; 
     background-color: rgba($blueSky, 0.6);
 
@@ -37,7 +39,7 @@
     }
 }
 
-.kg-intro_status--discussion {
+.kg-intro_status--status_keyword_discussion {
     border-color: $coral; 
     background-color: rgba($coral, 0.6);
 
@@ -46,10 +48,10 @@
     }
 }
 
-.kg-intro_status--preparation,
-.kg-intro_status--meetup,
-.kg-intro_status--insights,
-.kg-intro_status--discussion {
+.kg-intro_status--status_keyword_preparation,
+.kg-intro_status--status_keyword_meetup,
+.kg-intro_status--status_keyword_insights,
+.kg-intro_status--status_keyword_discussion {
     &::before {
         content: "";
         width: 2rem;
