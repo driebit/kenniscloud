@@ -24,40 +24,10 @@
 
 -include_lib("zotonic_core/include/zotonic.hrl").
 
--record(rdf_value, {
-    value :: term(),
-    language = undefined :: undefined | binary(),
-    type = undefined :: undefined | ginger_uri:uri()
-}).
-
--record(rdf_resource, {
-    id :: ginger_uri:uri(),
-    triples = [] :: [m_rdf:triple()]
-}).
-
--record(triple, {
-    %% DEPRECATED: type property is deprecated. Construct an object = #rdf_value{value = ...}
-    %% instead.
-    type = literal :: resource | literal,
-
-    subject :: undefined | binary(),
-    subject_props = [] :: proplists:proplist(),
-    predicate :: m_rdf:predicate(),
-    object :: ginger_uri:uri() | #rdf_value{} | #rdf_resource{},
-    object_props = [] :: proplists:proplist()
-}).
-
-
 %% @doc Create link between contribution and a library publication.
 -spec event(#postback{}, z:context()) -> z:context().
-event(#postback{message = {confirm_suggestion, Args}, target = TargetId}, Context) ->
-    Triple = #triple{
-        subject = maps:get(<<"subject">>, Args, undefined),
-        predicate = <<"http://purl.org/dc/terms/references">>,
-        object = maps:get(<<"uri">>, Args, undefined),
-        object_props = []
-    },
-    {ok, _} = m_rdf_triple:insert(Triple, Context),
+event(#postback{message = {confirm_suggestion, [{subject, SubjectId}, {uri, Uri}]}, target = TargetId}, Context) ->
+    kenniscloud_reference:insert_opengraph_data(Uri, SubjectId, Context),
 
     Target = z_convert:to_binary(TargetId),
     z_render:wire(

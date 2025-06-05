@@ -4,6 +4,8 @@
 
         <div id="content" class="add-references__content">
             {% include "library/add-source.tpl" %}
+
+            {% include "library/add-suggestion.tpl" %}
         </div>
     </div>
 {% endif %}
