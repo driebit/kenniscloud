@@ -27,6 +27,12 @@
 
                     {% include "page-title/page-title.tpl" %}
 
+                    {% if id.is_a.contribution %}
+                        <div class="u-margin-bottom-2">
+                            {% include "keywords/status-tags.tpl" latest_contribution=id %}
+                        </div>
+                    {% endif %}
+
                     {% catinclude "keywords/keywords.tpl" id %}
 
                     {% block og_data %}{% endblock %}

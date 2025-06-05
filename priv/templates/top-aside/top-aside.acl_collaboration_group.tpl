@@ -1,4 +1,9 @@
-<div class="u-d-flex u-flex-col">
+<div class="u-d-flex u-flex-col u-flex-gap-2">
+    {% with m.search.paged[{query is_published content_group=id sort=-"modified" cat=['contribution', 'event'] id_exclude=upcoming_events|make_list pagelen=1 page=q.page}] as result %}
+        {% if result[1] as latest_contribution %}
+            {% catinclude "keywords/status-tags.tpl" latest_contribution %}
+        {% endif %}
+    {% endwith %}
 
     {% live
         template="person/person-list.tpl"
