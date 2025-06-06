@@ -22,3 +22,5 @@
 <script src='/lib/js/maplibre-gl.js'></script>
 <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css' />
 <script src='https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js'></script>
+
+<link rel="me" href="https://mastodon.social/@KennisCloud" />
