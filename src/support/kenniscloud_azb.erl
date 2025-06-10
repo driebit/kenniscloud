@@ -29,6 +29,9 @@
 
     fetch_keywords/1,
     fetch_keywords/2,
+    fetch_suggestions/2,
+
+    fetch/4,
 
     aid/1,
     apikey/1,
@@ -86,11 +89,13 @@ schedule_import_keywords(Term, Context) when is_binary(Term) ->
     ).
 
 
-import_keywords(Term, Context) ->
+import_keywords(Term, Context) when is_binary(Term) orelse Term =:= undefined ->
     ?zInfo("AZB: fetching keyword from: ~p", [Term], Context),
+    import_keywords(fetch_keywords(Term, Context), Context);
+import_keywords(KeywordList, Context) when is_list(KeywordList) ->
     lists:foreach(
         fun(Keyword) -> import_keyword(Keyword, Context) end,
-        fetch_keywords(Term, Context)
+        KeywordList
     ).
 
 import_keyword({NbcKey, NbcLabel}, Context) when is_binary(NbcKey) andalso is_binary(NbcLabel) ->
@@ -137,12 +142,42 @@ fetch_keywords(Context) ->
 % https://azb.zbkb.nl/demo/documentation/search.html
 % Return a list of tuples with ID and label of each valid keyword found.
 fetch_keywords(Term, Context) ->
+    XmlMap = fetch(Term, [], true, Context),
+    extract_keywords(XmlMap, Context).
+
+
+% Fetch suggestions from the keywords (ids) using a search query with facets, see:
+% https://azb.zbkb.nl/demo/documentation/search.html
+% Return a list of suggestions, each represented by a map containing:
+% - title
+% - ppn
+% - uri
+% - creator
+% - genre
+% - date
+fetch_suggestions(KeywordIds, Context) ->
+    KeywordKeys = lists:map(
+        fun(KeywordId) -> m_rsc:p(KeywordId, <<"keyword_id">>, Context) end,
+        KeywordIds
+    ),
+    XmlMap = fetch(undefined, KeywordKeys, false, Context),
+    % Since we receive keywords while looking for suggestions too, we import them:
+    FoundKeywords = extract_keywords(XmlMap, Context),
+    import_keywords(FoundKeywords, Context),
+    % before returning all found records as suggestions:
+    extract_suggestions(XmlMap, Context).
+
+
+% Fetch results from the API, optionally starting from a term
+% https://azb.zbkb.nl/demo/documentation/search.html
+% Return a list of tuples with ID and label of each valid keyword found.
+fetch(Term, KeywordKeys, IdsOnly, Context) ->
     case auth_bearer(Context) of
         undefined ->
             [];
         AuthBearer ->
             Options = [{accept, <<"text/xml">>}, {authorization, AuthBearer}],
-            QueryArgs = [
+            BaseQueryArgs = [
                 % query for everything ('*') or for NBC terms:
                 {<<"query">>,
                     if
@@ -154,23 +189,39 @@ fetch_keywords(Term, Context) ->
                 {<<"size">>, <<"50">>},
                 {<<"from">>, <<"0">>},
                 % only get the identifiers of the resulting titles
-                {<<"identifiersOnly">>, <<"true">>},
+                {<<"identifiersOnly">>, z_convert:to_binary(IdsOnly)},
                 % only get the keyword facet, with the maximum size allowed
                 {<<"facet">>, <<"nbc:subjectNbdtrefwoorden_key">>},
                 {<<"facetSize">>, <<"100">>}
             ],
+            FilterQueryArgs = lists:filtermap(
+                fun
+                    (<<"subject~nbdtrefwoorden~", _Rest/binary>> = KeywordKey) ->
+                        {
+                            true,
+                            {
+                                <<"filter">>,
+                                <<"nbc:subjectNbdtrefwoorden_key:", KeywordKey/binary>>
+                            }
+                        };
+                    (_KeywordKey) ->
+                        false
+                end,
+                KeywordKeys
+            ),
+            QueryArgs = BaseQueryArgs ++ FilterQueryArgs,
             case z_fetch:fetch(get, ?SEARCH_URL, QueryArgs, Options, Context) of
                 {ok, {_FinalUrl, _RespHeaders, _ContentLength, Content}} ->
                     case z_html_parse:parse_to_map(Content, #{mode => xml}) of
                         {ok, XmlMap} ->
-                            extract_keywords(XmlMap, Context);
+                            XmlMap;
                         {error, Error} ->
                             ?zError(
                                 "AZB: invalid results XML: ~p",
                                 [Error],
                                 Context
                             ),
-                            []
+                            #{}
                     end;
                 {error, Error} ->
                     ?zError(
@@ -178,7 +229,7 @@ fetch_keywords(Term, Context) ->
                         [Error],
                         Context
                     ),
-                    []
+                    #{}
             end
     end.
 
@@ -203,6 +254,86 @@ extract_keyword(#{
 extract_keyword(_) ->
     false.
 
+
+extract_suggestions(#{
+    <<"nbc:searchResult">> := [#{<<"nbc:results">> := [#{<<"nbc:result">> := SearchResults}]}]
+}, _Context) when is_list(SearchResults) ->
+    lists:filtermap(fun extract_suggestion/1, SearchResults);
+extract_suggestions(Response, Context) ->
+    ?zError(
+        "AZB: unexpected results XML: ~p",
+        [Response],
+        Context
+    ),
+    [].
+
+extract_suggestion(#{<<"nbc:record">> := [RecordMap]}) when is_map(RecordMap) ->
+    extract_suggestion(RecordMap);
+extract_suggestion(#{<<"@attributes">> := Attrs} = RecordMap) when is_map(RecordMap) ->
+    case proplists:get_value(<<"nbc:identifier">>, Attrs, undefined) of
+        <<"PPN:", Ppn/binary>> ->
+            Result = #{
+                <<"ppn">> => Ppn,
+                <<"uri">> => <<"https://www.bibliotheek.nl/catalogus/titel.", Ppn/binary,".html">>,
+                <<"title">> => extract_record_title(RecordMap),
+                <<"creator">> => extract_record_creator(RecordMap),
+                <<"genre">> => extract_record_genre(RecordMap),
+                <<"date">> => extract_record_date(RecordMap)
+            },
+            {true, Result};
+        _ ->
+            false
+    end;
+extract_suggestion(_) ->
+    false.
+
+extract_record_title(RecordMap) ->
+    case maps:get(<<"nbc:title">>, RecordMap, undefined) of
+        [#{<<"nbc:displayTitle">> := [Title]} | _] ->
+            Title;
+        _ ->
+            undefined
+    end.
+
+extract_record_creator(RecordMap) ->
+    case maps:get(<<"nbc:creator">>, RecordMap, undefined) of
+        [#{<<"nbc:nameProfile2">> := [#{<<"value">> := [Name]}]} | _] ->
+            Name;
+        _ ->
+            undefined
+    end.
+
+extract_record_genre(RecordMap) ->
+    case maps:get(<<"nbc:subject">>, RecordMap, undefined) of
+        SubjectsList when is_list(SubjectsList) ->
+            GenreList = lists:filtermap(
+                fun
+                    (#{<<"@attributes">> := Attrs, <<"value">> := [Value]}) ->
+                        case proplists:get_value(<<"nbc:domain">>, Attrs, undefined) of
+                            <<"subject~nbdgenre">> -> {true, Value};
+                            <<"subject~nbchoofdcategorie">> -> {true, Value};
+                            _ -> false
+                        end;
+                    (_) ->
+                        false
+                end,
+                SubjectsList
+            ),
+            case GenreList of
+                [Genre | _] when is_binary(Genre) -> Genre;
+                _ -> undefined
+            end;
+        _ ->
+            undefined
+    end.
+
+extract_record_date(RecordMap) ->
+    case maps:get(<<"nbc:publication">>, RecordMap, undefined) of
+        [#{<<"nbc:year">> := [Year]} | _] ->
+            Year;
+        _ ->
+            undefined
+    end.
 
 %% CONFIG & AUTH
 
