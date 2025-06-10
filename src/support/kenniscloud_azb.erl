@@ -89,7 +89,7 @@ schedule_import_keywords(Term, Context) when is_binary(Term) ->
     ).
 
 
-import_keywords(Term, Context) when is_binary(Term) ->
+import_keywords(Term, Context) when is_binary(Term) orelse Term =:= undefined ->
     ?zInfo("AZB: fetching keyword from: ~p", [Term], Context),
     import_keywords(fetch_keywords(Term, Context), Context);
 import_keywords(KeywordList, Context) when is_list(KeywordList) ->
