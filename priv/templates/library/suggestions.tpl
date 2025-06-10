@@ -1,5 +1,5 @@
 {% with id.o.subject|is_a:"library_keyword" as keywords %}
-    {% if m.library.suggestions[keywords]|slice:[,5] as suggestions %}
+    {% if m.library.suggestions[keywords]|slice:[5] as suggestions %}
         <ul id="library-suggestions-list">
             {% for suggestion in suggestions %}
                 {% include "list/list-item-small-library.tpl" r=suggestion %}
