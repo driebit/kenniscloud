@@ -17,6 +17,15 @@
                         {% include "_hidden-resource.tpl" %}
                     {% endspaceless %}
 
+                    {% if id.is_a.contribution %}
+                        <div>
+                            {% include "keywords/status-tags.tpl" id %}
+                        </div>
+                        <div class="kg-intro_status c-contribution__intro_lvl">
+                            <span>{_ Preparation _}</span>
+                        </div>
+                    {% endif %}
+
                     {% block page_actions %}{% endblock %}
 
                     {% if id.date_start|date:"Y" %}
