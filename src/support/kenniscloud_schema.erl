@@ -506,6 +506,13 @@ get_prod_data() ->
                 ]}},
                 {language, [nl, en]}
             ]},
+            {status_keyword, keyword, [
+                {title, {trans, [
+                    {nl, <<"Status">>},
+                    {en, <<"Status">>}
+                ]}},
+                {language, [nl, en]}
+            ]},
             {dcat_dataset, query, [
                 {title, {trans, [
                     {nl, <<"DCAT dataset">>},
@@ -1049,6 +1056,30 @@ get_prod_data() ->
             %% Avatar fallback image
             {custom_avatar_fallback, image, [
                 {title, "Avatar fallback image"}
+            ]},
+
+            %% Status keywords 
+            {status_keyword_preparation, status_keyword, [
+                {title, {trans, [
+                    {nl, <<"voorwerk">>},
+                    {en, <<"preparation">>}
+                ]}},
+                {language, [nl,en]}
+            ]},
+            {status_keyword_insights, status_keyword, [
+                {title, {trans, [
+                    {nl, <<"inzichten">>},
+                    {en, <<"insights">>}
+                ]}
+                },
+                {language, [nl,en]}
+            ]},
+            {status_keyword_discussion, status_keyword, [
+                {title, {trans, [
+                    {nl, <<"discussie">>},
+                    {en, <<"discussion">>}
+                ]}},
+                {language, [nl,en]}
             ]}
         ],
         media=[
