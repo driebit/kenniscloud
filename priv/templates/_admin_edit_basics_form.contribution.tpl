@@ -43,6 +43,8 @@
 
     {% include "_ginger_edit_content_add_to_timeline.tpl" %}
 
+    {% include "_ginger_edit_content_status_label.tpl" extraClass="col-md-4" %}
+
 </fieldset>
 
 {% endwith %}
