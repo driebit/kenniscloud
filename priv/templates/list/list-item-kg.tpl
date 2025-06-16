@@ -16,9 +16,8 @@
         </div>
     {% endif %}
     <a href="{{ ref.page_url }}">
-        {% comment %} TODO also check if there is a lvl. then use the lvl text instead of the mockup {% endcomment %}
-        {% if id.is_a.contribution %} 
-            <div class="list-item-kg-contribution__lvl">Lvl here</div>
+        {% if id.status_label %} 
+            <div class="list-item-kg-contribution__lvl">{{ id.status_label|translate }}</div>
         {% endif %}
         <div {% if dep %}class="list-item-kg-contribution__content"{% endif %}>
             <div class="list-item-kg__top">
