@@ -9,13 +9,16 @@
 %}
 {% with ((id.category.name == "tip")|if:first_relation:((id.category.name == "remark")|if:topic:0)|default:id) as ref %}
 {% with id.o.hasbanner[1]|default:id.depiction.id as dep %}
-<li class='list-item-kg {% if latest_remark %}has-remark{% endif %}' style="background-image: url('{% image_url dep mediaclass='list-image' crop=dep.crop_center %}'); background-repeat: no-repeat; background-size: cover;">
+<li class='list-item-kg {% if latest_remark %}has-remark{% endif %}' style="background-image: url('{% image_url dep mediaclass='list-image' crop=dep.crop_center %}'); background-repeat: no-repeat; background-size: cover;{% if id.is_a.contribution %}overflow: hidden;{% endif %}">
     {% if id.category.name == "remark" %}
         <div class="list-item-kg__remark">
             <i class="icon--comment"></i>
         </div>
     {% endif %}
     <a href="{{ ref.page_url }}">
+        {% if id.status_label %} 
+            <div class="list-item-kg-contribution__lvl">{{ id.status_label|translate }}</div>
+        {% endif %}
         <div {% if dep %}class="list-item-kg-contribution__content"{% endif %}>
             <div class="list-item-kg__top">
                 {% block list_author %}

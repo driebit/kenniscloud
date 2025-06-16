@@ -5,6 +5,8 @@
         <b>Om aanmelden mogelijk te maken, moet zowel de begin als de einddatum ingevuld worden. Dit mag ook dezelfde dag zijn.</b>
         {% include "_ginger_edit_content_date_range.tpl" show_header is_editable %}
         {% include "_ginger_edit_content_publication_date.tpl" %}
+
+        {% include "_ginger_edit_content_status_label.tpl" %}
         
         <div class="form-group">
         <input type="hidden" id="is_subjects_checked" name="is_subjects_checked" value="1">

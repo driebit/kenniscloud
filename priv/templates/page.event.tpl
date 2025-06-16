@@ -17,6 +17,7 @@
                         {% include "_hidden-resource.tpl" %}
                     {% endspaceless %}
 
+
                     {% block page_actions %}{% endblock %}
 
                     {% if id.date_start|date:"Y" %}
@@ -28,6 +29,10 @@
                     {% include "page-title/page-title.tpl" %}
 
                     {% catinclude "keywords/keywords.tpl" id %}
+
+                    {% block status_tags %}
+                        {% include "keywords/status-tags.tpl" %}
+                    {% endblock %}                    
 
                     {% block og_data %}{% endblock %}
 

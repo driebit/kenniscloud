@@ -105,13 +105,14 @@ img.admin-list-overview {
     }
 }
 
-[class^="ginger-edit__aside"], [class*=" ginger-edit__aside"] {
+[class^="ginger-edit__aside"],
+[class*=" ginger-edit__aside"] {
     @extend .ginger-edit__aside;
 }
 
 .ginger-edit__profile-picture {
     padding: 15px;
-    border: 1px solid #BEBDBE;
+    border: 1px solid #bebdbe;
 
     .widget-header {
         display: none;
@@ -127,7 +128,6 @@ img.admin-list-overview {
     }
 }
 
-
 .ginger-edit {
     .modal-body {
         .table-striped {
@@ -136,4 +136,9 @@ img.admin-list-overview {
             }
         }
     }
+}
+
+.c-status-select {
+    width: 90%;
+    margin: 0 auto;
 }

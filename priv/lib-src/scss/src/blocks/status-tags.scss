@@ -1,0 +1,90 @@
+.c-status-container {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.kg-intro_status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: $superSmallFont;
+    font-weight: 600;
+    border: 2px solid;
+    text-transform: uppercase;
+    color: $white;
+}
+
+.kg-intro_status--preparation {
+    border-color: $greenMint;
+    background-color: rgba($greenMint, 0.6);
+
+    &::before {
+        background-image: url(/lib/images/preparation.svg);
+    }
+}
+
+.kg-intro_status--meetup {
+    border-color: $purpleLight;
+    background-color: rgba($purpleLight, 0.6);
+
+    &::before {
+        background-image: url(/lib/images/meetup.svg);
+    }
+}
+
+.kg-intro_status--insights {
+    border-color: $blueSky;
+    background-color: rgba($blueSky, 0.6);
+
+    &::before {
+        background-image: url(/lib/images/idea.svg);
+    }
+}
+
+.kg-intro_status--discussion {
+    border-color: $coral;
+    background-color: rgba($coral, 0.6);
+
+    &::before {
+        background-image: url(/lib/images/discussion.svg);
+    }
+}
+
+.kg-intro_status--preparation,
+.kg-intro_status--meetup,
+.kg-intro_status--insights,
+.kg-intro_status--discussion {
+    &::before {
+        content: "";
+        width: 2rem;
+        height: 2rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        display: block;
+    }
+}
+
+.c-contribution__lvl {
+    background-color: $greenDarker;
+    border: none;
+    text-transform: none;
+}
+
+.list-item-kg-contribution__lvl {
+    position: absolute;
+    bottom: 15px;
+    right: -45px;
+    width: 140px;
+    padding: 6px 0;
+    background-color: $greenDarker;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    transform: rotate(-45deg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    pointer-events: none;
+}
