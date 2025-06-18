@@ -1,9 +1,7 @@
 <div class="u-d-flex u-flex-col u-flex-gap-2">
-    {% with m.search.paged[{query is_published content_group=id sort=-"modified" cat=['contribution', 'event'] id_exclude=upcoming_events|make_list pagelen=1 page=q.page}] as result %}
-        {% if result[1] as latest_contribution %}
-            {% catinclude "keywords/status-tags.tpl" latest_contribution %}
-        {% endif %}
-    {% endwith %}
+    {% if m.search[{query cat=['contribution', 'event'] sort="-rsc.created" is_published content_group=id pagelen=15}]|make_list|kc_collaboration_group_progress_label as result %}
+        {% catinclude "keywords/progress-tags.tpl" id latest_contribution=result.id %} 
+    {% endif %}
 
     {% live
         template="person/person-list.tpl"

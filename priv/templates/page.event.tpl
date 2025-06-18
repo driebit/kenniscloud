@@ -17,7 +17,6 @@
                         {% include "_hidden-resource.tpl" %}
                     {% endspaceless %}
 
-
                     {% block page_actions %}{% endblock %}
 
                     {% if id.date_start|date:"Y" %}
@@ -27,12 +26,6 @@
                     {% include "meta/task-status.tpl" extraClass="list-item-kg__task--white" %}
 
                     {% include "page-title/page-title.tpl" %}
-
-                    {% if id.is_a.contribution %}
-                        <div class="u-margin-bottom-2">
-                            {% include "keywords/status-tags.tpl" latest_contribution=id %}
-                        </div>
-                    {% endif %}
 
                     {% catinclude "keywords/keywords.tpl" id %}
 
