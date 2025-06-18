@@ -158,6 +158,15 @@
         width: 16px;
         height: 16px;
     }
+    .icon--mastodon {
+        background-image: url(/lib/images/mastodon-logo-white.svg);
+        background-size: 16px 16px;
+        background-repeat: no-repeat;
+        background-position-x: 0px;
+        background-position-y: 0px;
+        width: 16px;
+        height: 16px;
+    }
 }
 
 .icon--linkedin:before {
@@ -293,6 +302,15 @@
 .icon--twitter,
 .icon--twitter-other {
   background-image: url(/lib/images/x-black.svg);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position-x: 7px;
+  background-position-y: 7px;
+}
+
+.icon--mastodon,
+.icon--mastodon-other {
+  background-image: url(/lib/images/mastodon-logo-black.svg);
   background-size: 20px 20px;
   background-repeat: no-repeat;
   background-position-x: 7px;
