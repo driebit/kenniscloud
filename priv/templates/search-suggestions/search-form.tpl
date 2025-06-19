@@ -60,12 +60,18 @@ as
 var searchSuggestionsContainer = document.getElementById("suggestion-container");
 var searchInput = document.getElementById("qs");
 
-searchInput.addEventListener("input", function() {
-    if (searchInput.placeholder.visible) {
-        searchSuggestionsContainer.style.display = "none";
-    } else {
-        searchSuggestionsContainer.style.display = "block";
-    }
-});
+if (!searchSuggestionsContainer && !searchInput) {
+    return; 
+} else {
+  searchInput.addEventListener("keyup", function() {
+      console.log("trigger");
+      if (!searchInput.value) {
+          searchSuggestionsContainer.style.display = "none";
+          console.log("hide suggestions");
+      } else {
+          searchSuggestionsContainer.style.display = "block";
+      }
+  });
+}
 
 {% endjavascript %}
