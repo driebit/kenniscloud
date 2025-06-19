@@ -49,8 +49,23 @@ as
                 action={update target="search-suggestions__suggestions-"++#identifier template="search-suggestions/search-query-wrapper.tpl" pagelen=12 results_template="search-suggestions/search-suggestions.tpl" context=context  }
             %}
           {% endblock %}
-
-        <div class="{{ suggestionsclass }}" id="search-suggestions__suggestions-{{ #identifier }}"></div>
+        <div id="suggestion-container" style="display: none;">
+          <div class="{{ suggestionsclass }}" id="search-suggestions__suggestions-{{ #identifier }}"></div>
+        </div>
     </div>
 </form>
 {% endwith %}
+
+{% javascript %}
+var searchSuggestionsContainer = document.getElementById("suggestion-container");
+var searchInput = document.getElementById("qs");
+
+searchInput.addEventListener("input", function() {
+    if (searchInput.placeholder.visible) {
+        searchSuggestionsContainer.style.display = "none";
+    } else {
+        searchSuggestionsContainer.style.display = "block";
+    }
+});
+
+{% endjavascript %}
