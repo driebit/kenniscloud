@@ -19,32 +19,39 @@
 
 -include("zotonic_core/include/zotonic.hrl").
 
-kc_collaboration_group_progress_label(Ids, Context) when is_list(Ids) ->
-    case lists:dropwhile(
-        fun(Id) ->
-            case m_rsc:get(Id, Context) of
-                Rsc when is_map(Rsc) ->
-                    ProgressLabel = maps:get(<<"progress_label">>, Rsc, undefined),
-                    CategoryId = maps:get(<<"category_id">>, Rsc, undefined),
-                    IsEvent = case m_category:id_to_name(CategoryId, Context) of
-                        event ->
-                            true;
-                        _ ->
-                            false
-                    end,
-                    case {ProgressLabel, IsEvent} of
-                        {undefined, false} -> true;
-                        {<<>>, false} -> true;
-                        _ -> false
-                    end;
-                _ ->
-                    true
+kc_collaboration_group_progress_label(GroupId, Context) when is_integer(GroupId) ->
+    #search_result{ result = RscIds } = z_search:search(
+        <<"query">>,
+        [
+            {<<"cat">>, [<<"contribution">>, <<"event">>]},
+            {<<"is_published">>, true},
+            {<<"content_group">>, GroupId},
+            {<<"sort">>, <<"-rsc.created">>}
+        ],
+        1,
+        15, % pagelen
+        Context
+    ),
+
+    ProgressResult = lists:search(
+        fun(RscId) ->
+            case m_rsc:is_a(RscId, event, Context) of
+                true ->
+                    true;
+                false ->
+                    case m_rsc:p(RscId, <<"progress_label">>, Context) of
+                        undefined -> false;
+                        <<>> -> false;
+                        _ -> true
+                    end
             end
         end,
-        Ids
-    ) of
-        [FirstId | _] -> m_rsc:get(FirstId, Context);
-        [] -> undefined
+        RscIds
+    ),
+
+    case ProgressResult of
+        false -> undefined;
+        {value, Value} -> Value
     end;
 kc_collaboration_group_progress_label(_, _) ->
     undefined.
