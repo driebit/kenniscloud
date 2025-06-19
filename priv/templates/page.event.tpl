@@ -26,9 +26,6 @@
                         <time datetime="{{ id.date_start|date:"Y-F-jTH:i" }}">{{ id.date_start|date:"j.n.Y" }}</time>
                     {% endif %}
 
-                                        {% block status_tags %}
-                    {% endblock %}  
-
                     {% include "meta/task-status.tpl" extraClass="list-item-kg__task--white" %}
 
                     {% include "page-title/page-title.tpl" %}
