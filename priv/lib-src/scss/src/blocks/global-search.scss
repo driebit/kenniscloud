@@ -132,14 +132,6 @@
     }
 }
 
-.search-suggestions__searchform__group {
-    height: 100%;
-
-    .search-form__label {
-        display: none;
-    }
-}
-
 .search-suggestions__suggestions {
     width: 100%;
     @include size(padding, 10, 15);
@@ -180,7 +172,6 @@
 
     @include mq(min-width, $mediumBreakpoint) {
         @include size(max-width, 440);
-        @include size(margin-left, 50);
     }
 }
 
@@ -193,4 +184,59 @@
         margin: 0;
         padding: 0;
     }
+}
+
+// KC-2.0 code
+.search-suggestions__searchform__group {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+
+    .search-form__label {
+        display: none;
+    }
+}
+
+.c-nav-search {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: 31rem;
+
+    @include breakpoint($largeBreakpoint) {
+        margin-left: 15rem;
+    }
+}
+
+.c-nav-search input {
+    border: 0;
+    margin-left: 0.5rem;
+    width: 100%;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.c-nav-search__input {
+    border: 1px solid lightgray;
+    padding: 0.5rem 1rem;
+    border-radius: 5rem;
+    height: 4rem;
+    display: flex;
+    margin-top: 1.25rem;
+    max-width: 19rem;
+
+    @include breakpoint($largeBreakpoint) {
+        max-width: 22rem;
+    }
+}
+
+.c-nav-search .search-suggestions__submit {
+    border: 0;
+    background: none;
+}
+
+.search-suggestions__suggestions {
+    display: block !important;
 }

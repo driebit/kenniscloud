@@ -1,4 +1,3 @@
-{% include "search-suggestions/toggle-search.tpl" %}
 {% include "toggle-menu/toggle-menu.tpl" %}
 {% if m.acl.user as user %}
     {% live template="dialog-notifications/dialog-notifications.tpl" topic=["bridge", "origin", "user", m.acl.user, "activities"] %}

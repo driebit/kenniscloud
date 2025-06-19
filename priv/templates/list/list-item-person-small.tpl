@@ -25,9 +25,9 @@ as
             badge_class
         %}
             {% if nolink == "true" or not id.is_published %}
-                <div class="{{ class }} do_touch_hover {{ badge_class }}">
+                <div class="{{ class }} {{ badge_class }}">
             {% else %}
-                <a href="{{ id.page_url }}" class="{{ class }} do_touch_hover {{ badge_class }}">
+                <a href="{{ id.page_url }}" class="{{ class }} {{ badge_class }}">
             {% endif %}
                 {% if not id.is_published %}
                     {% include "avatar/avatar.tpl" id=m.rsc.custom_avatar_fallback.id fallback_rsc_id=m.rsc.custom_avatar_fallback.id %}
