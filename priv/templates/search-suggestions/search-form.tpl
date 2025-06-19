@@ -64,10 +64,8 @@ if (!searchSuggestionsContainer && !searchInput) {
     return; 
 } else {
   searchInput.addEventListener("keyup", function() {
-      console.log("trigger");
       if (!searchInput.value) {
           searchSuggestionsContainer.style.display = "none";
-          console.log("hide suggestions");
       } else {
           searchSuggestionsContainer.style.display = "block";
       }
