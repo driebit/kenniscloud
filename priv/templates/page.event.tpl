@@ -17,6 +17,7 @@
                         {% include "_hidden-resource.tpl" %}
                     {% endspaceless %}
 
+
                     {% block page_actions %}{% endblock %}
 
                     {% if id.date_start|date:"Y" %}
