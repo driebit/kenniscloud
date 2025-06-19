@@ -4,7 +4,7 @@ as
     class
 %}
 
-<div class="category-of">
+<div class=" {{ class }}">
 	<span class="category-of__cat">{{ m.rsc[id.category.id].title }}</span>
 	<a href="{{ m.rsc[id.content_group_id.id].page_url }}" class="category-of__kg">{{ m.rsc[id.content_group_id.id].title }}</a>
 	{% if id.address_city %}

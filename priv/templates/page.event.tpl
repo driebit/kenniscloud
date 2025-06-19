@@ -13,7 +13,10 @@
             <div class="page-left">
                 <div class="page-intro page-intro--{{id.category.name}}">
                     {% spaceless %}
-                        {% catinclude "category-of/category-of.tpl" id rsc_id=id.content_group_id %}
+                        <div class="u-d-flex u-gap-3">
+                            {% catinclude "category-of/category-of.tpl" id rsc_id=id.content_group_id class="category-of u-margin-none" %}
+                            {% include "keywords/status-tags.tpl" extraClass="u-margin-none" %}
+                        </div>
                         {% include "_hidden-resource.tpl" %}
                     {% endspaceless %}
 
@@ -23,15 +26,14 @@
                         <time datetime="{{ id.date_start|date:"Y-F-jTH:i" }}">{{ id.date_start|date:"j.n.Y" }}</time>
                     {% endif %}
 
+                                        {% block status_tags %}
+                    {% endblock %}  
+
                     {% include "meta/task-status.tpl" extraClass="list-item-kg__task--white" %}
 
                     {% include "page-title/page-title.tpl" %}
 
-                    {% catinclude "keywords/keywords.tpl" id %}
-
-                    {% block status_tags %}
-                        {% include "keywords/status-tags.tpl" %}
-                    {% endblock %}                    
+                    {% catinclude "keywords/keywords.tpl" id %}                  
 
                     {% block og_data %}{% endblock %}
 
