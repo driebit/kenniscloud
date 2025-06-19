@@ -42,6 +42,7 @@ tasks:
             - mkdir -p ./priv/lib/js
             - |
                 babel ./priv/lib-src/js -d ./priv/lib/js --presets=@babel/preset-env
+            # - npx babel ./priv/lib-src/js -d ./priv/lib/js --presets=@babel/preset-env
 
     build-dev:
         description: Build js and css from elm and sass
@@ -52,3 +53,4 @@ tasks:
             - mkdir -p ./priv/lib/js
             - |
                 babel ./priv/lib-src/js -d ./priv/lib/js --presets=@babel/preset-env
+            # - npx babel ./priv/lib-src/js -d ./priv/lib/js --presets=@babel/preset-env
