@@ -16,8 +16,6 @@
 
                 {% include "page-title/page-title.tpl" id=id %}
 
-                {% include "keywords/status-tags.tpl" id %}
-
                 {% include "summary/summary.tpl" id=id %}
 
                 {% catinclude "keywords/keywords.tpl" id %}

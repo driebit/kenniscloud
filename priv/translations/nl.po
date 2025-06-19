@@ -614,6 +614,30 @@ msgstr "Omzetten naar een taak"
 msgid "Add to timeline"
 msgstr "Toevoegen aan tijdlijn"
 
+#: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:3
+msgid "Progress label"
+msgstr "Voortgang label"
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:19
+msgid "Status label"
+msgstr "Status label"
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:8
+msgid "Select a progress label"
+msgstr "Selecteer een voortgang label"
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:23
+msgid "Select a status"
+msgstr "Selecteer een status"
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:4
+msgid "Progress labels are visible on the knowledgegroup"
+msgstr "Voortgang labels zijn zichtbaar in de kennisgroep"
+
+#: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:20
+msgid "Status labels are visible on contributions and meetups"
+msgstr "Status labels zijn zichtbaar op bijdragen en meetups"
+
 #: user/sites/kenniscloud/templates/_admin_edit_basics.acl_collaboration_group.tpl:
 msgid "Timeline off"
 msgstr "Tijdlijn uit"

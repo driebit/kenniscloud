@@ -13,9 +13,22 @@
     border: 2px solid;
     text-transform: uppercase;
     color: $white;
+    justify-content: center;
+    border-radius: 2px;
+
+    &::before {
+        content: "";
+        width: 2rem;
+        height: 2rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        display: block;
+    }
 }
 
-.kg-intro_status--preparation {
+.kg-intro_status--preparation,
+.kg-intro_status--voorwerk {
     border-color: $greenMint;
     background-color: rgba($greenMint, 0.6);
 
@@ -33,7 +46,8 @@
     }
 }
 
-.kg-intro_status--insights {
+.kg-intro_status--insights,
+.kg-intro_status--inzichten {
     border-color: $blueSky;
     background-color: rgba($blueSky, 0.6);
 
@@ -42,27 +56,13 @@
     }
 }
 
-.kg-intro_status--discussion {
+.kg-intro_status--discussion,
+.kg-intro_status--discussie {
     border-color: $coral;
     background-color: rgba($coral, 0.6);
 
     &::before {
         background-image: url(/lib/images/discussion.svg);
-    }
-}
-
-.kg-intro_status--preparation,
-.kg-intro_status--meetup,
-.kg-intro_status--insights,
-.kg-intro_status--discussion {
-    &::before {
-        content: "";
-        width: 2rem;
-        height: 2rem;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        display: block;
     }
 }
 

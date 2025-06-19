@@ -1,4 +1,7 @@
-<div class="u-d-flex u-flex-col">
+<div class="u-d-flex u-flex-col u-flex-gap-2">
+    {% if id|kc_collaboration_group_progress_label as result %}
+        {% catinclude "keywords/progress-tags.tpl" id latest_contribution=result.id %} 
+    {% endif %}
 
     {% live
         template="person/person-list.tpl"
