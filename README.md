@@ -21,12 +21,14 @@ If you would like to contribute to this project make sure to review the [contrib
 
 ### Setup
 
-To run this project and make contributions you will need to follow this checklist:
+To run this project and make contributions you will need to follow this list:
 
 -   Clone [Zotonic](git@github.com:zotonic/zotonic.git) on your machine and build it
 -   Clone this repository into the `zotonic/apps_user` directory
+-   Make sure to add the site to your `etc/hosts` file `127.0.0.1 kenniscloud.docker.test` this will allow you to access the site in your broswer after compiling the code
 -   Install the frontend dependencies using the below instructions
     With nixOs:
+
     -   This project was built using [NixOs](https://nixos.org/) as a dependency management system via `nixpkgs`:
         -   Add this list of nixpkgs:
             -   sass
@@ -49,9 +51,11 @@ To run this project and make contributions you will need to follow this checklis
     -   Using `npm`: (WIP)
         -   current version is set to v22.14.0.
         -   run `npm i` to install the frontend deps and task-go
+        -   install elm (recommended method if you use brew `brew install elm elm-format`)
         -   in the [`style.scss`](priv/lib-src/scss/src/style.scss) stylesheet replace the first 2 lines with the below commented out lines
         -   in the sass [Taskfile](priv/lib-src/scss/Taskfile.yml) uncomment the `npx sass` script and remove the `sass` lines above.
-        -   run `task` to compile the stylesheets
+        -   in the main [Taskfile](Taskfile.yml) uncomment the `npx babel` scripts and remove the line above each of them.
+        -   run `task` to compile the stylesheets and javascript
 
 **TODO:**
 
