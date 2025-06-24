@@ -156,14 +156,19 @@ fetch_keywords(Term, Context) ->
 % - genre
 % - date
 fetch_suggestions(KeywordIds, Context) ->
-    KeywordKeys = lists:map(
-        fun(KeywordId) -> m_rsc:p(KeywordId, <<"keyword_id">>, Context) end,
+    KeywordKeys = lists:filtermap(
+        fun(KeywordId) ->
+            case m_rsc:p(KeywordId, <<"keyword_id">>, Context) of
+                <<"subject~nbdtrefwoorden~", _Rest/binary>> = KeywordKey -> {true, KeywordKey};
+                _ -> false
+            end
+        end,
         KeywordIds
     ),
     if
         KeywordKeys =:= [] ->
-            % don't perform a search if there are no input keywords, as the
-            % suggestions would be unrelated:
+            % don't perform a search if there are no valid input keywords, as
+            % the suggestions would be unrelated:
             [];
         true ->
             XmlMap = fetch(undefined, KeywordKeys, false, Context),
@@ -201,18 +206,13 @@ fetch(Term, KeywordKeys, IdsOnly, Context) ->
                 {<<"facet">>, <<"nbc:subjectNbdtrefwoorden_key">>},
                 {<<"facetSize">>, <<"100">>}
             ],
-            FilterQueryArgs = lists:filtermap(
+            FilterQueryArgs = lists:map(
                 fun
-                    (<<"subject~nbdtrefwoorden~", _Rest/binary>> = KeywordKey) ->
+                    (KeywordKey) ->
                         {
-                            true,
-                            {
-                                <<"filter">>,
-                                <<"nbc:subjectNbdtrefwoorden_key:", KeywordKey/binary>>
-                            }
-                        };
-                    (_KeywordKey) ->
-                        false
+                            <<"filter">>,
+                            <<"nbc:subjectNbdtrefwoorden_key:", KeywordKey/binary>>
+                        }
                 end,
                 KeywordKeys
             ),
