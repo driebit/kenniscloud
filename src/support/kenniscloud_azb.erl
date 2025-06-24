@@ -160,12 +160,19 @@ fetch_suggestions(KeywordIds, Context) ->
         fun(KeywordId) -> m_rsc:p(KeywordId, <<"keyword_id">>, Context) end,
         KeywordIds
     ),
-    XmlMap = fetch(undefined, KeywordKeys, false, Context),
-    % Since we receive keywords while looking for suggestions too, we import them:
-    FoundKeywords = extract_keywords(XmlMap, Context),
-    import_keywords(FoundKeywords, Context),
-    % before returning all found records as suggestions:
-    extract_suggestions(XmlMap, Context).
+    if
+        KeywordKeys =:= [] ->
+            % don't perform a search if there are no input keywords, as the
+            % suggestions would be unrelated:
+            [];
+        true ->
+            XmlMap = fetch(undefined, KeywordKeys, false, Context),
+            % Since we receive keywords while looking for suggestions too, we import them:
+            FoundKeywords = extract_keywords(XmlMap, Context),
+            import_keywords(FoundKeywords, Context),
+            % before returning all found records as suggestions:
+            extract_suggestions(XmlMap, Context)
+    end.
 
 
 % Fetch results from the API, optionally starting from a term
@@ -259,6 +266,9 @@ extract_suggestions(#{
     <<"nbc:searchResult">> := [#{<<"nbc:results">> := [#{<<"nbc:result">> := SearchResults}]}]
 }, _Context) when is_list(SearchResults) ->
     lists:filtermap(fun extract_suggestion/1, SearchResults);
+extract_suggestions(#{<<"nbc:searchResult">> := [#{<<"nbc:results">> := []}]}, _Context) ->
+    % Don't log an error in case of no result:
+    [];
 extract_suggestions(Response, Context) ->
     ?zError(
         "AZB: unexpected results XML: ~p",
