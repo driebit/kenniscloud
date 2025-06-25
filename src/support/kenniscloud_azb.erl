@@ -206,14 +206,22 @@ fetch(Term, KeywordKeys, IdsOnly, Context) ->
                 {<<"facet">>, <<"nbc:subjectNbdtrefwoorden_key">>},
                 {<<"facetSize">>, <<"100">>}
             ],
-            FilterQueryArgs = lists:map(
+            % Combine keyword filters in an 'OR' to each-other
+            % See: https://azb.zbkb.nl/demo/documentation/filter.html
+            FilterQueryArgs = lists:foldl(
                 fun
-                    (KeywordKey) ->
-                        {
+                    (KeywordKey, []) ->
+                        [{
                             <<"filter">>,
                             <<"nbc:subjectNbdtrefwoorden_key:", KeywordKey/binary>>
-                        }
+                        }];
+                    (KeywordKey, [{<<"filter">>, FilterAcc}]) ->
+                        [{
+                            <<"filter">>,
+                            <<FilterAcc/binary, " ", KeywordKey/binary>>
+                        }]
                 end,
+                [],
                 KeywordKeys
             ),
             QueryArgs = BaseQueryArgs ++ FilterQueryArgs,
