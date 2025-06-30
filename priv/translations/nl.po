@@ -630,6 +630,10 @@ msgstr "Selecteer een voortgang label"
 msgid "Select a status"
 msgstr "Selecteer een status"
 
+#: user/sites/kenniscloud/templates/top-aside/top-aside.name.page_kennisgroepen.tpl.tpl:4
+msgid "Search for a knowledge group"
+msgstr "Zoek een kennisgroep"
+
 #: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:4
 msgid "Progress labels are visible on the knowledgegroup"
 msgstr "Voortgang labels zijn zichtbaar in de kennisgroep"

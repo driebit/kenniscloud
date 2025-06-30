@@ -18,7 +18,7 @@
             </div>
 
             {% block content_right %}
-                <aside class="page-aside">
+                <aside class="page-aside {% if id == m.rsc.page_kennisgroepen.id %}u-d-flex u-flex-col u-gap-3{% endif %}">
                     {% catinclude "top-aside/top-aside.tpl" id %}
                 </aside>
             {% endblock %}

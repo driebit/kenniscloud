@@ -5,4 +5,4 @@
 {% else %}
     <a href="mailto:{{ m.rsc.acl_user_group_community_librarian.email }}?subject=Kennisgroep starten" class="btn--primary">Start een nieuwe kennisgroep </a>
 {% endif %}
-
+    <a href="/search?qs=kennisgroep" class="c-btn--primary-no-icon c-btn--search">{_ Search for a knowledge group _}<img src="/lib/images/icon-font/--search.svg" class="c-btn--search__icon" /></a>
