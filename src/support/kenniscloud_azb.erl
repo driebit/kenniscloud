@@ -16,7 +16,7 @@
 %% limitations under the License.
 
 %% @doc Support and coupling with the AZB API
-%% Online documentation: https://azb.zbkb.nl/demo/documentation/_Sidebar.html
+%% Online documentation: https://v2.azb.zbkb.nl/demo/documentation/_Sidebar.html
 
 -module(kenniscloud_azb).
 
@@ -43,7 +43,7 @@
 -include_lib("zotonic_core/include/zotonic.hrl").
 
 -define(AUTH_URL, "https://azb.zbkb.nl/authorize").
--define(SEARCH_URL, "https://v1.azb.zbkb.nl/title/search").
+-define(SEARCH_URL, "https://v2.azb.zbkb.nl/title/search").
 
 %% IMPORTING
 
@@ -139,7 +139,7 @@ fetch_keywords(Context) ->
     fetch_keywords(undefined, Context).
 
 % Fetch keywords from the given term using a search query with facets, see:
-% https://azb.zbkb.nl/demo/documentation/search.html
+% https://v2.azb.zbkb.nl/demo/documentation/search.html
 % Return a list of tuples with ID and label of each valid keyword found.
 fetch_keywords(Term, Context) ->
     XmlMap = fetch(Term, [], true, Context),
@@ -147,7 +147,7 @@ fetch_keywords(Term, Context) ->
 
 
 % Fetch suggestions from the keywords (ids) using a search query with facets, see:
-% https://azb.zbkb.nl/demo/documentation/search.html
+% https://v2.azb.zbkb.nl/demo/documentation/search.html
 % Return a list of suggestions, each represented by a map containing:
 % - title
 % - ppn
@@ -181,7 +181,7 @@ fetch_suggestions(KeywordIds, Context) ->
 
 
 % Fetch results from the API, optionally starting from a term
-% https://azb.zbkb.nl/demo/documentation/search.html
+% https://v2.azb.zbkb.nl/demo/documentation/search.html
 % Return a list of tuples with ID and label of each valid keyword found.
 fetch(Term, KeywordKeys, IdsOnly, Context) ->
     case auth_bearer(Context) of
@@ -207,18 +207,18 @@ fetch(Term, KeywordKeys, IdsOnly, Context) ->
                 {<<"facetSize">>, <<"100">>}
             ],
             % Combine keyword filters in an 'OR' to each-other
-            % See: https://azb.zbkb.nl/demo/documentation/filter.html
+            % See: https://v2.azb.zbkb.nl/demo/documentation/filter.html
             FilterQueryArgs = lists:foldl(
                 fun
                     (KeywordKey, []) ->
                         [{
-                            <<"filter">>,
+                            <<"filterAsQuery">>,
                             <<"nbc:subjectNbdtrefwoorden_key:", KeywordKey/binary>>
                         }];
-                    (KeywordKey, [{<<"filter">>, FilterAcc}]) ->
+                    (KeywordKey, [{<<"filterAsQuery">>, FilterAcc}]) ->
                         [{
-                            <<"filter">>,
-                            <<FilterAcc/binary, " ", KeywordKey/binary>>
+                            <<"filterAsQuery">>,
+                            <<FilterAcc/binary, " OR nbc:subjectNbdtrefwoorden_key:", KeywordKey/binary>>
                         }]
                 end,
                 [],
@@ -261,7 +261,7 @@ extract_keywords(Response, Context) ->
     [].
 
 extract_keyword(#{
-    <<"nbc:domain">> := [<<"subject~nbdtrefwoorden">>],
+    <<"nbc:origin">> := [<<"subject~nbdtrefwoorden">>],
     <<"nbc:key">> := [NbcKey],
     <<"nbc:label">> := [NbcLabel]
 }) when is_binary(NbcKey) andalso is_binary(NbcLabel) ->
@@ -406,7 +406,7 @@ auth_bearer(_, _, _) ->
     undefined.
 
 % Retrieve the current authorization token for the API, see:
-% https://azb.zbkb.nl/demo/documentation/autorisatie.html
+% https://v2.azb.zbkb.nl/demo/documentation/autorisatie.html
 % Returns a tuple with 'sid' and 'token', that also get saved in the config.
 % Note: as per documentation, this should be run daily.
 refresh_token(Context) ->
