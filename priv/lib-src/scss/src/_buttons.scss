@@ -455,3 +455,19 @@ button.z-btn-help {
     position: absolute;
     right: 3rem;
 }
+
+.c-btn--search {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0.8rem 2rem 1rem;
+}
+
+.c-btn--search__icon {
+    filter: invert(1);
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    right: 1rem;
+}
