@@ -49,5 +49,20 @@
             </label>
         </div>
 
+        {% if m.acl.user.o.hasusergroup[1].id == m.rsc.acl_user_group_community_librarian.id or m.acl.use.mod_admin %}
+            <label class="control-label col-md-12" for="has_menti">
+                <input type="checkbox" id="has_menti" name="has_menti"
+                    value="1"
+                    {% if id.has_menti %}checked{% endif %}
+                    {% if not id.is_editable %}disabled="disabled"{% endif %} />
+                {_ Add mentimeter _}
+            </label>
+            <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="https://www.mentimeter.com/app/presentation/..." class="control-label col-md-12"
+                    {% if not id.is_editable %}disabled="disabled"{% endif %} />
+            <label class="control-label col-md-12" for="has_mentilink">
+                {_ Mentimeter embed url _}
+            </label>
+        {% endif %}
+
     </div>
 </div>

@@ -66,7 +66,7 @@
 </div>
 {% if m.acl.user.o.hasusergroup[1].id == m.rsc.acl_user_group_community_librarian.id or m.acl.use.mod_admin %}
     <div class="form-group row col-md-12">
-        <label class="control-label" for="has_map">
+        <label class="control-label" for="has_menti">
             <input type="checkbox" id="has_menti" name="has_menti"
                 value="1"
                 {% if id.has_menti %}checked{% endif %}
