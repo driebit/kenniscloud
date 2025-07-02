@@ -64,4 +64,20 @@
         {_ Descending _}
     </label>
 </div>
+{% if m.acl.user.o.hasusergroup[1].id == m.rsc.acl_user_group_community_librarian.id or m.acl.use.mod_admin %}
+    <div class="form-group row col-md-12">
+        <label class="control-label" for="has_map">
+            <input type="checkbox" id="has_menti" name="has_menti"
+                value="1"
+                {% if id.has_menti %}checked{% endif %}
+                {% if not id.is_editable %}disabled="disabled"{% endif %} />
+            {_ Add mentimeter _}
+        </label>
+        <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="https://www.mentimeter.com/app/presentation/..." class="ltr do_autofocus field-title form-control"
+                {% if not id.is_editable %}disabled="disabled"{% endif %} />
+            {_ Mentimeter embed url _}
+        <label class="control-label" for="has_mentilink">
+        </label>
+    </div>
+{% endif %}
 {% endblock %}
