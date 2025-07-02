@@ -57,7 +57,7 @@
                     {% if not id.is_editable %}disabled="disabled"{% endif %} />
                 {_ Add mentimeter _}
             </label>
-            <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="https://www.mentimeter.com/app/presentation/..." class="control-label col-md-12"
+            <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="app/presentation/abcdefg" class="control-label col-md-12"
                     {% if not id.is_editable %}disabled="disabled"{% endif %} />
             <label class="control-label col-md-12" for="has_mentilink">
                 {_ Mentimeter embed url _}

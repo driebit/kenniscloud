@@ -73,7 +73,7 @@
                 {% if not id.is_editable %}disabled="disabled"{% endif %} />
             {_ Add mentimeter _}
         </label>
-        <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="https://www.mentimeter.com/app/presentation/..." class="ltr do_autofocus field-title form-control"
+        <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="app/presentation/abcvshfkdl" class="ltr do_autofocus field-title form-control"
                 {% if not id.is_editable %}disabled="disabled"{% endif %} />
             {_ Mentimeter embed url _}
         <label class="control-label" for="has_mentilink">
