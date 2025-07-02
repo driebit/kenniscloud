@@ -630,7 +630,7 @@ msgstr "Selecteer een voortgang label"
 msgid "Select a status"
 msgstr "Selecteer een status"
 
-#: user/sites/kenniscloud/templates/top-aside/top-aside.name.page_kennisgroepen.tpl.tpl:4
+#: user/sites/kenniscloud/templates/top-aside/top-aside.name.page_kennisgroepen.tpl:8
 msgid "Search for a knowledge group"
 msgstr "Zoek een kennisgroep"
 
