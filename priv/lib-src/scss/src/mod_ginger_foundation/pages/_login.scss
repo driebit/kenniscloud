@@ -19,3 +19,9 @@
         @include size(margin-top, 100);
     }
 }
+
+.c-signup-container {
+    width: 90%;
+    margin: 3rem auto 6rem auto;
+    max-width: 60rem;
+}

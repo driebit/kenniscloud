@@ -22,7 +22,7 @@
 -mod_description("").
 -mod_prio(10).
 -mod_depends([mod_crowdlink, mod_crowdparticipant, mod_driebit_activity2, mod_driebit_base, mod_driebit_edit, mod_image_edit]).
--mod_schema(20).
+-mod_schema(21).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
 
@@ -76,9 +76,7 @@
     observe_rsc_update_done/2,
     observe_custom_pivot/2,
     observe_logon_ready_page/2,
-    observe_signup_done/2,
     observe_signup_form_fields/3,
-    observe_signup_confirm/2,
     observe_signup_confirm_redirect/2,
     observe_search_query_term/2,
     observe_driebit_activity2_inserted/2,
@@ -278,19 +276,47 @@ event(#submit{message={new_group, Args}}, Context) ->
     end;
 
 event(#submit{message={save_signup_step1, []}}, Context) ->
+    UserId = z_acl:user(Context),
     NameFirst = z_context:get_q(<<"name_first">>, Context),
-    NameMiddle = z_context:get_q(<<"name_middle">>, Context),
     NamePrefix = z_context:get_q(<<"name_surname_prefix">>, Context),
     NameSurname = z_context:get_q(<<"name_surname">>, Context),
 
-    m_rsc_update:update(z_context:get_q(<<"id">>, Context), #{
+    m_rsc_update:update(UserId, #{
         <<"name_first">> => NameFirst,
-        <<"name_middle">> => NameMiddle,
         <<"name_surname_prefix">> => NamePrefix,
-        <<"name_surname">> => NameSurname
+        <<"name_surname">> => NameSurname,
+        <<"title">> =>
+            binary_to_list(NameFirst) ++ " " ++
+            binary_to_list(NamePrefix) ++ " " ++
+            binary_to_list(NameSurname)
     }, Context),
 
-    z_render:wire({redirect, [{location, z_dispatcher:url_for(signup_step2, [], Context)}]}, Context);
+    z_render:wire({redirect, [{location, z_dispatcher:url_for(signup_step2, Context)}]}, Context);
+
+event(#submit{message={save_signup_step2, []}}, Context) ->
+    UserId = z_acl:user(Context),
+    SignUpRegion = z_context:get_q(<<"signup_region">>, Context),
+    m_edge:insert(UserId, hasregion, SignUpRegion, z_acl:sudo(Context)),
+    % Redirect to signup_step3
+    z_render:wire({redirect, [{location, z_dispatcher:url_for(signup_step3, Context)}]}, Context);
+
+event(#submit{message={save_signup_step3, []}}, Context) ->
+    UserId = z_acl:user(Context),
+    TagIds = z_context:get_q_all(<<"signup_tags">>, Context),
+    % Add new subject edges for selected tags
+    lists:foreach(
+        fun(Tid) ->
+            try z_convert:to_integer(Tid) of
+                TagId -> m_edge:insert(UserId, subject, TagId, z_acl:sudo(Context))
+            catch error:badarg ->
+                z:error("Illegal signup_tags id in parameters: ~p", [Tid], [], Context),
+                undefined
+            end
+        end,
+        TagIds
+    ),
+    % Redirect to the homepage
+    z_render:wire({redirect, [{location, z_dispatcher:url_for(home, [], Context)}]}, Context);
 
 event(#submit{message={sudo_delete_profile, Args}}, Context0) ->
     SudoContext = z_acl:sudo(Context0),
@@ -529,23 +555,6 @@ observe_logon_ready_page(#logon_ready_page{ request_page = None }, Context) when
 observe_logon_ready_page(_LogonReadyPage, _Context) ->
     undefined.
 
-observe_signup_done(#signup_done{id=NewUserId}, Context) ->
-    case z_context:get_q_all(<<"signup_tags">>, Context) of
-        [_|_] = TagIds ->
-            lists:foreach(
-                fun (Tid) ->
-                    try z_convert:to_integer(Tid) of
-                        TagId -> m_edge:insert(NewUserId, subject, TagId, Context)
-                    catch error:badarg ->
-                        z:error("Illegal signup_tags id in parameters: ~p", [Tid], [], Context),
-                        undefined
-                    end
-                end,
-                TagIds
-            );
-        _ -> ok
-    end.
-
 observe_signup_form_fields(signup_form_fields, FS, _Context) ->
     FS1 = [
         {signup_region, false},
@@ -561,45 +570,9 @@ observe_signup_form_fields(signup_form_fields, FS, _Context) ->
     % We do it with maps as there's no straightforward way to merge proplists
     % in Erlang's standard library.
     proplists:from_map(maps:merge(proplists:to_map(FS), proplists:to_map(FS1))).
-% observe_signup_form_fields(signup_form_fields, FS, _Context) ->
-%     FS1 = [
-%         {signup_region, true},
-%         {signup_tags, false},
-%         % In Zotonic-0.x Ginger sites, these would have been set by 'mod_ginger_auth'.
-%         {name_first, false},
-%         {name_surname_prefix, false},
-%         {name_surname, false},
-%         {email, true},
-%         {block_email, false}
-%     ],
-%     % This merges the above proplist on top of the 'FS' accumulator.
-%     % We do it with maps as there's no straightforward way to merge proplists
-%     % in Erlang's standard library.
-%     proplists:from_map(maps:merge(proplists:to_map(FS), proplists:to_map(FS1))).
 
-
-observe_signup_confirm(#signup_confirm{ id = UserId }, Context) ->
-    case m_edge:objects(UserId, hasregion, Context) of
-        [] ->
-            SignupRegion = m_rsc:p_no_acl(UserId, signup_region, Context),
-            case m_rsc:name_to_id(SignupRegion, Context) of
-                {ok, RegionId} ->
-                    %% todo move to acl's
-                    %% is allowed to be changed by user after login in the interface
-                    {ok, _} = m_edge:insert(UserId, hasregion, RegionId, z_acl:sudo(Context)),
-                    RegionId;
-                _ ->
-                    undefined
-            end;
-        _ ->
-            ok
-    end.
-
-% observe_signup_confirm_redirect(#signup_confirm_redirect{}, Context) ->
-%     z_dispatcher:url_for(home, [], Context).
-
-observe_signup_confirm_redirect(#signup_confirm_redirect{ id = UserId }, Context) ->
-    z_dispatcher:url_for(signup_step1, [{id, UserId}], Context).
+observe_signup_confirm_redirect(#signup_confirm_redirect{}, Context) ->
+    z_dispatcher:url_for(signup_step1, Context).
 
 observe_search_query_term(#search_query_term{ term = <<"cat_exclude_defaults">>, arg = true }, _Context) ->
     #search_sql_term{ cats_exclude = [ {<<"rsc">>, [meta, media, menu, admin_content_query]} ] };

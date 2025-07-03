@@ -8,8 +8,6 @@
     show_signup_username=false
     show_signup_username_title=false
 %}
-{# {% include "_signup_form_fields_region.tpl" %}
-{% include "_signup_form_fields_keywords.tpl" %} #}
 {% include "_signup_form_fields_tos.tpl"
     show_signup_tos_title=false
     show_signup_tos_info=false
