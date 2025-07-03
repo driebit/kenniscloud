@@ -277,6 +277,21 @@ event(#submit{message={new_group, Args}}, Context) ->
             z_render:wire({redirect, [{location, Location}]}, Context)
     end;
 
+event(#submit{message={save_signup_step1, []}}, Context) ->
+    NameFirst = z_context:get_q(<<"name_first">>, Context),
+    NameMiddle = z_context:get_q(<<"name_middle">>, Context),
+    NamePrefix = z_context:get_q(<<"name_surname_prefix">>, Context),
+    NameSurname = z_context:get_q(<<"name_surname">>, Context),
+
+    m_rsc_update:update(z_context:get_q(<<"id">>, Context), #{
+        <<"name_first">> => NameFirst,
+        <<"name_middle">> => NameMiddle,
+        <<"name_surname_prefix">> => NamePrefix,
+        <<"name_surname">> => NameSurname
+    }, Context),
+
+    z_render:wire({redirect, [{location, z_dispatcher:url_for(signup_step2, [], Context)}]}, Context);
+
 event(#submit{message={sudo_delete_profile, Args}}, Context0) ->
     SudoContext = z_acl:sudo(Context0),
     Redirect = proplists:get_value(redirect, Args, undefined),
@@ -533,7 +548,7 @@ observe_signup_done(#signup_done{id=NewUserId}, Context) ->
 
 observe_signup_form_fields(signup_form_fields, FS, _Context) ->
     FS1 = [
-        {signup_region, true},
+        {signup_region, false},
         {signup_tags, false},
         % In Zotonic-0.x Ginger sites, these would have been set by 'mod_ginger_auth'.
         {name_first, false},
@@ -546,6 +561,21 @@ observe_signup_form_fields(signup_form_fields, FS, _Context) ->
     % We do it with maps as there's no straightforward way to merge proplists
     % in Erlang's standard library.
     proplists:from_map(maps:merge(proplists:to_map(FS), proplists:to_map(FS1))).
+% observe_signup_form_fields(signup_form_fields, FS, _Context) ->
+%     FS1 = [
+%         {signup_region, true},
+%         {signup_tags, false},
+%         % In Zotonic-0.x Ginger sites, these would have been set by 'mod_ginger_auth'.
+%         {name_first, false},
+%         {name_surname_prefix, false},
+%         {name_surname, false},
+%         {email, true},
+%         {block_email, false}
+%     ],
+%     % This merges the above proplist on top of the 'FS' accumulator.
+%     % We do it with maps as there's no straightforward way to merge proplists
+%     % in Erlang's standard library.
+%     proplists:from_map(maps:merge(proplists:to_map(FS), proplists:to_map(FS1))).
 
 
 observe_signup_confirm(#signup_confirm{ id = UserId }, Context) ->
@@ -565,8 +595,11 @@ observe_signup_confirm(#signup_confirm{ id = UserId }, Context) ->
             ok
     end.
 
-observe_signup_confirm_redirect(#signup_confirm_redirect{}, Context) ->
-    z_dispatcher:url_for(home, [], Context).
+% observe_signup_confirm_redirect(#signup_confirm_redirect{}, Context) ->
+%     z_dispatcher:url_for(home, [], Context).
+
+observe_signup_confirm_redirect(#signup_confirm_redirect{ id = UserId }, Context) ->
+    z_dispatcher:url_for(signup_step1, [{id, UserId}], Context).
 
 observe_search_query_term(#search_query_term{ term = <<"cat_exclude_defaults">>, arg = true }, _Context) ->
     #search_sql_term{ cats_exclude = [ {<<"rsc">>, [meta, media, menu, admin_content_query]} ] };
