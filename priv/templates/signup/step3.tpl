@@ -6,7 +6,7 @@
         {% wire action={redirect dispatch="page" id=m.acl.user.id } %}
     {% endif %}
 
-    <div class="c-signup-container">
+    <div id="{{ #signup }}" class="c-signup-container fade-in">
     
         <h1>{{ m.rsc.signup_step3.title }}</h1>
         <p>{{ m.rsc.signup_step3.body }}</p>
@@ -24,11 +24,18 @@
             </div>
 
             <div class="u-d-flex u-flex-gap-1">
-                {% button id="back" class="btn btn-default u-margin-right-auto" text=_"Back" title=_"Return to the previous page" action={redirect dispatch="signup_step2"} %}
-                {% button id="skip" class="btn btn-default" text=_"Skip" title=_"Skip this step." action={redirect dispatch="home"} %}
-                {% button type="submit" id="save_stay" class="btn btn-primary" text=_"Finish" title=_"Finish." %}
+                {% button id="back" class="btn btn-default u-d-hidden" text=_"Back" title=_"Return to the previous page" action={redirect dispatch="signup_step2"} %}
+                <button type="button" id="back-step-btn" class="btn btn-default u-margin-right-auto" title=_"Return to the previous page">{_ Back _}</button>
+
+                {% button id="skip" class="btn btn-default u-d-hidden" text=_"Skip" title=_"Skip this step." action={redirect dispatch="home"} %}
+                <button type="button" id="skip-step-btn" class="btn btn-default" title=_"Skip">{_ Skip _}</button>
+
+                {% button type="submit" id="save_stay" class="btn btn-primary u-d-hidden" text=_"Save" title=_"Save." %}
+                <button type="button" id="next-step-btn" class="btn btn-primary" title=_"Save and next">{_ Save _}</button>
             </div>
         </form>
     </div>
+
+    {% include "signup/animation_handler.tpl" signUpForm=#signup  %}
 
 {% endblock %}

@@ -6,7 +6,7 @@
         {% wire action={redirect dispatch="page" id=m.acl.user.id } %}
     {% endif %}
 
-    <div class="c-signup-container">
+    <div id="{{ #signup }}" class="c-signup-container fade-in">
 
         <h1>{{ m.rsc.signup_step1.title }}</h1>
         <p>{{ m.rsc.signup_step1.body }}</p>
@@ -39,10 +39,13 @@
                     </div>
                 </div>
                 <div class="u-d-flex u-flex-gap-1">
-                    {% button type="submit" id="save_stay" class="btn btn-primary u-margin-left-auto" text=_"Save" title=_"Save and next" %}
+                    {% button type="submit" id="save_stay" class="u-d-hidden" text=_"Save" title=_"Save and next" %}
+                    <button type="button" id="next-step-btn" class="btn btn-primary u-margin-left-auto" title=_"Save and next">{_ Save _}</button>
                 </div>
             </div>
         </form>
     </div>
+
+    {% include "signup/animation_handler.tpl" signUpForm=#signup  %}
 
 {% endblock %}
