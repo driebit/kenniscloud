@@ -19,3 +19,33 @@
         @include size(margin-top, 100);
     }
 }
+
+.c-signup-container {
+    width: 90%;
+    margin: 3rem auto 6rem auto;
+    max-width: 60rem;
+    min-height: 30rem;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(-5rem);
+    transition: opacity 1s ease-in, transform 0.5s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0rem);
+}
+
+.fade-out {
+    transform: translateX(-100vw);
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+}
+
+.fade-out-backwards {
+    transform: translateX(100vw);
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+}

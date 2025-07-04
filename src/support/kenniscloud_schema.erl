@@ -70,6 +70,8 @@ manage_schema({upgrade, 19}, _Context) ->
         ]
     };
 manage_schema({upgrade, 20}, _Context) ->
+    ok;
+manage_schema({upgrade, 21}, _Context) ->
     ok.
 
 manage_data(install, Context) ->
@@ -123,6 +125,8 @@ manage_data({upgrade, 19}, _Context) ->
     ok;
 manage_data({upgrade, 20}, Context) ->
     remove_unused_predicate(hasattachment, Context),
+    ok;
+manage_data({upgrade, 21}, Context) ->
     ok.
 
 
@@ -1080,6 +1084,33 @@ get_prod_data() ->
                     {en, <<"discussion">>}
                 ]}},
                 {language, [nl,en]}
+            ]},
+            {signup_step1, text, [
+                {title, {trans, [
+                    {nl, <<"Registreer: persoonlijke gegevens">>},
+                    {en, <<"Sign up: personal data">>}
+                ]}},
+                {language, [nl,en]},
+                {is_unfindable, true},
+                {seo_noindex, true}
+            ]},
+            {signup_step2, text, [
+                {title, {trans, [
+                    {nl, <<"Registreer: regio">>},
+                    {en, <<"Sign up: region">>}
+                ]}},
+                {language, [nl,en]},
+                {is_unfindable, true},
+                {seo_noindex, true}
+            ]},
+            {signup_step3, text, [
+                {title, {trans, [
+                    {nl, <<"Registreer: tags en thema's">>},
+                    {en, <<"Register: tags and themes">>}
+                ]}},
+                {language, [nl,en]},
+                {is_unfindable, true},
+                {seo_noindex, true}
             ]}
         ],
         media=[

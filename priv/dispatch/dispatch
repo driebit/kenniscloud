@@ -36,6 +36,10 @@
     {extra_images, ["extras", id, "images"], controller_page, [ {template, "acl_collaboration_group/additional-images.tpl"}, {is_canonical, false} ]},
     {extra_documents, ["extras", id, "documents"], controller_page, [ {template, "acl_collaboration_group/additional-documents.tpl"}, {is_canonical, false} ]},
     {extra_resources, ["extras", id, "resources"], controller_page, [ {template, "acl_collaboration_group/additional-resources.tpl"}, {is_canonical, false} ]},
-    {extra_faqs, ["extras", id, "faq"], controller_page, [ {template, "acl_collaboration_group/additional-faqs.tpl"}, {is_canonical, false} ]}
+    {extra_faqs, ["extras", id, "faq"], controller_page, [ {template, "acl_collaboration_group/additional-faqs.tpl"}, {is_canonical, false} ]},
+
+    {signup_step1, ["signup", "step1"], controller_template, [{template, "signup/step1.tpl"}, {acl, is_auth}]},
+    {signup_step2, ["signup", "step2"], controller_template, [{template, "signup/step2.tpl"}, {acl, is_auth}]},
+    {signup_step3, ["signup", "step3"], controller_template, [{template, "signup/step3.tpl"}, {acl, is_auth}]}
 
 ].
