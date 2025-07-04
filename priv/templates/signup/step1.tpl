@@ -3,7 +3,7 @@
 {% block content %}
 
     {% if m.acl.user.id.name_first %}
-        {% wire action={redirect dispatch="home"} %}
+        {% wire action={redirect dispatch="page" id=m.acl.user.id } %}
     {% endif %}
 
     <div class="c-signup-container">
