@@ -1,35 +1,43 @@
 {% javascript %}
     const signUpForm = document.getElementById("{{ signUpForm }}");
-    const animationTriggerNext = document.getElementById('next-step-btn');
-    const animationTriggerBack = document.getElementById('back-step-btn');
-    const animationTriggerSkip = document.getElementById('skip-step-btn');
-    const saveStayButton = document.getElementById('save_stay');
-    const backButton = document.getElementById('back');
-    const skipButton = document.getElementById('skip');
+    
+    if (signUpForm) {
+        signUpForm.classList.add('visible');
+    } else {
+        console.warn("signUpForm not found");
+    }
 
-    signUpForm?.classList.add('visible');
+    const triggers = {
+        next: {
+            trigger: document.getElementById('next-step-btn'),
+            button: document.getElementById('save_stay'),
+            animationClass: 'fade-out'
+        },
+        back: {
+            trigger: document.getElementById('back-step-btn'),
+            button: document.getElementById('back'),
+            animationClass: 'fade-out-backwards'
+        },
+        skip: {
+            trigger: document.getElementById('skip-step-btn'),
+            button: document.getElementById('skip'),
+            animationClass: 'fade-out'
+        }
+    };
 
-    animationTriggerNext?.addEventListener('click', () => {
+    const handleTrigger = (animationClass, targetButton) => {
+        if (!signUpForm || !targetButton) return;
+
         signUpForm.classList.remove('fade-in', 'visible');
-        signUpForm.classList.add('fade-out');
+        signUpForm.classList.add(animationClass);
+
         setTimeout(() => {
-            saveStayButton.click();
+            targetButton.click();
         }, 500);
+    }
+
+    Object.values(triggers).forEach(({ trigger, button, animationClass }) => {
+        trigger?.addEventListener('click', () => handleTrigger(animationClass, button));
     });
 
-    animationTriggerBack?.addEventListener('click', () => {
-        signUpForm.classList.remove('fade-in', 'visible');
-        signUpForm.classList.add('fade-out-backwards');
-        setTimeout(() => {
-            backButton.click();
-        }, 500);
-    });
-
-    animationTriggerSkip?.addEventListener('click', () => {
-        signUpForm.classList.remove('fade-in', 'visible');
-        signUpForm.classList.add('fade-out');
-        setTimeout(() => {
-            skipButton.click();
-        }, 500);
-    });
 {% endjavascript %}
