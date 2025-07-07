@@ -1,6 +1,7 @@
 {% extends "base.tpl" %}
 
 {% block content %}
+{% with m.acl.user.id as id %}
 
     <div id="{{ #signup }}" class="c-signup-container fade-in">
 
@@ -17,19 +18,19 @@
                         <div class="form-group col-md-12">
                             <label class="control-label" for="name_first">{_ First _}</label>
                             <div>
-                                <input class="form-control" id="name_first" type="text" name="name_first" value="{{ m.acl.user.id.name_first }}" />
+                                <input class="form-control" id="name_first" type="text" name="name_first" value="{{ id.name_first }}" />
                             </div>
                         </div>
                         <div class="form-group col-md-12">
                             <label class="control-label" for="name_surname_prefix">{_ Sur. prefix _}</label>
                             <div>
-                                <input class="form-control" id="name_surname_prefix" type="text" name="name_surname_prefix" value="{{ m.acl.user.id.name_surname_prefix }}" />
+                                <input class="form-control" id="name_surname_prefix" type="text" name="name_surname_prefix" value="{{ id.name_surname_prefix }}" />
                             </div>
                         </div>
                         <div class="form-group col-md-12">
                             <label class="control-label" for="name_surname">{_ Surname _}</label>
                             <div>
-                                <input class="form-control" id="name_surname" type="text" name="name_surname" value="{{ m.acl.user.id.name_surname }}" />
+                                <input class="form-control" id="name_surname" type="text" name="name_surname" value="{{ id.name_surname }}" />
                             </div>
                         </div>
                     </div>
@@ -43,5 +44,6 @@
     </div>
 
     {% include "signup/animation_handler.tpl" signUpForm=#signup  %}
-
+    
+{% endwith %}
 {% endblock %}
