@@ -2,10 +2,6 @@
 
 {% block content %}
 
-    {% if m.acl.user.id.o.hasregion %}
-        {% wire action={redirect dispatch="page" id=m.acl.user.id } %}
-    {% endif %}
-
     <div id="{{ #signup }}" class="c-signup-container fade-in">
 
         <h1>{{ m.rsc.signup_step2.title }}</h1>
