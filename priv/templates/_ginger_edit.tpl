@@ -13,11 +13,6 @@
             <div class="tab-pane" id="meta-language">
                 {% optional include "_translation_edit_languages.tpl" %}
             </div>
-            {# <div class="tab-pane publication-dates" id="meta-pubdate">
-                {% include "_edit_date.tpl" date=id.publication_start name="publication_start" is_end=0 %}
-                {_ till _}
-                {% include "_edit_date.tpl" date=id.publication_end name="publication_end" is_end=1 %}
-            </div> #}
         </div>
 
         {% javascript %}

@@ -26,7 +26,7 @@
 # we want the validation function to be accessible as 'window.validateSignupTags'
 # and not to be included in the computed JS script tag.
 #}
-{% if zotonic_dispatch == `signup` or zotonic_dispatch == `signup_confirm` %}
+{% if zotonic_dispatch == `signup` or zotonic_dispatch == `signup_step3` or zotonic_dispatch == `signup_confirm` %}
     <script type="text/javascript" nonce="{{ m.req.csp_nonce }}">
         var signupTagsControl = document.getElementById("signup_tags_control");
         var signupTagsApp = Elm.AddEdgeToNewResource.init({

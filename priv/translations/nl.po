@@ -714,6 +714,10 @@ msgstr "In de kennisgroep"
 msgid "reacted to the contribution of"
 msgstr "reageerde op de bijdrage van"
 
+#: user/sites/kenniscloud/templates/signup/step2.tpl:5
+msgid "Skip"
+msgstr "Overslaan"
+
 #priv/templates/keywords/status-tags.tpl
 msgid "Preparation"
 msgstr "Voorwerk"
