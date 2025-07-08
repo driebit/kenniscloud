@@ -46,6 +46,8 @@
         <input type="hidden" name="category_id" value="{{ m.rsc['document'].id }}">
     {% elseif predicate == 'hasextra_img' %}
         <input type="hidden" name="category_id" value="{{ m.rsc['image'].id }}">
+    {% elseif predicate == "has_subgroup" %}
+        <input type="hidden" name="category_id" value="{{ m.rsc['acl_collaboration_group'].id }}">
     {% else %}
         {% inherit %}
     {% endif %}
