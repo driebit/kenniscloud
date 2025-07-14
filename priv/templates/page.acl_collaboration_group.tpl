@@ -28,7 +28,11 @@
         
         <div class="kg-contributions">
 
+            <div class="u-d-flex u-gap-3 c-external-sevices">
             {% include "services/mentimeter.tpl" %}
+
+            {% include "services/opnform.tpl" %}
+            </div>
 
             {% include "maplibre/map.tpl" %}
 
