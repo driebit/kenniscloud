@@ -64,4 +64,21 @@
         {_ Descending _}
     </label>
 </div>
+{% if m.acl.use.mod_admin %}
+    <div class="form-group row col-md-12">
+        <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="app/presentation/abcvshfkdl" class="ltr do_autofocus field-title form-control"
+                {% if not id.is_editable %}disabled="disabled"{% endif %} />
+            {_ Mentimeter embed id _}
+        <label class="control-label" for="has_mentilink">
+        </label>
+    </div>
+
+    <div class="form-group row col-md-12">
+        <input type="text" id="has_opnformlink" name="has_opnformlink" value="{{ id.has_opnformlink }}" placeholder="customer-feedback-survey-9l6tuv" class="ltr do_autofocus field-title form-control"
+                {% if not id.is_editable %}disabled="disabled"{% endif %} />
+            {_ OpnForm embed id _}
+        <label class="control-label" for="has_opnformlink">
+        </label>
+    </div>
+{% endif %}
 {% endblock %}

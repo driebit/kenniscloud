@@ -49,5 +49,33 @@
             </label>
         </div>
 
+        {% if m.acl.use.mod_admin %}
+            <label class="control-label col-md-12" for="has_menti">
+                <input type="checkbox" id="has_menti" name="has_menti"
+                    value="1"
+                    {% if id.has_menti %}checked{% endif %}
+                    {% if not id.is_editable %}disabled="disabled"{% endif %} />
+                {_ Mentimeter toevoegen _}
+            </label>
+            <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="app/presentation/abcdefg" class="control-label col-md-12"
+                    {% if not id.is_editable %}disabled="disabled"{% endif %} />
+            <label class="control-label col-md-12" for="has_mentilink">
+                {_ Mentimeter embed url _}
+            </label>
+
+            <label class="control-label col-md-12" for="has_opnform">
+                <input type="checkbox" id="has_opnform" name="has_opnform"
+                    value="1"
+                    {% if id.has_opnform %}checked{% endif %}
+                    {% if not id.is_editable %}disabled="disabled"{% endif %} />
+                {_ OpnForm toevoegen _}
+            </label>
+            <input type="text" id="has_opnformlink" name="has_opnformlink" value="{{ id.has_opnformlink }}" placeholder="customer-feedback-survey-9l6tuv" class="control-label col-md-12"
+                    {% if not id.is_editable %}disabled="disabled"{% endif %} />
+            <label class="control-label col-md-12" for="has_opnformlink">
+                {_ OpnForm embed url _}
+            </label>
+        {% endif %}
+
     </div>
 </div>

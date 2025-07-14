@@ -27,7 +27,13 @@
         </div>
         
         <div class="kg-contributions">
-        
+
+            <div class="u-d-flex u-gap-3 c-external-sevices">
+            {% include "services/mentimeter.tpl" %}
+
+            {% include "services/opnform.tpl" %}
+            </div>
+
             {% include "maplibre/map.tpl" %}
 
             {% if m.search[{query cat=['contribution', 'event'] content_group=id pagelen=50 }]|timeline_sort:id as results %}
