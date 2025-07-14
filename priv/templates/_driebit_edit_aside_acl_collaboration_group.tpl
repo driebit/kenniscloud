@@ -49,7 +49,7 @@
             </label>
         </div>
 
-        {% if m.acl.user.o.hasusergroup[1].id == m.rsc.acl_user_group_community_librarian.id or m.acl.use.mod_admin %}
+        {% if m.acl.use.mod_admin %}
             <label class="control-label col-md-12" for="has_menti">
                 <input type="checkbox" id="has_menti" name="has_menti"
                     value="1"
