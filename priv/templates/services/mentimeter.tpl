@@ -1,3 +1,3 @@
-{% if id.has_menti and id.has_mentilink %}
+{% if id.has_mentilink|is_defined %}
     <div class="c-external-services__mentimeter"><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/{{ id.has_mentilink }}/embed' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
 {% endif %}

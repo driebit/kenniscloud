@@ -66,13 +66,6 @@
 </div>
 {% if m.acl.use.mod_admin %}
     <div class="form-group row col-md-12">
-        <label class="control-label" for="has_menti">
-            <input type="checkbox" id="has_menti" name="has_menti"
-                value="1"
-                {% if id.has_menti %}checked{% endif %}
-                {% if not id.is_editable %}disabled="disabled"{% endif %} />
-            {_ Mentimeter toevoegen _}
-        </label>
         <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="app/presentation/abcvshfkdl" class="ltr do_autofocus field-title form-control"
                 {% if not id.is_editable %}disabled="disabled"{% endif %} />
             {_ Mentimeter embed id _}
@@ -81,13 +74,6 @@
     </div>
 
     <div class="form-group row col-md-12">
-        <label class="control-label" for="has_opnform">
-            <input type="checkbox" id="has_opnform" name="has_opnform"
-                value="1"
-                {% if id.has_opnform %}checked{% endif %}
-                {% if not id.is_editable %}disabled="disabled"{% endif %} />
-            {_ OpnForm toevoegen _}
-        </label>
         <input type="text" id="has_opnformlink" name="has_opnformlink" value="{{ id.has_opnformlink }}" placeholder="customer-feedback-survey-9l6tuv" class="ltr do_autofocus field-title form-control"
                 {% if not id.is_editable %}disabled="disabled"{% endif %} />
             {_ OpnForm embed id _}
