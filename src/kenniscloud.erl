@@ -21,44 +21,16 @@
 -mod_title("Kenniscloud").
 -mod_description("").
 -mod_prio(10).
--mod_depends([mod_crowdlink, mod_crowdparticipant, mod_driebit_activity2, mod_driebit_base, mod_driebit_edit, mod_image_edit]).
+-mod_depends([mod_crowdlink, mod_crowdparticipant, mod_driebit_activity, mod_driebit_base, mod_driebit_edit, mod_image_edit]).
 -mod_schema(21).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
 
--include_lib("zotonic_mod_driebit_activity2/src/include/driebit_activity2.hrl").
-
--record(rdf_value, {
-    value :: term(),
-    language = undefined :: undefined | binary(),
-    type = undefined :: undefined | ginger_uri:uri()
-}).
-
--record(rdf_resource, {
-    id :: ginger_uri:uri(),
-    triples = [] :: [m_rdf:triple()]
-}).
-
--record(triple, {
-    %% DEPRECATED: type property is deprecated. Construct an object = #rdf_value{value = ...}
-    %% instead.
-    type = literal :: resource | literal,
-
-    subject :: undefined | binary(),
-    subject_props = [] :: proplists:proplist(),
-    predicate :: m_rdf:predicate(),
-    object :: ginger_uri:uri() | #rdf_value{} | #rdf_resource{},
-    object_props = [] :: proplists:proplist()
-}).
+-include_lib("zotonic_mod_driebit_rdf/include/driebit_rdf.hrl").
 
 -record(rsc_entity_text, {
     id :: term(),
     language :: atom()
-}).
-
-%% @doc Notification to convert a Zotonic resource to an RDF resource
--record(rsc_to_rdf, {
-    id :: m_rsc:resource()
 }).
 
 -export([
@@ -79,10 +51,9 @@
     observe_signup_form_fields/3,
     observe_signup_confirm_redirect/2,
     observe_search_query_term/2,
-    observe_driebit_activity2_inserted/2,
     observe_edge_insert/2,
     observe_edge_delete/2,
-    observe_rsc_to_rdf/3,
+    observe_triple_to_rdf/2,
     observe_tick_1h/2,
     observe_tick_24h/2,
     observe_validate_subjects/2,
@@ -540,13 +511,11 @@ observe_rsc_update_done(#rsc_update_done{id = Id, pre_props = Pre, post_props = 
         {true, true} ->
             ok;
         {_, true} ->
-            ok = kenniscloud_activity:maybe_register_activity(Id, Context);
+            ok = kenniscloud_activity:maybe_register_activity(Id, Context),
+            ok = kenniscloud_notifications:maybe_fan_out_activity(Id, Context);
         _ ->
             ok
     end.
-
-observe_driebit_activity2_inserted(#driebit_activity2_inserted{activity = Activity}, Context) ->
-    kenniscloud_activity:fan_out(Activity, Context).
 
 % When no request page was specified use '/'
 observe_logon_ready_page(#logon_ready_page{ request_page = None }, Context) when None =:= undefined; None =:= <<>> ->
@@ -673,6 +642,11 @@ observe_edge_insert(#edge_insert{predicate=hascollabmanager, subject_id=GroupId,
         _ ->
             undefined
     end;
+observe_edge_insert(#edge_insert{predicate=like, subject_id=SubjectId, object_id=ObjectId}, Context) ->
+    case m_rsc:is_a(SubjectId, person, Context) of
+        false -> undefined;
+        true -> kenniscloud_activity:register_like(SubjectId, ObjectId, Context)
+    end;
 observe_edge_insert(_, _) ->
     undefined.
 
@@ -689,6 +663,8 @@ on_edge_insert(_, _, _, _) ->
 observe_edge_delete(#edge_delete{predicate=flag, object_id=Object}, Context) ->
     send_flag_notification(Object, "email_unflag_to_region.tpl", Context),
     undefined;
+observe_edge_delete(#edge_delete{predicate=like, object_id=ObjectId, subject_id=SubjectId}, Context) ->
+    kenniscloud_activity:undo_like(SubjectId, ObjectId, Context);
 observe_edge_delete(_, _) ->
     undefined.
 
@@ -716,51 +692,33 @@ send_flag_notification(Object, Template, Context) ->
             z_pivot_rsc:insert_task(z_email, send_render, z_ids:id(), [Email, Template, Vars], z_acl:sudo(Context))
     end.
 
-observe_rsc_to_rdf(#rsc_to_rdf{id = RscId}, Triples, Context) ->
-    {ok, CatId} = m_category:name_to_id(remark, Context),
-    AboutSubjects = m_kc_contribution:transitive_subjects(RscId, about, Context),
-    Triples1 = lists:foldl(
-        fun(AboutSubject, Acc) ->
-            case m_rsc:is_a(AboutSubject, CatId, Context) of
-                true ->
-                    Triple = #triple{
-                                predicate = rdf_property:schema(<<"comment">>),
-                                object = m_rsc:p(AboutSubject, uri, Context)
-                               },
-                    [ Triple | Acc ];
-                false ->
-                    Acc
-            end
-        end,
-        Triples,
-        AboutSubjects),
-    AboutObjects = m_edge:objects(RscId, about, Context),
-    Triples2 = case m_rsc:is_a(RscId, CatId, Context) of
-        true ->
-            lists:foldl(
-                fun(AboutObject, Acc) ->
-                      Triple = #triple{
-                                  predicate = rdf_property:schema(<<"parentItem">>),
-                                  object = m_rsc:p(AboutObject, uri, Context)
-                                 },
-                      [ Triple | Acc ]
-                end,
-                Triples1,
-                AboutObjects
-             );
-        false ->
-            Triples1
-    end,
-    case is_likeable(RscId, Context) of
-        true ->
-            Upvotes = #triple{
-                predicate = rdf_property:schema(<<"upvoteCount">>),
-                object = #rdf_value{value = length(m_edge:subjects(RscId, like, Context))}
-            },
-            [ Upvotes | Triples2 ];
-        false ->
-            Triples2
-    end.
+
+observe_triple_to_rdf(
+    #triple_to_rdf{
+        rsc_id = RscId,
+        category = remark,
+        link_type = property,
+        link_name = <<"id">>,
+        value = RscId,
+        ontology = activitystreams
+    },
+    Context
+) ->
+    {ok, rdf_activitystreams:type_triple(RscId, <<"Note">>, Context)};
+observe_triple_to_rdf(
+    #triple_to_rdf{
+        rsc_id = RscId,
+        category = reference,
+        link_type = property,
+        link_name = <<"id">>,
+        value = RscId,
+        ontology = activitystreams
+    },
+    Context
+) ->
+    {ok, rdf_activitystreams:type_triple(RscId, <<"Page">>, Context)};
+observe_triple_to_rdf(_TripleToRdf, _Context) ->
+    undefined.
 
 -spec observe_tick_1h(atom(), z:context()) -> any().
 observe_tick_1h(tick_1h, Context) ->
@@ -832,13 +790,3 @@ observe_validate_subjects({validate_subjects, {postback, Id, Value, Args}}, Cont
                     {{error, Id, "Voeg minstens 4 tags toe"}, Context1}
             end
     end.
-
--spec is_likeable(m_rsc:resource(), z:context()) -> boolean().
-is_likeable(Rsc, Context) ->
-    {ok, Like} = m_predicate:name_to_id(like, Context),
-    lists:any(
-        fun(C) ->
-            m_rsc:is_a(Rsc, C, Context)
-        end,
-        m_predicate:objects(Like, Context)
-    ).

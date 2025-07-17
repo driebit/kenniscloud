@@ -19,13 +19,63 @@
 -module(kenniscloud_activity).
 
 -export([
-    maybe_register_activity/2,
-    fan_out/2,
-    interested_users/2
+    notifications_seen_at/2,
+    seen_notifications/1,
+    register_like/3,
+    undo_like/3,
+
+    maybe_register_activity/2
 ]).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
--include_lib("zotonic_mod_driebit_activity2/src/include/driebit_activity2.hrl").
+
+-spec notifications_seen_at(m_rsc:resource(), z:context()) -> calendar:datetime() | undefined.
+notifications_seen_at(User, Context) ->
+    m_rsc:p(User, notifications_seen_at, Context).
+
+-spec seen_notifications(z:context()) -> {ok, m_rsc:resource()} | {error, term()}.
+seen_notifications(Context) ->
+    m_rsc:update(
+        z_acl:user(Context),
+        #{notifications_seen_at => calendar:universal_time()},
+        Context
+    ).
+
+
+register_like(SubjectId, ObjectId, Context) ->
+    m_activity:register(
+        like,
+        [{object, ObjectId}],
+        z_acl:logon(SubjectId, Context)
+    ).
+
+undo_like(SubjectId, ObjectId, Context) ->
+    % From the activities of the user:
+    lists:search(
+        fun (ActivityId) ->
+            % Find a 'like' one that is still published
+            case {m_rsc:is_a(ActivityId, activity_like, Context), m_rsc:p_no_acl(ActivityId, is_published, Context)} of
+                {true, true} ->
+                    % and has an edge with the object:
+                    case m_edge:get_id(ActivityId, has_activity_object, ObjectId, Context) of
+                        undefined -> false;
+                        _ ->
+                            % and insert an 'undo' activity as the user:
+                            m_activity:register(
+                                undo,
+                                [{object, ActivityId}],
+                                z_acl:logon(SubjectId, Context)
+                            ),
+                            % Note: mod_driebit_activity will unpublish the like too
+                            % then stop:
+                            true
+                    end;
+                _ ->
+                    false
+            end
+        end,
+        m_edge:subjects(SubjectId, has_activity_actor, Context)
+    ).
 
 %% @doc Maybe register an activity for something that happened on Kenniscloud.
 -spec maybe_register_activity(m_rsc:resource(), z:context()) -> ok.
@@ -45,53 +95,21 @@ maybe_register_activity(Rsc, Context) ->
     end,
     ok.
 
-%% @doc Fan out an activity to all interested users' activity stream inboxes.
--spec fan_out(mod_driebit_activity2:activity(), z:context()) -> ok.
-fan_out(Activity, Context) ->
-    z:info("Activity fan out: ~p", [Activity], #{}, Context),
-    #driebit_activity2{user_id = User, rsc_id = Rsc, to = To} = Activity,
-    Users = interested_users(Rsc, Context),
-    %% Don't notify users of their own actions.
-    Interested = lists:delete(User, Users),
-    InterestedWithTo = lists:usort(Interested ++ To),
-    % Caution below: -- is expensive, slow for long lists; maybe use ordsets instead
-    kenniscloud_notifications:fan_out(Rsc, Interested -- To, To, Context),
-    m_driebit_activity2_inbox:fan_out(Activity, InterestedWithTo, Context).
-
--spec considered_same_activity(integer(), undefined | calendar:datetime(), calendar:datetime()) -> boolean().
-considered_same_activity(_TTL, undefined, _NewTime) ->
-    false;
-considered_same_activity(ActivityTTL_sec, ActivityTime, NewTime) ->
-    (calendar:datetime_to_gregorian_seconds(NewTime) - calendar:datetime_to_gregorian_seconds(ActivityTime)) < ActivityTTL_sec.
-
-
-%% @doc Throttle activity logging to avoid having to include (way) less simple conditions on the log triggers.
--spec register_activity_throttled(mod_driebit_activity2:activity(), z:context()) -> ok | nop.
-register_activity_throttled(Activity, Context) ->
-    #driebit_activity2{user_id = User, rsc_id = Rsc, time = NewTime} = Activity,
-    % Don't insert if for the same rsc there was already something logged very recently, defaulting to 60sec because this is also the displayed time granularity.
-    LastTime = z_db:q1("SELECT time FROM activity_log WHERE rsc_id = $1 AND user_id = $2 ORDER BY time DESC LIMIT 1", [Rsc, User], Context),
-    ActivityTTL_sec = z_convert:to_integer(m_config:get_value(kenniscloud, notifications_ttl_sec, 60, Context)),
-    case considered_same_activity(ActivityTTL_sec, LastTime, NewTime) of
-        false ->
-            mod_driebit_activity2:register_activity(Activity, Context),
-            ok;
-        true ->
-            z:info("No activity registration for ~p (throttled)", [Activity], #{}, Context),
-            nop
-    end.
-
-
 %% @doc Register an activity when a user adds a remark to a contribution.
 -spec maybe_register_remark_activity(m_rsc:resource(), m_rsc:resource(), z:context()) -> ok | nop.
 maybe_register_remark_activity(Rsc, Rsc, Context) ->
     z:info("No activity registration for remark ~p (no contribution found)", [Rsc], #{}, Context),
     nop;
 maybe_register_remark_activity(Rsc, About, Context) ->
-    Activity = m_driebit_activity2:activity(Rsc, Context),
-    WithTarget = m_driebit_activity2:target(Activity, About),
-    WithRecipients = m_driebit_activity2:to(WithTarget, m_remarks:recipients(Rsc, Context)),
-    register_activity_throttled(WithRecipients, Context).
+    BaseOptions = [{object, Rsc}, {target, About}],
+    Recipients = [{to, IdTo} || IdTo <- m_remarks:recipients(Rsc, Context)],
+    Interested = [{cc, IDCc} || IDCc <- interested_users(Rsc, Context)],
+
+    m_activity:register(
+        create,
+        BaseOptions ++ Recipients ++ Interested,
+        Context
+    ).
 
 %% @doc Register an activity when a user adds a contribution to a knowledge group.
 -spec maybe_register_contribution_activity(m_rsc:resource(), z:context()) -> ok | nop.
@@ -103,9 +121,13 @@ maybe_register_contribution_activity(Rsc, Context) ->
                     z:info("No activity registration for ~p (not in a kennisgroep)", [Rsc], #{}, Context),
                     nop;
                 Target ->
-                    Activity = m_driebit_activity2:activity(Rsc, Context),
-                    WithTarget = m_driebit_activity2:target(Activity, Target),
-                    register_activity_throttled(WithTarget, Context)
+                    BaseOptions = [{object, Rsc}, {target, Target}],
+                    Interested = [{cc, IDCc} || IDCc <- interested_users(Rsc, Context)],
+                    m_activity:register(
+                        create,
+                        BaseOptions ++ Interested,
+                        Context
+                    )
             end;
         false ->
             z:info("No activity registration for ~p (is not a contribution)", [Rsc], #{}, Context),
