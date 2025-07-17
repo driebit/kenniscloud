@@ -38,9 +38,6 @@ manage_schema(install, Context) ->
     m_config:set_default_value(mod_signup, username_equals_email, true, Context),
     m_config:set_default_value(mod_signup, request_confirm, true, Context),
 
-    % By default, save and keep track of user activity
-    m_config:set_default_value(mod_driebit_activity2, persist_activity, true, Context),
-
     Environment = m_site:environment(Context),
     [get_prod_data(), get_dev_data(Environment)];
 manage_schema({upgrade, N}, _Context) when N >= 2 andalso N =< 17 ->
