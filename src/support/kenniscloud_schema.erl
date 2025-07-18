@@ -229,6 +229,32 @@ get_dev_data() ->
     ExampleDaycrowdEvent = example_daycrowdevent(),
     #datamodel{
         resources=[
+            % Regions; used for local development (KC-140)
+            {region_utrecht, region, [
+                {title, <<"Utrecht en omstreken">>},
+                {address_city, <<"Utrecht">>},
+                {language, [nl]}
+            ]},
+            {region_geldrop, region, [
+                {title, <<"Dommeldal en omstreken">>},
+                {address_city, <<"Geldrop">>},
+                {language, [nl]}
+            ]},
+            {region_noordoost_brabant, region, [
+                {title, <<"Noordoost-Brabant">>},
+                {address_city, <<"Noordoost-Brabant">>},
+                {language, [nl]}
+            ]},
+            {region_dordrecht, region, [
+                {title, <<"Dordrecht en omstreken">>},
+                {address_city, <<"Dordrecht">>},
+                {language, [nl]}
+            ]},
+            {region_tilburg, region, [
+                {title, <<"Tilburg en omstreken">>},
+                {address_city, <<"Tilburg">>},
+                {language, [nl]}
+            ]},
             {page_kennisgroepen, collection, [
                 {title, <<"Kennisgroepen">>},
                 {subtitle, <<"Sluit je aan bij een kennisgroep">>},
@@ -647,34 +673,9 @@ get_prod_data() ->
                 {content_group_id, system_content_group}
             ]},
 
-            % Regions
+            % Region, used in website logic (KCS-140)
             {region_none, region, [
                 {title, <<"Geen regio">>},
-                {language, [nl]}
-            ]},
-            {region_utrecht, region, [
-                {title, <<"Utrecht en omstreken">>},
-                {address_city, <<"Utrecht">>},
-                {language, [nl]}
-            ]},
-            {region_geldrop, region, [
-                {title, <<"Dommeldal en omstreken">>},
-                {address_city, <<"Geldrop">>},
-                {language, [nl]}
-            ]},
-            {region_noordoost_brabant, region, [
-                {title, <<"Noordoost-Brabant">>},
-                {address_city, <<"Noordoost-Brabant">>},
-                {language, [nl]}
-            ]},
-            {region_dordrecht, region, [
-                {title, <<"Dordrecht en omstreken">>},
-                {address_city, <<"Dordrecht">>},
-                {language, [nl]}
-            ]},
-            {region_tilburg, region, [
-                {title, <<"Tilburg en omstreken">>},
-                {address_city, <<"Tilburg">>},
                 {language, [nl]}
             ]},
 
@@ -1090,7 +1091,7 @@ get_prod_data() ->
                 {title, "Avatar fallback image"}
             ]},
 
-            %% Status keywords 
+            %% Status keywords
             {status_keyword_preparation, status_keyword, [
                 {title, {trans, [
                     {nl, <<"voorwerk">>},
