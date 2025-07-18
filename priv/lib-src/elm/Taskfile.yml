@@ -8,6 +8,7 @@ tasks:
         description: Compile Elm code into JavaScript
         cmds:
             - mkdir -p ../../lib/js
+            - task: format
             - |
                 elm make src/Tips.elm \
                          src/Notifications.elm \
@@ -21,6 +22,8 @@ tasks:
     build-dev:
         description: Compile Elm code into JavaScript
         cmds:
+            - mkdir -p ../../lib/js
+            - task: format
             - |
                 elm make --output ../../lib/js/main.js \
                          --debug \
@@ -38,6 +41,6 @@ tasks:
 
     format:
         cmds:
-            - elm-fomrat --yes src
+            - elm-format --yes src
 
     test: elm-test
