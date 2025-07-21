@@ -44,7 +44,28 @@
     {% include "_ginger_edit_content_add_to_timeline.tpl" %}
 
     {% catinclude "_ginger_edit_content_status_label.tpl" id extraClass="col-md-6" %}
-
+  
 </fieldset>
 
+<fieldset>
+    <div id="status-closed-container" style="display: none;">
+       {_ status-close-remark-reminder _} 
+       <!-- TODO embed the elm app -->
+    </div>
+</fieldset>
+    {% javascript %}
+    $(document).ready(function() {
+        const $statusField = $('#status-label');
+        const $closedContainer = $('#status-closed-container');
+
+        function toggleClosedWarning() {
+            const value = $statusField.val()?.toLowerCase();
+            $closedContainer.toggle(value === 'closed');
+        }
+
+        $statusField.on('change', toggleClosedWarning);
+    });
+    {% endjavascript %}    
 {% endwith %}
+
+    
