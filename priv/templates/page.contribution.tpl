@@ -14,7 +14,9 @@
     <div class="page-body">
     	{{ id.body|show_media }}
 
-        {% include "library/add-references.tpl" %}
+        {% if id.status_label != "Closed" %}
+            {% include "library/add-references.tpl" %}
+        {% endif %}
     </div>
 {% endblock %}
 
