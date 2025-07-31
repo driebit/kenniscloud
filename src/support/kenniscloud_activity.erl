@@ -50,32 +50,19 @@ register_like(UserId, ObjectId, Context) ->
     ).
 
 undo_like(UserId, ObjectId, Context) ->
-    % From the activities of the user:
-    lists:search(
-        fun (ActivityId) ->
-            % Find a 'like' one that is still published
-            case {m_rsc:is_a(ActivityId, activity_like, Context), m_rsc:p_no_acl(ActivityId, is_published, Context)} of
-                {true, true} ->
-                    % and has an edge with the object:
-                    case m_edge:get_id(ActivityId, has_activity_object, ObjectId, Context) of
-                        undefined -> false;
-                        _ ->
-                            % and insert an 'undo' activity as the user:
-                            m_activity:register(
-                                undo,
-                                [{object, ActivityId}],
-                                z_acl:logon(UserId, Context)
-                            ),
-                            % Note: mod_driebit_activity will unpublish the like too
-                            % then stop:
-                            true
-                    end;
-                _ ->
-                    false
-            end
-        end,
-        m_edge:subjects(UserId, has_activity_actor, Context)
-    ).
+    % From the activities of the user, find a 'like' one that is still published and has an edge with the object:
+    case m_activity:find(like, [{actor, UserId}, {object, ObjectId}], Context) of
+        [ActivityId | _Rest] ->
+            % insert an 'undo' activity as the user:
+            % Note: mod_driebit_activity will unpublish the like too
+            m_activity:register(
+                undo,
+                [{object, ActivityId}],
+                z_acl:logon(UserId, Context)
+            );
+        _ ->
+            ok
+    end.
 
 %% @doc Maybe register an activity for something that happened on Kenniscloud.
 -spec maybe_register_activity(m_rsc:resource(), z:context()) -> ok.
