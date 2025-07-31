@@ -42,14 +42,14 @@ seen_notifications(Context) ->
     ).
 
 
-register_like(SubjectId, ObjectId, Context) ->
+register_like(UserId, ObjectId, Context) ->
     m_activity:register(
         like,
         [{object, ObjectId}],
-        z_acl:logon(SubjectId, Context)
+        z_acl:logon(UserId, Context)
     ).
 
-undo_like(SubjectId, ObjectId, Context) ->
+undo_like(UserId, ObjectId, Context) ->
     % From the activities of the user:
     lists:search(
         fun (ActivityId) ->
@@ -64,7 +64,7 @@ undo_like(SubjectId, ObjectId, Context) ->
                             m_activity:register(
                                 undo,
                                 [{object, ActivityId}],
-                                z_acl:logon(SubjectId, Context)
+                                z_acl:logon(UserId, Context)
                             ),
                             % Note: mod_driebit_activity will unpublish the like too
                             % then stop:
@@ -74,7 +74,7 @@ undo_like(SubjectId, ObjectId, Context) ->
                     false
             end
         end,
-        m_edge:subjects(SubjectId, has_activity_actor, Context)
+        m_edge:subjects(UserId, has_activity_actor, Context)
     ).
 
 %% @doc Maybe register an activity for something that happened on Kenniscloud.
@@ -101,13 +101,13 @@ maybe_register_remark_activity(Rsc, Rsc, Context) ->
     z:info("No activity registration for remark ~p (no contribution found)", [Rsc], #{}, Context),
     nop;
 maybe_register_remark_activity(Rsc, About, Context) ->
-    BaseOptions = [{object, Rsc}, {target, About}],
+    BaseInfo = [{object, Rsc}, {target, About}],
     Recipients = [{to, IdTo} || IdTo <- m_remarks:recipients(Rsc, Context)],
     Interested = [{cc, IDCc} || IDCc <- interested_users(Rsc, Context)],
 
     m_activity:register(
         create,
-        BaseOptions ++ Recipients ++ Interested,
+        BaseInfo ++ Recipients ++ Interested,
         Context
     ).
 
@@ -121,11 +121,11 @@ maybe_register_contribution_activity(Rsc, Context) ->
                     z:info("No activity registration for ~p (not in a kennisgroep)", [Rsc], #{}, Context),
                     nop;
                 Target ->
-                    BaseOptions = [{object, Rsc}, {target, Target}],
+                    BaseInfo = [{object, Rsc}, {target, Target}],
                     Interested = [{cc, IDCc} || IDCc <- interested_users(Rsc, Context)],
                     m_activity:register(
                         create,
-                        BaseOptions ++ Interested,
+                        BaseInfo ++ Interested,
                         Context
                     )
             end;

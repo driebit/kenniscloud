@@ -495,20 +495,7 @@ decodeUserTo =
 
 fullIdToId : String -> Maybe Int
 fullIdToId fullId =
-    lastElement (String.split "/" fullId) |> Maybe.andThen String.toInt
-
-
-lastElement : List String -> Maybe String
-lastElement list =
-    case list of
-        [] ->
-            Nothing
-
-        [ x ] ->
-            Just x
-
-        x :: xs ->
-            lastElement xs
+    String.split "/" fullId |> List.reverse |> List.head |> Maybe.andThen String.toInt
 
 
 notificationObjectDecoder : Decode.Decoder NotificationObject
