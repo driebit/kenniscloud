@@ -19,12 +19,35 @@
 -module(kenniscloud_notifications).
 
 -export([
-    fan_out/4,
-    unsubscribe/1,
-    timestamp/0
+    maybe_fan_out_activity/2,
+    unsubscribe/1
 ]).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
+
+-spec maybe_fan_out_activity(m_rsc:resource(), z:context()) -> ok.
+maybe_fan_out_activity(ActivityId, Context) ->
+    case m_rsc:is_a(ActivityId, activity_create, Context) of
+        false ->
+            ok;
+        true ->
+            case m_edge:object(ActivityId, has_activity_target, 1, Context) of
+                undefined ->
+                    ok;
+                TargetId ->
+                    Actors = sets:from_list(m_edge:objects(ActivityId, has_activity_actor, Context)),
+                    To = sets:from_list(m_edge:objects(ActivityId, has_activity_audience_to, Context)),
+                    Cc = sets:from_list(m_edge:objects(ActivityId, has_activity_audience_cc, Context)),
+                    %% Don't notify users of their own actions.
+                    Interested = sets:subtract(Cc, sets:union(Actors, To)),
+                    fan_out(
+                        TargetId,
+                        sets:to_list(Interested),
+                        sets:to_list(To),
+                        Context
+                    )
+            end
+    end.
 
 -spec fan_out(m_rsc:resource(), [m_rsc:resource()], [m_rsc:resource()], z:context()) -> ok.
 fan_out(Rsc, Interested, Mentions, Context) ->

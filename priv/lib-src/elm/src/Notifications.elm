@@ -4,6 +4,7 @@ import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Http
 import Iso8601
 import Json.Decode as Decode
 import Json.Encode as Encode
@@ -11,6 +12,7 @@ import Keyboard
 import Markdown
 import RemoteData exposing (RemoteData(..), WebData)
 import RemoteData.Http
+import Task
 import Time exposing (Posix)
 import Url.Builder
 import Util
@@ -114,13 +116,23 @@ type alias NotificationContent =
     , actor : String
     , object : NotificationObject
     , published : Posix
-    , timezone : Time.Zone
     , mentions : List UserId
+    }
+
+
+type alias PartialNotificationContent =
+    { id : Id
+    , target_id : String
+    , actor_id : String
+    , object_id : String
+    , published : Posix
+    , to : List UserId
     }
 
 
 type alias NotificationObject =
     { url : String
+    , object_type : String
     , title : String
     , content : String
     }
@@ -162,19 +174,9 @@ update msg model =
 
                 _ ->
                     ( { model | notifications = Loading }
-                    , RemoteData.Http.get
-                        (Url.Builder.absolute
-                            [ "api"
-                            , "model"
-                            , "driebit_activity2"
-                            , "get"
-                            , "activities"
-                            , "inbox"
-                            ]
-                            []
-                        )
-                        GotNotifications
-                        notificationsDecoder
+                    , Task.attempt
+                        (GotNotifications << Result.withDefault (RemoteData.succeed []))
+                        (RemoteData.fromTask getNotificationsTask)
                     )
 
         GotNotifications data ->
@@ -184,10 +186,9 @@ update msg model =
                         (Url.Builder.absolute
                             [ "api"
                             , "model"
-                            , "driebit_activity2"
+                            , "kc_user"
                             , "post"
-                            , "activities"
-                            , "inbox"
+                            , "activity_inbox"
                             ]
                             []
                         )
@@ -210,10 +211,9 @@ update msg model =
                 (Url.Builder.absolute
                     [ "api"
                     , "model"
-                    , "driebit_activity2"
+                    , "kc_user"
                     , "delete"
-                    , "activities"
-                    , "inbox"
+                    , "activity_inbox"
                     ]
                     []
                 )
@@ -348,71 +348,182 @@ viewNotificationContent now user notification message =
         []
         [ h4 [] [ Html.text notification.topic ]
         , p [] message
-        , Util.formatTime now notification.published notification.timezone
+
+        -- Note: we don't need the timezone here because the exported date string
+        -- always has an offset from UTC, which 'Iso8601.decoder' already accounts for
+        , Util.formatTime now notification.published Time.utc
         ]
+
+
+
+-- TASKS
+
+
+getNotificationsTask : Task.Task Http.Error Notifications
+getNotificationsTask =
+    let
+        inboxTask =
+            getActivityPubTask
+                (Url.Builder.absolute
+                    [ "activitypub"
+                    , "inbox"
+                    ]
+                    []
+                )
+                (Decode.field "orderedItems" (Decode.list (Decode.field "@id" Decode.string)))
+
+        notificationsTask inboxIds =
+            Task.sequence (List.map getNotificationTask inboxIds)
+    in
+    inboxTask |> Task.andThen notificationsTask
+
+
+getNotificationTask : Id -> Task.Task Http.Error Notification
+getNotificationTask notificationId =
+    let
+        partialNotificationTask =
+            getActivityPubTask notificationId partialNotificationContentDecoder
+
+        fullNotificationTask partialContent =
+            Task.map3
+                (\actorContent targetContent objectContent ->
+                    let
+                        notificationContent =
+                            { id = partialContent.id
+                            , url = targetContent.url
+                            , topic = targetContent.title
+                            , actor = actorContent.title
+                            , object = objectContent
+                            , published = partialContent.published
+                            , mentions = partialContent.to
+                            }
+                    in
+                    case objectContent.object_type of
+                        "Note" ->
+                            NewRemarkOrMention notificationContent
+
+                        "Event" ->
+                            NewEvent notificationContent
+
+                        "Page" ->
+                            NewReference notificationContent
+
+                        _ ->
+                            NewContribution notificationContent
+                )
+                (getActivityPubTask partialContent.actor_id notificationObjectDecoder)
+                (getActivityPubTask partialContent.target_id notificationObjectDecoder)
+                (getActivityPubTask partialContent.object_id notificationObjectDecoder)
+    in
+    partialNotificationTask |> Task.andThen fullNotificationTask
+
+
+getActivityPubTask : String -> Decode.Decoder a -> Task.Task Http.Error a
+getActivityPubTask url decoder =
+    Http.task
+        { method = "GET"
+        , headers = [ Http.header "Accept" "application/activity+json" ]
+        , url = url
+        , body = Http.emptyBody
+        , resolver = expectJson decoder
+        , timeout = Nothing
+        }
+
+
+expectJson : Decode.Decoder a -> Http.Resolver Http.Error a
+expectJson decoder =
+    Http.stringResolver <|
+        \response ->
+            case response of
+                Http.BadUrl_ url ->
+                    Err (Http.BadUrl url)
+
+                Http.Timeout_ ->
+                    Err Http.Timeout
+
+                Http.NetworkError_ ->
+                    Err Http.NetworkError
+
+                Http.BadStatus_ metadata _ ->
+                    Err (Http.BadStatus metadata.statusCode)
+
+                Http.GoodStatus_ _ body ->
+                    case Decode.decodeString decoder body of
+                        Ok value ->
+                            Ok value
+
+                        Err err ->
+                            Err (Http.BadBody (Decode.errorToString err))
 
 
 
 -- DECODERS
 
 
-dateDecoder : Decode.Decoder Posix
-dateDecoder =
-    Iso8601.decoder
-
-
-notificationDecoder : Decode.Decoder Notification
-notificationDecoder =
-    Decode.at [ "object", "type" ] Decode.string
-        |> Decode.andThen
-            (\value ->
-                case value of
-                    "remark" ->
-                        Decode.map NewRemarkOrMention notificationContentDecoder
-
-                    "event" ->
-                        Decode.map NewEvent notificationContentDecoder
-
-                    "reference" ->
-                        Decode.map NewReference notificationContentDecoder
-
-                    _ ->
-                        Decode.map NewContribution notificationContentDecoder
-            )
-
-
-notificationContentDecoder : Decode.Decoder NotificationContent
-notificationContentDecoder =
-    Decode.map8 NotificationContent
-        (Decode.field "id" Decode.string)
-        (Decode.at [ "target", "id" ] Decode.string)
-        (Decode.at [ "target", "name" ] Decode.string)
-        (Decode.at [ "actor", "name" ] Decode.string)
-        (Decode.field "object" notificationObjectDecoder)
-        (Decode.field "published" dateDecoder)
-        (Decode.field "timezone_offset" Util.decodeTimezone)
-        (Decode.field "to" decodeTo)
-
-
-notificationObjectDecoder : Decode.Decoder NotificationObject
-notificationObjectDecoder =
-    Decode.map3 NotificationObject
-        (Decode.field "id" Decode.string)
-        (Decode.field "name" Decode.string)
-        (Decode.field "content" Decode.string)
+partialNotificationContentDecoder : Decode.Decoder PartialNotificationContent
+partialNotificationContentDecoder =
+    Decode.map6 PartialNotificationContent
+        (Decode.field "@id" Decode.string)
+        (decodeFirstId "target")
+        (decodeFirstId "actor")
+        (decodeFirstId "object")
+        (decodeFirstValue "published" Iso8601.decoder)
+        decodeTo
 
 
 decodeTo : Decode.Decoder (List Int)
 decodeTo =
     Decode.oneOf
-        [ Decode.list Decode.int
+        [ Decode.field "to" (Decode.list decodeUserTo)
         , Decode.succeed []
         ]
 
 
-notificationsDecoder : Decode.Decoder (List Notification)
-notificationsDecoder =
-    Decode.field "result" (Decode.field "items" (Decode.list notificationDecoder))
+decodeUserTo : Decode.Decoder Int
+decodeUserTo =
+    Decode.field "@id" Decode.string
+        |> Decode.andThen
+            (\fullId ->
+                case fullIdToId fullId of
+                    Just id ->
+                        Decode.succeed id
+
+                    Nothing ->
+                        Decode.fail "Invalid ID path"
+            )
+
+
+fullIdToId : String -> Maybe Int
+fullIdToId fullId =
+    String.split "/" fullId |> List.reverse |> List.head |> Maybe.andThen String.toInt
+
+
+notificationObjectDecoder : Decode.Decoder NotificationObject
+notificationObjectDecoder =
+    Decode.map4 NotificationObject
+        (Decode.field "@id" Decode.string)
+        (Decode.field "@type" Decode.string)
+        (decodeFirstValue "name" Decode.string)
+        (Decode.oneOf
+            [ decodeFirstValue "content" Decode.string
+            , Decode.succeed ""
+            ]
+        )
+
+
+decodeFirstId field =
+    decodeFirstSubField field "@id" Decode.string
+
+
+decodeFirstValue field decoder =
+    decodeFirstSubField field "@value" decoder
+
+
+decodeFirstSubField field subfield decoder =
+    Decode.oneOf
+        [ Decode.field field <| Decode.index 0 <| Decode.field subfield decoder
+        , Decode.at [ field, subfield ] decoder
+        ]
 
 
 notificationsSeenAtReportEncoder : Posix -> Encode.Value
