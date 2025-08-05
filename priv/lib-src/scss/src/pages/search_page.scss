@@ -1,0 +1,74 @@
+body {
+    .c-search {
+        background-color: $white;
+        gap: 0;
+
+        .list__item__image {
+            background-color: $kgColor;
+        }
+    }
+
+    .c-full-text-search {
+        background-color: $kgColor;
+        padding: 7rem 0;
+    }
+
+    .c-full-text-search::after {
+        content: "*";
+        position: absolute;
+    }
+
+    .c-full-text-search__searchbar {
+        padding: 2rem;
+        border: none;
+        border-radius: 0;
+        background-color: $white;
+    }
+
+    .c-search-filters {
+        background-color: $greyLight;
+    }
+
+    .c-search-results {
+        background-color: $white;
+    }
+
+    .c-sort__select {
+        padding: 1rem;
+    }
+
+    .c-multiselect__option input[type="checkbox"], .c-checkboxes__item input[type="checkbox"] {
+        appearance: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: #fff;
+        cursor: pointer;
+        position: relative;
+        vertical-align: middle;
+        transition: border-color 0.2s;
+        outline-offset: 1px;
+
+        &:checked {
+            background: $mainThemeColor; 
+        }
+
+        &:focus {
+            outline: 1px solid $kgColor;
+        }
+    }
+
+    .c-fixed-ranges__button--selected {
+        background-color: $mainThemeColor;
+        color: $white;
+        border: 1px solid $white;
+    }
+
+    .c-fixed-ranges__input--selected {
+        background-color: $mainThemeColor;
+        color: $white;
+        border: 1px solid $white;
+    }
+
+}
