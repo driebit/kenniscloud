@@ -8,7 +8,7 @@
     {page, ["page", id, slug], controller_page, [ {template, {cat, "page.tpl"}} ]},
 
     %% Search page.
-    {search, ["search"], controller_template, [ {template, "search.tpl"} ]},
+    {search, ["search"], controller_template, [ {template, "search_page.tpl"}, {id, search_page} ]},
 
     {members, ["members", id], controller_page, [{template, "page_members.tpl"}, {is_canonical, false}]},
 
