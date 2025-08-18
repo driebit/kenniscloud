@@ -21,7 +21,6 @@
 -export([
     manage_schema/2,
     manage_data/2,
-
     example_event/0
 ]).
 
@@ -99,7 +98,9 @@ manage_schema({upgrade, 21}, _Context) ->
                 {seo_noindex, true}
             ]}
         ]
-    }.
+    };
+manage_schema({upgrade, 22}, _Context) ->
+    ok.
 
 manage_data(install, Context) ->
     case m_site:environment(Context) of
@@ -154,6 +155,12 @@ manage_data({upgrade, 20}, Context) ->
     remove_unused_predicate(hasattachment, Context),
     ok;
 manage_data({upgrade, 21}, _Context) ->
+    ok;
+manage_data({upgrade, N}, Context) when N >= 22 ->
+    SudoContext = z_acl:sudo(Context),
+    m_rsc:delete(region_utrecht, SudoContext),
+    m_rsc:delete(region_noordoost_brabant, SudoContext),
+    m_rsc:delete(region_dordrecht, SudoContext),
     ok.
 
 migrate_project(ProjId, Context0) ->
@@ -227,24 +234,9 @@ get_dev_data() ->
     #datamodel{
         resources=[
             % Regions; used for local development (KC-140)
-            {region_utrecht, region, [
-                {title, <<"Utrecht en omstreken">>},
-                {address_city, <<"Utrecht">>},
-                {language, [nl]}
-            ]},
             {region_geldrop, region, [
                 {title, <<"Dommeldal en omstreken">>},
                 {address_city, <<"Geldrop">>},
-                {language, [nl]}
-            ]},
-            {region_noordoost_brabant, region, [
-                {title, <<"Noordoost-Brabant">>},
-                {address_city, <<"Noordoost-Brabant">>},
-                {language, [nl]}
-            ]},
-            {region_dordrecht, region, [
-                {title, <<"Dordrecht en omstreken">>},
-                {address_city, <<"Dordrecht">>},
                 {language, [nl]}
             ]},
             {region_tilburg, region, [
