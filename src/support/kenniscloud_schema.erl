@@ -21,7 +21,6 @@
 -export([
     manage_schema/2,
     manage_data/2,
-
     example_event/0
 ]).
 
@@ -227,24 +226,9 @@ get_dev_data() ->
     #datamodel{
         resources=[
             % Regions; used for local development (KC-140)
-            {region_utrecht, region, [
-                {title, <<"Utrecht en omstreken">>},
-                {address_city, <<"Utrecht">>},
-                {language, [nl]}
-            ]},
             {region_geldrop, region, [
                 {title, <<"Dommeldal en omstreken">>},
                 {address_city, <<"Geldrop">>},
-                {language, [nl]}
-            ]},
-            {region_noordoost_brabant, region, [
-                {title, <<"Noordoost-Brabant">>},
-                {address_city, <<"Noordoost-Brabant">>},
-                {language, [nl]}
-            ]},
-            {region_dordrecht, region, [
-                {title, <<"Dordrecht en omstreken">>},
-                {address_city, <<"Dordrecht">>},
                 {language, [nl]}
             ]},
             {region_tilburg, region, [
