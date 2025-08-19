@@ -6,9 +6,11 @@
             </a>
         {% endblock %}
 
-        {% include "search-suggestions/search-form.tpl"
-            extraFormClassess=extraFormClassess formclass="c-nav-search"
-        %}
+        {% block search_bar %}
+            {% include "search-suggestions/search-form.tpl"
+                extraFormClassess=extraFormClassess formclass="c-nav-search"
+            %}
+        {% endblock %}
 
         {% block menu %}
             {% menu id=id %}

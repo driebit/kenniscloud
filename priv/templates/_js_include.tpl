@@ -19,6 +19,8 @@
     "js/search-suggestions.js"
     "bootstrap/js/bootstrap.min.js"
     "js/jquery.fancybox.js"
+    "js/models/loadmore.js"
+    "js/modules/z.forminit.js"
 %}
 
 
