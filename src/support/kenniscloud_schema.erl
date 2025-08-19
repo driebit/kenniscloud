@@ -98,9 +98,7 @@ manage_schema({upgrade, 21}, _Context) ->
                 {seo_noindex, true}
             ]}
         ]
-    };
-manage_schema({upgrade, 22}, _Context) ->
-    ok.
+    }.
 
 manage_data(install, Context) ->
     case m_site:environment(Context) of
@@ -155,12 +153,6 @@ manage_data({upgrade, 20}, Context) ->
     remove_unused_predicate(hasattachment, Context),
     ok;
 manage_data({upgrade, 21}, _Context) ->
-    ok;
-manage_data({upgrade, N}, Context) when N >= 22 ->
-    SudoContext = z_acl:sudo(Context),
-    m_rsc:delete(region_utrecht, SudoContext),
-    m_rsc:delete(region_noordoost_brabant, SudoContext),
-    m_rsc:delete(region_dordrecht, SudoContext),
     ok.
 
 migrate_project(ProjId, Context0) ->
