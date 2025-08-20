@@ -1,6 +1,8 @@
 {% if parent == "search_page" %}
     <li class="list__item {{ extraClasses }}">
-        <a href="{{ id.website }}" target="_blank" rel="noopener noreferrer">
+        {% if not nolink %}
+            <a href="{{ id.website }}" target="_blank" rel="noopener noreferrer">
+        {% endif %}
             <article>
                 <div class="list__item__image">
                     {% image id.og_image mediaclass="list-image" alt="" title="" crop=dep_rsc.crop_center %}
@@ -18,7 +20,9 @@
                     </div>
                 </div>
             </article>
+        {% if not nolink %}
         </a>
+        {% endif %}
     </li>
 {% else %}
     {% if id.og_title %}
