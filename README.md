@@ -162,7 +162,6 @@ Module dependencies are listed in `priv/zotonic_site.config`.
 
 -   zotonic_mod_crowdlink
 -   zotonic_mod_crowdparticipant
--   zotonic_mod_ginger_activity2
 
 #### Zotonic module usage notes
 

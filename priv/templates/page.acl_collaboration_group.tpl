@@ -27,7 +27,14 @@
         </div>
         
         <div class="kg-contributions">
-        
+
+            {% if id.has_mentilink or id.has_opnformlink %}
+                <div class="u-d-flex u-gap-3 c-external-sevices">
+                    {% include "services/mentimeter.tpl" %}
+                    {% include "services/opnform.tpl" %}
+                </div>
+            {% endif %}
+
             {% include "maplibre/map.tpl" %}
 
             {% if m.search[{query cat=['contribution', 'event'] content_group=id pagelen=50 }]|timeline_sort:id as results %}

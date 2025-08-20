@@ -21,7 +21,6 @@
 -export([
     manage_schema/2,
     manage_data/2,
-
     example_event/0
 ]).
 
@@ -37,9 +36,6 @@ manage_schema(install, Context) ->
     % Signup defaults previously setup by 'mod_ginger_auth':
     m_config:set_default_value(mod_signup, username_equals_email, true, Context),
     m_config:set_default_value(mod_signup, request_confirm, true, Context),
-
-    % By default, save and keep track of user activity
-    m_config:set_default_value(mod_driebit_activity2, persist_activity, true, Context),
 
     Environment = m_site:environment(Context),
     [get_prod_data(), get_dev_data(Environment)];
@@ -70,7 +66,39 @@ manage_schema({upgrade, 19}, _Context) ->
         ]
     };
 manage_schema({upgrade, 20}, _Context) ->
-    ok.
+    ok;
+manage_schema({upgrade, 21}, _Context) ->
+    #datamodel{
+        resources=[
+            {signup_step1, text, [
+                {title, {trans, [
+                    {nl, <<"Registreer: persoonlijke gegevens">>},
+                    {en, <<"Sign up: personal data">>}
+                ]}},
+                {language, [nl,en]},
+                {is_unfindable, true},
+                {seo_noindex, true}
+            ]},
+            {signup_step2, text, [
+                {title, {trans, [
+                    {nl, <<"Registreer: regio">>},
+                    {en, <<"Sign up: region">>}
+                ]}},
+                {language, [nl,en]},
+                {is_unfindable, true},
+                {seo_noindex, true}
+            ]},
+            {signup_step3, text, [
+                {title, {trans, [
+                    {nl, <<"Registreer: tags en thema's">>},
+                    {en, <<"Register: tags and themes">>}
+                ]}},
+                {language, [nl,en]},
+                {is_unfindable, true},
+                {seo_noindex, true}
+            ]}
+        ]
+    }.
 
 manage_data(install, Context) ->
     case m_site:environment(Context) of
@@ -123,8 +151,9 @@ manage_data({upgrade, 19}, _Context) ->
     ok;
 manage_data({upgrade, 20}, Context) ->
     remove_unused_predicate(hasattachment, Context),
+    ok;
+manage_data({upgrade, 21}, _Context) ->
     ok.
-
 
 migrate_project(ProjId, Context0) ->
     ?zInfo("Data upgrade, turning ~p into a kennisgroep", [ProjId], Context0),
@@ -166,7 +195,6 @@ migrate_project(ProjId, Context0) ->
         end,
         Context0
     ).
-
 remove_unused_predicate(Predicate, Context) ->
     case m_predicate:is_used(Predicate, Context) of
         false ->
@@ -197,6 +225,17 @@ get_dev_data() ->
     ExampleDaycrowdEvent = example_daycrowdevent(),
     #datamodel{
         resources=[
+            % Regions; used for local development (KC-140)
+            {region_geldrop, region, [
+                {title, <<"Dommeldal en omstreken">>},
+                {address_city, <<"Geldrop">>},
+                {language, [nl]}
+            ]},
+            {region_tilburg, region, [
+                {title, <<"Tilburg en omstreken">>},
+                {address_city, <<"Tilburg">>},
+                {language, [nl]}
+            ]},
             {page_kennisgroepen, collection, [
                 {title, <<"Kennisgroepen">>},
                 {subtitle, <<"Sluit je aan bij een kennisgroep">>},
@@ -615,34 +654,9 @@ get_prod_data() ->
                 {content_group_id, system_content_group}
             ]},
 
-            % Regions
+            % Region, used in website logic (KCS-140)
             {region_none, region, [
                 {title, <<"Geen regio">>},
-                {language, [nl]}
-            ]},
-            {region_utrecht, region, [
-                {title, <<"Utrecht en omstreken">>},
-                {address_city, <<"Utrecht">>},
-                {language, [nl]}
-            ]},
-            {region_geldrop, region, [
-                {title, <<"Dommeldal en omstreken">>},
-                {address_city, <<"Geldrop">>},
-                {language, [nl]}
-            ]},
-            {region_noordoost_brabant, region, [
-                {title, <<"Noordoost-Brabant">>},
-                {address_city, <<"Noordoost-Brabant">>},
-                {language, [nl]}
-            ]},
-            {region_dordrecht, region, [
-                {title, <<"Dordrecht en omstreken">>},
-                {address_city, <<"Dordrecht">>},
-                {language, [nl]}
-            ]},
-            {region_tilburg, region, [
-                {title, <<"Tilburg en omstreken">>},
-                {address_city, <<"Tilburg">>},
                 {language, [nl]}
             ]},
 
@@ -1058,7 +1072,7 @@ get_prod_data() ->
                 {title, "Avatar fallback image"}
             ]},
 
-            %% Status keywords 
+            %% Status keywords
             {status_keyword_preparation, status_keyword, [
                 {title, {trans, [
                     {nl, <<"voorwerk">>},
@@ -1080,6 +1094,33 @@ get_prod_data() ->
                     {en, <<"discussion">>}
                 ]}},
                 {language, [nl,en]}
+            ]},
+            {signup_step1, text, [
+                {title, {trans, [
+                    {nl, <<"Registreer: persoonlijke gegevens">>},
+                    {en, <<"Sign up: personal data">>}
+                ]}},
+                {language, [nl,en]},
+                {is_unfindable, true},
+                {seo_noindex, true}
+            ]},
+            {signup_step2, text, [
+                {title, {trans, [
+                    {nl, <<"Registreer: regio">>},
+                    {en, <<"Sign up: region">>}
+                ]}},
+                {language, [nl,en]},
+                {is_unfindable, true},
+                {seo_noindex, true}
+            ]},
+            {signup_step3, text, [
+                {title, {trans, [
+                    {nl, <<"Registreer: tags en thema's">>},
+                    {en, <<"Register: tags and themes">>}
+                ]}},
+                {language, [nl,en]},
+                {is_unfindable, true},
+                {seo_noindex, true}
             ]}
         ],
         media=[

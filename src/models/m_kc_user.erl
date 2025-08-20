@@ -23,6 +23,8 @@
 
 -export([
     m_get/3,
+    m_post/3,
+    m_delete/3,
 
     knowledge_groups/2,
     recommended_knowledge_groups/2,
@@ -38,13 +40,12 @@
 -spec m_get( list(), zotonic_model:opt_msg(), z:context() ) -> {ok, { term(), list() }} | {error, term()}.
 m_get([<<"activity_inbox">>, <<"alert">> | Rest ] = _Path, _Msg, Context) ->
     User = z_acl:user(Context),
-    Count = m_driebit_activity2_inbox:count_for_user(User, Context),
     Alert =
-        case Count of
-            0 -> false;
-            _ ->
-                MostRecentAt = m_driebit_activity2_inbox:most_recent_at_for_user(User, Context),
-                LastSeenAt = m_driebit_activity2_inbox:seen_at_for_user(User, Context),
+        case m_activity:inbox_activities(User, Context) of
+            [] -> false;
+            [LatestActivity | _] ->
+                MostRecentAt = m_rsc:p_no_acl(LatestActivity, <<"modified">>, Context),
+                LastSeenAt = kenniscloud_activity:notifications_seen_at(User, Context),
                 case { LastSeenAt, MostRecentAt } of
                     { undefined, _ } -> true;
                     { _, undefined } -> true;
@@ -52,8 +53,6 @@ m_get([<<"activity_inbox">>, <<"alert">> | Rest ] = _Path, _Msg, Context) ->
                 end
         end,
     {ok, {Alert, Rest}};
-m_get([<<"activity_inbox">> | Rest ] = _Path, _Msg, Context) ->
-    {ok, {m_driebit_activity2_inbox:for_user(z_acl:user(Context), Context), Rest}};
 m_get([<<"is_community_librarian">> | Rest ] = _Path, _Msg, Context) ->
     {ok, {is_community_librarian(z_acl:user(Context), Context), Rest}};
 m_get([<<"is_project_leader_of">>, Project | Rest ] = _Path, _Msg, Context) ->
@@ -70,6 +69,27 @@ m_get([ User, <<"is_community_librarian">> | Rest ] = _Path, _Msg, Context) ->
 % Unexpected path
 m_get(_, _Msg, _Context) ->
     {ok, {undefined, []}}.
+
+-spec m_post( list( binary() ), zotonic_model:opt_msg(), z:context() ) ->
+    {ok, term()} | ok | {error, term()}.
+% API path: /api/model/kc_user/post/activity_inbox
+m_post([ <<"activity_inbox">> | _Rest ], _Msg, Context) ->
+    kenniscloud_activity:seen_notifications(Context),
+    ok;
+% Unexpected query
+m_post(_Path, _Payload, _Context) ->
+    {error, unknown_path}.
+
+
+-spec m_delete( list(), zotonic_model:opt_msg(), z:context() ) ->
+    {ok, term()} | ok | {error, term()}.
+% API path: /api/model/kc_user/delete/activity_inbox
+m_delete([ <<"activity_inbox">> | _Rest ], _Msg, Context) ->
+    m_activity:clear_inbox(Context);
+% Unexpected path
+m_delete(_Path, _Msg, _Context) ->
+    {error, unknown_path}.
+
 
 is_community_librarian(UserId, Context) ->
     CommunityLibrarian = m_rsc:name_lookup(acl_user_group_community_librarian, Context),

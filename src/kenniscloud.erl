@@ -21,44 +21,16 @@
 -mod_title("Kenniscloud").
 -mod_description("").
 -mod_prio(10).
--mod_depends([mod_crowdlink, mod_crowdparticipant, mod_driebit_activity2, mod_driebit_base, mod_driebit_edit, mod_image_edit]).
--mod_schema(20).
+-mod_depends([mod_crowdlink, mod_crowdparticipant, mod_driebit_activity, mod_driebit_base, mod_driebit_edit, mod_image_edit]).
+-mod_schema(21).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
 
--include_lib("zotonic_mod_driebit_activity2/src/include/driebit_activity2.hrl").
-
--record(rdf_value, {
-    value :: term(),
-    language = undefined :: undefined | binary(),
-    type = undefined :: undefined | ginger_uri:uri()
-}).
-
--record(rdf_resource, {
-    id :: ginger_uri:uri(),
-    triples = [] :: [m_rdf:triple()]
-}).
-
--record(triple, {
-    %% DEPRECATED: type property is deprecated. Construct an object = #rdf_value{value = ...}
-    %% instead.
-    type = literal :: resource | literal,
-
-    subject :: undefined | binary(),
-    subject_props = [] :: proplists:proplist(),
-    predicate :: m_rdf:predicate(),
-    object :: ginger_uri:uri() | #rdf_value{} | #rdf_resource{},
-    object_props = [] :: proplists:proplist()
-}).
+-include_lib("zotonic_mod_driebit_rdf/include/driebit_rdf.hrl").
 
 -record(rsc_entity_text, {
     id :: term(),
     language :: atom()
-}).
-
-%% @doc Notification to convert a Zotonic resource to an RDF resource
--record(rsc_to_rdf, {
-    id :: m_rsc:resource()
 }).
 
 -export([
@@ -76,15 +48,12 @@
     observe_rsc_update_done/2,
     observe_custom_pivot/2,
     observe_logon_ready_page/2,
-    observe_signup_done/2,
     observe_signup_form_fields/3,
-    observe_signup_confirm/2,
     observe_signup_confirm_redirect/2,
     observe_search_query_term/2,
-    observe_driebit_activity2_inserted/2,
     observe_edge_insert/2,
     observe_edge_delete/2,
-    observe_rsc_to_rdf/3,
+    observe_triple_to_rdf/2,
     observe_tick_1h/2,
     observe_tick_24h/2,
     observe_validate_subjects/2,
@@ -276,6 +245,49 @@ event(#submit{message={new_group, Args}}, Context) ->
             Location = z_dispatcher:url_for(Dispatch, [{id, Id}], Context),
             z_render:wire({redirect, [{location, Location}]}, Context)
     end;
+
+event(#submit{message={save_signup_step1, []}}, Context) ->
+    UserId = z_acl:user(Context),
+    NameFirst = z_context:get_q(<<"name_first">>, Context),
+    NamePrefix = z_context:get_q(<<"name_surname_prefix">>, Context),
+    NameSurname = z_context:get_q(<<"name_surname">>, Context),
+
+    m_rsc_update:update(UserId, #{
+        <<"name_first">> => NameFirst,
+        <<"name_surname_prefix">> => NamePrefix,
+        <<"name_surname">> => NameSurname,
+        <<"title">> =>
+            binary_to_list(NameFirst) ++ " " ++
+            binary_to_list(NamePrefix) ++ " " ++
+            binary_to_list(NameSurname)
+    }, Context),
+
+    z_render:wire({redirect, [{location, z_dispatcher:url_for(signup_step2, Context)}]}, Context);
+
+event(#submit{message={save_signup_step2, []}}, Context) ->
+    UserId = z_acl:user(Context),
+    SignUpRegion = z_context:get_q(<<"signup_region">>, Context),
+    m_edge:insert(UserId, hasregion, SignUpRegion, z_acl:sudo(Context)),
+    % Redirect to signup_step3
+    z_render:wire({redirect, [{location, z_dispatcher:url_for(signup_step3, Context)}]}, Context);
+
+event(#submit{message={save_signup_step3, []}}, Context) ->
+    UserId = z_acl:user(Context),
+    TagIds = z_context:get_q_all(<<"signup_tags">>, Context),
+    % Add new subject edges for selected tags
+    lists:foreach(
+        fun(Tid) ->
+            try z_convert:to_integer(Tid) of
+                TagId -> m_edge:insert(UserId, subject, TagId, z_acl:sudo(Context))
+            catch error:badarg ->
+                z:error("Illegal signup_tags id in parameters: ~p", [Tid], [], Context),
+                undefined
+            end
+        end,
+        TagIds
+    ),
+    % Redirect to the homepage
+    z_render:wire({redirect, [{location, z_dispatcher:url_for(home, [], Context)}]}, Context);
 
 event(#submit{message={sudo_delete_profile, Args}}, Context0) ->
     SudoContext = z_acl:sudo(Context0),
@@ -499,13 +511,11 @@ observe_rsc_update_done(#rsc_update_done{id = Id, pre_props = Pre, post_props = 
         {true, true} ->
             ok;
         {_, true} ->
-            ok = kenniscloud_activity:maybe_register_activity(Id, Context);
+            ok = kenniscloud_activity:maybe_register_activity(Id, Context),
+            ok = kenniscloud_notifications:maybe_fan_out_activity(Id, Context);
         _ ->
             ok
     end.
-
-observe_driebit_activity2_inserted(#driebit_activity2_inserted{activity = Activity}, Context) ->
-    kenniscloud_activity:fan_out(Activity, Context).
 
 % When no request page was specified use '/'
 observe_logon_ready_page(#logon_ready_page{ request_page = None }, Context) when None =:= undefined; None =:= <<>> ->
@@ -514,26 +524,9 @@ observe_logon_ready_page(#logon_ready_page{ request_page = None }, Context) when
 observe_logon_ready_page(_LogonReadyPage, _Context) ->
     undefined.
 
-observe_signup_done(#signup_done{id=NewUserId}, Context) ->
-    case z_context:get_q_all(<<"signup_tags">>, Context) of
-        [_|_] = TagIds ->
-            lists:foreach(
-                fun (Tid) ->
-                    try z_convert:to_integer(Tid) of
-                        TagId -> m_edge:insert(NewUserId, subject, TagId, Context)
-                    catch error:badarg ->
-                        z:error("Illegal signup_tags id in parameters: ~p", [Tid], [], Context),
-                        undefined
-                    end
-                end,
-                TagIds
-            );
-        _ -> ok
-    end.
-
 observe_signup_form_fields(signup_form_fields, FS, _Context) ->
     FS1 = [
-        {signup_region, true},
+        {signup_region, false},
         {signup_tags, false},
         % In Zotonic-0.x Ginger sites, these would have been set by 'mod_ginger_auth'.
         {name_first, false},
@@ -547,26 +540,8 @@ observe_signup_form_fields(signup_form_fields, FS, _Context) ->
     % in Erlang's standard library.
     proplists:from_map(maps:merge(proplists:to_map(FS), proplists:to_map(FS1))).
 
-
-observe_signup_confirm(#signup_confirm{ id = UserId }, Context) ->
-    case m_edge:objects(UserId, hasregion, Context) of
-        [] ->
-            SignupRegion = m_rsc:p_no_acl(UserId, signup_region, Context),
-            case m_rsc:name_to_id(SignupRegion, Context) of
-                {ok, RegionId} ->
-                    %% todo move to acl's
-                    %% is allowed to be changed by user after login in the interface
-                    {ok, _} = m_edge:insert(UserId, hasregion, RegionId, z_acl:sudo(Context)),
-                    RegionId;
-                _ ->
-                    undefined
-            end;
-        _ ->
-            ok
-    end.
-
 observe_signup_confirm_redirect(#signup_confirm_redirect{}, Context) ->
-    z_dispatcher:url_for(home, [], Context).
+    z_dispatcher:url_for(signup_step1, Context).
 
 observe_search_query_term(#search_query_term{ term = <<"cat_exclude_defaults">>, arg = true }, _Context) ->
     #search_sql_term{ cats_exclude = [ {<<"rsc">>, [meta, media, menu, admin_content_query]} ] };
@@ -667,6 +642,11 @@ observe_edge_insert(#edge_insert{predicate=hascollabmanager, subject_id=GroupId,
         _ ->
             undefined
     end;
+observe_edge_insert(#edge_insert{predicate=like, subject_id=SubjectId, object_id=ObjectId}, Context) ->
+    case m_rsc:is_a(SubjectId, person, Context) of
+        false -> undefined;
+        true -> kenniscloud_activity:register_like(SubjectId, ObjectId, Context)
+    end;
 observe_edge_insert(_, _) ->
     undefined.
 
@@ -683,6 +663,8 @@ on_edge_insert(_, _, _, _) ->
 observe_edge_delete(#edge_delete{predicate=flag, object_id=Object}, Context) ->
     send_flag_notification(Object, "email_unflag_to_region.tpl", Context),
     undefined;
+observe_edge_delete(#edge_delete{predicate=like, object_id=ObjectId, subject_id=SubjectId}, Context) ->
+    kenniscloud_activity:undo_like(SubjectId, ObjectId, Context);
 observe_edge_delete(_, _) ->
     undefined.
 
@@ -710,51 +692,33 @@ send_flag_notification(Object, Template, Context) ->
             z_pivot_rsc:insert_task(z_email, send_render, z_ids:id(), [Email, Template, Vars], z_acl:sudo(Context))
     end.
 
-observe_rsc_to_rdf(#rsc_to_rdf{id = RscId}, Triples, Context) ->
-    {ok, CatId} = m_category:name_to_id(remark, Context),
-    AboutSubjects = m_kc_contribution:transitive_subjects(RscId, about, Context),
-    Triples1 = lists:foldl(
-        fun(AboutSubject, Acc) ->
-            case m_rsc:is_a(AboutSubject, CatId, Context) of
-                true ->
-                    Triple = #triple{
-                                predicate = rdf_property:schema(<<"comment">>),
-                                object = m_rsc:p(AboutSubject, uri, Context)
-                               },
-                    [ Triple | Acc ];
-                false ->
-                    Acc
-            end
-        end,
-        Triples,
-        AboutSubjects),
-    AboutObjects = m_edge:objects(RscId, about, Context),
-    Triples2 = case m_rsc:is_a(RscId, CatId, Context) of
-        true ->
-            lists:foldl(
-                fun(AboutObject, Acc) ->
-                      Triple = #triple{
-                                  predicate = rdf_property:schema(<<"parentItem">>),
-                                  object = m_rsc:p(AboutObject, uri, Context)
-                                 },
-                      [ Triple | Acc ]
-                end,
-                Triples1,
-                AboutObjects
-             );
-        false ->
-            Triples1
-    end,
-    case is_likeable(RscId, Context) of
-        true ->
-            Upvotes = #triple{
-                predicate = rdf_property:schema(<<"upvoteCount">>),
-                object = #rdf_value{value = length(m_edge:subjects(RscId, like, Context))}
-            },
-            [ Upvotes | Triples2 ];
-        false ->
-            Triples2
-    end.
+
+observe_triple_to_rdf(
+    #triple_to_rdf{
+        rsc_id = RscId,
+        category = remark,
+        link_type = property,
+        link_name = <<"id">>,
+        value = RscId,
+        ontology = activitystreams
+    },
+    Context
+) ->
+    {ok, rdf_activitystreams:type_triple(RscId, <<"Note">>, Context)};
+observe_triple_to_rdf(
+    #triple_to_rdf{
+        rsc_id = RscId,
+        category = reference,
+        link_type = property,
+        link_name = <<"id">>,
+        value = RscId,
+        ontology = activitystreams
+    },
+    Context
+) ->
+    {ok, rdf_activitystreams:type_triple(RscId, <<"Page">>, Context)};
+observe_triple_to_rdf(_TripleToRdf, _Context) ->
+    undefined.
 
 -spec observe_tick_1h(atom(), z:context()) -> any().
 observe_tick_1h(tick_1h, Context) ->
@@ -826,13 +790,3 @@ observe_validate_subjects({validate_subjects, {postback, Id, Value, Args}}, Cont
                     {{error, Id, "Voeg minstens 4 tags toe"}, Context1}
             end
     end.
-
--spec is_likeable(m_rsc:resource(), z:context()) -> boolean().
-is_likeable(Rsc, Context) ->
-    {ok, Like} = m_predicate:name_to_id(like, Context),
-    lists:any(
-        fun(C) ->
-            m_rsc:is_a(Rsc, C, Context)
-        end,
-        m_predicate:objects(Like, Context)
-    ).
