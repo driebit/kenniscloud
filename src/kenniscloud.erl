@@ -63,9 +63,15 @@
 
 init(Context) ->
     z_pivot_rsc:define_custom_pivot(
-      kenniscloud_users,
-      [{has_depiction, "boolean"}],
-      Context),
+        kenniscloud_users,
+        [{has_depiction, "boolean"}],
+        Context
+    ),
+    z_pivot_rsc:define_custom_pivot(
+        kenniscloud_rscs,
+        [{main_date, "timestamp with time zone"}],
+        Context
+    ),
     m_config:set_value(mod_acl_user_groups, collab_group_link, <<"member">>, Context),
     m_config:set_value(mod_acl_user_groups, collab_group_update, <<"manager">>, Context),
     m_config:set_value(site, maptiler_key, <<"">>, Context),
@@ -501,8 +507,26 @@ observe_custom_pivot({custom_pivot, Id}, Context0) ->
         _ ->
             true
     end,
-    Props = [{has_depiction, HasDepiction}],
-    {kenniscloud_users, Props}.
+
+    % The "main" date displayed in cards/pages of each resource:
+    DateStart = m_rsc:p(Id, <<"date_start">>, SudoContext),
+    PubStart = m_rsc:p(Id, <<"publication_start">>, SudoContext),
+    Created = m_rsc:p(Id, <<"created">>, SudoContext),
+    IsEvent = m_rsc:is_a(Id, event, SudoContext),
+
+    MainDate = if
+        IsEvent andalso DateStart =/= undefined -> DateStart;
+        PubStart =/= undefined -> PubStart;
+        true -> Created
+    end,
+    [
+        {kenniscloud_users,
+            [{has_depiction, HasDepiction}]
+        },
+        {kenniscloud_rscs,
+            [{main_date, MainDate}]
+        }
+    ].
 
 %% @doc Register activity (when the resource has been published) to send out notifications.
 -spec observe_rsc_update_done(#rsc_update_done{}, z:context()) -> ok.
@@ -587,6 +611,35 @@ observe_search_query_term(#search_query_term{ term = <<"user_kg_or_region">> }, 
                 end,
                 m_kc_user:regions(UserId, Context)
             )
+    };
+
+observe_search_query_term(#search_query_term{ term = <<"main_date_after">>, arg = Date }, Context) ->
+    %% Filter on main_date after a specific date.
+    #search_sql_term{
+        join_inner = #{
+            <<"pivot_kenniscloud_rscs">> =>
+                {<<"pivot_kenniscloud_rscs">>, <<"pivot_kenniscloud_rscs.id = rsc.id">>}
+        },
+        where = [
+            <<"pivot_kenniscloud_rscs.main_date >= ">>, '$1'
+        ],
+        args = [
+            z_datetime:to_datetime(Date, Context)
+        ]
+    };
+observe_search_query_term(#search_query_term{ term = <<"main_date_before">>, arg = Date }, Context) ->
+    %% Filter on main_date before a specific date.
+    #search_sql_term{
+        join_inner = #{
+            <<"pivot_kenniscloud_rscs">> =>
+                {<<"pivot_kenniscloud_rscs">>, <<"pivot_kenniscloud_rscs.id = rsc.id">>}
+        },
+        where = [
+            <<"pivot_kenniscloud_rscs.main_date <= ">>, '$1'
+        ],
+        args = [
+            z_datetime:to_datetime(Date, Context)
+        ]
     };
 
 observe_search_query_term(_, _Context) ->
