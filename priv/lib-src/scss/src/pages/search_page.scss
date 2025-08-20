@@ -84,9 +84,8 @@ body {
     }
 
     .c-fixed-ranges__input--selected {
-        background-color: $mainThemeColor;
-        color: $white;
-        border: 1px solid $white;
+        background-color: $white;
+        border: 2px solid $mainThemeColor;
     }
 
     .c-pagination__button--active {
