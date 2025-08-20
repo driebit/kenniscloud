@@ -5,7 +5,7 @@
         {% endif %}
             <article>
                 <div class="list__item__image">
-                    {% image id.og_image mediaclass="list-image" alt="" title="" crop=dep_rsc.crop_center %}
+                    <img src="{{ id.og_image }}" alt="">
                 </div>
                 <div class="list__item__content">
                     <div class="list__item__title">
