@@ -18,16 +18,27 @@ body {
         .list__item__title h3 {
             word-break: break-all;
         }
+
+        .category-of {
+            word-break: break-all;
+        }
     }
 
     .c-full-text-search {
         background-color: $kgColor;
         padding: 7rem 0;
+        display: block;
     }
 
     .c-full-text-search::after {
-        content: "*";
+        content: "";
         position: absolute;
+    }
+
+    .c-full-text-search__wrapper {
+        width: 90%;
+        max-width: 100rem;
+
     }
 
     .c-full-text-search__searchbar {
@@ -35,6 +46,7 @@ body {
         border: none;
         border-radius: 0;
         background-color: $white;
+
     }
 
     .c-search-filters {
