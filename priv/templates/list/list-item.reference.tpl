@@ -5,7 +5,7 @@
         {% endif %}
             <article>
                 <div class="list__item__image">
-                    <img src="{{ id.og_image }}" alt="">
+                    {% if id.og_image %}<img src="{{ id.og_image }}" alt="">{% endif %}
                 </div>
                 <div class="list__item__content">
                     <div class="list__item__title">
