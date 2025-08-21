@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 body {
     .c-search {
         background-color: $white;
@@ -11,6 +13,10 @@ body {
         .list__item img {
             height: 100%;
             object-fit: cover;
+        }
+
+        .list__item__title h3 {
+            word-break: break-all;
         }
     }
 
@@ -41,6 +47,16 @@ body {
 
     .c-sort__select {
         padding: 1rem;
+    }
+
+    .c-multiselect__pill {
+        background-color: $green;
+        border: none;
+        color: $white;
+
+        &:hover {
+            background-color: color.adjust($green, $lightness: -10%);
+        }
     }
 
     .c-multiselect__option input[type="checkbox"], .c-checkboxes__item input[type="checkbox"] {
