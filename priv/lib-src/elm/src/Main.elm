@@ -43,8 +43,14 @@ port logError : String -> Cmd msg
 
 -- MAIN
 
+type alias Flags =
+    { pageId : PageId
+    , now : Int
+    , remarkId : Maybe Int
+    , isClosed : Bool
+    }
 
-main : Program ( PageId, Int, Maybe Int ) Model Msg
+main : Program Flags Model Msg
 main =
     Browser.element
         { init = init
@@ -76,6 +82,7 @@ type alias Model =
     , isOngoingTask : Bool
     , now : Util.Now
     , remarkId : Maybe PageId
+    , pageIsClosed: Bool
     }
 
 
@@ -97,21 +104,20 @@ type alias IsReply =
 -- INIT
 
 
-init : ( PageId, Int, Maybe Int ) -> ( Model, Cmd Msg )
-init ( pageId, now, remarkId ) =
+init : Flags -> ( Model, Cmd Msg )
+init flags =
     ( { remarks = []
       , group = DefaultGroup
       , user = Anonymous
       , editor = Closed
-      , pageId = pageId
+      , pageId = flags.pageId
       , isOngoingTask = False
-      , now = Util.millisToNow now
-      , remarkId = remarkId
+      , now = Util.millisToNow flags.now
+      , remarkId = flags.remarkId
+      , pageIsClosed = flags.isClosed
       }
-    , Task.attempt GotRemarksData (Api.getRemarksData pageId)
+    , Task.attempt GotRemarksData (Api.getRemarksData flags.pageId)
     )
-
-
 
 -- UPDATE
 
@@ -259,7 +265,7 @@ view : Model -> Html Msg
 view model =
     section []
         [ viewRemarks model.now model.remarks model.editor model.user False
-        , viewParticipate model.editor model.user model.pageId
+        , viewParticipate model.pageIsClosed model.editor model.user model.pageId
         ]
 
 
@@ -565,14 +571,14 @@ viewRemarkFooterLikes likes =
 -- CALL TO ACIONS
 
 
-viewParticipate : Editor -> User -> PageId -> Html Msg
-viewParticipate editor user pageId =
+viewParticipate : Bool -> Editor -> User -> PageId -> Html Msg
+viewParticipate pageIsClosed editor user pageId =
     case ( user, editor ) of
         ( Anonymous, _ ) ->
             text ""
 
         ( User profile, Closed ) ->
-            viewParticipateButton profile pageId
+            viewParticipateButton pageIsClosed profile pageId
 
         ( User profile, Open (New id) editor_ ) ->
             Ginger.Util.viewIf (id == pageId) <|
@@ -583,12 +589,15 @@ viewParticipate editor user pageId =
             text ""
 
 
-viewParticipateButton : Profile -> PageId -> Html Msg
-viewParticipateButton profile pageId =
-    div [ class "status" ]
-        [ img [ class "avatar", src profile.userAvatarUrl ]
-            []
-        , button
-            [ class "btn--new-remark", onClick (NewRemark pageId) ]
-            [ text "Reageer op deze bijdrage" ]
-        ]
+viewParticipateButton : Bool -> Profile -> PageId -> Html Msg
+viewParticipateButton pageIsClosed profile pageId =
+    if pageIsClosed then
+        text "" -- hide the button
+    else
+        div [ class "status" ]
+            [ img [ class "avatar", src profile.userAvatarUrl ]
+                []
+            , button
+                [ class "btn--new-remark", onClick (NewRemark pageId) ]
+                [ text "Reageer op deze bijdrage" ]
+            ]

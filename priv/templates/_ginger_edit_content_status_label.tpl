@@ -25,6 +25,7 @@
             <option value="Meetup" {% if id.status_label == "Meetup" %}selected{% endif %}>{_ Meetup _}</option>
             <option value="Insights" {% if id.status_label == "Insights" %}selected{% endif %}>{_ Insights _}</option>
             <option value="Discussion" {% if id.status_label == "Discussion" %}selected{% endif %}>{_ Discussion _}</option>
+            <option value="Closed" {% if id.status_label == "Closed" %}selected{% endif %}>{_ Closed _}</option>
         </select>
     </div>
 </div>

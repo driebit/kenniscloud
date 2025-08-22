@@ -73,9 +73,11 @@
                             Registreer of log in om te reageren
                         </a>
                     {% else %}
+                        {% if id.status_label != "Closed" %}
                         <a href="#reacties" class="do_anchor btn--primary -is-anchor">
                             Direct reageren
                         </a>
+                        {% endif %}
                     {% endif %}
                     </div>
 

@@ -640,7 +640,11 @@ msgstr "Voortgang labels zijn zichtbaar in de kennisgroep"
 
 #: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:20
 msgid "Status labels are visible on contributions and meetups"
-msgstr "Status labels zijn zichtbaar op bijdragen en meetups"
+msgstr "Status labels zijn zichtbaar op bijdragen en meetups."
+
+#: user/sites/kenniscloud/templates/_admin_edit_basics_form.contribution.tpl
+msgid "status-close-remark-reminder"
+msgstr "Vergeet niet een laatste reactie te geven voor je de bijdrage sluit!"
 
 #: user/sites/kenniscloud/templates/_admin_edit_basics.acl_collaboration_group.tpl:
 msgid "Timeline off"
@@ -733,6 +737,10 @@ msgstr "Inzichten"
 #priv/templates/keywords/status-tags.tpl
 msgid "Discussion"
 msgstr "Discussie"
+
+#priv/templates/keywords/status-tags.tpl
+msgid "Closed"
+msgstr "Gesloten"
 
 #priv/templates/keywords/knowledge-lvl-tags.tpl
 msgid "Question"
