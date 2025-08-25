@@ -498,3 +498,50 @@ and is compiled from content satisfying the following criteria:
     -   `Collabgroup -> hasproject -> Project -> hasexpertscientist -> Person`
 
 <!-- **TODO** Describe sub-groups functionality -->
+
+## RDF and Linked Open Data
+
+Kenniscloud supports RDF representations of any resource based on the
+[zotonic_mod_driebit_rdf](https://github.com/driebit/zotonic_mod_driebit_rdf)
+module.
+
+Specifically, given a resource `<id>`, it's possible to obtain its
+[turtle](https://www.w3.org/TR/rdf12-turtle/) or [JSON+LD](https://www.w3.org/TR/json-ld11/)
+representation in the [schema.org ontology](https://schema.org/docs/about.html)
+by requesting the:
+```
+/id/<id>
+```
+page with an `Accept` header of `text/turtle` or `application/ld+json`, respectively.
+
+Alternatively, these can also be found at a specific API endpoints for convenience:
+```
+/rdf/turtle/<id>
+/rdf/json_ld/<id>
+```
+
+Note: resource IDs can be found in the URL of pages (e.g. `page/<id>/some-text`)
+and any saved search `query` is represented as a collection of results, which
+can be used for discoverability.
+
+See the documentation of [zotonic_mod_driebit_rdf](https://github.com/driebit/zotonic_mod_driebit_rdf)
+for all the available setting and options.
+
+### Activitypub
+
+Kenniscloud also supports [the activitypub's protocol](https://www.w3.org/TR/activitypub/)
+based on the [zotonic_mod_driebit_activity](https://github.com/driebit/zotonic_mod_driebit_activity)
+module.
+
+The activitypub representation of any resource can also be obtained by requesting
+either:
+1. `/id/<id>` with the `application/ld+json; profile="https://www.w3.org/ns/activitystreams` `Accept` header; or
+2. `/rdf/activitypub/<id>` for simplicity
+
+Kenniscloud tracks user activity on likes (and their undoing), comments and
+contributions and automatically puts it in the `inbox` of the interested users,
+(which will be notified on the site, see above) and in the `outbox`/`liked`
+collections of the users performing the action.
+
+See the documentation of [zotonic_mod_driebit_activity](https://github.com/driebit/zotonic_mod_driebit_activity)
+for more information and available options.
