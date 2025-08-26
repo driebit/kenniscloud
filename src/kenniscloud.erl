@@ -770,6 +770,180 @@ observe_triple_to_rdf(
     Context
 ) ->
     {ok, rdf_activitystreams:type_triple(RscId, <<"Page">>, Context)};
+observe_triple_to_rdf(
+    #triple_to_rdf{
+        rsc_id = RscId,
+        category = event,
+        link_type = property,
+        link_name = <<"title">>,
+        value = Value,
+        ontology = schema_org
+    },
+    Context
+) ->
+    {ok, rdf_utils:value_triple(
+        RscId,
+        rdf_schema_org:namespaced_iri(name),
+        Value,
+        Context
+    )};
+observe_triple_to_rdf(
+    #triple_to_rdf{
+        rsc_id = RscId,
+        category = event,
+        link_type = property,
+        link_name = <<"address_city">>,
+        value = Value,
+        ontology = schema_org
+    },
+    Context
+) ->
+    {ok, rdf_utils:nested_triple(
+        RscId,
+        [rdf_schema_org:namespaced_iri(location), rdf_schema_org:namespaced_iri(addressLocality)],
+        Value,
+        Context
+    )};
+observe_triple_to_rdf(
+    #triple_to_rdf{
+        rsc_id = RscId,
+        category = event,
+        link_type = property,
+        link_name = <<"address_postcode">>,
+        value = Value,
+        ontology = schema_org
+    },
+    Context
+) ->
+    {ok, rdf_utils:nested_triple(
+        RscId,
+        [rdf_schema_org:namespaced_iri(location), rdf_schema_org:namespaced_iri(postalCode)],
+        Value,
+        Context
+    )};
+observe_triple_to_rdf(
+    #triple_to_rdf{
+        rsc_id = RscId,
+        category = event,
+        link_type = property,
+        link_name = <<"address_street_1">>,
+        value = Value,
+        ontology = schema_org
+    },
+    Context
+) ->
+    {ok, rdf_utils:nested_triple(
+        RscId,
+        [rdf_schema_org:namespaced_iri(location), rdf_schema_org:namespaced_iri(streetAddress)],
+        Value,
+        Context
+    )};
+observe_triple_to_rdf(
+    #triple_to_rdf{
+        rsc_id = RscId,
+        category = event,
+        link_type = property,
+        link_name = <<"address_country">>,
+        value = Value,
+        ontology = schema_org
+    },
+    Context
+) ->
+    {ok, rdf_utils:nested_triple(
+        RscId,
+        [rdf_schema_org:namespaced_iri(location), rdf_schema_org:namespaced_iri(addressCountry)],
+        Value,
+        Context
+    )};
+observe_triple_to_rdf(
+    #triple_to_rdf{
+        rsc_id = RscId,
+        category = event,
+        link_type = property,
+        link_name = <<"body">>,
+        value = Value,
+        ontology = schema_org
+    },
+    Context
+) ->
+    {ok, [
+        rdf_utils:nested_triple(
+            RscId,
+            [rdf_schema_org:namespaced_iri(about), rdf_schema_org:namespaced_iri(articleBody)],
+            Value,
+            Context
+        ),
+        rdf_utils:nested_triple(
+            RscId,
+            [rdf_schema_org:namespaced_iri(about), rdf_schema_org:namespaced_iri(encodingFormat)],
+            <<"text/html">>,
+            Context
+        ),
+        rdf_utils:nested_triple(
+            RscId,
+            [rdf_schema_org:namespaced_iri(about), rdf_xsd:rdf_namespaced_iri(type)],
+            rdf_schema_org:namespaced_iri(<<"Article">>),
+            Context
+        )
+    ]};
+observe_triple_to_rdf(
+    #triple_to_rdf{
+        rsc_id = RscId,
+        category = acl_collaboration_group,
+        link_type = property,
+        link_name = <<"id">>,
+        value = RscId,
+        ontology = schema_org
+    },
+    Context
+) ->
+    TypeTriple = rdf_schema_org:type_triple(RscId, <<"Collection">>, Context),
+    #search_result{ result = Contribs } = z_search:search(
+        <<"query">>,
+        [{cat, contribution}, {content_group, RscId}],
+        1,
+        undefined,
+        Context
+    ),
+    #search_result{ result = Events } = z_search:search(
+        <<"query">>,
+        [{cat, event}, {content_group, RscId}],
+        1,
+        undefined,
+        Context
+    ),
+    ContribTriples = lists:map(
+        fun (ItemId) ->
+            #rdf_triple{
+                subject = rdf_utils:resolve_iri(RscId, Context),
+                predicate = rdf_schema_org:namespaced_iri(hasPart),
+                object = rdf_utils:value_triple(
+                    ItemId,
+                    rdf_schema_org:namespaced_iri(dateCreated),
+                    m_rsc:p(ItemId, <<"created">>, Context),
+                    Context
+                )
+            }
+        end,
+        Contribs
+    ),
+    EventTriples = lists:map(
+        fun (ItemId) ->
+            #rdf_triple{
+                subject = rdf_utils:resolve_iri(RscId, Context),
+                predicate = rdf_schema_org:namespaced_iri(hasPart),
+                object = rdf_utils:value_triple(
+                    ItemId,
+                    rdf_schema_org:namespaced_iri(startDate),
+                    m_rsc:p(ItemId, <<"date_start">>, Context),
+                    Context
+                )
+            }
+        end,
+        Events
+    ),
+    {ok, [TypeTriple] ++ ContribTriples ++ EventTriples};
+
 observe_triple_to_rdf(_TripleToRdf, _Context) ->
     undefined.
 
