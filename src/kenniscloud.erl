@@ -912,33 +912,47 @@ observe_triple_to_rdf(
         undefined,
         Context
     ),
-    ContribTriples = lists:map(
+    ContribTriples = lists:flatmap(
         fun (ItemId) ->
-            #rdf_triple{
-                subject = rdf_utils:resolve_iri(RscId, Context),
-                predicate = rdf_schema_org:namespaced_iri(hasPart),
-                object = rdf_utils:value_triple(
-                    ItemId,
-                    rdf_schema_org:namespaced_iri(dateCreated),
-                    m_rsc:p(ItemId, <<"created">>, Context),
-                    Context
-                )
-            }
+            [
+                #rdf_triple{
+                    subject = rdf_utils:resolve_iri(RscId, Context),
+                    predicate = rdf_schema_org:namespaced_iri(hasPart),
+                    object = rdf_utils:value_triple(
+                        ItemId,
+                        rdf_schema_org:namespaced_iri(dateCreated),
+                        m_rsc:p(ItemId, <<"created">>, Context),
+                        Context
+                    )
+                },
+                #rdf_triple{
+                    subject = rdf_utils:resolve_iri(RscId, Context),
+                    predicate = rdf_schema_org:namespaced_iri(hasPart),
+                    object = rdf_schema_org:type_triple(ItemId, <<"Article">>, Context)
+                }
+            ]
         end,
         Contribs
     ),
-    EventTriples = lists:map(
+    EventTriples = lists:flatmap(
         fun (ItemId) ->
-            #rdf_triple{
-                subject = rdf_utils:resolve_iri(RscId, Context),
-                predicate = rdf_schema_org:namespaced_iri(hasPart),
-                object = rdf_utils:value_triple(
-                    ItemId,
-                    rdf_schema_org:namespaced_iri(startDate),
-                    m_rsc:p(ItemId, <<"date_start">>, Context),
-                    Context
-                )
-            }
+            [
+                #rdf_triple{
+                    subject = rdf_utils:resolve_iri(RscId, Context),
+                    predicate = rdf_schema_org:namespaced_iri(hasPart),
+                    object = rdf_utils:value_triple(
+                        ItemId,
+                        rdf_schema_org:namespaced_iri(startDate),
+                        m_rsc:p(ItemId, <<"date_start">>, Context),
+                        Context
+                    )
+                }
+                #rdf_triple{
+                    subject = rdf_utils:resolve_iri(RscId, Context),
+                    predicate = rdf_schema_org:namespaced_iri(hasPart),
+                    object = rdf_schema_org:type_triple(ItemId, <<"Event">>, Context)
+                }
+            ]
         end,
         Events
     ),
