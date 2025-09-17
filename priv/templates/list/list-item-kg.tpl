@@ -17,7 +17,11 @@
     {% endif %}
     <a href="{{ ref.page_url }}">
         {% if id.status_label %} 
-            <div class="list-item-kg-contribution__lvl">{{ id.status_label|translate }}</div>
+        	{% if id.status_label == 'Closed' %}
+		    <div class=" list-item-kg-contribution__lvl list-item-kg-contribution__lvl--closed">{{ id.status_label|translate }}</div>
+		{% else %} 
+		    <div class="list-item-kg-contribution__lvl">{{ id.status_label|translate }}</div>
+		{% endif %}
         {% endif %}
         <div {% if dep %}class="list-item-kg-contribution__content"{% endif %}>
             <div class="list-item-kg__top">

@@ -17,9 +17,15 @@
         hash = null
     };
 
+    //ocataco: last flag is passed to indicate this page is closed, and no new remarks are allowed
     var app = Elm.Main.init({
         node: remarksElement,
-        flags: [{{ id }}, now, hash]
+        flags: { 
+                 pageId: {{ id }}, 
+                 now: now, 
+                 remarkId: hash, 
+                 isClosed: {{id.status_label == 'Closed'}}
+                 } 
     });
 
     app.ports.scrollIdIntoView.subscribe(function(domId) {

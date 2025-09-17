@@ -66,6 +66,16 @@
     }
 }
 
+.kg-intro_status--closed,
+.kg-intro_status--gesloten {
+    border-color: $greenDarker;
+    background-color: rgba($greenDarker, 0.6);
+
+    &::before {
+        background-image: url(/lib/images/closed.svg);
+    }
+}
+
 .c-contribution__lvl {
     background-color: $greenDarker;
     border: none;
@@ -87,4 +97,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     z-index: 2;
     pointer-events: none;
+
+    &--closed {
+      background-color: $grey; 
+  }
 }
