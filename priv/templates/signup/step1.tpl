@@ -16,7 +16,7 @@
                 <div class="widget-content">
                     <div class="form-group row u-d-flex u-flex-col">
                         <div class="form-group col-md-12">
-                            <label class="control-label" for="name_first">{_ First _}</label>
+                            <label class="control-label" for="name_first">{_ First name _}</label>
                             <div>
                                 <input class="form-control" id="name_first" type="text" name="name_first" value="{{ id.name_first }}" />
                             </div>
