@@ -1,6 +1,6 @@
 <div class="ginger-edit__aside-item ginger-edit__aside {{ extraClass }}" id="ginger-edit__aside">
-
-    <h3 class="section-title">{_ Progress label _}</h3>
+    {# This has been commented out on request from Frank in order to better establish a way to use these and explain to the user #}
+    {# <h3 class="section-title">{_ Progress label _}</h3>
     <label class="control-label" for="progress-label">{_ Progress labels are visible on the knowledgegroup _}</label>
     <div class="form-group row ">
         {% with m.search[{query cat_exact=`status_keyword`}] as statuses %}
@@ -14,7 +14,7 @@
                 {% endfor %}
             </select>
         {% endwith %}
-    </div>
+    </div> #}
 
     <h3 class="section-title">{_ Status label _}</h3>
     <label class="control-label" for="status-label">{_ Status labels are visible on contributions and meetups _}</label>

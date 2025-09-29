@@ -741,3 +741,7 @@ msgstr "Vraag"
 #priv/templates/keywords/knowledge-lvl-tags.tpl
 msgid "Insight"
 msgstr "Inzicht"
+
+#priv/templates/keywords/knowledge-lvl-tags.tpl
+msgid "Sur. prefix"
+msgstr "Voorvoegsel"

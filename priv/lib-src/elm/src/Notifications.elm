@@ -370,7 +370,10 @@ getNotificationsTask =
                     ]
                     []
                 )
-                (Decode.field "orderedItems" (Decode.list (Decode.field "@id" Decode.string)))
+                (Decode.maybe
+                    (Decode.field "orderedItems" (Decode.list (Decode.field "@id" Decode.string)))
+                    |> Decode.map (Maybe.withDefault [])
+                )
 
         notificationsTask inboxIds =
             Task.sequence (List.map getNotificationTask inboxIds)
