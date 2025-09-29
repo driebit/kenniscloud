@@ -751,5 +751,5 @@ msgid "to include a presentation you need to use the embed code in the following
 msgstr "om een presentatie op te nemen, moet u de embedcode in het volgende formaat gebruiken"
 
 #priv/templates/keywords/knowledge-lvl-tags.tpl
-msgid "Mentimeter and OpnForm"
-msgstr "Mentimeter en OpnForm"
+msgid "Embed poll via Mentimeter or OpnForm"
+msgstr "Poll embedden via Mentimeter of OpnForm"
