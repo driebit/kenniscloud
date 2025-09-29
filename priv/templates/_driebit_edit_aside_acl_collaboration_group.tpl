@@ -50,6 +50,7 @@
         </div>
 
         {% if m.acl.use.mod_admin %}
+            <h4 style="margin-top: 40px;">{_ Mentimeter and OpnForm _}</h4>
             <label class="control-label col-md-12" for="has_menti">
                 <input type="checkbox" id="has_menti" name="has_menti"
                     value="1"
@@ -57,10 +58,11 @@
                     {% if not id.is_editable %}disabled="disabled"{% endif %} />
                 {_ Mentimeter toevoegen _}
             </label>
-            <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="app/presentation/abcdefg" class="control-label col-md-12"
+            <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="aloc6zmqtnfh" class="control-label col-md-12"
                     {% if not id.is_editable %}disabled="disabled"{% endif %} />
             <label class="control-label col-md-12" for="has_mentilink">
-                {_ Mentimeter embed url _}
+                {_ Mentimeter embed url or code _}
+                <span class="help-block">{_ to include a presentation you need to use the embed code in the following format _}: "app/presentation/al3bdpfthdpo9h5dwqjoch24ej6ofskc"</span>
             </label>
 
             <label class="control-label col-md-12" for="has_opnform">
