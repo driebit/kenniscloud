@@ -1,7 +1,8 @@
 <div class="u-d-flex u-flex-col u-flex-gap-2">
-    {% if id|kc_collaboration_group_progress_label as result %}
+    {# This has been commented out on request from Frank in order to better establish a way to use these and explain to the user #}
+    {# {% if id|kc_collaboration_group_progress_label as result %}
         {% catinclude "keywords/progress-tags.tpl" id latest_contribution=result.id %} 
-    {% endif %}
+    {% endif %} #}
 
     {% live
         template="person/person-list.tpl"
