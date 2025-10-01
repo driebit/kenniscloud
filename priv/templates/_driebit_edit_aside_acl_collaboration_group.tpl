@@ -50,7 +50,7 @@
         </div>
 
         {% if m.acl.use.mod_admin %}
-            <h4 style="margin-top: 40px;">{_ Poll embedden via Mentimeter of OpnForm _}</h4>
+            <h4 style="margin-top: 40px;">{_ Embed poll via Mentimeter or OpnForm _}</h4>
             <label class="control-label col-md-12" for="has_menti">
                 <input type="checkbox" id="has_menti" name="has_menti"
                     value="1"
