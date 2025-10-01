@@ -65,11 +65,13 @@
     </label>
 </div>
 {% if m.acl.use.mod_admin %}
+    <h4 style="margin-top: 40px;">{_ Embed poll via Mentimeter or OpnForm _}</h4>
     <div class="form-group row col-md-12">
-        <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="app/presentation/abcvshfkdl" class="ltr do_autofocus field-title form-control"
+        <input type="text" id="has_mentilink" name="has_mentilink" value="{{ id.has_mentilink }}" placeholder="abcvshfkdl" class="ltr do_autofocus field-title form-control"
                 {% if not id.is_editable %}disabled="disabled"{% endif %} />
             {_ Mentimeter embed id _}
         <label class="control-label" for="has_mentilink">
+        {_ to include a presentation you need to use the embed code in the following format _}: "app/presentation/al3bdpfthdpo9h5dwqjoch24ej6ofskc"
         </label>
     </div>
 
