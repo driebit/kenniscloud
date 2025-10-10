@@ -258,21 +258,21 @@
 
 /* the new ribbon for past events */
 .event-status__past {
-  position: absolute;
-  top: 74px;
-  right: -26px;
-  width: 140px;
-  padding: 6px 0;
-  background-color: #197c87;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1rem;
-  transform: rotate(45deg);
-  transform-origin: top right;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  z-index: 1;
-  pointer-events: none;
+    position: absolute;
+    top: 74px;
+    right: -26px;
+    width: 140px;
+    padding: 6px 0;
+    background-color: $grey;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    transform: rotate(45deg);
+    transform-origin: top right;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    pointer-events: none;
 }
 
 .list-item-kg__content--og {
