@@ -1,6 +1,6 @@
 <div class="ginger-edit__aside-item ginger-edit__aside" id="ginger-edit__aside">
-    <h3 class="section-title">{_ Status Label _}</h3>
-    <label class="control-label" for="status-label">{_ Status labels are visible on contributions and meetups _}</label>
+    <h3 class="section-title">{_ Kennis Type _}</h3>
+    <label class="control-label" for="status-label">{_ Kennis types are visible on contributions and meetups _}</label>
     <div class="form-group row">
         <select id="status-label" name="status_label" class="form-control c-status-select">
             <option value="">{_ Select a status _}</option>
