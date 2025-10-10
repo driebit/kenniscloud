@@ -11,12 +11,13 @@
     font-size: $superSmallFont;
     font-weight: 600;
     border: 2px solid;
+    border-top: none;
     text-transform: uppercase;
     color: $white;
     justify-content: center;
     border-radius: 2px;
 
-    &::before {
+    &::after {
         content: "";
         width: 2rem;
         height: 2rem;
@@ -32,7 +33,7 @@
     border-color: $greenMint;
     background-color: rgba($greenMint, 0.6);
 
-    &::before {
+    &::after {
         background-image: url(/lib/images/preparation.svg);
     }
 }
@@ -41,7 +42,7 @@
     border-color: $purpleLight;
     background-color: rgba($purpleLight, 0.6);
 
-    &::before {
+    &::after {
         background-image: url(/lib/images/meetup.svg);
     }
 }
@@ -51,7 +52,7 @@
     border-color: $blueSky;
     background-color: rgba($blueSky, 0.6);
 
-    &::before {
+    &::after {
         background-image: url(/lib/images/idea.svg);
     }
 }
@@ -61,7 +62,7 @@
     border-color: $coral;
     background-color: rgba($coral, 0.6);
 
-    &::before {
+    &::after {
         background-image: url(/lib/images/discussion.svg);
     }
 }

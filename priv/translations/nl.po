@@ -619,8 +619,8 @@ msgid "Progress label"
 msgstr "Voortgang label"
 
 #: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:19
-msgid "Status label"
-msgstr "Status label"
+msgid "Kennis Type"
+msgstr "Kennis Type"
 
 #: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:8
 msgid "Select a progress label"
@@ -639,8 +639,8 @@ msgid "Progress labels are visible on the knowledgegroup"
 msgstr "Voortgang labels zijn zichtbaar in de kennisgroep"
 
 #: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:20
-msgid "Status labels are visible on contributions and meetups"
-msgstr "Status labels zijn zichtbaar op bijdragen en meetups"
+msgid "Kennis types are visible on contributions and meetups"
+msgstr "Kennis types zijn zichtbaar op bijdragen en meetups"
 
 #: user/sites/kenniscloud/templates/_admin_edit_basics.acl_collaboration_group.tpl:
 msgid "Timeline off"
