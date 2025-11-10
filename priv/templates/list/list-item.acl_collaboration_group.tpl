@@ -23,7 +23,7 @@
                         </h3>
 
 					</div>
-					{% include "keywords/keywords.tpl" nolink="true" slice_items=5 %}
+					{% include "keywords/keywords.tpl" slice_items=5 %}
 
 					<div class="list__item__meta">
 						<p>Aantal leden <b>{{ id|kc_collaboration_group_members|length }}</b></p>

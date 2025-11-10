@@ -5,6 +5,10 @@
     list-style: none;
     font-family: $tertiaryFontFamily;
 
+    .btn--secondary a {
+        all: unset;
+    }
+
     .btn--secondary {
         padding: 5px 15px;
         margin: 0 8px 8px 0;
@@ -12,7 +16,7 @@
         font-size: $superSmallFont;
         color: $white;
         background: none;
-        transition: all .2s;
+        transition: all 0.2s;
 
         &.is-active {
             color: $mainThemeColor;
