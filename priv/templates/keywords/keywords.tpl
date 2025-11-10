@@ -3,11 +3,11 @@
 	    <ul class="keywords">
 	        {% for id in results|slice:slice_items %}
 	            {% if id.is_visible %}
-	                <li>
+	                <li class="btn--secondary">
 	                	{% if nolink == "true" %}
-							<div class="btn--secondary" title="{{ m.rsc[id].title }}">{{ m.rsc[id].title|truncate:12 }}</div>
+							<div title="{{ m.rsc[id].title }}">{{ m.rsc[id].title|truncate:12 }}</div>
 	               		{% else %}
-	                		<a href="{% url page id=id type="subject" direction="object" %}" title="{{ m.rsc[id].title }}" class="btn--secondary">{{ m.rsc[id].title }}</a>
+	                		<a href="/search?tag={{ id }}" title="{{ m.rsc[id].title }}">{{ m.rsc[id].title }}</a>
 	                	{% endif %}
 	                </li>
 	            {% endif %}
