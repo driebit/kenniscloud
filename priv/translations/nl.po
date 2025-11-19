@@ -744,11 +744,11 @@ msgstr "Inzicht"
 
 #priv/templates/keywords/knowledge-lvl-tags.tpl
 msgid "Sur. prefix"
-msgstr "Voorvoegsel"
+msgstr "Tussenvoegsel"
 
 #priv/templates/keywords/knowledge-lvl-tags.tpl
-msgid "to include a presentation you need to use the embed code in the following format"
-msgstr "om een presentatie op te nemen, moet u de embedcode in het volgende formaat gebruiken"
+msgid "enter the unique mentimeter embed id here"
+msgstr "voer hier het unieke mentimeter embed id in"
 
 #priv/templates/keywords/knowledge-lvl-tags.tpl
 msgid "Embed poll via Mentimeter or OpnForm"
