@@ -75,7 +75,7 @@
 
 .list-item-kg-contribution__lvl {
     position: absolute;
-    top: 15px;
+    bottom: 15px;
     right: -45px;
     width: 140px;
     padding: 6px 0;
@@ -84,7 +84,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 1rem;
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     z-index: 2;
     pointer-events: none;

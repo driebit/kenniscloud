@@ -71,7 +71,7 @@
                 {% if not id.is_editable %}disabled="disabled"{% endif %} />
             {_ Mentimeter embed id _}
         <label class="control-label" for="has_mentilink">
-        {_ to include a presentation you need to use the embed code in the following format _}: "app/presentation/al3bdpfthdpo9h5dwqjoch24ej6ofskc"
+        {_ enter the unique mentimeter embed id here _}
         </label>
     </div>
 

@@ -123,10 +123,6 @@
     margin-top: 2rem;
 }
 
-.list-item-kg__task {
-    margin-left: auto;
-}
-
 .list-item-kg__task--white {
     background: white;
     padding: 0.5em 1em;
@@ -446,6 +442,15 @@
         display: block;
         color: $typographyColor;
 
+        &.is-kg {
+            position: absolute;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+            z-index: 11;
+        }
+
         @include setInteractive {
             .list__item__title {
                 background: color-mix(in srgb, $greyLight 90%, black);
@@ -760,4 +765,20 @@
 
 .c-card--reference .og-data__content {
     border: 0;
+}
+
+.c-search-results__item .list__item__content--faq h3 {
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.c-search-results__item .list__item__content--faq .list__item__summary b {
+    line-clamp: 7;
+    -webkit-line-clamp: 7;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

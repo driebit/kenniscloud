@@ -17,6 +17,7 @@
         color: $white;
         background: none;
         transition: all 0.2s;
+        z-index: 12;
 
         &.is-active {
             color: $mainThemeColor;
