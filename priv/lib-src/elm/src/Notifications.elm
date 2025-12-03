@@ -124,7 +124,7 @@ type alias PartialNotificationContent =
     { id : Id
     , target_id : String
     , actor_id : String
-    , object_id : String
+    , object_id : Maybe String
     , published : Posix
     , to : List UserId
     }
@@ -377,48 +377,79 @@ getNotificationsTask =
 
         notificationsTask inboxIds =
             Task.sequence (List.map getNotificationTask inboxIds)
+                |> Task.map (List.filterMap identity)
     in
     inboxTask |> Task.andThen notificationsTask
 
 
-getNotificationTask : Id -> Task.Task Http.Error Notification
+getNotificationTask : Id -> Task.Task Http.Error (Maybe Notification)
 getNotificationTask notificationId =
     let
+        recover task =
+            task
+                |> Task.map Just
+                |> Task.onError (\_ -> Task.succeed Nothing |> Task.mapError never)
+
         partialNotificationTask =
-            getActivityPubTask notificationId partialNotificationContentDecoder
+            recover (getActivityPubTask notificationId partialNotificationContentDecoder)
+
+        fetchNotificationObject url =
+            recover (getActivityPubTask url notificationObjectDecoder)
 
         fullNotificationTask partialContent =
-            Task.map3
-                (\actorContent targetContent objectContent ->
-                    let
-                        notificationContent =
-                            { id = partialContent.id
-                            , url = targetContent.url
-                            , topic = targetContent.title
-                            , actor = actorContent.title
-                            , object = objectContent
-                            , published = partialContent.published
-                            , mentions = partialContent.to
-                            }
-                    in
-                    case objectContent.object_type of
-                        "Note" ->
-                            NewRemarkOrMention notificationContent
+            case partialContent.object_id of
+                Nothing ->
+                    -- Skip malformed notifications that miss an object reference.
+                    Task.succeed Nothing
 
-                        "Event" ->
-                            NewEvent notificationContent
+                Just objectId ->
+                    Task.map3
+                        (\maybeActor maybeTarget maybeObject ->
+                            case ( maybeActor, maybeTarget, maybeObject ) of
+                                ( Just actorContent, Just targetContent, Just objectContent ) ->
+                                    let
+                                        notificationContent =
+                                            { id = partialContent.id
+                                            , url = targetContent.url
+                                            , topic = targetContent.title
+                                            , actor = actorContent.title
+                                            , object = objectContent
+                                            , published = partialContent.published
+                                            , mentions = partialContent.to
+                                            }
+                                    in
+                                    Just <|
+                                        case objectContent.object_type of
+                                            "Note" ->
+                                                NewRemarkOrMention notificationContent
 
-                        "Page" ->
-                            NewReference notificationContent
+                                            "Event" ->
+                                                NewEvent notificationContent
 
-                        _ ->
-                            NewContribution notificationContent
-                )
-                (getActivityPubTask partialContent.actor_id notificationObjectDecoder)
-                (getActivityPubTask partialContent.target_id notificationObjectDecoder)
-                (getActivityPubTask partialContent.object_id notificationObjectDecoder)
+                                            "Page" ->
+                                                NewReference notificationContent
+
+                                            _ ->
+                                                NewContribution notificationContent
+
+                                _ ->
+                                    -- Drop notifications where fetching references failed.
+                                    Nothing
+                        )
+                        (fetchNotificationObject partialContent.actor_id)
+                        (fetchNotificationObject partialContent.target_id)
+                        (fetchNotificationObject objectId)
     in
-    partialNotificationTask |> Task.andThen fullNotificationTask
+    partialNotificationTask
+        |> Task.andThen
+            (\maybePartial ->
+                case maybePartial of
+                    Nothing ->
+                        Task.succeed Nothing
+
+                    Just partialContent ->
+                        fullNotificationTask partialContent
+            )
 
 
 getActivityPubTask : String -> Decode.Decoder a -> Task.Task Http.Error a
@@ -469,7 +500,7 @@ partialNotificationContentDecoder =
         (Decode.field "@id" Decode.string)
         (decodeFirstId "target")
         (decodeFirstId "actor")
-        (decodeFirstId "object")
+        (decodeFirstIdOptional "object")
         (decodeFirstValue "published" Iso8601.decoder)
         decodeTo
 
@@ -520,6 +551,13 @@ decodeFirstId field =
 
 decodeFirstValue field decoder =
     decodeFirstSubField field "@value" decoder
+
+
+decodeFirstIdOptional field =
+    Decode.oneOf
+        [ Decode.map Just (decodeFirstId field)
+        , Decode.succeed Nothing
+        ]
 
 
 decodeFirstSubField field subfield decoder =
