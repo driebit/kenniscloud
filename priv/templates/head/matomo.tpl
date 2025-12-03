@@ -1,7 +1,7 @@
 {# In zotonic1 the config values are not public, so we created an erl model to get the matomo value (m_matomo_config.erl) #}
 {% if m.matomo_config.mtm_container_id as mtm_id %}
     <!-- Matomo Tag Manager -->
-    <script type="text/x-cookie-consent" data-cookie-consent="stats" nonce="{{ m.req.csp_nonce }}">
+    <script type="text/x-cookie-consent" data-cookie-consent="functional" nonce="{{ m.req.csp_nonce }}">
         var _mtm = window._mtm = window._mtm || [];
         _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
