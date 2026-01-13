@@ -323,7 +323,7 @@ rules() ->
         % (overrides deny rules in resource table for hidden collab groups)
         {collab, [
             {actions, [view]},
-            {category_id, all}
+            {category_id, undefined}
         ]},
         % Editors can edit all collaboration groups
         {rsc, [
