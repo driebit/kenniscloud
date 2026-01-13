@@ -252,6 +252,11 @@ extract_keywords(#{
     <<"nbc:searchResult">> := [#{<<"nbc:facets">> := [#{<<"nbc:facet">> := FacetResults}]}]
 }, _Context) when is_list(FacetResults) ->
     lists:filtermap(fun extract_keyword/1, FacetResults);
+extract_keywords(#{
+    <<"nbc:searchResult">> := [#{<<"nbc:numberOfResults">> := [<<"0">>]}]
+}, _Context) ->
+    % no results, we make a special case for this to avoid reporting an error:
+    [];
 extract_keywords(Response, Context) ->
     ?zError(
         "AZB: unexpected results XML: ~p",
