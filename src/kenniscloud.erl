@@ -268,7 +268,7 @@ event(#submit{message={save_signup_step1, []}}, Context) ->
             binary_to_list(NameSurname)
     }, Context),
 
-    z_render:wire({redirect, [{location, z_dispatcher:url_for(signup_step2, Context)}]}, Context);
+    z_render:wire({redirect, [{location, m_rsc:p(z_acl:user(Context), page_url, Context)}]}, Context);
 
 event(#submit{message={save_signup_step2, []}}, Context) ->
     UserId = z_acl:user(Context),
