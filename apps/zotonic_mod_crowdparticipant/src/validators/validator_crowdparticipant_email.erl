@@ -32,6 +32,14 @@
 %% check an input field with id 'email' it's sufficient to add to the template:
 %% {% validate id="email" type={postback event="crowdparticipant_email"} %}
 validate(crowdparticipant_email, Id, EmailAddress, Args, Context) ->
+    validator_base_email:validate(email, Id, EmailAddress, Args, Context);
+
+%% If normal email validation requests end up here, we also pass them to the
+%% base email validator. This is related to the issue mentioned in
+%% _admin_edit_content_address_email.tpl, which also contains a layout change.
+%% The template _signup_form_fields_email.tpl was also overridden for this,
+%% but it is not needed anymore, because it had no other changes.
+validate(email, Id, EmailAddress, Args, Context) ->
     validator_base_email:validate(email, Id, EmailAddress, Args, Context).
 
 render_validator(email, TriggerId, TargetId, Args, Context) ->
