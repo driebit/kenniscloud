@@ -125,8 +125,9 @@
 
 .list-item-kg__task--white {
     background: white;
+    margin-left: 3rem;
     padding: 0.5em 1em;
-    position: absolute;
+    float: right;
     right: 30px;
     color: $grey;
     font-weight: 500;
