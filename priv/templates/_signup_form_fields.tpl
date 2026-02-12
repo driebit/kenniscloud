@@ -1,8 +1,8 @@
 {% include "_signup_form_fields_email.tpl"
     show_signup_name_title=false
-    show_signup_name_first=false
-    show_signup_name_prefix=false
-    show_signup_name_last=false %}
+    show_signup_name_first=true
+    show_signup_name_prefix=true
+    show_signup_name_last=true %}
     
 {% include "_signup_form_fields_username.tpl"
     show_signup_username=false

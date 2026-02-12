@@ -252,49 +252,6 @@ event(#submit{message={new_group, Args}}, Context) ->
             z_render:wire({redirect, [{location, Location}]}, Context)
     end;
 
-event(#submit{message={save_signup_step1, []}}, Context) ->
-    UserId = z_acl:user(Context),
-    NameFirst = z_context:get_q(<<"name_first">>, Context),
-    NamePrefix = z_context:get_q(<<"name_surname_prefix">>, Context),
-    NameSurname = z_context:get_q(<<"name_surname">>, Context),
-
-    m_rsc_update:update(UserId, #{
-        <<"name_first">> => NameFirst,
-        <<"name_surname_prefix">> => NamePrefix,
-        <<"name_surname">> => NameSurname,
-        <<"title">> =>
-            binary_to_list(NameFirst) ++ " " ++
-            binary_to_list(NamePrefix) ++ " " ++
-            binary_to_list(NameSurname)
-    }, Context),
-
-    z_render:wire({redirect, [{location, m_rsc:p(z_acl:user(Context), page_url, Context)}]}, Context);
-
-event(#submit{message={save_signup_step2, []}}, Context) ->
-    UserId = z_acl:user(Context),
-    SignUpRegion = z_context:get_q(<<"signup_region">>, Context),
-    m_edge:insert(UserId, hasregion, SignUpRegion, z_acl:sudo(Context)),
-    % Redirect to signup_step3
-    z_render:wire({redirect, [{location, z_dispatcher:url_for(signup_step3, Context)}]}, Context);
-
-event(#submit{message={save_signup_step3, []}}, Context) ->
-    UserId = z_acl:user(Context),
-    TagIds = z_context:get_q_all(<<"signup_tags">>, Context),
-    % Add new subject edges for selected tags
-    lists:foreach(
-        fun(Tid) ->
-            try z_convert:to_integer(Tid) of
-                TagId -> m_edge:insert(UserId, subject, TagId, z_acl:sudo(Context))
-            catch error:badarg ->
-                z:error("Illegal signup_tags id in parameters: ~p", [Tid], [], Context),
-                undefined
-            end
-        end,
-        TagIds
-    ),
-    % Redirect to the homepage
-    z_render:wire({redirect, [{location, z_dispatcher:url_for(home, [], Context)}]}, Context);
-
 event(#submit{message={sudo_delete_profile, Args}}, Context0) ->
     SudoContext = z_acl:sudo(Context0),
     Redirect = proplists:get_value(redirect, Args, undefined),
