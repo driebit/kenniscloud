@@ -14,8 +14,6 @@
             }
     %}
 
-    {% include "aside-connection/aside-add-connection.tpl" id=id cat="region" predicate="hasregion" tabs_enabled=["find"] tab="find" %}
-
     {% if m.rsc["hasbanner"] %}
         {% include "aside-connection/aside-add-connection.tpl" id=id cat="image" predicate="hasbanner" tab="upload" tabs_enabled=["upload","find"] %}
     {% endif %}
