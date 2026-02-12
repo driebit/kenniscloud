@@ -156,13 +156,24 @@ event(#postback{message={cancel_contribution, [{id, ContributionId}]}}, Context)
 
 event(#postback{message={join, [{target, TargetId}]}}, Context) ->
     User = z_acl:user(Context),
-    true = m_rsc:is_a(TargetId, acl_collaboration_group, Context),
-    m_edge:insert(TargetId, hascollabmember, User, z_acl:sudo(Context)),
+    IsACollaborationGroup = m_rsc:is_a(TargetId, acl_collaboration_group, Context),
+    IsARegion = m_rsc:is_a(TargetId, region, Context),
+    if (IsACollaborationGroup) ->
+        m_edge:insert(TargetId, hascollabmember, User, z_acl:sudo(Context));
+       (IsARegion) ->
+        m_edge:insert(User, hasregion, TargetId, z_acl:sudo(Context))
+    end,
     Context;
 event(#postback{message={leave, [{target, TargetId}]}}, Context) ->
     User = z_acl:user(Context),
-    m_edge:delete(TargetId, hascollabmember, User, z_acl:sudo(Context)),
-    m_edge:delete(TargetId, hascollabmanager, User, z_acl:sudo(Context)),
+    IsACollaborationGroup = m_rsc:is_a(TargetId, acl_collaboration_group, Context),
+    IsARegion = m_rsc:is_a(TargetId, region, Context),
+    if (IsACollaborationGroup) ->
+        m_edge:delete(TargetId, hascollabmember, User, z_acl:sudo(Context)),
+        m_edge:delete(TargetId, hascollabmanager, User, z_acl:sudo(Context));
+       (IsARegion) ->
+        m_edge:delete(User, hasregion, TargetId, z_acl:sudo(Context))
+    end,
     Context;
 event(#postback{message={link_rsvp,
         [{subject_id, Subject}, {predicate, <<"rsvp">>}, {object_id, Object} | _AndActionEtc]
