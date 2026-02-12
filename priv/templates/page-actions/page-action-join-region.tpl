@@ -36,7 +36,6 @@
 {% endif %}
 {% endif %}
 
-{% print q.qstatus %}
 {% if q.qstatus=="join-region" %}
     {% javascript %}
         z_growl_add("Je volgt nu deze regio");
