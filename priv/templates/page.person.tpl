@@ -7,7 +7,7 @@
 
 <div class="main-container person-info">
     <div class="person-info__contact">
-        <h3 class="bordered-title">Biografie</h3>
+        <h3 class="bordered-title">Biografie en interessegebieden</h3>
         {% if id.function %}
         <p class="person-info__contact__line"><strong>Functie</strong> <span>{{ id.function }}</span></p>
         {% endif %}
@@ -31,7 +31,7 @@
         {% endwith %}
 
         {% if id.o.hasregion as regions %}
-        <div class="person-info__contact__line"><strong>Aangemeld voor regio</strong>
+        <div class="person-info__contact__line"><strong>Regio's</strong>
             <div>
                 {% for region in regions %}
                 <a href="{{ region.page_url }}" class="person-info__contact__line">{{ region.title }}</a>
