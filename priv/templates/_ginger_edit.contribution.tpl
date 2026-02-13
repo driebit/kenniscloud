@@ -17,7 +17,7 @@
             {% catinclude "_admin_edit_body.tpl" id is_editable=is_editable languages=languages %}
         </div>
 
-        {% catinclude "_ginger_edit_depiction.tpl" id languages=languages show_opened tab="upload" tabs_enabled=["upload"] %}
+        {% catinclude "_ginger_edit_depiction.tpl" id is_editable=is_editable languages=languages show_opened tab="upload" tabs_enabled=["upload","find","url"] %}
 
         <div class="form-group clearfix c-edit__add-document">
             <div class="widget-header">{_ Gekoppelde documenten _}</div>
