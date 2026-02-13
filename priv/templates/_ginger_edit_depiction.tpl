@@ -31,6 +31,7 @@
                             subject_id=id
                             edge_template="_rsc_edge_media.tpl"
                             predicate=`depiction`
+                            cat=`media`
                             tab=tab|default:"upload"
                             tabs_enabled=tabs_enabled|default:["upload", "oembed"]
                             callback=""
