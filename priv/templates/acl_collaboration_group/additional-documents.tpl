@@ -17,7 +17,9 @@
                                     {% else %}
                                         {{ doc.title|truncate:40 }}
                                     {% endif %}
-                                    ({% if m.media[doc].mime == "application/pdf" %}pdf{% else %}document{% endif %}&nbsp;-&nbsp;{{ m.media[doc].size|filesizeformat }})
+                                    {% if m.media[doc].size as size %}
+                                        ({% if m.media[doc].mime == "application/pdf" %}pdf{% else %}document{% endif %}&nbsp;-&nbsp;{{ size|filesizeformat }})
+                                    {% endif %}
                                 </h3>
                             </div>
                     </a>
