@@ -89,20 +89,28 @@ is_allowed_explained([<<"acl_user_group_editors">> | _UGs], _Query, _Context) ->
 % We could avoid using rules for private 'acl_collaboration_group' entirely and
 % only handle this permission here, but we keep the current mechanism in order
 % to be able to see the active rules in the CMS.
+% Determining if someone is anonymous by checking that they are in the anonymous usergroup
+% does not work, because the anonymous group is added to everybody, including members, even
+% without members being linked to it (anonymous is a special group that is always there).
 is_allowed_explained(
-    [<<"acl_user_group_anonymous">> | _UGs],
+    _UGs,
     #acl_is_allowed{
         action = view,
         object = Rsc
     },
     Context
 ) when is_integer(Rsc) ->
-    ContentGroupId = m_rsc:p_no_acl(Rsc, <<"content_group_id">>, Context),
-    case m_rsc:is_a(ContentGroupId, acl_collaboration_group, Context) of
+    GroupId = m_rsc:p_no_acl(Rsc, <<"content_group_id">>, Context),
+    case m_rsc:is_a(GroupId, acl_collaboration_group, Context) of
         true ->
-            case m_kc_collab_group:private_acl_rule_id(ContentGroupId, Context) of
+            case m_kc_collab_group:private_acl_rule_id(GroupId, Context) of
                 RuleId when is_integer(RuleId) ->
-                    {"forbid Anonymous from accessing private kennisgroepen", false};
+                    case m_kc_collab_group:includes_person(z_acl:user(Context), GroupId, Context) of
+                        true ->
+                            undefined;
+                        false ->
+                            {"forbid Anonymous from accessing private kennisgroepen", false}
+                    end;
                 undefined ->
                     undefined
             end;

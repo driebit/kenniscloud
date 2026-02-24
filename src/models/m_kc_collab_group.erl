@@ -26,6 +26,8 @@
     managers/2,
     specialists/2,
     members/2,
+    people/2,
+    includes_person/3,
     private_acl_rule_id/2,
     private_acl_rule_id/3,
     private_acl_rule/2
@@ -112,6 +114,20 @@ members(CollabGroup, Context) ->
         Context
     ),
     Members.
+
+people(CollabGroup, Context) ->
+    sets:to_list(
+        sets:from_list(
+            m_edge:objects(CollabGroup, hascollabmanager, Context) ++
+            m_edge:objects(CollabGroup, hasinitiator, Context) ++
+            m_edge:objects(CollabGroup, hascollabmember, Context)
+        )
+    ).
+
+includes_person(Person, CollabGroup, Context) ->
+    is_integer(m_edge:get_id(CollabGroup, hascollabmember, Person, Context)) orelse
+    is_integer(m_edge:get_id(CollabGroup, hascollabmanager, Person, Context)) orelse
+    is_integer(m_edge:get_id(CollabGroup, hasinitiator, Person, Context)).
 
 private_acl_rule_id(CollabGroup, Context) ->
     private_acl_rule_id(CollabGroup, acl_rules_is_edit_state(Context), Context).
