@@ -50,6 +50,10 @@ m_get([ CollabGroup, <<"private_acl_rule_id">> | Rest ], _Msg, Context) ->
     {ok, {private_acl_rule_id(CollabGroup, Context), Rest}};
 m_get([ <<"collab_group_of">>, Rsc | Rest ], _Msg, Context) ->
     {ok, {collab_group_of(Rsc, Context), Rest}};
+m_get([ CollabGroup, <<"people">> | Rest], _Msg, Context) ->
+    {ok, {people(CollabGroup, Context), Rest}};
+m_get([ CollabGroup, <<"includes_person">>, User | Rest], _Msg, Context) ->
+    {ok, {includes_person(User, CollabGroup, Context), Rest}};
 m_get(_, _Msg, _Context) ->
     {ok, {undefined, []}}.
 
