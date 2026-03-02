@@ -1,9 +1,7 @@
 {% with m.acl.user as user %}
-{% with id.o.hascollabmember|make_list as members %}
-{% with id.o.hascollabmanager|make_list as managers %}
-{% with members ++ managers as group_members %}
+{% with m.kc_collab_group[id].includes_person[user] as joined %}
 
-{% if not user|member:group_members %}
+{% if not joined %}
 
     <a id="{{ #join_group }}" href="#connect"
         class="btn--primary -blue-border -icon">
@@ -41,8 +39,6 @@
 
 {% endif %}
 
-{% endwith %}
-{% endwith %}
 {% endwith %}
 {% endwith %}
 
