@@ -54,13 +54,13 @@
     <label class="control-label col-md-12" for="timeline_asc">
         <input type="radio" id="timeline_asc" name="timeline_order"
             value="asc"
-            {% if id.timeline_order == "asc" or not id.timeline_order %}checked{% endif %}/>
+            {% if id.timeline_order == "asc" %}checked{% endif %}/>
         {_ Ascending _}
     </label>
     <label class="control-label col-md-12" for="timeline_desc">
         <input type="radio" id="timeline_desc" name="timeline_order"
             value="desc"
-            {% if id.timeline_order == "desc" %}checked{% endif %}/>
+            {% if id.timeline_order == "desc" or not id.timeline_order %}checked{% endif %}/>
         {_ Descending _}
     </label>
 </div>

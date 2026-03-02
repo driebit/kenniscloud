@@ -21,7 +21,7 @@
 -mod_title("Kenniscloud").
 -mod_description("").
 -mod_prio(10).
--mod_depends([mod_crowdlink, mod_crowdparticipant, mod_driebit_activity, mod_driebit_base, mod_driebit_edit, mod_image_edit]).
+-mod_depends([mod_crowdlink, mod_crowdparticipant, mod_driebit_activity, mod_driebit_timeline, mod_driebit_base, mod_driebit_edit, mod_image_edit]).
 -mod_schema(21).
 
 -include_lib("zotonic_core/include/zotonic.hrl").

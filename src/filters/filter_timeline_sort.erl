@@ -28,10 +28,10 @@ timeline_sort(Items, RscId, Context) when is_list(Items) ->
     IdsWithDates = lists:map(fun(Item) -> {Item, timeline_date(Item, Context)} end, Items),
     % then sort them on said date:
     {SortedItems, _} = lists:unzip(lists:keysort(2, IdsWithDates)),
-    % finally reverse the list if needed:
+    % finally reverse the list if needed (descending order is the default):
     case z_convert:to_atom(m_rsc:p(RscId, <<"timeline_order">>, Context)) of
-        desc -> lists:reverse(SortedItems);
-        _ -> SortedItems
+        asc -> SortedItems;
+        _ -> lists:reverse(SortedItems)
     end;
 timeline_sort(#search_result{result=Result}, RscId, Context) ->
     timeline_sort(Result, RscId, Context).

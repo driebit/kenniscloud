@@ -12,5 +12,4 @@ zotonic_mod_driebit_timeline
 
 -   There is also the stylsheet used for setting this up on Kenniscloud included which can be used as inspiration or directly included in the style.scss of the destination project.
 
--   TODO:
-    -   https://gitlab.driebit.nl/driebit/kenniscloud/-/merge_requests/971 (lots of notes from the merge request)
+-   Merge request https://gitlab.driebit.nl/driebit/kenniscloud/-/merge_requests/971 had a lot of notes, but they are lost in the move to GitHub.
