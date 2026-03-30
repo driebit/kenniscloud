@@ -119,6 +119,28 @@
 .kg-contributions {
     @extend .main-container;
     margin-top: 30px;
+
+    .keywords {
+        .btn--secondary.disabled {
+            background-color: $greyLight;
+            color: $grey;
+            border: 1px solid $greyLight;
+            cursor: not-allowed;
+
+            @include setInteractive {
+                background-color: $greyLight;
+                color: $grey;
+                border: 1px solid $greyLight;
+            }
+        }
+        .btn--secondary {
+            background: $blueDark;
+
+            @include setInteractive {
+                background: $blueDarker;
+            }
+        }
+    }
 }
 
 .c-external-sevices {
