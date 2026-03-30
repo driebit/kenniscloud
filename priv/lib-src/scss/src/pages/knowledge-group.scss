@@ -121,6 +121,27 @@
     margin-top: 30px;
 }
 
+.kg-contributions > .keywords {
+        .btn--secondary.disabled {
+            background-color: $greyLight;
+            color: $grey;
+            border: 1px solid $greyLight;
+            
+            @include setInteractive {
+                background-color: $greyLight;
+                color: $grey;
+                border: 1px solid $greyLight;
+            }
+        }
+        .btn--secondary {
+            background: $blueDark;
+
+            @include setInteractive {
+                background: $blueDarker;
+            }
+        }
+    }
+
 .c-external-sevices {
     flex-wrap: wrap;
     height: 100rem;
