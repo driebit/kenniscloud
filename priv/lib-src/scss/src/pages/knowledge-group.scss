@@ -125,8 +125,7 @@
             background-color: $greyLight;
             color: $grey;
             border: 1px solid $greyLight;
-            cursor: not-allowed;
-
+            
             @include setInteractive {
                 background-color: $greyLight;
                 color: $grey;

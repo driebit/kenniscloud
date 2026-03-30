@@ -1,6 +1,8 @@
 <div class="ginger-edit__aside">
     <h3>{_ Options _}</h3>
+
     <h5>{_ Map _}</h5>
+
     <div class="form-group row ">
         <label class="control-label col-md-12" for="has_map">
             <input type="checkbox" id="has_map" name="has_map"
@@ -34,7 +36,7 @@
         </label>
 
         <div class="control-label">
-            <h6 class="col-md-12">{_ Sorting order _}</h5>
+            <h6 class="col-md-12">{_ Sorting order _}</h6>
             <label class="control-label col-md-12" for="timeline_asc">
                 <input type="radio" id="timeline_asc" name="timeline_order"
                     value="asc"
@@ -48,9 +50,24 @@
                 {_ Descending _}
             </label>
         </div>
+    </div>
 
-        {% if m.acl.use.mod_admin %}
-            <h4 style="margin-top: 40px;">{_ Embed poll via Mentimeter or OpnForm _}</h4>
+    <h5>{_ Filter _}</h5>
+
+    <div class="form-group row ">
+        <label class="control-label col-md-12" for="has_keyword_filter">
+            <input type="checkbox" id="has_keyword_filter" name="has_keyword_filter"
+                value="1"
+                {% if id.has_keyword_filter %}checked{% endif %}
+                {% if not id.is_editable %}disabled="disabled"{% endif %} />
+            {_ Toon trefwoordenfilter voor de lijst van bijdragen _}
+        </label>
+    </div>
+
+    {% if m.acl.use.mod_admin %}
+        <h5>{_ Embed poll via Mentimeter or OpnForm _}</h5>
+
+        <div class="form-group row">
             <label class="control-label col-md-12" for="has_menti">
                 <input type="checkbox" id="has_menti" name="has_menti"
                     value="1"
@@ -77,7 +94,6 @@
             <label class="control-label col-md-12" for="has_opnformlink">
                 {_ OpnForm embed url _}
             </label>
-        {% endif %}
-
-    </div>
+        </div>
+    {% endif %}
 </div>

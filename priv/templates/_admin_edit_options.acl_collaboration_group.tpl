@@ -64,6 +64,15 @@
         {_ Descending _}
     </label>
 </div>
+<div class="form-group row">
+    <label class="control-label col-md-12" for="has_map">
+        <input type="checkbox" id="has_keyword_filter" name="has_keyword_filter"
+            value="1"
+            {% if id.has_keyword_filter %}checked{% endif %}
+            {% if not id.is_editable %}disabled="disabled"{% endif %} />
+        {_ Toon trefwoordenfilter voor de lijst van bijdragen _}
+    </label>
+</div>
 {% if m.acl.use.mod_admin %}
     <h4 style="margin-top: 40px;">{_ Embed poll via Mentimeter or OpnForm _}</h4>
     <div class="form-group row col-md-12">
