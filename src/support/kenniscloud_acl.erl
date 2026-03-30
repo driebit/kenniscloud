@@ -107,7 +107,7 @@ is_allowed_explained(
                 RuleId when is_integer(RuleId) ->
                     case m_kc_collab_group:includes_person(z_acl:user(Context), GroupId, Context) of
                         true ->
-                            undefined;
+                            {"view allowed for collaboration group members and managers", true};
                         false ->
                             {"forbid Anonymous from accessing private kennisgroepen", false}
                     end;
