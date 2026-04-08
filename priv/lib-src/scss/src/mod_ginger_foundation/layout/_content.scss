@@ -1,7 +1,6 @@
 main {
     @extend %cf;
     position: relative;
-    z-index: 100;
     transition: margin-top 0.3s;
 }
 
@@ -54,7 +53,8 @@ article.main-content--sided {
 @include mq(min-width, $mediumBreakpoint) {
     main {
         min-height: 100%;
-        margin-top: 250px;
+        // margin-top: 250px;
+        margin-top: 4rem;
     }
 
     .main-content {

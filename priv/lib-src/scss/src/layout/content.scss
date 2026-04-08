@@ -228,13 +228,13 @@ main {
 
 .page-header {
     @extend .page-container;
-    max-width: 100rem;
+    max-width: $containerMaxWidth;
     margin: 0 auto 40px;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
     -webkit-font-smoothing: antialiased;
     color: $white;
     background: $kgColor;
+    border-radius: $borderRadius;
+    padding: 1rem;
 
     .page-intro {
         color: inherit;
@@ -314,7 +314,8 @@ main {
         }
     }
 
-    ul, ol {
+    ul,
+    ol {
         padding-left: 1.5em;
     }
 

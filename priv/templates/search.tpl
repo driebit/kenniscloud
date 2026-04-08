@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    <main class="">
+    <main class="o-main-container" class="">
         {% block search__top %}
             <div class="search__top">
                 <div class="search__top__container">

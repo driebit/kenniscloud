@@ -2,8 +2,12 @@
     <div class="global-nav__container">
         {% block logo %}
             <a href="/" class="global-nav__logo">
-                <img src="/lib/images/cloud.svg" alt=""> KennisCloud
+                KennisCloud
             </a>
+        {% endblock %}
+
+        {% block menu %}
+            {% menu id=id %}
         {% endblock %}
 
         {% block search_bar %}
@@ -12,12 +16,9 @@
             %}
         {% endblock %}
 
-        {% block menu %}
-            {% menu id=id %}
+        {% block actions %}
+            {% include "global-nav/global-nav-actions.tpl" %}
         {% endblock %}
     </div>
 
-    {% block actions %}
-        {% include "global-nav/global-nav-actions.tpl" %}
-    {% endblock %}
 </nav>

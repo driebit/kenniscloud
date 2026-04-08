@@ -1,0 +1,50 @@
+{% with
+    main_content_class|default:"foldout",
+    maptype|default:"map",
+    recenter|default:"true",
+    blackwhite|default:"true",
+    main_content_class|default:"foldout"
+as
+    main_content_class,
+    maptype,
+    recenter,
+    blackwhite,
+    main_content_class
+%}
+    {% if id %}
+
+        {% if (id|is_a:"location" or id|is_a:"organization") and (id.address_city or (id.pivot_location_lat and id.pivot_location_lng)) %}
+
+            {% include "map/map-location.tpl" id=id type=maptype main_content_class=main_content_class fallback recenter blackwhite %}
+
+        {% elseif id.category.is_a.location_query %}
+
+            <div class="do_masthead_map masthead--map">
+                {% include "map/map.tpl" id=id type=maptype main_content_class=main_content_class fallback recenter blackwhite result=result container=container %}
+            </div>
+
+        {% else %}
+
+            {% if id.depiction.id|is_a:`video` %}
+
+                <div class="masthead--video">
+                    {% include "masthead/video.tpl" dep=id.depiction %}
+                </div>
+
+            {% else %}
+
+                {% if id.o.hasbanner[1].depiction.width > 500 or id.o.header[1].depiction.width > 500 %}
+                    {% with id.o.hasbanner[1].depiction.id|default:id.o.header[1].depiction.id as dep %}
+                        <div class="masthead {{ extraClasses }}" style="background-image: url({% image_url dep mediaclass='masthead' crop=dep.crop_center %}); background-size: cover; background-position: {{ dep|background_position }};"></div>
+                    {% endwith %}
+                {% else %}
+                    <div class="masthead-no-img {{ extraClasses }}"></div>
+                {% endif %}
+
+            {% endif %}
+
+        {% endif %}
+
+    {% endif %}
+
+{% endwith %}

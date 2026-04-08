@@ -6,7 +6,7 @@
 {% with id as collab_group %}
     {% catinclude "masthead/masthead.tpl" id %}
 
-    <main>
+    <main class="o-main-container">
         <div class="kg-intro">
             <div class="kg-intro__content">
                 {% spaceless %}

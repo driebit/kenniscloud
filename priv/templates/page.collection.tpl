@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <main>
+    <main class="o-main-container">
         <div class="page-header">
             <div class="page-intro">
 

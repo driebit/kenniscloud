@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <main>
+    <main class="o-main-container">
         <div class="page-header">
             <div class="page-intro">
                 {% include "page-title/page-title.tpl" %}

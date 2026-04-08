@@ -29,8 +29,6 @@
     }
 }
 
-
-
 .person-list__items {
     display: flex;
     flex-flow: row wrap;
@@ -49,7 +47,7 @@
 
     img {
         width: 45px;
-        height: 45px;
+        height: auto;
         position: relative;
         border-radius: 50%;
         z-index: 20;
@@ -60,7 +58,7 @@
             opacity: 1;
             top: 55px;
             left: 0px;
-            transform: scale(1);
+            display: block;
             z-index: 30;
         }
     }
@@ -70,22 +68,19 @@
     }
 
     @include mq(min-width, $largeBreakpoint) {
-
         &:hover,
         .is-hovered {
             z-index: 60;
-
-            .person__content {
-                left: 50%;
-                transform: scale(1) translateX(-50%);
-            }
         }
     }
 }
 
 .avatar__wrapper {
-    position: relative;
-    flex-shrink: 0;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .person--manager,
@@ -107,7 +102,7 @@
 }
 
 .person--cl .avatar__wrapper:before {
-    color: $mainThemeColor;
+    color: $coral;
 }
 
 .person--pl .avatar__wrapper:before {
@@ -122,20 +117,20 @@
     width: 220px;
     padding: 15px;
     opacity: 1;
-    display: block;
+    display: none;
     position: absolute;
     top: 10px;
     left: 20px;
     font-size: 15px;
     color: $white;
     background: rgba($black, 0.6);
-    transform: scale(0);
     transform-origin: top left;
     z-index: 60;
     transition: all 0.3s;
+    transform: translateX(-42%);
 
     &:before {
-        content: '';
+        content: "";
         position: absolute;
         top: -14px;
         left: 20px;
@@ -151,7 +146,7 @@
         line-height: 1;
     }
 
-    strong+small {
+    strong + small {
         margin-top: 5px;
     }
 
@@ -195,7 +190,7 @@
 
     .avatar__image {
         width: 45px;
-        height: 45px;
+        height: auto;
         margin-right: 0;
     }
 

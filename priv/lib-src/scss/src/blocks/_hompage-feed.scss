@@ -30,8 +30,13 @@
     @include mq(min-width, $mediumBreakpoint) {
         flex-direction: row;
         height: 10.5rem;
-        align-items: center;
+        align-items: flex-start;
     }
+}
+
+.c-card--feed .avatar__wrapper {
+    width: 5rem;
+    height: 5rem;
 }
 
 .c-card--feed__avatar {
@@ -88,9 +93,10 @@
 }
 
 .c-card--feed__background {
-    width: calc(100% - 2rem);
-    height: calc(100% - 2rem);
-    left: 1rem;
+    width: calc(100% - 1rem);
+    height: calc(100% - 1rem);
+    left: 0.5rem;
+    top: 0.5rem;
     margin: auto;
     position: absolute;
     background-repeat: no-repeat;

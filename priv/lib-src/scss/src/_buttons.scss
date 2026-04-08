@@ -28,11 +28,12 @@
     @extend %btn;
     padding-right: 45px;
     position: relative;
-    border: 1px solid $mainThemeColor;
+    border: 1px solid $kgColor;
+    border-radius: 1rem;
     font-family: $secondaryFontFamily;
     font-size: 1.6rem;
-    color: $white;
-    background: $mainThemeColor;
+    color: $kgColor;
+    background: $white;
     transition: all 0.3s;
 
     &.-large {
@@ -61,9 +62,9 @@
     &:focus,
     &:focus:active,
     &.is-active {
-        border-color: color-mix(in srgb, $mainThemeColor 95%, black);
+        border-color: $white;
         color: $white;
-        background-color: color-mix(in srgb, $mainThemeColor 95%, black);
+        background-color: $kgColor;
     }
 
     &::after {
@@ -86,20 +87,22 @@
     &.-blue {
         border-color: $kgColor;
         background: $kgColor;
+        color: $white;
 
         &:hover,
         &:active,
         &:focus,
         &:focus:active {
-            border-color: color-mix(in srgb, $kgColor 95%, black);
+            border-color: $white;
             color: $white;
-            background-color: color-mix(in srgb, $kgColor 95%, black);
+            background-color: $kgColor;
         }
     }
 
     &.-blue-border {
         border-color: $white;
         background: $kgColor;
+        color: white;
 
         &:hover,
         &:active,
@@ -140,6 +143,7 @@
     @extend .btn--primary;
     border-color: $grey;
     background: $grey;
+    color: $white;
 
     &.-icon {
         padding-right: 45px;
@@ -203,6 +207,8 @@
     color: $white;
     background: $black;
     transition: all 0.3s;
+    border-radius: $borderRadius;
+    width: fit-content;
 
     &:before {
         @extend .has-icon;
@@ -464,10 +470,10 @@ button.z-btn-help {
     padding: 0.8rem 2rem 1rem;
 }
 
-.c-btn--search__icon {
-    filter: invert(1);
+.c-btn--search svg {
+    color: inherit;
     width: 1.5rem;
-    height: 1.5rem;
+    height: 1.75rem;
     position: absolute;
     right: 1rem;
 }

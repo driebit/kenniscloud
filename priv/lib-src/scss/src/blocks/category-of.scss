@@ -33,3 +33,15 @@
 .page-intro .category-of {
     margin: 0 auto;
 }
+
+// ginger specificty
+.page-intro .category-of,
+.kg-intro .kg-intro__content .category-of {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    font-size: 1.5rem;
+    font-family: $bodyFontFamily;
+    color: $white;
+    margin-top: 2rem;
+}

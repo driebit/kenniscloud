@@ -62,6 +62,11 @@ $mediumBreakpoint: 800px;
 $largeBreakpoint: 1024px;
 $hugeBreakpoint: 1200px;
 
+$containerMaxWidth: 1280px;
+
+// Border radius
+$borderRadius: 1.5rem;
+
 // END COPY GINGER FOUNDATION
 
 $offwhite: #f5f5f5;
@@ -72,11 +77,12 @@ $grey: #505450;
 $greyDark: #3f433f;
 $greyDarker: #343734;
 $bodyBgColor: $white;
-$mainThemeColor: #ff5f00;
+$kgColor: #089db0;
+$mainThemeColor: $kgColor;
+// $mainThemeColor: #ff5f00;
 $secondaryThemeColor: $grey;
 $orange: $mainThemeColor;
 $orangeDark: #c03c00;
-$kgColor: #089db0;
 $blue: $kgColor;
 $blueDark: #197c87;
 $blueDarker: #255964;
@@ -90,9 +96,8 @@ $green: #00a495;
 $greenDark: #21847a;
 $greenDarker: #15665e;
 $greenMint: #4ecdc4;
-$blueSky: #7fdbff; 
-$coral: #FF9E5E;
-
+$blueSky: #7fdbff;
+$coral: #ff9e5e;
 
 // methodology scheme
 

@@ -18,7 +18,8 @@
 
     main {
         @include mq(min-width, $mediumBreakpoint) {
-            margin-top: 250px;
+            // margin-top: 250px;
+            margin-top: 4rem;
         }
     }
 }
@@ -35,15 +36,13 @@
 }
 
 .kg-intro {
-    max-width: 100rem;
     -webkit-font-smoothing: antialiased;
+    border-radius: $borderRadius;
 
     @include mq(min-width, $mediumBreakpoint) {
         padding: 0 30px 30px;
         margin: 0 auto;
         display: flex;
-        border-bottom-left-radius: 3px;
-        border-bottom-right-radius: 3px;
         background: $kgColor;
 
         & > div:nth-of-type(2) {
@@ -56,10 +55,6 @@
     @extend .page-intro;
     padding: 0 20px 20px;
     background: $kgColor;
-
-    .category-of {
-        background: $blueDark;
-    }
 
     .page-title {
         margin: 0.5em 0;

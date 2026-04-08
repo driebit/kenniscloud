@@ -2,81 +2,113 @@
     display: none;
     background-position: center center;
     background-size: cover;
-    background-image: url('/lib/images/masthead-fallback.svg');
+    background-image: url("/lib/images/masthead-fallback.svg");
+    position: relative;
 
-	@include mq(min-width, $mediumBreakpoint) {
-		display: block;
-		height: 375px;
-	}
+    @include mq(min-width, $mediumBreakpoint) {
+        display: block;
+        height: 375px;
+    }
 
-	@include mq(min-width, $largeBreakpoint) {
-		height: 375px;
-		top: 103px;
-	}
+    @include mq(min-width, $largeBreakpoint) {
+        height: 375px;
+        top: 0;
+    }
 }
 
 .masthead--home {
-	padding-bottom: 50px;
-	position: relative;
-	margin-bottom: 20px;
-	background-position: center center;
+    padding: 4rem;
+    position: relative;
+    background-position: center center;
+    z-index: 0;
 
-	&:after {
-		content: '';
-		position: absolute;
-		top: 0px;
-		left: -10px;
-		right: 0;
-		bottom: -2px;
-		z-index: 1;
-		background: url('/lib/images/home-overlay.svg') no-repeat bottom left;
-		background-size: 105% 100px;
-	}
+    @include mq(min-width, $mediumBreakpoint) {
+        min-height: fit-content;
+        padding: 21rem 0;
+        margin-top: -7.5rem;
+    }
 
-	@include mq(min-width, $mediumBreakpoint) {
-		min-height: fit-content;
-	}
-
-	@include mq(min-width, $largeBreakpoint) {
-		&:after {
-			background-size: 105% 230px;
-		}
-	}
-
-	.main-container {
-		z-index: 100;
-	}
+    .main-container {
+        max-width: $containerMaxWidth;
+        width: 95%;
+    }
 }
 
 .masthead__content {
-	width: 100%;
-	max-width: 650px;
-	padding: 15px;
-	margin-bottom: 20px;
-	position: relative;
-	z-index: 100;
-	background: $kgColor;
-	color: $white;
-	border-bottom-left-radius: 3px;
-	border-bottom-right-radius: 3px;
+    width: 100%;
+    max-width: 650px;
+    padding: 15px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.226);
+    backdrop-filter: blur(4px);
+    color: $white;
+    border-radius: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.32);
 
-	.summary {
-		margin: 0;
-		font-family: $mixFontFamily;
-		-webkit-font-smoothing: antialiased;
-	}
+    .summary {
+        margin: 0;
+        font-family: $mixFontFamily;
+        -webkit-font-smoothing: antialiased;
+    }
 
-	@include mq(min-width, $smallBreakpoint) {
-		padding: 30px;
+    @include mq(min-width, $smallBreakpoint) {
+        padding: 30px;
 
-		.page-title {
-			margin-bottom: 20px;
-		}
-	}
+        .page-title {
+            margin-bottom: 20px;
+        }
+    }
 
-	@include mq(min-width, $mediumBreakpoint) {
-		.page-title {
-			font-size: 50px;
-		}
-	}
+    @include mq(min-width, $mediumBreakpoint) {
+        .page-title {
+            font-size: 50px;
+        }
+    }
+
+    @include mq(min-width, $largeBreakpoint) {
+        margin: unset;
+    }
+}
+
+.masthead--person {
+    padding: 0rem;
+    position: relative;
+    background-position: center center;
+    z-index: 0;
+    background-color: $kgColor;
+    max-width: $containerMaxWidth;
+    width: 95%;
+    margin: auto;
+    border-radius: $borderRadius;
+
+    @include mq(min-width, $mediumBreakpoint) {
+        min-height: 20rem;
+        margin-top: 0;
+    }
+
+    .main-container {
+        max-width: $containerMaxWidth;
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding-bottom: 4rem;
+
+        .masthead__content {
+            border: none;
+        }
+    }
+
+    .masthead--person__banner {
+        width: 100%;
+        height: 25rem;
+        overflow: hidden;
+        border-top-left-radius: $borderRadius;
+        border-top-right-radius: $borderRadius;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
 }

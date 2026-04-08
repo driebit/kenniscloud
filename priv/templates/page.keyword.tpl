@@ -4,7 +4,7 @@
 {% block body_class %}t--no-masthead{% endblock %}
 
 {% block content %}
-<main>
+<main class="o-main-container">
     <div class="foldout do_foldout">
         <article class="main-content">
             {% include "page-title/page-title.tpl" id=id title=_"Everything for:"++" "++id.title %}

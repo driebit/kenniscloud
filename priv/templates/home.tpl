@@ -54,21 +54,4 @@
             {% endwith %}
         </div>
     </div>
-
-	<div class="home-members">
-		<div class="main-container">
-			<h2 class="bordered-title">Wij maken KennisCloud</h2>
-			<div class="home-members__list">
-				{% with m.search[{query
-                                     cat="person"
-                                     pagelen=24
-                                     sort="-pivot.kenniscloud_users.has_depiction"}] as result %}
-					{% for r in result %}
-						{% include "list/list-item-person-small.tpl" id=r summary %}
-					{% endfor %}
-				{% endwith %}
-			</div>
-			<a href="{{ m.rsc.page_community.page_url }}" class="btn--primary">Bekijk iedereen die meedoet</a>
-		</div>
-	</div>
 {% endblock %}

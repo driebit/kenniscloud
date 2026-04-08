@@ -62,7 +62,6 @@
             </div>
         </div>
         {% endif %}
-            {% catinclude "page-actions/page-actions.tpl" id %}
         </div>
         <div class="person-info__summary">
             <h3 class="bordered-title">Over mijzelf</h3>

@@ -6,7 +6,7 @@
 
     {% include "masthead/masthead.tpl" id=id %}
 
-    <main>
+    <main class="o-main-container">
         <div class="kg-intro">
             <div class="kg-intro__content">
                 {% catinclude "category-of/category-of.tpl" id rsc_id=id %}

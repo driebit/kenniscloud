@@ -6,7 +6,7 @@
 
 {% block content %}
 
-	<main>
+	<main class="o-main-container">
 		<div class="page-container">
 
 			<div class="page-intro page-intro--{{id.category.name}}">

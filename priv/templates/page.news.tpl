@@ -3,7 +3,7 @@
 {% block body_class %}-no-bg t--contribution{% endblock %}
 
 {% block content %}
-<main id="main-content">
+<main class="o-main-container" id="main-content">
     {% catinclude "masthead/masthead.tpl" id %}
 
     <article class="main-content">

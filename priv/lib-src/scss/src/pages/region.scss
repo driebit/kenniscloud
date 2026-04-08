@@ -1,10 +1,4 @@
 .t--region {
-    main {
-        @include mq(min-width, $mediumBreakpoint) {
-            margin-top: 170px;
-        }
-    }
-
     .kg-intro,
     .kg-intro__content {
         background: $grey;
@@ -17,7 +11,7 @@
             li {
                 .btn--secondary {
                     background: $greyDark;
-    
+
                     @include setInteractive {
                         background: $greyDarker;
                     }
@@ -25,7 +19,6 @@
             }
         }
     }
-
 
     .person-list {
         .btn--primary {
