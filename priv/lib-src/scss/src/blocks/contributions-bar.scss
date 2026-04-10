@@ -1,7 +1,7 @@
 .contributions-bar {
     padding: 1.5rem 2rem;
     margin: 0 0 3rem;
-    border-radius: 3px;
+    border-radius: $borderRadius;
     background: $white;
 
     > div {

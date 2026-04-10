@@ -23,7 +23,7 @@
                 {% catinclude "top-aside/top-aside.tpl" id kc_groups=kc_groups %}
             </div>
 
-            <div class="kg-contributions">
+            <div class="kg-contributions o-main-container">
                 {% catinclude "main-aside/main-aside.tpl" id kc_groups=kc_groups %}
             </div>
 

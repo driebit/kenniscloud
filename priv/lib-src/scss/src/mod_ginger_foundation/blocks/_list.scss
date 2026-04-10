@@ -1,5 +1,5 @@
 .list {
-    width: 90%;
+    width: 100%;
     max-width: $containerMaxWidth;
     @include size(padding-top, $standardOffset);
     margin: 0 auto;
@@ -95,7 +95,7 @@
     display: initial;
     font-weight: normal;
     font-family: $bodyFontFamily;
-    font-size: 1.25rem;
+    font-size: 1.4rem;
 }
 
 .list__item__content__meta {

@@ -1,6 +1,6 @@
 @include mq(min-width, 0) {
     %main-container {
-        width: 100%;
+        width: 95%;
         @include size(max-width, $containerMaxWidth);
         margin: 0 auto;
         position: relative;

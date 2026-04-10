@@ -50,8 +50,12 @@
         margin-left: 0;
     }
 
+    @include breakpoint($smallBreakpoint) {
+        padding: 3rem 0rem;
+    }
+
     @include breakpoint($largeBreakpoint) {
-        padding: 5rem;
+        padding: 4rem 0rem;
     }
 }
 

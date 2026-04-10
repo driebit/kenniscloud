@@ -10,20 +10,16 @@
 
 		{% include "homepage-feed/user-feed.tpl" %}
 
-		<div class="home-kg">
-			<div class="main-container">
+		<div class="home-kg o-main-container">
 				<h2 class="bordered-title">Ook Interessant</h2>
-			</div>
 
 			{% if m.kc_user.recommended_knowledge_groups as items  %}
 				{% include "list/list.tpl" items=items hide_showmore_button extraClasses="c-card-list--suggestions" id=id %}
 			{% endif %}
 
-			<div class="main-container">
 				<a href="{{ m.rsc.page_kennisgroepen.page_url }}" class="btn--primary">
 					Bekijk alle kennisgroepen
 				</a>
-			</div>
 		</div>
 
 	{% else %}

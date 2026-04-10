@@ -21,7 +21,7 @@
     --list-content-bg: $grey;
     position: relative;
     border: 1px solid $altoGrey;
-    border-radius: 2px;
+    border-radius: $borderRadius;
     background-color: $white;
     transition: box-shadow 0.2s;
 
