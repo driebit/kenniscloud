@@ -559,7 +559,7 @@ Integration of content from KennisCloud into other sites/on other platforms incl
 
 When visiting the admin edit page of a page (content resource) the pulldown menu on the View (Bekijk) button shows the various representations available for the resource.
 
-The HTML-version of a page includes an **OpenGraph** description of the content, enabling preview integration for e.g. social media, or inclusion on your own site. You can try out these page previews using an OpenGraph validator service such as https://orcascan.com/tools/open-graph-validator, providing the url of the KennisCloud-page.
+The HTML-version of a page includes an **OpenGraph** description of the content, enabling preview integration for e.g. social media, or inclusion on your own site. You can try out these page previews using an OpenGraph validator service such as https://leerob.com/og or https://orcascan.com/tools/open-graph-validator, providing the url of the KennisCloud-page.
 
 For all formats data output is limited by what is defined in the ACL (Access Control List) to be visible for the logged-in user, or anonymous. For elevated view permissions OAuth2 tokens can be created in the Authentication - OAuth2 Applications admin menu, e.g. when used from a trusted server (to list/show things from KennisCloud on an external site).
 
