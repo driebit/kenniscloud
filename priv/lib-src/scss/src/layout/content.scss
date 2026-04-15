@@ -19,7 +19,7 @@ main {
 .page-container {
     @include mq(min-width, $mediumBreakpoint) {
         width: 100%;
-        max-width: 1000px;
+        max-width: $containerMaxWidth;
         margin: 0 auto;
         display: flex;
         flex-flow: row wrap;
@@ -112,7 +112,7 @@ main {
 .page-intro .og-data {
     width: 100%;
     max-width: none;
-    padding: 2rem;
+    padding: 0rem;
     margin: 2rem 0 1rem;
     display: flex;
     flex-direction: column;
@@ -373,20 +373,30 @@ main {
 
 .page-intro--contribution,
 .page-intro--reference {
-    background: $green;
+    background: $white;
+    border: 1px solid $kgColor;
+    border-radius: $borderRadius;
+    color: $kgColor;
 
     .category-of {
-        background: $greenDark;
+        background: $kgColor;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
     }
 
     .keywords {
         .btn--secondary {
-            background: $greenDark;
+            background: $kgColor;
 
             @include setInteractive {
-                background: $greenDarker;
+                color: $white;
+                background: color-mix(in srgb, $kgColor 80%, black);
             }
         }
+    }
+
+    .btn--like {
+        color: $kgColor;
     }
 }
 

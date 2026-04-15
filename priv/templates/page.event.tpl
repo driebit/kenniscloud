@@ -126,9 +126,7 @@
         {% endblock %}
 
         {% block content_bottom %}
-            <div class="main-container--related">
-                {% catinclude "main-aside/main-aside.tpl" id %}
-            </div>
+            {% catinclude "main-aside/main-aside.tpl" id %}
         {% endblock %}
 
     </main>

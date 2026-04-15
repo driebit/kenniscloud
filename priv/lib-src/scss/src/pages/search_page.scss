@@ -1,9 +1,10 @@
-@use 'sass:color';
+@use "sass:color";
 
 body {
     .c-search {
         background-color: $white;
         gap: 0;
+        margin-bottom: 4rem;
 
         .list__item__image {
             background-color: $kgColor;
@@ -38,7 +39,6 @@ body {
     .c-full-text-search__wrapper {
         width: 90%;
         max-width: 100rem;
-
     }
 
     .c-full-text-search__searchbar {
@@ -46,7 +46,6 @@ body {
         border: none;
         border-radius: 0;
         background-color: $white;
-
     }
 
     .c-search-filters {
@@ -71,7 +70,8 @@ body {
         }
     }
 
-    .c-multiselect__option input[type="checkbox"], .c-checkboxes__item input[type="checkbox"] {
+    .c-multiselect__option input[type="checkbox"],
+    .c-checkboxes__item input[type="checkbox"] {
         appearance: none;
         width: 1.5rem;
         height: 1.5rem;
@@ -85,7 +85,7 @@ body {
         outline-offset: 1px;
 
         &:checked {
-            background: $mainThemeColor; 
+            background: $mainThemeColor;
         }
 
         &:focus {
@@ -109,5 +109,4 @@ body {
         color: $white;
         border: 1px solid $white;
     }
-
 }
