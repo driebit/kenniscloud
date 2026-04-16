@@ -1253,6 +1253,17 @@ get_prod_data() ->
 
         ],
         predicates=[
+            % The entry on About is only indicative, to remind of that this
+            % needs to be configured manually in the predicate's admin edit
+            % page, as fixtures defined for resources created by other
+            % modules are not automatically applied by schema management.
+            {about, [
+                    {title, {trans, [{nl, <<"Over">>},
+                                     {en, <<"About">>}]}},
+                    {language, [en,nl]}
+                ], [
+                    {text, text}
+            ]},
             {like, [
                     {title, {trans, [{nl, <<"Waardering">>},
                                      {en, <<"Appreciation">>}]}},
