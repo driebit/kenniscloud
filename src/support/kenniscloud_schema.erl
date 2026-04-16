@@ -21,7 +21,8 @@
 -export([
     manage_schema/2,
     manage_data/2,
-    example_event/0
+    example_event/0,
+    set_supported_predicate_connections/3
 ]).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
@@ -98,6 +99,35 @@ manage_schema({upgrade, 21}, _Context) ->
                 {seo_noindex, true}
             ]}
         ]
+    };
+manage_schema({upgrade, 22}, _Context) ->
+    #datamodel{
+        categories=[
+            {predicate_constraint, meta, [
+                {title, {trans, [
+                    {nl, <<"Predikaatbeperking">>},
+                    {en, <<"Predicate constraint">>}
+                ]}},
+                {language, [nl,en]}
+            ]}
+        ]
+    };
+manage_schema({upgrade, 23}, _Context) ->
+    #datamodel{
+        resources=[
+            {contribution_constraint_for_about, predicate_constraint, [
+                {title, {trans, [
+                    {nl, <<"Predikaatbeperking op \"Over\" voor Bijdragen">>},
+                    {en, <<"Predicate constraint on \"About\" for Contributions">>}
+                ]}},
+                {language, [nl,en]}
+            ]}
+        ],
+        edges=[
+            {contribution, hasconstraint, contribution_constraint_for_about},
+            {contribution_constraint_for_about, hasscope, about},
+            {contribution_constraint_for_about, includes, reference}
+        ]
     }.
 
 manage_data(install, Context) ->
@@ -153,7 +183,45 @@ manage_data({upgrade, 20}, Context) ->
     remove_unused_predicate(hasattachment, Context),
     ok;
 manage_data({upgrade, 21}, _Context) ->
+    ok;
+manage_data({upgrade, 22}, _Context) ->
+    ok;
+manage_data({upgrade, 23}, _Context) ->
+    %set_supported_predicate_connections(about, [{text, undefined}, {contribution, reference}], Context)
     ok.
+
+set_supported_predicate_connections(Predicate, Connections, Context) ->
+    Id = m_rsc:rid(Predicate, Context),
+    ConnIds = lists:map(fun ({S,O}) -> {m_rsc:rid(S, Context), m_rsc:rid(O, Context)} end, Connections),
+    ?DEBUG(manage_predicate_validfor(Id, ConnIds, [], Context)).
+
+% manage_predicate_validfor is taken from z_datamodel,
+% vendored here because it is not exported
+manage_predicate_validfor(_Id, [], _Options, _Context) ->
+    ok;
+manage_predicate_validfor(Id, [{SubjectCat, ObjectCat} | Rest], Options, Context) ->
+    F = fun(S, I, C) ->
+        case z_db:q("SELECT 1 FROM predicate_category WHERE predicate_id = $1 AND is_subject = $2 AND category_id = $3", [S, I, C], Context) of
+            [{1}] ->
+                ok;
+            _ ->
+                z_db:q("insert into predicate_category (predicate_id, is_subject, category_id) values ($1, $2, $3)", [S, I, C], Context),
+                ok
+        end
+    end,
+    case SubjectCat of
+        undefined -> nop;
+        _ ->
+            {ok, SubjectCatId} = m_rsc:name_to_id(SubjectCat, Context),
+            F(Id, true, SubjectCatId)
+    end,
+    case ObjectCat of
+        undefined -> nop;
+        _ ->
+            {ok, ObjectCatId} = m_rsc:name_to_id(ObjectCat, Context),
+            F(Id, false, ObjectCatId)
+    end,
+    manage_predicate_validfor(Id, Rest, Options, Context).
 
 migrate_project(ProjId, Context0) ->
     ?zInfo("Data upgrade, turning ~p into a kennisgroep", [ProjId], Context0),
@@ -1253,6 +1321,34 @@ get_prod_data() ->
 
         ],
         predicates=[
+            {hasconstraint, [
+                    {title, {trans, [{nl, <<"Heeft beperking">>},
+                                     {en, <<"Has constraint">>}]}},
+                    {language, [en,nl]}
+                ], [
+                    {category, predicate_constraint}
+            ]},
+            {hasscope, [
+                    {title, {trans, [{nl, <<"Is van toepassing op (werkingsgebied)">>},
+                                     {en, <<"Has scope">>}]}},
+                    {language, [en,nl]}
+                ], [
+                    {predicate_constraint, predicate}
+            ]},
+            {includes, [
+                    {title, {trans, [{nl, <<"Omvat (is inclusief, staat toe)">>},
+                                     {en, <<"Includes">>}]}},
+                    {language, [en,nl]}
+                ], [
+                    {predicate_constraint, category}
+            ]},
+            {excludes, [
+                    {title, {trans, [{nl, <<"Sluit uit (is exclusief)">>},
+                                     {en, <<"Excludes">>}]}},
+                    {language, [en,nl]}
+                ], [
+                    {predicate_constraint, category}
+            ]},
             {like, [
                     {title, {trans, [{nl, <<"Waardering">>},
                                      {en, <<"Appreciation">>}]}},
