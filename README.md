@@ -545,3 +545,43 @@ collections of the users performing the action.
 
 See the documentation of [zotonic_mod_driebit_activity](https://github.com/driebit/zotonic_mod_driebit_activity)
 for more information and available options.
+
+## Integrating KennisCloud
+
+Integration of content from KennisCloud into other sites/on other platforms include the following mechanisms:
+
+- Previews via **OpenGraph** data, available within the HTML rendering of a page itself
+- Sharing a page via **Mastodon**
+- ActivityStreams/**ActivityPub** JSON
+- RDF JSON-LD and Turtle (TTL) **linked data** (Turtle is a human- and machine-readable plain text format for linked data), supporting multiple vocabularies or ontologies, such as **schema.org**
+- Zotonic native **JSON export** format - currently contains the most data details, among the available formats
+- **OAuth2** tokens
+
+When visiting the admin edit page of a page (content resource) the pulldown menu on the View (Bekijk) button shows the various representations available for the resource.
+
+The HTML-version of a page includes an **OpenGraph** description of the content, enabling preview integration for e.g. social media, or inclusion on your own site. You can try out these page previews using an OpenGraph validator service such as https://leerob.com/og or https://orcascan.com/tools/open-graph-validator, providing the url of the KennisCloud-page.
+
+For all formats data output is limited by what is defined in the ACL (Access Control List) to be visible for the logged-in user, or anonymous. For elevated view permissions OAuth2 tokens can be created in the Authentication - OAuth2 Applications admin menu, e.g. when used from a trusted server (to list/show things from KennisCloud on an external site).
+
+In RDF/linked data views like ActivityPub KennisCloud content is mapped to RDF types (http://www.w3.org/1999/02/22-rdf-syntax-ns#type) from the schema.org vocabulary (per default) as follows:
+
+- Knowledge Group (KennisGroep) → https://schema.org/Collection
+- Contribution (Bijdrage) → https://schema.org/Article
+- Meetup → https://schema.org/Event
+- Keywords → https://schema.org/DefinedTerm
+
+For these types the following schema.org properties are likely to be of interest:
+
+- https://schema.org/name (the title)
+- https://schema.org/description (summary)
+- https://schema.org/startDate (start datetime, e.g. for an Event)
+- https://schema.org/endDate (end datetime, e.g. for an Event)
+- https://schema.org/url (url to point to for more information)
+- https://schema.org/location (e.g. the location where the Event takes place)
+    - https://schema.org/addressCountry
+    - https://schema.org/addressLocality
+    - https://schema.org/postalCode
+    - https://schema.org/streetAddress
+- https://schema.org/keywords (keywords linked to Knowledge Groups, Meetups, Contributions etc)
+
+Apart from sharing of KennisCloud pages via Mastodon, ActivityPub support prepares Zotonic for deeper integration with federated social media platforms. For a complete integration though, the platform would need to present KennisCloud users (the ones who want to be listed as “followable”) via the “WebFinger” protocol (to be able to use the @user@kenniscloud.nl handle format). Platforms that support using ActivityPub without WebFinger should already be able to fetch activities from KennisCloud using the ActivityPub url of the user: e.g. https://kenniscloud.nl/rdf/activitypub/{userid}.
