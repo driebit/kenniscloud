@@ -956,30 +956,7 @@ observe_tick_1h(tick_1h, Context) ->
 observe_tick_24h(tick_24h, Context) ->
     % Update the token for AZB:
     kenniscloud_azb:refresh_token(Context),
-
-    % Check all references and if the last update was done more than 'StaleDays'
-    % days ago, trigger an update on the same URI ('website').
-    StaleDays = z_convert:to_integer(m_config:get_value(site, stale_reference_days, 7, Context)),
-    Now = calendar:universal_time(),
-    % Note: if nothing has changed (including the metadata fetched in 'on_rsc_update'),
-    % then this leaves the resource unmodified.
-    m_category:foreach(
-        reference,
-        fun(RscId, Ctx) ->
-            Website = m_rsc:p(RscId, <<"website">>, Ctx),
-            LastModified = m_rsc:p(RscId, <<"modified">>, Ctx),
-            SinceLastUpdate = z_datetime:diff(LastModified, Now),
-            case SinceLastUpdate >= {{0, 0, StaleDays}, {0, 0, 0}} of
-                true ->
-                    m_rsc:update(RscId, #{<<"website">> => Website}, Ctx);
-                false ->
-                    ok
-            end
-        end,
-        % Note: we use sudo here to have the permission to update all references
-        % (regardless of who initially created them).
-        z_acl:sudo(Context)
-    ).
+    kenniscloud_reference:refresh_all(Context).
 
 observe_validate_subjects({validate_subjects, {postback, Id, Value, Args}}, Context) ->
     case proplists:get_value(<<"id">>, Args, undefined) of
