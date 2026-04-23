@@ -2,8 +2,6 @@
 .sass-cache
 files/*
 !files/fixtures
-!files/hdt
-files/hdt/*.hdt
 priv/lib/css/*
 priv/lib/js/*
 node_modules

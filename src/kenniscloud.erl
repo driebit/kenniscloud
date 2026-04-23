@@ -36,7 +36,6 @@
 -export([
     manage_schema/2,
     manage_data/2,
-    generate_hdt_dataset/2,
     event/2,
 
     observe_acl_is_allowed/2,
@@ -89,31 +88,6 @@ manage_schema(Version, Context) ->
 
 manage_data(Version, Context) ->
     kenniscloud_schema:manage_data(Version, Context).
-
-generate_hdt_dataset(QueryId, Context) ->
-    %% Serialize data
-    IoData = lists:map(
-               fun(Id) ->
-                       R = m_rdf:to_triples(Id, Context),
-                       ginger_turtle_kenniscloud:serialize(R)
-               end,
-               z_search:query_([{query_id, QueryId}], Context)
-              ),
-    %% Write to file
-    Ttl = io_lib:format("/tmp/kenniscloud_~s.ttl", [QueryId]),
-    ok = file:write_file(Ttl, IoData, [write]),
-    %% Convert to HDT
-    Hdt = io_lib:format("/tmp/kenniscloud_~s.hdt", [QueryId]),
-    Cmd1 = io_lib:format("rdf2hdt ~s ~s", [Ttl, Hdt]),
-    os:cmd(Cmd1),
-    %% Move file to "files"
-    SiteDir = z_path:site_dir(Context),
-    %% 1) Create dir
-    os:cmd(io_lib:format("mkdir ~s/files/hdt", [SiteDir])),
-    %% 2) Move file
-    os:cmd(io_lib:format("mv ~s ~s/files/hdt/~s.hdt", [Hdt, SiteDir, QueryId])),
-    %% Done
-    ok.
 
 event(#postback{message={contribution_to_task, [{id, ContributionId}, {dispatch_to, DispatchTo}]}}, Context) ->
     case m_rsc:update(ContributionId, #{<<"category_id">> => task}, Context) of
@@ -938,17 +912,6 @@ observe_tick_1h(tick_1h, Context) ->
             kenniscloud_weekly:send(Context);
         {1, 22} -> % Mondays at 22:00 UTC (23:00/24:00 +01:00)
             kenniscloud_azb:update_keywords(Context);
-        {_, 1} ->
-            generate_hdt_dataset(dataset_contributions, Context);
-        {_, 2} -> % Process the most active category at quiet time (3/4 am in our timezone)
-            generate_hdt_dataset(dataset_remarks, Context);
-        {_, 3} ->
-            generate_hdt_dataset(dataset_events, Context);
-        {_, 4} ->
-            generate_hdt_dataset(dataset_references, Context);
-        {_, 5} -> % At 5 utc things are already getting busy in our timezone, so process the least active categories then
-            generate_hdt_dataset(dataset_regions, Context),
-            generate_hdt_dataset(dataset_knowledge_groups, Context);
         _ ->
             ok
     end.

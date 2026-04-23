@@ -23,9 +23,6 @@
 
     {unsubscribe, ["unsubscribe", mailing], controller_template, [{template, "page_unsubscribe.tpl"}]},
 
-    {dcat, ["dcat"], controller_template, [{template, "dcat.tpl"}, {content_type, "text/turtle"}]},
-    {hdt, ["hdt", '*'], controller_file, [{root, ["hdt"]}]},
-
     {crowd,        ["crowd", id],         controller_page, [{template, "crowd/crowd.tpl"}, {is_canonical, false}]},
     {crowd_signup, ["crowd", id, "join"], controller_page, [{template, "crowd/participant_signup.tpl"}, {is_canonical, false}]},
     {crowd_mode,   ["crowd", id, mode],   controller_page, [{template, "crowd/crowd.tpl"}, {is_canonical, false}]},
