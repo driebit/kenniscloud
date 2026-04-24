@@ -6,7 +6,7 @@
 
     {% catinclude "masthead/masthead.tpl" id %}
     {% with m.search[{query hasobject=[id,'hasregion'] cat="acl_collaboration_group" pagelen=1000}] as kc_groups %}
-        <main>
+        <main class="o-main-container">
             <div class="kg-intro">
                 <div class="kg-intro__content">
                     {% catinclude "category-of/category-of.tpl" id %}
@@ -23,7 +23,7 @@
                 {% catinclude "top-aside/top-aside.tpl" id kc_groups=kc_groups %}
             </div>
 
-            <div class="kg-contributions">
+            <div class="kg-contributions o-main-container">
                 {% catinclude "main-aside/main-aside.tpl" id kc_groups=kc_groups %}
             </div>
 

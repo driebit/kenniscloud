@@ -6,7 +6,7 @@
 
     {% include "masthead/masthead.tpl" id=id %}
 
-    <main>
+    <main class="o-main-container">
         <div class="kg-intro">
             <div class="kg-intro__content">
                 {% catinclude "category-of/category-of.tpl" id rsc_id=id %}
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="kg-contributions">
+        <div class="kg-contributions o-main-container">
             <ul class="list">
                 {% for member in id|kc_collaboration_group_members %}
                     {% include "list/list-item.person.tpl" id=member %}

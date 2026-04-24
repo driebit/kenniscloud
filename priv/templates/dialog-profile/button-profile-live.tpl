@@ -6,8 +6,6 @@
                 id=user.id
                 fallback_rsc_id=m.rsc.custom_avatar_fallback.id
             %}
-
-            <span>{{ user.title|truncate:20 }}</span>
         </a>
 
     {% endwith %}

@@ -5,7 +5,7 @@
 {% block title %}Bevestiging uitschrijven mail{% endblock%}
 
 {% block content %}
-<main>
+<main class="o-main-container">
     <div class="page-container">
         <div class="page-body">
             {% if m.acl.user as user %}

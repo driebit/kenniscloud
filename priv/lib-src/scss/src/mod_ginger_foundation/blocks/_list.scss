@@ -1,6 +1,6 @@
 .list {
-    width: 90%;
-    @include size(max-width, 1000);
+    width: 100%;
+    max-width: $containerMaxWidth;
     @include size(padding-top, $standardOffset);
     margin: 0 auto;
     margin-bottom: 3rem;
@@ -21,7 +21,7 @@
 
 .list--vertical {
     width: 90%;
-    @include size(max-width, 1000);
+    max-width: $containerMaxWidth;
     @include size(padding-top, $standardOffset);
     margin: 0 auto;
 }
@@ -93,6 +93,9 @@
 
 .c-card-list--suggestions .list__item__information {
     display: initial;
+    font-weight: normal;
+    font-family: $bodyFontFamily;
+    font-size: 1.4rem;
 }
 
 .list__item__content__meta {

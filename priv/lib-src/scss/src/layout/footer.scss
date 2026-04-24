@@ -1,20 +1,26 @@
 .main-footer {
     @include size(min-height, 200);
-    @include size(padding, 25, 0);
     position: relative;
     z-index: 0;
-    background: $grey;
+    background: $kgColor;
     font-family: $secondaryFontFamily;
     -webkit-font-smoothing: antialiased;
+    width: 95%;
+    margin: 0 auto 2.5vw;
+    max-width: $containerMaxWidth;
+    border-radius: $borderRadius;
+    padding: 3rem;
+    min-width: unset;
 
     @include mq(min-width, $mediumBreakpoint) {
-        width: 100%;
+        padding: 5rem;
+
         @include size(min-height, $footerHeight);
-        @include size(padding, 50, 0);
+        margin: 0 auto 2.5vw;
 
         .main-footer__container {
-            width: 90%;
-            @include size(max-width, 1000);
+            width: 100%;
+            max-width: $containerMaxWidth;
             margin: 0 auto;
             position: relative;
             display: flex;
@@ -27,6 +33,7 @@
             flex-flow: row nowrap;
             justify-content: space-between;
         }
+        margin: 0 auto 4rem;
     }
 }
 
@@ -44,7 +51,7 @@
 
     @include mq(min-width, $mediumBreakpoint) {
         flex-grow: 50%;
-	}
+    }
 
     @include mq(min-width, $largeBreakpoint) {
         flex-grow: 0;
@@ -62,8 +69,8 @@
 
         &:hover,
         &:focus {
-            color: $mainThemeColor;
-            text-decoration: none;
+            color: $white;
+            text-decoration: underline;
         }
 
         &:active {
@@ -177,5 +184,18 @@
 }
 
 .main-footer__column--title {
-	@extend .main-footer__column;
+    @extend .main-footer__column;
+    font-size: 3rem;
+}
+
+.c-footer__logo {
+    width: 10rem;
+}
+
+.c-footer__logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.75rem;
+    font-weight: 300;
+    font-family: $bodyFontFamily;
 }

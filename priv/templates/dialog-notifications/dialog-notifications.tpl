@@ -1,4 +1,4 @@
-<div id="elm-notifications" class="notifications">
+<div id="elm-notifications">
 </div>
 {% javascript %}
     var notificationsElement = document.getElementById("elm-notifications");

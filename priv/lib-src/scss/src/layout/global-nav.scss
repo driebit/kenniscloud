@@ -1,27 +1,30 @@
 .global-nav {
     width: 100%;
-    @include size(height, 60);
+    height: 4rem;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 500;
-    background-color: $white;
-    @include size(line-height, 60);
-    @include size(font-size, 15);
+    backdrop-filter: blur(2px);
+    height: 6rem;
     font-weight: 400;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.13);
     font-family: $secondaryFontFamily;
+    background-color: $white;
+
+    @include breakpoint($mediumBreakpoint) {
+        background-color: unset;
+    }
 }
 
 .global-nav__logo {
     display: inline-block;
     height: 100%;
     position: relative;
-    margin-left: 2rem;
+    margin: 2rem;
     transition: transform 0.3s;
     transform-origin: left center;
     font-size: 2rem;
-    color: $mainThemeColor;
+    color: $kgColor;
     -webkit-font-smoothing: antialiased;
 
     img {
@@ -36,14 +39,17 @@
     }
 
     @include setInteractive {
-        color: $mainThemeColor;
         text-decoration: none;
-        transform: scale(1.1);
+    }
+
+    @include breakpoint($mediumBreakpoint) {
+        color: white;
     }
 
     @include mq(min-width, $largeBreakpoint) {
         margin-left: 0;
-        font-size: 2.8rem;
+        font-size: 2rem;
+        color: inherit;
 
         img {
             width: 50px;
@@ -59,7 +65,7 @@
     @include size(top, 120);
     right: 0;
     z-index: 1000;
-    background-color: $menuMobileBgColor;
+    background-color: $white;
     transform: translateX(100%);
     transition: all 250ms ease-out;
 
@@ -72,6 +78,7 @@
         display: block;
         @include size(line-height, 18);
         border-bottom: 1px solid color-mix(in srgb, $typographyColor 40%, white);
+        color: inherit;
     }
 
     a {
@@ -79,7 +86,7 @@
         @include size(padding, 12, 14);
         transition: background 250ms linear;
         text-align: left;
-        color: $grey;
+        color: inherit;
         transition: color 0.3s;
 
         &:hover,
@@ -115,29 +122,30 @@
 
     @include mq(min-width, $smallBreakpoint) {
         width: 35%;
-        height: 100%;
     }
 
     @include mq(min-width, $largeBreakpoint) {
         display: flex;
         align-items: center;
         width: auto;
-        margin-top: 10px;
         position: static;
         transform: none;
         background: none;
         transition: none;
+        margin: 0;
 
         > li {
             border: none;
+            padding: 2.5rem 0px 2.5rem;
+            border-top: 3px solid transparent;
+        }
+
+        .is-active {
+            border-top: 3px solid $kgColor;
         }
 
         a {
             padding: 0 15px;
-        }
-
-        > li:first-child a {
-            padding-left: 0;
         }
     }
 }
@@ -153,8 +161,8 @@
     z-index: 1000;
     background: $mainThemeColor;
     @include size(line-height, 60);
-    transform: translateX(100%);
     transition: all 250ms ease-out;
+    transform: translateX(100%);
 
     .is-open & {
         transform: translateX(0);
@@ -170,13 +178,28 @@
     }
 
     @include mq(min-width, $largeBreakpoint) {
-        width: auto;
-        position: absolute;
-        top: 0.3rem;
-        right: 10rem;
+        display: flex;
+        position: initial;
+        width: fit-content;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
         background: none;
         transform: none;
-        transition: none;
+    }
+}
+
+.global-nav__notifications {
+    position: fixed;
+    top: 1.85rem;
+    right: 6rem;
+    z-index: 1100;
+
+    @include breakpoint($largeBreakpoint) {
+        position: static;
+        display: flex;
+        align-items: center;
+        z-index: auto;
     }
 }
 
@@ -186,19 +209,19 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: $white;
+    color: white;
     transition: color 0.3s;
 
     @include setInteractive {
-        color: $white;
+        color: $kgColor;
         text-decoration: none;
     }
 
     @include mq(min-width, $largeBreakpoint) {
-        color: $grey;
+        color: inherit;
 
         @include setInteractive {
-            color: $mainThemeColor;
+            color: $kgColor;
 
             i {
                 background-color: $mainThemeColor;
@@ -222,7 +245,9 @@
         border-radius: 50%;
         font-size: 16px;
         color: $mainThemeColor;
-        transition: background 0.3s, color 0.4s;
+        transition:
+            background 0.3s,
+            color 0.4s;
 
         &:before {
             position: relative;
@@ -248,21 +273,23 @@
 }
 
 .profile--global-nav {
+    margin-top: 1.25rem;
+
     .avatar__image {
         display: inline-block;
         @include size(width, 30);
         @include size(height, 30);
         margin: 0 10px;
         position: relative;
-        top: -2px;
         border-radius: 50%;
     }
 
     @include mq(min-width, $largeBreakpoint) {
+        margin-top: unset;
         .avatar__image {
             order: 2;
-            width: 50px;
-            height: 50px;
+            width: 100%;
+            height: 100%;
         }
     }
 }
@@ -275,30 +302,36 @@
 }
 
 @include mq(min-width, $largeBreakpoint) {
+    .global-nav__meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
     .global-nav {
-        position: static;
+        position: relative;
         height: auto;
-    }
-
-    .global-nav__logo {
-        //flex: 100%;
-    }
-
-    .global-nav__menu {
-        flex: 100%;
+        z-index: 100;
     }
 
     .global-nav__container {
         display: flex;
         flex-flow: row wrap;
         width: 90%;
-        @include size(max-width, 1000);
+        max-width: $containerMaxWidth;
         margin: 0 auto;
         position: relative;
+        justify-content: space-between;
+        align-items: center;
+        color: $kgColor;
     }
 
     .toggle-menu {
         display: none;
+    }
+
+    .t--home .global-nav__container {
+        color: $white;
     }
 }
 
@@ -306,5 +339,10 @@
     .is-open .global-nav__menu {
         height: calc(100% - (#{$globalNavHeight + $globalNavHeight}px));
         overflow-y: scroll;
+    }
+}
+.global-nav.do_global_nav.is-open {
+    .global-nav__actions {
+        transform: translateX(0);
     }
 }

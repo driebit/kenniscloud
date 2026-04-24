@@ -29,6 +29,8 @@
 
 .home-kg {
     padding: 30px 0;
+    width: 95%;
+    margin: 0 auto;
 
     @include breakpoint($largeBreakpoint) {
         position: relative;
@@ -37,42 +39,28 @@
 }
 
 .home-regions {
-    padding: 30px 0;
+    padding: 3rem;
+    width: 95%;
+    max-width: $containerMaxWidth;
+    margin: 2rem auto;
+    border-radius: $borderRadius;
     background: $greyLight;
 
     .btn--primary.-blue:first-child {
         margin-left: 0;
     }
-}
 
-.home-members {
-    padding: 30px;
+    @include breakpoint($smallBreakpoint) {
+        padding: 3rem 0rem;
+    }
+
+    @include breakpoint($largeBreakpoint) {
+        padding: 4rem 0rem;
+    }
 }
 
 .home-members__list {
     display: flex;
-    flex-flow: row wrap;
-    margin: 20px 0;
-
-    .person {
-        flex-shrink: 0;
-        margin-right: 20px;
-        margin-bottom: 20px;
-
-        &:hover {
-            .person__content {
-                top: 83px;
-                border-radius: 2px;
-            }
-        }
-    }
-
-    .avatar__image {
-        width: 70px;
-        height: 70px;
-    }
-
-    @include mq(min-width, $mediumBreakpoint) {
-        margin: 40px 0;
-    }
+    gap: 1rem;
+    margin-bottom: 6rem;
 }

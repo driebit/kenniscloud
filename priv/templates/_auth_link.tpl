@@ -10,6 +10,6 @@
     not m.acl.user
 %}
     <a class="login--global-nav" href="{% url logon p=`home`|url %}" title="{_ logon/signup _}">
-        <i class="icon--person"></i> <span>{_ logon/signup _}</span>
+        <span>{_ logon/signup _}</span>
     </a>
 {% endif %}

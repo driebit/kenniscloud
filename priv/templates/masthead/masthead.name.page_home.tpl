@@ -6,13 +6,12 @@
 				{% if not m.acl.user %}
 					{% include "summary/summary.tpl" %}
 				{% endif %}
+				{% if not m.acl.user %}
+					<a href="{% url logon p={page id=id}|url %}" class="btn--primary">Doe mee!</a>
+				{% else %}
+					<a href="{{ m.rsc.page_kennisgroepen.page_url }}" class="btn--primary -icon">Bekijk de kennisgroepen</a>
+				{% endif %}
 			</div>
-			{% if not m.acl.user %}
-				<a href="{% url logon p={page id=id}|url %}" class="btn--primary">Doe mee!</a>
-			{% else %}
-				<a href="{{ m.rsc.page_kennisgroepen.page_url }}" class="btn--primary -icon">Bekijk de kennisgroepen</a>
-				{# {% include "page-actions/page-action-create-group.tpl" id=id tabs_enable=["new"] btn_class="btn--primary" btn_title="Start nu je eigen kennisgroep" %} #}
-			{% endif %}
 		</div>
 
 	</div>

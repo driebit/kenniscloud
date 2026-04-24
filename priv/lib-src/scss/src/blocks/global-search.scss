@@ -58,6 +58,7 @@
     transition: transform 0.3s ease-out;
     background-color: $white;
     text-indent: 0px;
+    display: none;
 
     &.is-visible {
         transform: translateX(0);
@@ -83,7 +84,6 @@
     [type="submit"] {
         display: block;
         width: 40px;
-        //width: 45px;
         height: 100%;
         position: absolute;
         top: 0px;
@@ -192,19 +192,30 @@
     position: absolute;
     top: 0;
     z-index: 9999;
+    right: 8.5rem;
 
     .search-form__label {
         display: none;
     }
+
+    @include breakpoint($largeBreakpoint) {
+        right: unset;
+    }
 }
 
 .c-nav-search {
-    width: fit-content;
+    width: 4rem;
     margin-left: auto;
-    margin-right: 31rem;
+    margin-right: 7rem;
 
     @include breakpoint($largeBreakpoint) {
-        margin-left: 15rem;
+        margin: 0;
+        position: relative;
+        height: 6rem;
+    }
+
+    @include breakpoint($hugeBreakpoint) {
+        width: 22rem;
     }
 }
 
@@ -219,22 +230,40 @@
 }
 
 .c-nav-search__input {
-    border: 1px solid lightgray;
     padding: 0.5rem 1rem;
     border-radius: 5rem;
     height: 4rem;
     display: flex;
     margin-top: 1.25rem;
-    max-width: 19rem;
+    max-width: 4rem;
+    border: 1px solid transparent;
+    background-color: transparent;
 
-    @include breakpoint($largeBreakpoint) {
+    @include breakpoint($hugeBreakpoint) {
         max-width: 22rem;
+        margin: 1rem 0;
+        border: 1px solid lightgray;
+        background-color: rgba(255, 255, 255, 0.388);
+    }
+
+    input {
+        background: none;
+        display: none;
+
+        @include breakpoint($hugeBreakpoint) {
+            display: block;
+        }
     }
 }
 
 .c-nav-search .search-suggestions__submit {
     border: 0;
     background: none;
+    color: inherit;
+
+    @include breakpoint($hugeBreakpoint) {
+        color: $grey;
+    }
 }
 
 .search-suggestions__suggestions {

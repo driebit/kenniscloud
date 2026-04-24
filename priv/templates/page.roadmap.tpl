@@ -5,7 +5,7 @@
 {% block content %}
     {% include "masthead/masthead.text.tpl" %}
 
-    <main id="main-content" class="main-content">
+    <main class="o-main-container" id="main-content" class="main-content">
         <div class="roadmap">
             {% include "roadmap/roadmap-actions.tpl" %}
 

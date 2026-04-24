@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <main>
+    <main class="o-main-container">
         <div class="page-header">
             <div class="page-intro">
 
@@ -27,9 +27,7 @@
         {% block page_filters %}{% endblock %}
 
         {% block content_bottom %}
-            <div class="main-container--related">
-                {% catinclude "main-aside/main-aside.tpl" id %}
-            </div>
+            {% catinclude "main-aside/main-aside.tpl" id %}
         {% endblock %}
 
     </main>

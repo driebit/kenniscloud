@@ -4,7 +4,7 @@
 
 {% block content %}
     {% if id.o.hasbanner|default:id.o.depiction[1] as masthead %}
-        <main id="main-content">
+        <main class="o-main-container" id="main-content">
             <div class="methodology-masthead">
                 <div class="methodology-masthead__bg" style="background-image: url({% image_url masthead.id mediaclass="masthead" %});"></div>
                 <div class="methodology-container">

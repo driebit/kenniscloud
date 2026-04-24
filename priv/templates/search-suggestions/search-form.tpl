@@ -26,7 +26,9 @@ as
     <div class="{{ wrapperclass }}">
         <label style="display:none;" class="search-form__label" for="qs">{_ Search _}</label>
         <div class="c-nav-search__input">
-          <button type="submit" class="{{ buttonclass }}" title="{_ Search _}"><img src="/lib/images/icon-font/--search.svg" /></button>
+            <button type="submit" class="{{ buttonclass }}" title="{_ Search _}">
+                {% include "icons/--search-icon.tpl" %}
+            </button>
 
           <input type="search"
               aria-label=_"Search"

@@ -21,7 +21,7 @@
     --list-content-bg: $grey;
     position: relative;
     border: 1px solid $altoGrey;
-    border-radius: 2px;
+    border-radius: $borderRadius;
     background-color: $white;
     transition: box-shadow 0.2s;
 
@@ -142,7 +142,7 @@
 }
 
 .list-item-kg__top {
-    min-height: 45px;
+    min-height: 3.5rem;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -431,6 +431,8 @@
 .list__item {
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(128, 128, 128, 0.401);
+    border-radius: $borderRadius;
 
     img {
         border-radius: 3px;
@@ -451,18 +453,6 @@
             cursor: pointer;
             z-index: 11;
         }
-
-        @include setInteractive {
-            .list__item__title {
-                background: color-mix(in srgb, $greyLight 90%, black);
-            }
-
-            &.is-kg {
-                .list__item__title {
-                    background: color-mix(in srgb, $kgColor 90%, black);
-                }
-            }
-        }
     }
 
     h3 {
@@ -471,10 +461,20 @@
     }
 
     .category-of {
-        padding-bottom: 3px;
-        border-bottom-width: 4px;
-        border-color: $typographyColor;
-        font-size: $superSmallFont;
+        margin: 0;
+        padding: 0;
+        margin-top: 2rem;
+    }
+
+    .category-of__cat {
+        padding: 0.5rem 1.25rem;
+        color: white;
+        border-radius: 3rem;
+        border: 0;
+        background: $kgColor;
+        font-family: $primaryFontFamily;
+        background: $kgColor;
+        margin: 2rem 0rem;
     }
 
     .keywords {
@@ -498,7 +498,6 @@
 .list__item__content {
     padding: 0 15px;
     position: relative;
-    border: 1px solid $greyLight;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     background: $white;
@@ -511,14 +510,13 @@
 }
 
 .list__item__content--faq {
-    padding: 0 15px;
+    padding: 1.5rem;
     position: relative;
     border: 1px solid $greyLight;
     background: $white;
 
     @include mq(min-width, $mediumBreakpoint) {
         height: fit-content;
-        padding-bottom: 0rem;
     }
 }
 
@@ -541,26 +539,13 @@
 }
 
 .list__item__title {
-    padding: 10px 15px;
-    margin: -45px auto 0;
-    position: relative;
-    border-radius: 3px;
-    -webkit-font-smoothing: antialiased;
-    background: $greyLight;
-    z-index: 10;
-    transition: background 0.3s;
+    color: $kgColor;
 
     .is-kg & {
-        color: $white;
-        background: $kgColor;
+        color: $kgColor;
 
         .category-of {
             border-color: $white;
-        }
-
-        @include mq(min-width, $mediumBreakpoint) {
-            height: 160px;
-            overflow: hidden;
         }
     }
 
@@ -672,6 +657,9 @@
 }
 
 .main-aside--person {
+    width: 95%;
+    max-width: $containerMaxWidth;
+    margin: 0 auto;
     margin-top: 20px;
 
     @include mq(min-width, $mediumBreakpoint) {

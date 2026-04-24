@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <main>
+    <main class="o-main-container">
         <div class="page-header -allin">
             {% include "page-title/page-title.tpl" id=id title="Alles voor: "++""++id.title++"" %}
         </div>
