@@ -23,7 +23,10 @@
 
     insert_opengraph_data/3,
     get_opengraph_data/2,
-    library_data_url_from_url/1
+    library_data_url_from_url/1,
+
+    refresh_all/1,
+    refresh/2
 ]).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
@@ -100,4 +103,46 @@ get_opengraph_data(Url, Context) ->
                 [],
                 Context),
             #{}
+    end.
+
+
+% Checks all references (with a separate task for each): if the last update was
+% done more than 'site.stale_reference_days' days ago, then it triggers an update
+% on the same URI ('website').
+refresh_all(Context) ->
+    m_category:foreach(
+        reference,
+        fun(RscId, Ctx) ->
+            z_pivot_rsc:insert_task(
+                kenniscloud_reference,
+                refresh,
+                <<"kenniscloud_reference:refresh:", (z_convert:to_binary(RscId))/binary>>,
+                [RscId, Ctx],
+                Context
+            )
+        end,
+        Context
+    ).
+
+refresh(RscId, Context) ->
+    StaleDays = z_convert:to_integer(m_config:get_value(site, stale_reference_days, 7, Context)),
+    Now = calendar:universal_time(),
+    % Note: we use sudo here to have the permission to update all references
+    % (regardless of who initially created them).
+    SudoContext = z_acl:sudo(Context),
+
+    % Note: if nothing has changed (including the metadata fetched in 'on_rsc_update'),
+    % then this leaves the resource unmodified.
+    case m_rsc:p(RscId, <<"website">>, SudoContext) of
+        undefined -> ok;
+        <<>> -> ok;
+        Website ->
+            LastModified = m_rsc:p(RscId, <<"modified">>, SudoContext),
+            SinceLastUpdate = z_datetime:diff(LastModified, Now),
+            case SinceLastUpdate >= {{0, 0, StaleDays}, {0, 0, 0}} of
+                true ->
+                    m_rsc:update(RscId, #{<<"website">> => Website}, SudoContext);
+                false ->
+                    ok
+            end
     end.
