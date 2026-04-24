@@ -510,14 +510,13 @@
 }
 
 .list__item__content--faq {
-    padding: 0 15px;
+    padding: 1.5rem;
     position: relative;
     border: 1px solid $greyLight;
     background: $white;
 
     @include mq(min-width, $mediumBreakpoint) {
         height: fit-content;
-        padding-bottom: 0rem;
     }
 }
 

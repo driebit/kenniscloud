@@ -9,6 +9,7 @@
     border: 1px solid currentColor;
     color: white;
     transition: 0.3s;
+    filter: invert(1);
 
     .icon--notification {
         line-height: 1.5rem;
@@ -19,6 +20,7 @@
         color: $mainThemeColor;
         background-color: $white;
         transition: 0.3s;
+        filter: unset;
     }
 
     &.-active {
@@ -32,6 +34,7 @@
         height: 3.5rem;
         font-size: 2rem;
         color: inherit;
+        filter: unset;
 
         @include setInteractive {
             border-color: $kgColor;
@@ -67,6 +70,7 @@
 .notifications {
     z-index: 1100;
     color: $white;
+    position: relative;
 
     @include mq(min-width, $largeBreakpoint) {
         color: inherit;

@@ -189,6 +189,20 @@
     }
 }
 
+.global-nav__notifications {
+    position: fixed;
+    top: 1.85rem;
+    right: 6rem;
+    z-index: 1100;
+
+    @include breakpoint($largeBreakpoint) {
+        position: static;
+        display: flex;
+        align-items: center;
+        z-index: auto;
+    }
+}
+
 .login--global-nav,
 .profile--global-nav {
     display: flex;
@@ -259,6 +273,8 @@
 }
 
 .profile--global-nav {
+    margin-top: 1.25rem;
+
     .avatar__image {
         display: inline-block;
         @include size(width, 30);
@@ -269,6 +285,7 @@
     }
 
     @include mq(min-width, $largeBreakpoint) {
+        margin-top: unset;
         .avatar__image {
             order: 2;
             width: 100%;
@@ -285,6 +302,12 @@
 }
 
 @include mq(min-width, $largeBreakpoint) {
+    .global-nav__meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
     .global-nav {
         position: relative;
         height: auto;

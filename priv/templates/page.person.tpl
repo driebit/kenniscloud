@@ -67,8 +67,7 @@
             <h3 class="bordered-title">Over mijzelf</h3>
             {% include "summary/summary.tpl" %}
         </div>
-
     </div>
-
     {% catinclude "main-aside/main-aside.tpl" id %}
+</div>
 {% endblock %}

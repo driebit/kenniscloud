@@ -1,6 +1,6 @@
 {% extends "base.tpl" %}
 
-{% block body_class %}t--knowledge-group{% endblock %}
+{% block body_class %}t--knowledge-group c-additional-content{% endblock %}
 
 {% block content %}
 {% with id as collab_group %}

@@ -9,10 +9,12 @@
     margin: 0 auto 2.5vw;
     max-width: $containerMaxWidth;
     border-radius: $borderRadius;
-    padding: 5rem;
+    padding: 3rem;
     min-width: unset;
 
     @include mq(min-width, $mediumBreakpoint) {
+        padding: 5rem;
+
         @include size(min-height, $footerHeight);
         margin: 0 auto 2.5vw;
 
@@ -183,4 +185,17 @@
 
 .main-footer__column--title {
     @extend .main-footer__column;
+    font-size: 3rem;
+}
+
+.c-footer__logo {
+    width: 10rem;
+}
+
+.c-footer__logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.75rem;
+    font-weight: 300;
+    font-family: $bodyFontFamily;
 }
