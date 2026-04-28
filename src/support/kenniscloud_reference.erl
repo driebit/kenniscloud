@@ -83,8 +83,7 @@ get_opengraph_data(Url, Context) ->
         [],
         Context
     ),
-    Url1 = z_convert:to_list(Url),
-    case z_url_metadata:fetch(Url1) of
+    case z_url_metadata:fetch(Url) of
         {ok, MD} ->
             ImageUrl = case z_url_metadata:p([<<"twitter:image:src">>, <<"twitter:image">>, <<"og:image">>], MD) of
                 undefined -> undefined;
@@ -97,9 +96,17 @@ get_opengraph_data(Url, Context) ->
             },
             maps:filter(fun(_Key, Value) -> is_binary(Value) orelse Value =:= undefined end, Meta);
         {error, Reason} ->
+            ErrorMessage = case Reason of
+                {ErrorCode, _Url, _Headers, _Length, _Data} ->
+                    <<"error ", (z_convert:to_binary(ErrorCode))/binary>>;
+                {failed_connect, _} ->
+                    <<"failed to connect">>;
+                _ ->
+                    <<"unexpected error">>
+            end,
             z:warning(
-                "KennisCloud: error fetching opengraph data for Url '~s': ~p",
-                [Url1, Reason],
+                "KennisCloud: error fetching opengraph data for Url '~s': ~s",
+                [Url, ErrorMessage],
                 [],
                 Context),
             #{}
