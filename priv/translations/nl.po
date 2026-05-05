@@ -726,6 +726,14 @@ msgstr "reageerde op de bijdrage van"
 msgid "Skip"
 msgstr "Overslaan"
 
+#: user/sites/kenniscloud/templates/homepage-feed/visitor-feed.tpl:5
+msgid "Recently published posts"
+msgstr "Recent gepubliceerde berichten"
+
+#: user/sites/kenniscloud/templates/homepage-feed/visitor-feed.tpl:6
+msgid "Log in to see your personalized updates"
+msgstr "Log in om je persoonlijke updates te zien"
+
 #priv/templates/keywords/status-tags.tpl
 msgid "Preparation"
 msgstr "Voorwerk"
