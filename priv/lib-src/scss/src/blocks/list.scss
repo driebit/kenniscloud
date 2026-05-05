@@ -2,6 +2,7 @@
     list-style: none;
     display: grid;
     gap: 3rem;
+    grid-template-columns: minmax(0, 1fr);
 
     @include mq(min-width, $mediumBreakpoint) {
         grid-template-columns: repeat(2, 1fr);
@@ -212,6 +213,7 @@
     position: relative;
     -webkit-font-smoothing: antialiased;
     color: $white;
+    word-break: break-all;
 
     h3 {
         position: relative;
@@ -433,6 +435,7 @@
     overflow: hidden;
     border: 1px solid rgba(128, 128, 128, 0.401);
     border-radius: $borderRadius;
+    height: 100%;
 
     img {
         border-radius: 3px;

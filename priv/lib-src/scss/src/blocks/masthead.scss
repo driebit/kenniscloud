@@ -103,6 +103,10 @@
 
     .main-container.no-banner {
         padding: 4rem 0;
+
+        @include breakpoint($mediumBreakpoint) {
+            padding: 13rem 0 3rem;
+        }
     }
 
     .masthead--person__banner {

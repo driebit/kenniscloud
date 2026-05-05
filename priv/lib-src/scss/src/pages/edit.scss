@@ -117,8 +117,19 @@
                 margin: 0;
             }
         }
+
+        .form-control {
+            height: auto;
+        }
+
+        label {
+            padding: 0;
+        }
     }
 
+    label {
+        padding: 0.5rem 1rem;
+    }
     .selection-buttons {
         .selected {
             width: auto;
@@ -183,6 +194,7 @@
     .with-elm {
         .list__item {
             margin: 0;
+            margin-bottom: 1rem;
         }
     }
 }
