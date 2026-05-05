@@ -6,8 +6,8 @@
             {% endfor %}
         </ul>
     {% elif id.o.subject %}
-        <p><a href="{% url ginger_edit id=id %}">Koppel andere tags</a> aan deze bijdrage, dan heb je meer kans op suggesties uit de bibliotheekcatalogus.</p>
+        <p><a href="{% url ginger_edit id=id %}">{_ Link other keywords _}</a> aan deze bijdrage, dan heb je meer kans op suggesties uit de bibliotheekcatalogus.</p>
     {% else %}
-        <p><a href="{% url ginger_edit id=id %}">Voeg tags toe</a> aan deze bijdrage om suggesties uit de bibliotheekcollectie te krijgen.</p>
+        <p><a href="{% url ginger_edit id=id %}">{_ Add keywords _}</a> aan deze bijdrage om suggesties uit de bibliotheekcollectie te krijgen.</p>
     {% endif %}
 {% endwith %}

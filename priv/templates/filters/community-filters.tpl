@@ -5,7 +5,7 @@
 	<div class="filters__inner">
 		<form id="filter_form" method="post" action="postback" class="filter-form do_filter_form">
 			{% if m.search[{query cat="keyword" sort="pivot_title"}] as result %}
-				<h3>Tags</h3>
+				<h3>{_ Keywords _}</h3>
 				<ul class="keywords">
 					{% for id in result %}
 						<li>

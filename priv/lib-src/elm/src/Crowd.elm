@@ -1168,7 +1168,7 @@ viewSelection selected =
             text "*Niets gehovered*"
 
         Just (TagNode tag) ->
-            text ("Tag " ++ Translation.toString Translation.NL tag.title)
+            text ("Trefwoord " ++ Translation.toString Translation.NL tag.title)
 
         Just (ParticipantNode participant) ->
             case participant of
