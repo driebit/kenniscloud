@@ -71,6 +71,11 @@ init(Context) ->
         [{main_date, "timestamp with time zone"}],
         Context
     ),
+    z_pivot_rsc:define_custom_pivot(
+        kenniscloud_groups,
+        [{last_contributed, "timestamp with time zone"}],
+        Context
+    ),
     m_config:set_value(mod_acl_user_groups, collab_group_link, <<"member">>, Context),
     m_config:set_value(mod_acl_user_groups, collab_group_update, <<"manager">>, Context),
     m_config:set_value(site, maptiler_key, <<"">>, Context),
@@ -449,26 +454,56 @@ observe_custom_pivot({custom_pivot, Id}, Context0) ->
         _ ->
             true
     end,
+    PivotsKcUsers = [{kenniscloud_users, [{has_depiction, HasDepiction}]}],
 
     % The "main" date displayed in cards/pages of each resource:
     DateStart = m_rsc:p(Id, <<"date_start">>, SudoContext),
     PubStart = m_rsc:p(Id, <<"publication_start">>, SudoContext),
     Created = m_rsc:p(Id, <<"created">>, SudoContext),
     IsEvent = m_rsc:is_a(Id, event, SudoContext),
-
     MainDate = if
         IsEvent andalso DateStart =/= undefined -> DateStart;
         PubStart =/= undefined -> PubStart;
         true -> Created
     end,
-    [
-        {kenniscloud_users,
-            [{has_depiction, HasDepiction}]
-        },
-        {kenniscloud_rscs,
-            [{main_date, MainDate}]
-        }
-    ].
+    PivotsKcRsc = [{kenniscloud_rscs, [{main_date, MainDate}]}],
+
+    % A "last contributed to" date for kennisgroepen: for each kennisgroep this
+    % is the most recent date between the modification date of the kennisgroep
+    % itself and the creation dates of all its resource (ignoring subgroups).
+    PivotsKcGroups = case m_rsc:is_a(Id, acl_collaboration_group, SudoContext) of
+        false ->
+            % If a resource is not a kennisgroup we don't add it to this custom
+            % pivot at all, but we request its content group to be repivoted:
+            case m_rsc:p(Id, content_group_id, SudoContext) of
+                ContentGroupId
+                when is_integer(ContentGroupId) andalso ContentGroupId =/= Id ->
+                    z_pivot_rsc:insert_queue(ContentGroupId, SudoContext);
+                _ ->
+                    ok
+            end,
+            [];
+        true ->
+            % Otherwise, we find the time and add it to the custom pivot:
+            MaybeNewestRscAt = z_db:q1("
+                SELECT created FROM rsc WHERE
+                content_group_id = $1
+                ORDER BY created DESC LIMIT 1
+                ",
+                [Id],
+                SudoContext
+            ),
+            Modified = m_rsc:p(Id, <<"modified">>, SudoContext),
+            LastContributed = case MaybeNewestRscAt of
+                {{_,_,_},{_,_,_}} = NewestRecAt when NewestRecAt > Modified ->
+                    NewestRecAt;
+                _ ->
+                    Modified
+            end,
+            [{kenniscloud_groups, [{last_contributed, LastContributed}]}]
+    end,
+
+    PivotsKcUsers ++ PivotsKcRsc ++ PivotsKcGroups.
 
 %% @doc Register activity (when the resource has been published) to send out notifications.
 -spec observe_rsc_update_done(#rsc_update_done{}, z:context()) -> ok.
