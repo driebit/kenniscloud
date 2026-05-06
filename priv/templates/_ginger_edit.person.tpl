@@ -37,9 +37,9 @@
                     </div>
                 </div>
                 <div class="form-group col-lg-4 col-md-4">
-                    <label class="control-label" for="name_first">{_ First _}</label>
+                    <label class="control-label" for="name_first">{_ First _}*</label>
                     <div>
-                        <input class="form-control" id="name_first" type="text" name="name_first" value="{{ id.name_first }}" />
+                        <input class="form-control" id="name_first" type="text" name="name_first" value="{{ id.name_first }}" required />
                     </div>
                 </div>
                 <div class="form-group col-lg-2 col-md-2">
@@ -49,9 +49,9 @@
                     </div>
                 </div>
                 <div class="form-group col-lg-4 col-md-4">
-                    <label class="control-label" for="name_surname">{_ Surname _}</label>
+                    <label class="control-label" for="name_surname">{_ Surname _}*</label>
                     <div>
-                        <input class="form-control" id="name_surname" type="text" name="name_surname" value="{{ id.name_surname }}" />
+                        <input class="form-control" id="name_surname" type="text" name="name_surname" value="{{ id.name_surname }}" required />
                     </div>
                 </div>
             </div>

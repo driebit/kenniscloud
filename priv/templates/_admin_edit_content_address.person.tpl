@@ -2,7 +2,7 @@
 
 {# Show the edit fields to edit the name of a person #}
 
-{% block widget_title %}Contactgegevens{% endblock %}
+{% block widget_title %}Contactgegevens (optioneel){% endblock %}
 {% block widget_id %}content-address{% endblock %}
 {% block widget_class %} edit-address {% endblock %}
 {% block widget_show_minimized %}false{% endblock %}
