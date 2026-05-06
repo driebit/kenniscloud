@@ -43,13 +43,11 @@
     <div class="home-regions">
         <div class="main-container">
             <h2 class="bordered-title">Deze regio's zijn al aangesloten</h2>
-            {% with m.search[{query cat="region"}] as result %}
-                {% for r in result %}
-                    {% if r.name != "region_none" %}
-                        <a href="{{ r.page_url }}" class="btn--primary -blue -icon">{{ r.title }}</a>
-                    {% endif %}
-                {% endfor %}
-            {% endwith %}
+            {% for r in m.search[{query cat="region"}] %}
+                {% if r.name != "region_none" %}
+                    <a href="{{ r.page_url }}" class="btn--primary -blue -icon">{{ r.title }}</a>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

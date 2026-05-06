@@ -172,7 +172,7 @@ is_allowed_explained(
 ) when is_integer(Rsc) ->
     UserId = z_acl:user(Context),
 
-    IsCollabManager = edge_exists(Rsc, hascollabmanager, UserId, Context),
+    IsCollabManager = kenniscloud_utils:edge_exists(Rsc, hascollabmanager, UserId, Context),
     IsOwner = m_rsc:p_no_acl(Rsc, creator_id, Context) == UserId,
     NoMembers = m_edge:objects(Rsc, hascollabmember, Context) == [],
     IsProjectManager = is_project_manager_of(Rsc, Context),
@@ -205,7 +205,7 @@ is_allowed_explained(_UserGroups, _Query, _Context) ->
 
 
 is_project_manager_of(Rsc, Context) when is_integer(Rsc) ->
-    edge_exists(project_of(Rsc, Context), hascollabmanager, z_acl:user(Context), Context).
+    kenniscloud_utils:edge_exists(project_of(Rsc, Context), hascollabmanager, z_acl:user(Context), Context).
 
 project_of(#acl_rsc{category = acl_collaboration_group} = Rsc, _Context) ->
     Rsc;
@@ -271,18 +271,6 @@ is_private_property(<<"billing_city">>) -> true;
 is_private_property(<<"billing_state">>) -> true;
 is_private_property(<<"billing_country">>) -> true;
 is_private_property(_) -> false.
-
-% @doc Utility function to check if there is an edge between two resources
--spec edge_exists(Subject, Predicate, Object, Context) -> boolean() when
-    Subject :: m_rsc:resource(),
-    Predicate :: m_rsc:resource(),
-    Object :: m_rsc:resource(),
-    Context :: z:context().
-edge_exists(undefined, _PredId, _ObjectId, _Context) -> false;
-edge_exists(_SubjectId, undefined, _ObjectId, _Context) -> false;
-edge_exists(_SubjectId, _PredId, undefined, _Context) -> false;
-edge_exists(SubjectId, PredId, ObjectId, Context) ->
-    m_edge:get_id(SubjectId, PredId, ObjectId, Context) =/= undefined.
 
 %% @doc List of ACL rules to be installed with the website.
 %% This is used in 'kenniscloud_schema:install_acl_rules/1'.

@@ -22,7 +22,8 @@
 
 -export([
     ensure_trans/1,
-    prop_text/3
+    prop_text/3,
+    edge_exists/4
 ]).
 
 
@@ -46,3 +47,15 @@ prop_text(RscId, Property, Context) ->
         Trans when is_binary(Trans) -> z_sanitize:html(Trans);
         _ -> <<"">>
     end.
+
+% @doc Utility function to check if there is an edge between two resources
+-spec edge_exists(Subject, Predicate, Object, Context) -> boolean() when
+    Subject :: m_rsc:resource(),
+    Predicate :: m_rsc:resource(),
+    Object :: m_rsc:resource(),
+    Context :: z:context().
+edge_exists(undefined, _PredId, _ObjectId, _Context) -> false;
+edge_exists(_SubjectId, undefined, _ObjectId, _Context) -> false;
+edge_exists(_SubjectId, _PredId, undefined, _Context) -> false;
+edge_exists(SubjectId, PredId, ObjectId, Context) ->
+    m_edge:get_id(SubjectId, PredId, ObjectId, Context) =/= undefined.

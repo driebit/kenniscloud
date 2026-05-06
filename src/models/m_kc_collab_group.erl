@@ -22,11 +22,6 @@
     m_get/3,
     collab_group_of/2,
     roles_of/3,
-    project_leaders/2,
-    managers/2,
-    specialists/2,
-    members/2,
-    people/2,
     includes_person/3,
     private_acl_rule_id/2,
     private_acl_rule_id/3,
@@ -50,8 +45,6 @@ m_get([ CollabGroup, <<"private_acl_rule_id">> | Rest ], _Msg, Context) ->
     {ok, {private_acl_rule_id(CollabGroup, Context), Rest}};
 m_get([ <<"collab_group_of">>, Rsc | Rest ], _Msg, Context) ->
     {ok, {collab_group_of(Rsc, Context), Rest}};
-m_get([ CollabGroup, <<"people">> | Rest], _Msg, Context) ->
-    {ok, {people(CollabGroup, Context), Rest}};
 m_get([ CollabGroup, <<"includes_person">>, User | Rest], _Msg, Context) ->
     {ok, {includes_person(User, CollabGroup, Context), Rest}};
 m_get(_, _Msg, _Context) ->
@@ -69,69 +62,62 @@ collab_group_of(Id, Context) ->
 % Returns a list with an atom for the role, or the id of the relevant predicate in case of a specilist
 -spec roles_of(m_rsc:resource_id(), m_rsc:resource_id(), #context{}) -> [role()].
 roles_of(User, CollabGroup, Context) ->
-    MemberGroups = [
-        {project_leader, project_leaders(CollabGroup, Context)},
-        {manager, managers(CollabGroup, Context)}
-    ] ++ specialists(CollabGroup, Context) ++
-    [
-        {member, members(CollabGroup, Context)}
-    ],
-
-    Roles = lists:filtermap(
-        fun ({Role, MemberGroup}) ->
-            case lists:member(User, MemberGroup) of
-                true -> {true, Role};
-                false -> false
-            end
-        end,
-        MemberGroups
-    ),
-
-    case m_kc_user:is_community_librarian(User, Context) of
-        true -> [community_librarian|Roles];
-        false -> Roles
+    CacheKey = {kc_roles_of, User, CollabGroup},
+    case z_depcache:get(CacheKey, Context) of
+        {ok, Roles} ->
+            Roles;
+        _ ->
+            Roles = lists:filtermap(
+                fun ({Role, Checked}) ->
+                    if
+                        Checked -> {true, Role};
+                        true -> false
+                    end
+                end,
+                checked_roles_of(User, CollabGroup, Context)
+            ),
+            Deps = [
+                User,
+                CollabGroup,
+                m_rsc:rid(collection_expert_predicates, Context)
+            ],
+            z_depcache:set(CacheKey, Roles, ?DAY, Deps, Context),
+            Roles
     end.
 
-project_leaders(CollabGroup, Context) ->
-    m_edge:objects(CollabGroup, hascollabmanager, Context).
-
-managers(CollabGroup, Context) ->
-    m_edge:objects(CollabGroup, hascollabmanager, Context)
-        ++ m_edge:objects(CollabGroup, hasinitiator, Context).
-
-specialists(CollabGroup, Context) ->
+checked_roles_of(User, CollabGroup, Context) ->
+    [
+        {community_librarian,
+            m_kc_user:is_community_librarian(User, Context)
+        },
+        {project_leader,
+            kenniscloud_utils:edge_exists(CollabGroup, hascollabmanager, User, Context)
+        },
+        {manager,
+            kenniscloud_utils:edge_exists(CollabGroup, hascollabmanager, User, Context)
+            orelse kenniscloud_utils:edge_exists(CollabGroup, hasinitiator, User, Context)
+        },
+        {member,
+            kenniscloud_utils:edge_exists(CollabGroup, hascollabmember, User, Context)
+        }
+    ] ++
     case m_edge:subjects(CollabGroup, has_subgroup, Context) of
         [] -> [];
         [Project | _] ->
-            SpecialistPredicates = m_edge:objects(collection_expert_predicates, haspart, Context),
-            lists:map(fun (Pred) -> {Pred, m_edge:objects(Project, Pred, Context)} end, SpecialistPredicates)
+            lists:map(
+                fun (SpecialistPredicate) ->
+                    {SpecialistPredicate,
+                        kenniscloud_utils:edge_exists(Project, SpecialistPredicate, User, Context)
+                    }
+                end,
+                m_edge:objects(collection_expert_predicates, haspart, Context)
+            )
     end.
 
-members(CollabGroup, Context) ->
-    #search_result{ result = Members } = z_search:search(
-        <<"query">>,
-        [
-            {hassubject, [CollabGroup, hascollabmember]},
-            {sort, "-pivot.kenniscloud_users.has_depiction"}
-        ],
-        1, 10000,
-        Context
-    ),
-    Members.
-
-people(CollabGroup, Context) ->
-    sets:to_list(
-        sets:from_list(
-            m_edge:objects(CollabGroup, hascollabmanager, Context) ++
-            m_edge:objects(CollabGroup, hasinitiator, Context) ++
-            m_edge:objects(CollabGroup, hascollabmember, Context)
-        )
-    ).
-
 includes_person(Person, CollabGroup, Context) ->
-    is_integer(m_edge:get_id(CollabGroup, hascollabmember, Person, Context)) orelse
-    is_integer(m_edge:get_id(CollabGroup, hascollabmanager, Person, Context)) orelse
-    is_integer(m_edge:get_id(CollabGroup, hasinitiator, Person, Context)).
+    kenniscloud_utils:edge_exists(CollabGroup, hascollabmember, Person, Context) orelse
+    kenniscloud_utils:edge_exists(CollabGroup, hascollabmanager, Person, Context) orelse
+    kenniscloud_utils:edge_exists(CollabGroup, hasinitiator, Person, Context).
 
 private_acl_rule_id(CollabGroup, Context) ->
     private_acl_rule_id(CollabGroup, acl_rules_is_edit_state(Context), Context).

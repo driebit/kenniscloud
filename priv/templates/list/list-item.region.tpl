@@ -2,7 +2,7 @@
 
 {% block with_depiction %}
 
-{% with collaboration_groups|default:(id.s.hasregion|is_a:"acl_collaboration_group") as collaboration_groups %}
+{% with collaboration_groups|default:m.kc_region[id].knowledge_groups as collaboration_groups %}
 
 {% if id.is_visible %}
 
@@ -27,9 +27,9 @@
 
                     {% include "keywords/keywords.tpl" nolink="true" slice_items=5 %}
 
-                    {% with m.search[{query content_group=collaboration_groups|make_list sort="-rsc.created" cat=["reference", "contribution", "event"] pagelen=10000000 }] as contributions %}
+                    {% with m.search.count.query::%{is_published:true region_content_groups:id cat:["reference", "contribution", "event"]} as contributions_total %}
                     <div class="list__item__meta">
-                        <p>Aantal bijdragen <b>{{ contributions|length }}</b></p>
+                        <p>Aantal bijdragen <b>{{ contributions_total.result[1] }}</b></p>
                         <p>Aantal kennisgroepen <b>{{ collaboration_groups|length }}</b></p>
                     </div>
                     {% endwith %}
