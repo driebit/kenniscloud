@@ -14,7 +14,10 @@
                     {% catinclude "page-actions/page-actions.tpl" id %}
                 </div>
 
-                {% include "subtitle/subtitle.tpl" %}
+                {% if id.function %}
+                    <h2 class="subtitle">{{ id.function }}</h2>
+                {% endif %}
+                
                 {% include "keywords/keywords.tpl" %}
             </div>
         </div>

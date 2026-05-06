@@ -314,7 +314,11 @@ msgstr ""
 
 #: user/sites/kenniscloud/templates/_ginger_edit.person.tpl:54
 msgid "Profile picture"
-msgstr ""
+msgstr "Profielfoto"
+
+#: user/sites/kenniscloud/templates/_ginger_edit.person.tpl:17
+msgid "Change profile picture"
+msgstr "Profielfoto wijzigen"
 
 #: user/sites/kenniscloud/templates/page-actions/page-action-rsvp.tpl:12
 msgid "RSVP"
