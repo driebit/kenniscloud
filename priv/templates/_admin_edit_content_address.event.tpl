@@ -47,19 +47,6 @@
 
 <div class="row">
     <div class="col-lg-6 col-md-6">
-        <div class="form-group address_facebook">
-            <label class="control-label" for="facebook">{_ Facebook _}</label>
-            <input class="form-control" id="facebook" type="text" name="facebook"
-                    value="{{ id.facebook }}">
-        </div>
-        <div class="form-group address_twitter">
-            <label class="control-label" for="twitter">{_ Twitter _}</label>
-            <input class="form-control" id="twitter" type="text" name="twitter"
-                    value="{{ id.twitter }}">
-        </div>
-    </div>
-
-    <div class="col-lg-6 col-md-6">
         <div class="form-group address_website">
             <label class="control-label" for="website">{_ Website _}</label>
             <input class="form-control" id="website" name="website" value="{{ id.website }}">

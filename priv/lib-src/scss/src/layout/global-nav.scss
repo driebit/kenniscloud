@@ -10,6 +10,7 @@
     font-weight: 400;
     font-family: $secondaryFontFamily;
     background-color: $white;
+    color: $greyDark;
 
     @include breakpoint($mediumBreakpoint) {
         background-color: unset;
@@ -24,7 +25,7 @@
     transition: transform 0.3s;
     transform-origin: left center;
     font-size: 2rem;
-    color: $kgColor;
+    color: $greyDark;
     -webkit-font-smoothing: antialiased;
 
     img {
@@ -35,15 +36,16 @@
     }
 
     .-methodology {
-        color: $grey;
+        color: $greyDark;
     }
 
     @include setInteractive {
+        color: $greyDark;
         text-decoration: none;
     }
 
     @include breakpoint($mediumBreakpoint) {
-        color: white;
+        color: $greyDark;
     }
 
     @include mq(min-width, $largeBreakpoint) {
@@ -92,13 +94,13 @@
         &:hover,
         &:active,
         &:focus {
-            color: $mainThemeColor;
+            color: $greyDark;
             text-decoration: none;
         }
     }
 
     .is-active > a {
-        color: $mainThemeColor;
+        color: $greyDark;
 
         a:hover,
         &:active,
@@ -141,7 +143,7 @@
         }
 
         .is-active {
-            border-top: 3px solid $kgColor;
+            border-top: 3px solid $greyDark;
         }
 
         a {
@@ -209,11 +211,11 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: white;
+    color: $greyDark;
     transition: color 0.3s;
 
     @include setInteractive {
-        color: $kgColor;
+        color: $greyDark;
         text-decoration: none;
     }
 
@@ -221,11 +223,11 @@
         color: inherit;
 
         @include setInteractive {
-            color: $kgColor;
+            color: $greyDark;
 
             i {
                 background-color: $mainThemeColor;
-                color: $white;
+                color: $greyDark;
             }
         }
     }
@@ -244,7 +246,7 @@
         background: $white;
         border-radius: 50%;
         font-size: 16px;
-        color: $mainThemeColor;
+        color: $greyDark;
         transition:
             background 0.3s,
             color 0.4s;
@@ -323,7 +325,7 @@
         position: relative;
         justify-content: space-between;
         align-items: center;
-        color: $kgColor;
+        color: $greyDark;
     }
 
     .toggle-menu {
@@ -331,7 +333,7 @@
     }
 
     .t--home .global-nav__container {
-        color: $white;
+        color: $greyDark;
     }
 }
 

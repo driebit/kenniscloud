@@ -24,16 +24,18 @@
 
 	{% else %}
 
-		<div class="home-kg">
-			<div class="main-container">
-				<h2 class="bordered-title">Kennisgroepen</h2>
-				{% if id.o.haspart as result %}
-					{% include "list/list.tpl" items=result hide_showmore_button extraClasses="" id=id %}
-				{% endif %}
+		{% include "homepage-feed/visitor-feed.tpl" %}
+
+		<div class="home-kg o-main-container">
+				<h2 class="bordered-title">Ook Interessant</h2>
+
+			{% if m.kc_user.recommended_knowledge_groups as items  %}
+				{% include "list/list.tpl" items=items hide_showmore_button extraClasses="c-card-list--suggestions" id=id %}
+			{% endif %}
+
 				<a href="{{ m.rsc.page_kennisgroepen.page_url }}" class="btn--primary">
 					Bekijk alle kennisgroepen
 				</a>
-			</div>
 		</div>
 
 	{% endif %}

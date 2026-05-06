@@ -11,7 +11,7 @@
         <div class="form-group">
         <input type="hidden" id="is_subjects_checked" name="is_subjects_checked" value="1">
         {% validate id="is_subjects_checked" type={postback event="validate_subjects" id=id} only_on_submit %}
-        {% include "aside-connection/aside-add-connection.tpl" id=id cat="keyword" predicate="subject" dispatch="ginger_edit" helper_text_top="Voeg minimaal 4 tot maximaal 17 thema-tags toe, zodat deelnemers aan de meetup hun interesses aan kunnen geven." %}
+        {% include "aside-connection/aside-add-connection.tpl" id=id cat="keyword" predicate="subject" title=_"Keywords" new_rsc_title=_"Keyword" dispatch="ginger_edit" helper_text_top=_"Add at least 4 and at most 17 theme keywords, so meetup participants can indicate their interests." %}
         </div>
         {% include "aside-connection/aside-add-connection.tpl" id=id cat="person" predicate="author" dispatch="ginger_edit" preset_id=q.auteur|escape title="Auteur" %}
 

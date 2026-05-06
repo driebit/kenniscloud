@@ -314,7 +314,11 @@ msgstr ""
 
 #: user/sites/kenniscloud/templates/_ginger_edit.person.tpl:54
 msgid "Profile picture"
-msgstr ""
+msgstr "Profielfoto"
+
+#: user/sites/kenniscloud/templates/_ginger_edit.person.tpl:17
+msgid "Change profile picture"
+msgstr "Profielfoto wijzigen"
 
 #: user/sites/kenniscloud/templates/page-actions/page-action-rsvp.tpl:12
 msgid "RSVP"
@@ -634,6 +638,14 @@ msgstr "Selecteer een status"
 msgid "Search for a knowledge group"
 msgstr "Zoek een kennisgroep"
 
+#: user/sites/kenniscloud/templates/top-aside/top-aside.name.page_agenda.tpl:1
+msgid "Search for a meetup"
+msgstr "Zoek een meetup"
+
+#: user/sites/kenniscloud/templates/top-aside/top-aside.name.page_community.tpl:1
+msgid "Search the community"
+msgstr "Zoek in de community"
+
 #: user/sites/kenniscloud/templates/_ginger_edit_content_status_label.tpl:4
 msgid "Progress labels are visible on the knowledgegroup"
 msgstr "Voortgang labels zijn zichtbaar in de kennisgroep"
@@ -717,6 +729,56 @@ msgstr "reageerde op de bijdrage van"
 #: user/sites/kenniscloud/templates/signup/step2.tpl:5
 msgid "Skip"
 msgstr "Overslaan"
+
+#: user/sites/kenniscloud/templates/homepage-feed/visitor-feed.tpl:5
+msgid "Recently published posts"
+msgstr "Recent gepubliceerde berichten"
+
+#: user/sites/kenniscloud/templates/homepage-feed/visitor-feed.tpl:6
+msgid "Log in to see your personalized updates"
+msgstr "Log in om je persoonlijke updates te zien"
+
+#: user/sites/kenniscloud/templates/filters/community-filters.tpl:8
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.tpl:4
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.contribution.tpl:8
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.person.tpl:25
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.event.tpl:14
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.acl_collaboration_group.tpl:9
+msgid "Keywords"
+msgstr "Trefwoorden"
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.tpl:4
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.contribution.tpl:8
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.person.tpl:25
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.event.tpl:14
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.acl_collaboration_group.tpl:9
+msgid "Keyword"
+msgstr "Trefwoord"
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.tpl:4
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.contribution.tpl:8
+msgid "Add keywords so the knowledge can be found easily and relevant connections can be made."
+msgstr "Voeg trefwoorden toe zodat de kennis goed vindbaar wordt en er relevante verbindingen gemaakt kunnen worden."
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.person.tpl:25
+msgid "Add keywords for your interests and expertise so you can make relevant connections."
+msgstr "Voeg trefwoorden toe van je interesses en expertises zodat je relevante connecties kunt maken."
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.event.tpl:14
+msgid "Add at least 4 and at most 17 theme keywords, so meetup participants can indicate their interests."
+msgstr "Voeg minimaal 4 tot maximaal 17 thema-trefwoorden toe, zodat deelnemers aan de meetup hun interesses aan kunnen geven."
+
+#: user/sites/kenniscloud/templates/library/suggestions.tpl:9
+msgid "Link other keywords"
+msgstr "Koppel andere trefwoorden"
+
+#: user/sites/kenniscloud/templates/library/suggestions.tpl:11
+msgid "Add keywords"
+msgstr "Voeg trefwoorden toe"
+
+#: user/sites/kenniscloud/templates/_aside_ginger_edit.person.tpl:9
+msgid "Add a banner image to your profile. Others will see it when they visit your profile."
+msgstr "Voeg een bannerafbeelding toe aan je profiel. Anderen zullen het zien wanneer ze je profiel bezoeken."
 
 #priv/templates/keywords/status-tags.tpl
 msgid "Preparation"

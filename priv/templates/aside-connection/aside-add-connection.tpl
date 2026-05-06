@@ -10,6 +10,7 @@
     dispatch|default:zotonic_dispatch,
     helper_text_top,
     errormsg_required|default:_"Field is required",
+    new_rsc_title|default:title,
     max|default:'none'
 as
     cat,
@@ -23,6 +24,7 @@ as
     dispatch,
     helper_text_top,
     errormsg_required,
+    new_rsc_title,
     max
 %}
 {% if id.is_editable %}
@@ -38,7 +40,7 @@ as
 
         {% include "_ginger_connection_widget.tpl" predicate_ids=[predicate.id] direction=direction %}
 
-        {% include "_action_ginger_connection.tpl" category=cat.name predicate=predicate_name new_rsc_title=title tabs_enabled=tabs_enabled tab=tab direction=direction actions=actions dispatch=dispatch %}
+        {% include "_action_ginger_connection.tpl" category=cat.name predicate=predicate_name new_rsc_title=new_rsc_title tabs_enabled=tabs_enabled tab=tab direction=direction actions=actions dispatch=dispatch %}
 
         <div class="form-group">
             <input type="hidden" id="{{ #predicate}}_{{ predicate_name }}" value="0" />

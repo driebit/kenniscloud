@@ -6,7 +6,7 @@
 
         {% include "aside-connection/aside-add-connection.tpl" id=id cat="image" predicate="hasbanner" %}
 
-        {% include "aside-connection/aside-add-connection.tpl" id=id cat="keyword" predicate="subject" %}
+        {% include "aside-connection/aside-add-connection.tpl" id=id cat="keyword" predicate="subject" title=_"Keywords" new_rsc_title=_"Keyword" %}
 
         {% include "aside-connection/aside-add-connection.tpl" id=id cat="person" predicate="hascollabmember" title=_'Lid' tabs_enabled=["find"] tab="find" %}
 

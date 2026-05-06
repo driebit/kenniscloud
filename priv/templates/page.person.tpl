@@ -8,12 +8,16 @@
 <div class="main-container person-info">
     <div class="person-info__contact">
         <h3 class="bordered-title">Biografie en interessegebieden</h3>
-        {% if id.function %}
-        <p class="person-info__contact__line"><strong>Functie</strong> <span>{{ id.function }}</span></p>
-        {% endif %}
-
         {% if id.address_city %}
         <p class="person-info__contact__line"><strong>Woonplaats</strong> <span>{{ id.address_city|truncate:30 }}</span></p>
+        {% endif %}
+
+        {% if id.website %}
+        <p class="person-info__contact__line"><strong>Website</strong> <span><a href="{{ id.website }}" target="_blank">{{ id.website }}</a></span></p>
+        {% endif %}
+
+        {% if id.linkedin %}
+        <p class="person-info__contact__line"><strong>LinkedIn</strong> <span><a href="{{ id.linkedin }}" target="_blank">{{ id.linkedin }}</a></span></p>
         {% endif %}
 
         {% with m.rsc[`collection_expert_predicates`].o.haspart as expertpredicates %}

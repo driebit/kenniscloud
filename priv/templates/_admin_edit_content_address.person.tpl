@@ -2,7 +2,7 @@
 
 {# Show the edit fields to edit the name of a person #}
 
-{% block widget_title %}Contactgegevens{% endblock %}
+{% block widget_title %}Contactgegevens (optioneel){% endblock %}
 {% block widget_id %}content-address{% endblock %}
 {% block widget_class %} edit-address {% endblock %}
 {% block widget_show_minimized %}false{% endblock %}
@@ -10,20 +10,9 @@
 {% block widget_content %}
 <div class="row">
 	<div class="col-lg-6 col-md-6">
-		<div class="form-group address_facebook">
-			<label class="control-label" for="facebook">{_ Facebook _}</label>
-			<input class="form-control" id="facebook" type="text" name="facebook" value="{{ id.facebook }}">
-		</div>
 		<div class="form-group address_website">
 			<label class="control-label" for="website">Website</label>
 			<input class="form-control" id="website" name="website" value="{{ id.website }}">
-		</div>
-	</div>
-
-	<div class="col-lg-6 col-md-6">
-		<div class="form-group address_twitter">
-			<label class="control-label" for="twitter">{_ Twitter _}</label>
-			<input class="form-control" id="twitter" type="text" name="twitter" value="{{ id.twitter }}">
 		</div>
 		<div class="form-group address_linkedin">
 			<label class="control-label" for="linkedin">{_ LinkedIn _}</label>

@@ -7,8 +7,6 @@
 }
 
 .t--home {
-    background: none;
-
     .btn--primary {
         @extend %home-primary;
         margin: 0;
