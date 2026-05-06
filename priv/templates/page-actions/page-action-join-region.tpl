@@ -1,5 +1,5 @@
 {% if m.acl.user as user %}
-{% if not id|member:user.o.hasregion %}
+{% if not id|member:m.kc_user[user].regions %}
 
     <a id="{{ #join_region }}" href="#connect"
         class="btn--primary -blue-border -icon">

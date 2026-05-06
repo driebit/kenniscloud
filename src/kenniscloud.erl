@@ -570,6 +570,23 @@ observe_search_query_term(#search_query_term{ term = <<"match_many_objects">>, a
         <<"terms">> => [MatchObjectIds | IdExcludes]
     };
 
+% Like 'content_group', but using all the content groups of the given 'Region'
+observe_search_query_term(#search_query_term{ term = <<"region_content_groups">>, arg = Region}, Context) ->
+    #{
+        <<"term">> => <<"content_group">>,
+        <<"value">> => m_kc_region:get_knowledge_groups(Region, Context)
+    };
+
+% Limits to (user) resources that are manager of any knowledge group in the given 'Region'
+observe_search_query_term(#search_query_term{ term = <<"region_kg_manager">>, arg = Region}, Context) ->
+    #{
+        <<"term">> => <<"hasanysubject">>,
+        <<"value">> => [
+            [KG, <<"hascollabmanager">>] || KG <- m_kc_region:get_knowledge_groups(Region, Context)
+        ]
+    };
+
+
 % Combine multiple filters to select resources that are part of any of the
 % current user's kennisgroepen or connected to any of their regions.
 observe_search_query_term(#search_query_term{ term = <<"user_kg_or_region">> }, Context) ->

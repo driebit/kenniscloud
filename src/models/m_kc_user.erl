@@ -66,6 +66,13 @@ m_get([ User, <<"specialist_predicates_for">>, CollabGroup | Rest ], _Msg, Conte
 m_get([ User, <<"is_community_librarian">> | Rest ] = _Path, _Msg, Context) ->
     {ok, {is_community_librarian(User, Context), Rest}};
 
+% Syntax: m.kc_user[UserId].regions
+m_get([ User, <<"regions">> | Rest ], _Msg, Context) ->
+    {ok, {regions(User, Context), Rest}};
+% Syntax: m.kc_user[UserId].knowledge_groups
+m_get([ User, <<"knowledge_groups">> | Rest ], _Msg, Context) ->
+    {ok, {knowledge_groups(User, Context), Rest}};
+
 % Unexpected path
 m_get(_, _Msg, _Context) ->
     {ok, {undefined, []}}.
@@ -93,13 +100,14 @@ m_delete(_Path, _Msg, _Context) ->
 
 is_community_librarian(UserId, Context) ->
     CommunityLibrarian = m_rsc:name_lookup(acl_user_group_community_librarian, Context),
-    lists:member(CommunityLibrarian, m_edge:objects(UserId, hasusergroup, Context)).
+    kenniscloud_utils:edge_exists(UserId, hasusergroup, CommunityLibrarian, Context).
 
 is_project_leader_of(GroupId, UserId, Context) ->
     m_edge:get_id(GroupId, hascollabmanager, UserId, Context) =/= undefined.
 
 knowledge_groups(UserId, Context) ->
-    m_rsc:s(UserId, hascollabmember, Context).
+    % Note: these are automatically cached by 'm_edge':
+    m_edge:subjects(UserId, hascollabmember, Context).
 
 
 % Returns a list of (up to) 20 recommended knowledge groups, based on the ones
@@ -118,7 +126,8 @@ recommended_knowledge_groups(UserId, Context) ->
     Result.
 
 regions(UserId, Context) ->
-    m_rsc:o(UserId, hasregion, Context).
+    % Note: these are automatically cached by 'm_edge':
+    m_edge:objects(UserId, hasregion, Context).
 
 specialist_predicates_for(UserId, Project, Context) ->
     SpecialistPredicates = m_edge:objects(collection_expert_predicates, haspart, Context),

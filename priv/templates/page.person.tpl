@@ -34,7 +34,7 @@
         {% endfor %}
         {% endwith %}
 
-        {% if id.o.hasregion as regions %}
+        {% if m.kc_user[id].regions as regions %}
         <div class="person-info__contact__line"><strong>Regio's</strong>
             <div>
                 {% for region in regions %}

@@ -3,7 +3,7 @@
 {% block with_depiction %}
 
 {% if id.is_visible %}
-{% with m.search.paged[{query is_published content_group=id cat=['contribution', 'event'] pagelen=100000}]|length as contributions_total %}
+{% with m.search.count.query::%{is_published:true content_group:id cat:['contribution', 'event']} as contributions_total %}
 	<li class="list__item  {{ extraClasses }}">
 
 		<a href="{{ id.page_url }}" class="is-kg"></a>
@@ -27,7 +27,7 @@
 
 				<div class="list__item__meta">
 					<p>Aantal leden <b>{{ id|kc_collaboration_group_members|length }}</b></p>
-					<p>Aantal bijdragen <b>{{ contributions_total }}</b></p>
+					<p>Aantal bijdragen <b>{{ contributions_total.result[1] }}</b></p>
 				</div>
 			</div>
 		</article>

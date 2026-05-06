@@ -1,10 +1,10 @@
-{% if m.acl.user %}
+{% if m.acl.user as user %}
 <aside class="c-homepage__aside">
     <h3 class="c-homepage__aside-title">Je bent aangemeld voor:</h3>
     <p class="c-homepage__aside-section-title"><i class="icon--location"></i>Regio</p>
     <ul class="c-homepage__aside-list">
 
-        {% if m.acl.user.o.hasregion as regions %}
+        {% if m.kc_user[user].regions as regions %}
 
             {% if regions|length <= 3 %}
                 {% for region in regions %}
@@ -35,7 +35,7 @@
     <p class="c-homepage__aside-section-title"><i class="icon--ob-arrow"></i>Kennisgroepen:</p>
     <ul class="c-homepage__aside-list">
 
-        {% if m.acl.user.s.hascollabmember as groups %}
+        {% if m.kc_user[user].knowledge_groups as groups %}
 
             {% if groups|length <= 3 %}
                 {% for kg in groups %}
