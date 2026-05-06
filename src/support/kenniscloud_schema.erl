@@ -236,31 +236,6 @@ get_dev_data() ->
                 {address_city, <<"Tilburg">>},
                 {language, [nl]}
             ]},
-            {page_kennisgroepen, collection, [
-                {title, <<"Kennisgroepen">>},
-                {subtitle, <<"Sluit je aan bij een kennisgroep">>},
-                {summary, <<"Ad debet similique ius, dicant inermis scribentur ut cum. Deleniti delicatissimi ea sit. Deleniti delicatissimi ea sit. Ei pro idque saperet expetendis, vim et illud prodesset.">>},
-                {language, [nl]}
-            ]},
-            {page_subjects, query, [
-                {title, <<"Wat speelt er nu?">>},
-                {summary, <<"Ad debet similique ius, dicant inermis scribentur ut cum. Deleniti delicatissimi ea sit. Deleniti delicatissimi ea sit. Ei pro idque saperet expetendis, vim et illud prodesset.">>},
-                {language, [nl]},
-                {query, <<"cat=news\ncat=event\ncat=contribution\nauthoritative\nis_published\nsort=-rsc.publication_start">>}
-            ]},
-            {page_regions, query, [
-                {title, <<"Regio’s"/utf8>>},
-                {language, [nl]},
-                {query, <<"cat_exact=region\nsort=rsc.pivot_title">>}
-            ]},
-            {page_agenda, text, [
-                {title, <<"Agenda">>},
-                {language, [nl]}
-            ]},
-            {page_community, query, [
-                {title, <<"De community">>},
-                {language, [nl]}
-            ]},
             {page_about, text, [
                 {title, <<"Over deze site">>},
                 {summary, <<"De KennisCloud is het platform van de bibliotheek waar betrokken mensen en communities uit de regio samen hun kennis delen en creeeren.">>},
@@ -610,6 +585,34 @@ get_prod_data() ->
                     {en, <<"Homepage">>}
                 ]}},
                 {page_path, <<"/">>}
+            ]},
+
+            % Main menu pages:
+            {page_kennisgroepen, query, [
+                {title, <<"Kennisgroepen">>},
+                {subtitle, <<"Sluit je aan bij een kennisgroep">>},
+                {summary, <<"Door lid te worden van een kennisgroep, kan je met anderen kennis delen over een specifiek onderwerp. Ook wordt je op de hoogte gehouden van meetups die worden georganiseerd.">>},
+                {language, [nl]},
+                {query, <<"cat=acl_collaboration_group\nis_published\nsort=-pivot.kenniscloud_groups.last_contributed">>}
+            ]},
+            {page_subjects, query, [
+                {title, <<"Wat speelt er nu?">>},
+                {summary, <<"Ad debet similique ius, dicant inermis scribentur ut cum. Deleniti delicatissimi ea sit. Deleniti delicatissimi ea sit. Ei pro idque saperet expetendis, vim et illud prodesset.">>},
+                {language, [nl]},
+                {query, <<"cat=news\ncat=event\ncat=contribution\nauthoritative\nis_published\nsort=-rsc.publication_start">>}
+            ]},
+            {page_regions, query, [
+                {title, <<"Regio’s"/utf8>>},
+                {language, [nl]},
+                {query, <<"cat_exact=region\nsort=rsc.pivot_title">>}
+            ]},
+            {page_agenda, text, [
+                {title, <<"Agenda">>},
+                {language, [nl]}
+            ]},
+            {page_community, query, [
+                {title, <<"De community">>},
+                {language, [nl]}
             ]},
 
             % Menus
