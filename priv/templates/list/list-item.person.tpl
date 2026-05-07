@@ -6,10 +6,9 @@
 
     <li class="list__item--person {{ extraClasses }}">
 
-        {# {% include "page-actions/page-action-edit-thing.tpl" extraClasses="edit-button--list-item" id=id %} #}
         <a href="{{ id.page_url }}">
             <article>
-                <div class="list__item__image">
+                <div class="list__item__image" style="background-image: url({% image_url id.o.hasbanner[1].depiction.id mediaclass='masthead' crop=dep.crop_center %}); background-size: cover;">
                     {% image dep_rsc.id mediaclass="avatar" alt="" title="" crop=dep_rsc.crop_center %}
                 </div>
                 <div class="list__item__content">
