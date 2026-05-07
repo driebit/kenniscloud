@@ -19,7 +19,7 @@
         </div>
 
         <div class="kg-contributions o-main-container">
-            <ul class="list">
+            <ul class="list list--people">
                 {% for member in id|kc_collaboration_group_members %}
                     {% include "list/list-item.person.tpl" id=member %}
                 {% endfor %}

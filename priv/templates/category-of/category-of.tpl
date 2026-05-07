@@ -32,9 +32,9 @@ as
 	{% endif %}
 
 	<span class="list__item__information">
-		<br/>
 		{% if id.o.hasregion as region %}
 			{_ In de regio _} {{ region.title}}.
+		<br/>
 		{% endif %}
 
 		{% if id.s.has_subgroup as parentKg %}

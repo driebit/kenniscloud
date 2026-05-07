@@ -5,8 +5,8 @@
 			<b>KennisCloud</b>
 			<span class="c-footer__logo-wrapper">
 				Een initiatief van:
-				<img src="/lib/images/--driebit-logo.svg" class="c-footer__logo" alt="Een initiatief van: Driebit">
-				<img src="/lib/images/bibliotheek-logo.svg" class="c-footer__logo" alt="Een initiatief van: Bibliotheek">
+				<img src="/lib/images/--driebit-logo.svg" class="c-footer__logo--driebit" alt="Een initiatief van: Driebit">
+				<img src="/lib/images/bibliotheek-logo.svg" class="c-footer__logo--bibliotheek" alt="Een initiatief van: Bibliotheek">
 			</span>
     	</p>
 
