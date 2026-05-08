@@ -116,25 +116,25 @@
 }
 
 .kg-contributions > .keywords {
-        .btn--secondary.disabled {
+    .btn--secondary.disabled {
+        background-color: $greyLight;
+        color: $grey;
+        border: 1px solid $greyLight;
+
+        @include setInteractive {
             background-color: $greyLight;
             color: $grey;
             border: 1px solid $greyLight;
-            
-            @include setInteractive {
-                background-color: $greyLight;
-                color: $grey;
-                border: 1px solid $greyLight;
-            }
-        }
-        .btn--secondary {
-            background: $blueDark;
-
-            @include setInteractive {
-                background: $blueDarker;
-            }
         }
     }
+    .btn--secondary {
+        background: $blueDark;
+
+        @include setInteractive {
+            background: $blueDarker;
+        }
+    }
+}
 
 .c-external-sevices {
     flex-wrap: wrap;
@@ -169,5 +169,15 @@
 
     @include breakpoint($mediumBreakpoint) {
         height: 100%;
+    }
+}
+
+.c-link__parentKg {
+    color: $white;
+    text-decoration: underline;
+
+    @include setInteractive {
+        color: $white;
+        text-decoration: none;
     }
 }
