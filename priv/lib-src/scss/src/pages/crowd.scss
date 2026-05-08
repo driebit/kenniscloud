@@ -254,13 +254,11 @@ div.crowd-wrapper {
 
 .list__item.person-card {
     width: 300px;
+    height: auto;
     background: $white;
     color: $grey;
 
     article .list__item__content .list__item__title {
-        color: $offwhite;
-        background-color: $grey;
-
         .category-of {
             border-color: $offwhite;
         }
