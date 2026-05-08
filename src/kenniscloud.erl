@@ -40,6 +40,7 @@
 
     observe_acl_is_allowed/2,
     observe_acl_is_allowed_prop/2,
+    observe_acl_add_sql_check/2,
 
     observe_rsc_insert/3,
     observe_rsc_entity_text/3,
@@ -307,6 +308,9 @@ observe_acl_is_allowed(#acl_is_allowed{} = Allowed, Context) ->
 
 observe_acl_is_allowed_prop(#acl_is_allowed_prop{action=_Action, object=Object, prop=Property}, Context) ->
     kenniscloud_acl:is_allowed_prop(Object, Property, Context).
+
+observe_acl_add_sql_check(#acl_add_sql_check{} = AddSqlCheck, Context) ->
+    kenniscloud_acl:add_sql_check(AddSqlCheck, Context).
 
 observe_rsc_insert(#rsc_insert{}, Props, Context) ->
     CatId = maps:get(<<"category_id">>, Props, undefined),

@@ -23,6 +23,7 @@
     collab_group_of/2,
     roles_of/3,
     includes_person/3,
+    sql_user_collabs/2,
     private_acl_rule_id/2,
     private_acl_rule_id/3,
     private_acl_rule/2
@@ -118,6 +119,17 @@ includes_person(Person, CollabGroup, Context) ->
     kenniscloud_utils:edge_exists(CollabGroup, hascollabmember, Person, Context) orelse
     kenniscloud_utils:edge_exists(CollabGroup, hascollabmanager, Person, Context) orelse
     kenniscloud_utils:edge_exists(CollabGroup, hasinitiator, Person, Context).
+
+% SQL that returns all collab group IDs of which the user is a member
+% IMPORTANT: for ACL this has to logically match 'includes_person' above
+sql_user_collabs(UserId, Context) ->
+    User = z_convert:to_list(UserId),
+    "SELECT subject_id FROM edge " ++
+    "WHERE predicate_id IN (" ++
+        z_convert:to_list(m_rsc:rid(hascollabmember, Context)) ++ "," ++
+        z_convert:to_list(m_rsc:rid(hascollabmanager, Context)) ++ "," ++
+        z_convert:to_list(m_rsc:rid(hasinitiator, Context)) ++
+    ") AND object_id = " ++ User.
 
 private_acl_rule_id(CollabGroup, Context) ->
     private_acl_rule_id(CollabGroup, acl_rules_is_edit_state(Context), Context).
