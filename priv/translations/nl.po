@@ -368,6 +368,14 @@ msgstr ""
 msgid "Show more results..."
 msgstr "Toon meer resultaten..."
 
+#: user/sites/kenniscloud/templates/show-hide-button.tpl:9
+msgid "Show more"
+msgstr "Toon meer"
+
+#: user/sites/kenniscloud/templates/show-hide-button.tpl:9
+msgid "Show less"
+msgstr "Toon minder"
+
 #: user/sites/kenniscloud/templates/_signup_form_fields.tpl:7
 msgid "Sign Up"
 msgstr ""
