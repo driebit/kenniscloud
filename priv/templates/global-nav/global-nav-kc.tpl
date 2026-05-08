@@ -2,6 +2,7 @@
     <div class="global-nav__container">
         {% block logo %}
             <a href="/" class="global-nav__logo">
+                <img src="/lib/images/cloud-grey.svg" alt="KennisCloud logo" class="global-nav__logo-image">
                 KennisCloud
             </a>
         {% endblock %}

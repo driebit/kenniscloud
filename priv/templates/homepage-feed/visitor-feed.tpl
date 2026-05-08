@@ -5,7 +5,7 @@
             <h2 class="bordered-title">{_ Recently published posts _}</h2>
             <h5>{_ Log in to see your personalized updates _}</h5>
 
-            {% if m.search[{query cat=['event', 'contribution', 'remark', 'news'] sort='-rsc.publication_start' is_published="true" pagelen=5 }] as results %}
+            {% if m.search[{query cat=['event', 'contribution', 'news'] sort='-rsc.publication_start' is_published="true" pagelen=5 }] as results %}
 
                 <ul class="c-homepage__feed" id="results">
                     {% for rsc in results %}
