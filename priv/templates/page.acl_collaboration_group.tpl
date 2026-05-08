@@ -11,6 +11,11 @@
             <div class="kg-intro__content">
                 {% spaceless %}
                     {% catinclude "category-of/category-of.tpl" id %}
+                    {% if id.s.has_subgroup as parentKg %}
+                        <p>
+                            {_ In de kennisgroep _} <a href="{{ parentKg.page_url }}" class="c-link__parentKg"><b>{{ parentKg.title }}</b></a>.
+                        </p>
+                    {% endif %}
                     {% include "_hidden-resource.tpl" %}
                 {% endspaceless %}
 
