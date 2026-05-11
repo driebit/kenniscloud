@@ -33,6 +33,8 @@ div.crowd-wrapper {
 
         .person-card {
             width: 400px;
+            max-height: 90vh;
+            overflow-y: scroll;
         }
 
         .crowd-controls {
