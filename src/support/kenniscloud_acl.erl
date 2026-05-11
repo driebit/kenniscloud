@@ -20,6 +20,7 @@
 -export([
     is_allowed/2,
     is_allowed_prop/3,
+    add_sql_check/2,
 
     rules/0
 ]).
@@ -271,6 +272,75 @@ is_private_property(<<"billing_city">>) -> true;
 is_private_property(<<"billing_state">>) -> true;
 is_private_property(<<"billing_country">>) -> true;
 is_private_property(_) -> false.
+
+
+% This encodes in search queries two ACL rules that are not automatically
+% picked up and handled by zotonic core:
+% 1. that (anonymous) users cannot access private KGs or their content,
+%    this is made with 'deny' rules, which standard search/ACL can't really cope with
+% 2. that users are able to access the content in KGs of which they are member
+%    this is done with ACL notifications (see above), which core cannot encode as SQL
+add_sql_check(AddSqlCheck, Context) ->
+    case z_acl:is_admin(Context) of
+        true ->
+            % shortcut: admin can see everything, skip filtering:
+            {"", AddSqlCheck#acl_add_sql_check.args};
+        false ->
+            % check the user group(s) for everyone else:
+            UserGroups = lists:map(
+                fun (UserGroup) -> m_rsc:p_no_acl(UserGroup, name, Context) end,
+                acl_user_groups_checks:user_groups_all(Context)
+            ),
+            add_sql_check(UserGroups, AddSqlCheck, Context)
+    end.
+
+
+% shortcut: project managers can see everything, skip filtering:
+add_sql_check([<<"acl_user_group_project_manager">> | _UGs], AddSqlCheck, _Context) ->
+    {"", AddSqlCheck#acl_add_sql_check.args};
+% community librarians (and UG above) can see everything inside kennisgroepen,
+% so we don't add any additional filtering, but only use the rules':
+add_sql_check([<<"acl_user_group_community_librarian">> | _UGs], AddSqlCheck, Context) ->
+    acl_user_groups_checks:acl_add_sql_check(AddSqlCheck, Context);
+% members cannot see private kennisgroep content, unless they participate in it:
+add_sql_check([<<"acl_user_group_members">> | _UGs], AddSqlCheck, Context) ->
+    {RulesClause, RulesArgs} = acl_user_groups_checks:acl_add_sql_check(AddSqlCheck, Context),
+    RscAlias = z_convert:to_list(AddSqlCheck#acl_add_sql_check.alias),
+    UserId = z_acl:user(Context),
+    case lists:flatten(RulesClause) of
+        [] ->
+            PrivContentClause = sql_exclude_private_content(UserId, RscAlias, Context),
+            {lists:flatten(PrivContentClause), RulesArgs};
+        FlatRulesClause ->
+            PrivContentClause = sql_exclude_private_content(UserId, RscAlias, Context),
+            {"(" ++ FlatRulesClause ++ " AND " ++ PrivContentClause ++ ")", RulesArgs}
+    end;
+% everyone else (unregistered/anonymous) users, cannot see private kennisgroep content
+add_sql_check([], AddSqlCheck, Context) ->
+    {RulesClause, RulesArgs} = acl_user_groups_checks:acl_add_sql_check(AddSqlCheck, Context),
+    RscAlias = z_convert:to_list(AddSqlCheck#acl_add_sql_check.alias),
+    case lists:flatten(RulesClause) of
+        [] ->
+            PrivContentClause = sql_exclude_private_content(undefined, RscAlias, Context),
+            {lists:flatten(PrivContentClause), RulesArgs};
+        FlatRulesClause ->
+            PrivContentClause = sql_exclude_private_content(undefined, RscAlias, Context),
+            {"(" ++ FlatRulesClause ++ " AND " ++ PrivContentClause ++ ")", RulesArgs}
+    end;
+add_sql_check([_UG | UGs], AddSqlCheck, Context) ->
+    add_sql_check(UGs, AddSqlCheck, Context).
+
+
+sql_exclude_private_content(undefined, RscAlias, _Context) ->
+    RscAlias ++ ".content_group_id NOT IN (" ++
+        "SELECT content_group_id FROM acl_rule_rsc " ++
+        "WHERE is_block = true AND managed_by = 'kenniscloud_private_collab_groups'"
+    ")";
+sql_exclude_private_content(UserId, RscAlias, Context) ->
+    "(" ++ sql_exclude_private_content(undefined, RscAlias, Context) ++
+    " OR " ++ RscAlias ++ ".id IN (" ++
+        m_kc_collab_group:sql_user_collabs(UserId, Context) ++
+    "))".
 
 %% @doc List of ACL rules to be installed with the website.
 %% This is used in 'kenniscloud_schema:install_acl_rules/1'.
