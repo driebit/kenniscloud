@@ -19,7 +19,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.1/jquery.fancybox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.1/jquery.fancybox.min.js"></script>
-<script src='/lib/js/maplibre-gl.js'></script>
 <script src='/lib/js/mastodon-share.js'></script>
 <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css' />
 <script src='https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js'></script>
