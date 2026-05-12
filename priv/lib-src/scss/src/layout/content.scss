@@ -183,7 +183,6 @@ main {
     a {
         display: flex;
         align-items: center;
-        color: $white;
 
         @include setInteractive {
             text-decoration: none;
