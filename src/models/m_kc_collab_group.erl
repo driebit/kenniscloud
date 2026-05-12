@@ -124,7 +124,7 @@ includes_person(Person, CollabGroup, Context) ->
 % IMPORTANT: for ACL this has to logically match 'includes_person' above
 sql_user_collabs(UserId, Context) ->
     User = z_convert:to_list(UserId),
-    "SELECT subject_id FROM edge " ++
+    "SELECT DISTINCT(subject_id) FROM edge " ++
     "WHERE predicate_id IN (" ++
         z_convert:to_list(m_rsc:rid(hascollabmember, Context)) ++ "," ++
         z_convert:to_list(m_rsc:rid(hascollabmanager, Context)) ++ "," ++
