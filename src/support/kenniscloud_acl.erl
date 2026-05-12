@@ -338,7 +338,7 @@ sql_exclude_private_content(undefined, RscAlias, _Context) ->
     ")";
 sql_exclude_private_content(UserId, RscAlias, Context) ->
     "(" ++ sql_exclude_private_content(undefined, RscAlias, Context) ++
-    " OR " ++ RscAlias ++ ".id IN (" ++
+    " OR " ++ RscAlias ++ ".content_group_id IN (" ++
         m_kc_collab_group:sql_user_collabs(UserId, Context) ++
     "))".
 
