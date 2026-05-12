@@ -118,6 +118,7 @@
     width: 220px;
     padding: 15px;
     opacity: 1;
+    display: none;
     position: absolute;
     top: 10px;
     left: 20px;
@@ -197,6 +198,7 @@
     .person__content {
         padding: 0;
         opacity: 1;
+        display: block;
         flex-grow: 1;
         position: static;
         color: inherit;
