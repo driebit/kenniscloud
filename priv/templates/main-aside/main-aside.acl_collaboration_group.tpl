@@ -11,8 +11,11 @@
 	{% endif %}
 
 
-	{% if m.search.paged[{query is_published content_group=id sort=["-is_featured", "-rsc.publication_start", "id"] cat=['contribution', 'event'] hasobject=q.tag|if:[q.tag,'subject']:"*" id_exclude=upcoming_events|make_list pagelen=6}] as result %}
-
+	{% if m.search.paged[
+		q.tag|if
+			:{query is_published content_group=id sort=["-is_featured", "-rsc.publication_start", "id"] cat=['contribution', 'event'] hasobject=[q.tag,'subject'] id_exclude=upcoming_events|make_list pagelen=6}
+			:{query is_published content_group=id sort=["-is_featured", "-rsc.publication_start", "id"] cat=['contribution', 'event'] id_exclude=upcoming_events|make_list pagelen=6}
+	] as result %}
 		<h3 id="contributions" class="bordered-title">Bijdragen</h3>
 		{% if id.has_keyword_filter %}
 			{% if m.search[{facets is_published content_group=id cat=['contribution', 'event'] id_exclude=upcoming_events|make_list}] as facetted %}
