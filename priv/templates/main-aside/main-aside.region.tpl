@@ -27,7 +27,7 @@
         "list/list.tpl"
         items=result
         list_template="list/list-item-person-small.tpl"
-        class="person"
-        extraClasses="home-members__list"
+        class="home-members__list"
+        extraClasses="person"
     %}
 {% endif %}
