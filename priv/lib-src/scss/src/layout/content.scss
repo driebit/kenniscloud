@@ -173,7 +173,7 @@ main {
 .c-document-info {
     display: flex;
     align-items: center;
-    color: $white;
+    color: inherit;
 }
 
 .page-intro__documents {
@@ -183,6 +183,7 @@ main {
     a {
         display: flex;
         align-items: center;
+        color: inherit;
 
         @include setInteractive {
             text-decoration: none;
