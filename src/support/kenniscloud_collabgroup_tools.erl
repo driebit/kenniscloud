@@ -43,7 +43,10 @@ sudo_add_group(Name, Context) ->
                 <<"title">> => iolist_to_binary(Name),
                 <<"creator_id">> => z_acl:user(Context)
             },
-            m_rsc:insert(Props, z_acl:sudo(Context));
+            Creator = z_acl:user(Context),
+            {ok, CollabGroup} = m_rsc:insert(Props, z_acl:sudo(Context)),
+            m_edge:insert(CollabGroup, hascollabmanager, Creator, z_acl:sudo(Context)),
+            {ok, CollabGroup};
         false ->
             {error, eacces}
     end.
