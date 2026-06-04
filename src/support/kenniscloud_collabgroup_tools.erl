@@ -37,16 +37,20 @@ event(#submit{message={new_collabgroup, _Args}}, Context) ->
 sudo_add_group(Name, Context) ->
     case z_acl:is_allowed(use, mod_admin, Context) of
         true ->
+            Creator = z_acl:user(Context),
             Props = #{
                 <<"is_published">> => true,
                 <<"category">> => acl_collaboration_group,
                 <<"title">> => iolist_to_binary(Name),
-                <<"creator_id">> => z_acl:user(Context)
+                <<"creator_id">> => Creator
             },
-            Creator = z_acl:user(Context),
-            {ok, CollabGroup} = m_rsc:insert(Props, z_acl:sudo(Context)),
-            m_edge:insert(CollabGroup, hascollabmanager, Creator, z_acl:sudo(Context)),
-            {ok, CollabGroup};
+            case m_rsc:insert(Props, z_acl:sudo(Context)) of
+                {ok, CollabGroup} ->
+                    m_edge:insert(CollabGroup, hascollabmanager, Creator, z_acl:sudo(Context)),
+                    {ok, CollabGroup};
+                Error ->
+                    Error
+            end;
         false ->
             {error, eacces}
     end.
