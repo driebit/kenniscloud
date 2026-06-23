@@ -693,6 +693,16 @@ observe_edge_insert(#edge_insert{predicate=hascollabmanager, subject_id=GroupId,
         _ ->
             undefined
     end;
+observe_edge_insert(#edge_insert{predicate=has_subgroup, subject_id = ParentId, object_id = SubGroupId}, Context) ->
+    % add collabmanagers from parent group
+    SudoContext = z_acl:sudo(Context),
+    lists:foreach(
+        fun (CollabManagerId) ->
+            {ok, _} = m_edge:insert(SubGroupId, hascollabmanager, CollabManagerId, SudoContext)
+        end,
+        m_edge:objects(ParentId, hascollabmanager, SudoContext)
+    ),
+    ok;
 observe_edge_insert(#edge_insert{predicate=like, subject_id=SubjectId, object_id=ObjectId}, Context) ->
     case m_rsc:is_a(SubjectId, person, Context) of
         false -> undefined;

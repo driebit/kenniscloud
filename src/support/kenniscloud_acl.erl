@@ -165,6 +165,15 @@ is_allowed_explained(
         #acl_is_allowed{ action = Action, object = SubjectId },
         Context
     );
+% CL's permissions
+is_allowed_explained(
+    [<<"acl_user_group_community_librarian">> | _],
+    #acl_is_allowed{ action = insert, object = Object = #acl_rsc{props = #{<<"category_id">> := CategoryId}} },
+    Context
+) -> case m_rsc:name_to_id(acl_collaboration_group, Context) of
+       {ok, CategoryId} -> {"CL can create knowledge groups", true};
+       _ -> undefined
+    end;
 % Project managers' permissions on resources:
 is_allowed_explained(
     [<<"acl_user_group_project_manager">> | UserGroups],
