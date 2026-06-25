@@ -165,15 +165,6 @@ is_allowed_explained(
         #acl_is_allowed{ action = Action, object = SubjectId },
         Context
     );
-% CL's permissions
-is_allowed_explained(
-    [<<"acl_user_group_community_librarian">> | _],
-    #acl_is_allowed{ action = insert, object = Object = #acl_rsc{props = #{<<"category_id">> := CategoryId}} },
-    Context
-) -> case m_rsc:name_to_id(acl_collaboration_group, Context) of
-       {ok, CategoryId} -> {"CL can create knowledge groups", true};
-       _ -> undefined
-    end;
 % Project managers' permissions on resources:
 is_allowed_explained(
     [<<"acl_user_group_project_manager">> | UserGroups],
@@ -501,12 +492,12 @@ rules() ->
             {actions, [view, insert, update, delete, link]},
             {content_group_id, acl_collaboration_group}
         ]},
-        % Community librarian can add acl_collaboration_group in standard default
-        % group otherwise they can't make a group
+        % Community librarian can add acl_collaboration_group in all collab groups
+        % otherwise they can't make (sub)groups
         {rsc, [
             {acl_user_group_id, acl_user_group_community_librarian},
             {actions, [insert]},
-            {content_group_id, default_content_group},
+            {content_group_id, acl_collaboration_group},
             {category_id, acl_collaboration_group}
         ]},
         % Project leader can add a collaboration group in the standard default
