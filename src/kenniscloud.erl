@@ -701,6 +701,13 @@ observe_edge_insert(#edge_insert{predicate=has_subgroup, subject_id = ParentId, 
         end,
         m_edge:objects(ParentId, hascollabmanager, Context)
     ),
+    % add any existing users from the subgroup, also to the parent group (like how it is done on join)
+    lists:foreach(
+        fun (MemberId) ->
+            m_edge:insert(ParentId, hascollabmember, MemberId, Context)
+        end,
+        m_edge:objects(SubGroupId, hascollabmember, Context)
+    ),
     ok;
 observe_edge_insert(#edge_insert{predicate=like, subject_id=SubjectId, object_id=ObjectId}, Context) ->
     case m_rsc:is_a(SubjectId, person, Context) of
