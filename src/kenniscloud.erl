@@ -704,7 +704,7 @@ observe_edge_insert(#edge_insert{predicate=has_subgroup, subject_id = ParentId, 
     % add any existing users from the subgroup, also to the parent group (like how it is done on join)
     lists:foreach(
         fun (MemberId) ->
-            m_edge:insert(ParentId, hascollabmember, MemberId, Context)
+           {ok, _} = m_edge:insert(ParentId, hascollabmember, MemberId, Context)
         end,
         m_edge:objects(SubGroupId, hascollabmember, Context)
     ),
