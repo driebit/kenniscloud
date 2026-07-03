@@ -64,9 +64,9 @@ view model =
     div [ class "row" ]
         [ div [ class "form-group col-xs-12" ]
             [ div []
-                [ label [ class "control-label" ] [ text "Bron toevoegen (optioneel)" ]
+                [ label [ class "control-label" ] [ text "Link naar bron toevoegen (optioneel)" ]
                 , p [ class "control-label-summary" ]
-                    [ text "Voeg hier de URL toe van bijvoorbeeld een video, artikel of website waar je bijdrage over gaat. Deze bron wordt onder je titel in het groene vlak geplaatst." ]
+                    [ text "Voeg hier de URL toe van bijvoorbeeld een video, artikel of website waar je bijdrage over gaat. Deze bron wordt onder je titel in het vlak geplaatst." ]
                 ]
             , p []
                 [ input

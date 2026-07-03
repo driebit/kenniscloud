@@ -1,5 +1,5 @@
 {# TODO ZOTONIC1: check this if/when the integration with bibliotheek.nl is fixed #}
-{% if id.og_title %}
+{% if id.og_title|default:id.title as title %}
 
 {% if nolink %}
     <div class="og-data">
@@ -17,13 +17,13 @@
         <small>{{ id.website|kc_domain_name_from_url }}</small>
 
         {% if nolink %}
-            <h3>{{ id.og_title|truncate:40 }}</h3>
+            <h3>{{ title|truncate:40 }}</h3>
         {% else %}
 
-            {% if id.og_title|match:".pdf" %}
-                <h3 class="break-word">{{ id.og_title }}</h3>
+            {% if title|match:".pdf" %}
+                <h3 class="break-word">{{ title }}</h3>
             {% else %}
-                <h3>{{ id.og_title }}</h3>
+                <h3>{{ title }}</h3>
             {% endif %}
 
             <p>{{ id.og_description|truncate:300 }}</p>
