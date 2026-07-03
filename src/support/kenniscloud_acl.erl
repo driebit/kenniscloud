@@ -492,12 +492,12 @@ rules() ->
             {actions, [view, insert, update, delete, link]},
             {content_group_id, acl_collaboration_group}
         ]},
-        % Community librarian can add acl_collaboration_group in standard default
-        % group otherwise they can't make a group
+        % Community librarian can add acl_collaboration_group in all collab groups
+        % otherwise they can't make (sub)groups
         {rsc, [
             {acl_user_group_id, acl_user_group_community_librarian},
             {actions, [insert]},
-            {content_group_id, default_content_group},
+            {content_group_id, acl_collaboration_group},
             {category_id, acl_collaboration_group}
         ]},
         % Project leader can add a collaboration group in the standard default
