@@ -6,7 +6,7 @@ as
     max
 %}
 
-    {% if id.about|is_undefined or id.about|length < 1 %}
+    {% if id.o.about|is_undefined or id.o.about|length < 1 %}
         <div id="elm-references"></div>
         {% javascript %}
             var referencesElement = document.getElementById("elm-references");
