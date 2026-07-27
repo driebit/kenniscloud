@@ -112,7 +112,7 @@ h2 {
 }
 
 h3 {
-    @include size(font-size, 25);
+    @include size(font-size, 20);
     @include size(margin-bottom, 0);
     line-height: 1.2;
 }
