@@ -48,7 +48,6 @@
     observe_rsc_update_done/2,
     observe_custom_pivot/2,
     observe_logon_ready_page/2,
-    observe_signup_form_fields/3,
     observe_signup_confirm_redirect/2,
     observe_search_query_term/2,
     observe_edge_insert/2,
@@ -528,22 +527,6 @@ observe_logon_ready_page(#logon_ready_page{ request_page = None }, Context) when
 % Otherwise let the default handler redirect the user
 observe_logon_ready_page(_LogonReadyPage, _Context) ->
     undefined.
-
-observe_signup_form_fields(signup_form_fields, FS, _Context) ->
-    FS1 = [
-        {signup_region, false},
-        {signup_tags, false},
-        % In Zotonic-0.x Ginger sites, these would have been set by 'mod_ginger_auth'.
-        {name_first, false},
-        {name_surname_prefix, false},
-        {name_surname, false},
-        {email, true},
-        {block_email, false}
-    ],
-    % This merges the above proplist on top of the 'FS' accumulator.
-    % We do it with maps as there's no straightforward way to merge proplists
-    % in Erlang's standard library.
-    proplists:from_map(maps:merge(proplists:to_map(FS), proplists:to_map(FS1))).
 
 observe_signup_confirm_redirect(#signup_confirm_redirect{}, Context) ->
     z_dispatcher:url_for(signup_step1, Context).
