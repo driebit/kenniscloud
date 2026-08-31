@@ -1,0 +1,18 @@
+on:
+  push:
+    branches: 
+    - master
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: master
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - run: |
+          git remote add sync ${{ secrets.GIT_SYNC_REMOTE }}
+          git remote update
+          git push sync master
