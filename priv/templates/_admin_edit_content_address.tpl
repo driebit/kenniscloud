@@ -1,2 +1,2 @@
 {% overrules %}
-{% block widget_show_minimized %}false{% endblock %}
+{% block widget_show_minimized %}true{% endblock %}
