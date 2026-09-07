@@ -20,6 +20,11 @@ body {
     background: $bodyBgColor;
     background-repeat: no-repeat;
 
+    white-space: wrap;
+    word-wrap: normal;
+    word-break: word;
+    hyphens: auto;
+
     &.-no-bg {
         background-image: none;
     }

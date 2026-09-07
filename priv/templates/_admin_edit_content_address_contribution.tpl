@@ -3,7 +3,7 @@
 {% block widget_title %}{_ Address _}{% endblock %}
 {% block widget_id %}content-address{% endblock %}
 {% block widget_class %} edit-address {% endblock %}
-{% block widget_show_minimized %}false{% endblock %}
+{% block widget_show_minimized %}true{% endblock %}
 
 {% block widget_content %}
 <div class="row">
@@ -40,5 +40,8 @@
             <input class="form-control" id="address_title" type="text" name="address_title" value="{{ id.address_title }}">
         </div>
     </div>
+<p class="u-padding-1"><b>Als u het hier ingevoerde adres wilt gebruiken voor de geolocatie hieronder, geef dan eerst de stad, de straat en het huisnummer op en sla vervolgens de pagina op. </b>
+{% button type="submit" id="save_stay" class="btn btn-default" text=_"Save" title=_"Save this page." disabled=not id.is_editable %}
+</p>
 </div>
 {% endblock %}
