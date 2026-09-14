@@ -72,7 +72,7 @@ is_allowed_explained(Query, Context) ->
 
 
 %% @doc part of 'is_allowed_explained/2' taking user groups into account.
--spec is_allowed_explained(list(UserGroupName), #acl_is_allowed_prop{}, z:context()) ->
+-spec is_allowed_explained(list(UserGroupName), #acl_is_allowed{}, z:context()) ->
     undefined | {Reason, Verdict} when
         UserGroupName :: binary(),
         Reason :: [string()],
@@ -82,6 +82,15 @@ is_allowed_explained([<<"acl_user_group_managers">> | _UGs], _Query, _Context) -
     undefined;
 is_allowed_explained([<<"acl_user_group_editors">> | _UGs], _Query, _Context) ->
     undefined;
+is_allowed_explained([<<"acl_user_group_knowledge_manager">> | _UGs],
+    #acl_is_allowed{
+        object = Rsc
+    },
+    Context) ->
+    UserId = z_acl:user(Context),
+    ContentGroup = m_rsc:p_no_acl(Rsc, content_group_id, Context),
+    IsCollabManager = kenniscloud_utils:edge_exists(ContentGroup, hascollabmanager, UserId, Context),
+    {"Knowledge manager can perform all actions on content within managed groups", IsCollabManager};
 % Anonymous visitors are not allowed to view private 'acl_collaboration_group'/kennisgroepen.
 % This clause may seem redundant because there are "private rules" set up for
 % these 'acl_collaboration_group' (see 'm_kc_collab_group'), however we need this
@@ -131,40 +140,6 @@ is_allowed_explained(
         true -> {"insert relation on contribution or reference for member", true};
         _ -> is_allowed_explained(UserGroups, Query, Context)
     end;
-% Project managers are allowed to view every resource
-is_allowed_explained(
-    [<<"acl_user_group_project_manager">> | _UGs],
-    #acl_is_allowed{ action = view },
-    _Context
-) ->
-    {"view allowed for project manager", true};
-% Project managers are allowed to remove themselves, but no other PMs, from a project
-is_allowed_explained(
-    [<<"acl_user_group_project_manager">> | _UGs],
-    #acl_is_allowed{
-        action = delete,
-        object = #acl_edge{ object_id = ObjectId, predicate = hascollabmanager }
-    },
-    Context
-) ->
-    case ObjectId == z_acl:user(Context) of
-        true -> {"project managers can remove themselves from a project", true};
-        false -> {"project managers can not remove other project managers than themselves", false}
-    end;
-% Project managers' permissions on resources extend to the edges that use said resources as subject
-is_allowed_explained(
-    [<<"acl_user_group_project_manager">> | UserGroups],
-    #acl_is_allowed{
-        action = Action,
-        object = #acl_edge{ subject_id = SubjectId }
-    },
-    Context
-) ->
-    is_allowed_explained(
-        [<<"acl_user_group_project_manager">> | UserGroups],
-        #acl_is_allowed{ action = Action, object = SubjectId },
-        Context
-    );
 % Project managers' permissions on resources:
 is_allowed_explained(
     [<<"acl_user_group_project_manager">> | UserGroups],
@@ -178,7 +153,6 @@ is_allowed_explained(
     NoMembers = m_edge:objects(Rsc, hascollabmember, Context) == [],
     IsProjectManager = is_project_manager_of(Rsc, Context),
     IsCollabGroup = m_rsc:is_a(Rsc, acl_collaboration_group, Context),
-    NameIsVproWaag = m_rsc:p_no_acl(Rsc, name, Context) =:= <<"vpro_waag_collaboration">>,
 
     if
         IsCollabManager ->
@@ -194,14 +168,14 @@ is_allowed_explained(
             {"allowed for project manager on collab group's resources", true};
         IsCollabGroup ->
             {"project manager does not manage collab group", false};
-        NameIsVproWaag ->
-            {"allowed for vpro_waag_collaboration for project manager", true};
         true ->
             is_allowed_explained(UserGroups, Query, Context)
     end;
 is_allowed_explained([_UserGroup | UserGroups], Query, Context) ->
     is_allowed_explained(UserGroups, Query, Context);
-is_allowed_explained(_UserGroups, _Query, _Context) ->
+is_allowed_explained([], _Query, _Context) ->
+    undefined;
+is_allowed_explained(undefined, _Query, _Context) ->
     undefined.
 
 
@@ -370,6 +344,12 @@ rules() ->
             {actions, [use]},
             {module, mod_admin}
         ]},
+        % Knowledge managers can access the admin.
+        {module, [
+            {acl_user_group_id, acl_user_group_knowledge_manager},
+            {actions, [use]},
+            {module, mod_admin}
+        ]},
         % Editors can use seo.
         {module, [
             {acl_user_group_id, acl_user_group_editors},
@@ -486,6 +466,14 @@ rules() ->
             {actions, [update]},
             {category_id, acl_collaboration_group}
         ]},
+        % Project leader can add a collaboration group in the standard default
+        % group otherwise they can't make a group
+        {rsc, [
+            {acl_user_group_id, acl_user_group_project_manager},
+            {actions, [insert]},
+            {content_group_id, default_content_group},
+            {category_id, acl_collaboration_group}
+        ]},
         % Community librarian can view and edit everything in collaboration groups
         {rsc, [
             {acl_user_group_id, acl_user_group_community_librarian},
@@ -500,14 +488,6 @@ rules() ->
             {content_group_id, acl_collaboration_group},
             {category_id, acl_collaboration_group}
         ]},
-        % Project leader can add a collaboration group in the standard default
-        % group otherwise they can't make a group
-        {rsc, [
-            {acl_user_group_id, acl_user_group_project_manager},
-            {actions, [insert]},
-            {content_group_id, default_content_group},
-            {category_id, acl_collaboration_group}
-        ]},
         % Community librarian can link acl user groups, allowing them to
         % place users into user groups
         {rsc,
@@ -519,12 +499,6 @@ rules() ->
         % Community librarian can (un)link (and used to be able to also edit) members
         {rsc, [
             {acl_user_group_id, acl_user_group_community_librarian},
-            {actions, [link]},
-            {category_id, person}
-        ]},
-        % Project leader can (un)link (and used to be able to also edit) members
-        {rsc, [
-            {acl_user_group_id, acl_user_group_project_manager},
             {actions, [link]},
             {category_id, person}
         ]},
