@@ -73,7 +73,7 @@ type alias RequestDelete =
 type Role
     = CommunityLibrarian
     | Manager
-    | ProjectLeader
+    | Coordinator
     | Specialist Int
     | Member
 

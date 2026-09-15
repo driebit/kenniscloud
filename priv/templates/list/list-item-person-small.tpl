@@ -14,7 +14,7 @@ as
         {% with
             ((is_librarian and ((`manager`|member:roles) or not collab_group))|if:
                 "person--cl":
-            ((`project_leader`|member:roles)|if:
+            ((`coordinator`|member:roles)|if:
                 "person--pl":
             ((`manager`|member:roles)|if:
                 "person--manager":
@@ -41,8 +41,8 @@ as
                         <strong>{% include "person/person-title.tpl" id=id %}</strong>
                         {% if is_librarian %}
                             <small>Community Librarian</small>
-                        {% elseif (`project_leader`|member:roles) %}
-                            <small>Projectleider</small>
+                        {% elseif (`coordinator`|member:roles) %}
+                            <small>Kennisgroepcoördinator</small>
                         {% elseif (`manager`|member:roles) %}
                             <small>Beheerder</small>
                         {% elseif active_specialist_predicates %}

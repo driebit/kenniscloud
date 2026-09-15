@@ -9,7 +9,7 @@ as
 		{% if id.o.hasusergroup.name == "acl_user_group_community_librarian" %}
 			Community Librarian
         {% elseif id|member:collab_group.o.hascollabmanager %}
-			Beheerder
+			Kennisgroepcoördinator
 		{% elseif id|is_a:"reference" or id|is_a:"event" or id|is_a:"contribution" or id|is_a:"person" or id|is_a:"acl_collaboration_group" or id|is_a:"region" %}
 			{{ m.rsc[id.category.id].title }}
         {% else %}

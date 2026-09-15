@@ -34,7 +34,7 @@
 
 -type role()
     :: community_librarian
-     | project_leader
+     | coordinator
      | manager
      | member
      | m_rsc:resource_id().
@@ -91,7 +91,7 @@ checked_roles_of(User, CollabGroup, Context) ->
         {community_librarian,
             m_kc_user:is_community_librarian(User, Context)
         },
-        {project_leader,
+        {coordinator,
             kenniscloud_utils:edge_exists(CollabGroup, hascollabmanager, User, Context)
         },
         {manager,

@@ -654,7 +654,7 @@ get_prod_data() ->
             ]},
             {acl_user_group_knowledge_group_coordinator, acl_user_group, [
                 {title, {trans, [
-                    {nl, <<"Kennisgroepcoördinator (Verbinder)">>},
+                    {nl, <<"Kennisgroepcoördinator (Verbinder)"/utf8>>},
                     {en, <<"Knowledge group coordinator">>}
                 ]}},
                 {language, [nl,en]}

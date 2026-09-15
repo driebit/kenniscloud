@@ -66,6 +66,8 @@ log_if_enabled(Text, Args, Context) ->
     undefined | {Reason, Verdict} when
         Reason :: [string()],
         Verdict :: true | false | undefined.
+is_allowed_explained(#acl_is_allowed{action = use}, _Context) ->
+    {"Permissions on module use are not handled here", undefined};
 is_allowed_explained(Query, Context) ->
     UserGroups = lists:map(fun (UserGroup) -> m_rsc:p_no_acl(UserGroup, name, Context) end, acl_user_groups_checks:user_groups_all(Context)),
     is_allowed_explained(UserGroups, Query, Context).
@@ -82,15 +84,23 @@ is_allowed_explained([<<"acl_user_group_managers">> | _UGs], _Query, _Context) -
     undefined;
 is_allowed_explained([<<"acl_user_group_editors">> | _UGs], _Query, _Context) ->
     undefined;
-is_allowed_explained([<<"acl_user_group_knowledge_manager">> | _UGs],
+is_allowed_explained([<<"acl_user_group_knowledge_group_coordinator">> | _UGs],
     #acl_is_allowed{
+        action = Action,
         object = Rsc
     },
-    Context) ->
+    Context) when Action =:= view orelse
+                  Action =:= insert orelse
+                  Action =:= update orelse
+                  Action =:= delete orelse
+                  Action =:= link
+->
     UserId = z_acl:user(Context),
     ContentGroup = m_rsc:p_no_acl(Rsc, content_group_id, Context),
-    IsCollabManager = kenniscloud_utils:edge_exists(ContentGroup, hascollabmanager, UserId, Context),
-    {"Knowledge manager can perform all actions on content within managed groups", IsCollabManager};
+    IsCollabManager =
+        ContentGroup =:= undefined orelse
+        kenniscloud_utils:edge_exists(ContentGroup, hascollabmanager, UserId, Context),
+    {"Knowledge group coordinator can perform all actions on content within managed groups", IsCollabManager};
 % Anonymous visitors are not allowed to view private 'acl_collaboration_group'/kennisgroepen.
 % This clause may seem redundant because there are "private rules" set up for
 % these 'acl_collaboration_group' (see 'm_kc_collab_group'), however we need this
@@ -344,9 +354,9 @@ rules() ->
             {actions, [use]},
             {module, mod_admin}
         ]},
-        % Knowledge managers can access the admin.
+        % Knowledge group coordinators can access the admin.
         {module, [
-            {acl_user_group_id, acl_user_group_knowledge_manager},
+            {acl_user_group_id, acl_user_group_knowledge_group_coordinator},
             {actions, [use]},
             {module, mod_admin}
         ]},
