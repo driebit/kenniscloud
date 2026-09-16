@@ -97,10 +97,12 @@ is_allowed_explained([<<"acl_user_group_knowledge_group_coordinator">> | _UGs],
 ->
     UserId = z_acl:user(Context),
     ContentGroup = m_rsc:p_no_acl(Rsc, content_group_id, Context),
-    IsCollabManager =
-        ContentGroup =:= undefined orelse
-        kenniscloud_utils:edge_exists(ContentGroup, hascollabmanager, UserId, Context),
-    {"Knowledge group coordinator can perform all actions on content within managed groups", IsCollabManager};
+    IsCollabManager = kenniscloud_utils:edge_exists(ContentGroup, hascollabmanager, UserId, Context),
+    if (IsCollabManager) ->
+        {"Knowledge group coordinator can perform all actions on content within managed groups", true};
+       (true) ->
+        {"Normal ACL rules apply to knowledge group coordinator outside managed groups", undefined}
+    end;
 % Anonymous visitors are not allowed to view private 'acl_collaboration_group'/kennisgroepen.
 % This clause may seem redundant because there are "private rules" set up for
 % these 'acl_collaboration_group' (see 'm_kc_collab_group'), however we need this
