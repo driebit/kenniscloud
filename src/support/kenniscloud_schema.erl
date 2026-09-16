@@ -336,6 +336,11 @@ get_dev_data() ->
                 {summary, <<"Community Librarian">>},
                 {language, [nl]}
             ]},
+            {person_knowledge_group_coordinator, person, [
+                {title, <<"Vincent Verbinder">>},
+                {summary, <<"Kennisgroepcoördinator / Verbinder">>},
+                {language, [nl]}
+            ]},
             {person_dorien, person, [
                 {title, <<"Dorien Drees">>},
                 {summary, <<"Webdeveloper">>},
@@ -446,6 +451,8 @@ get_dev_data() ->
 
             {person_community_librarian, hasregion, region_tilburg},
             {person_community_librarian, hasusergroup, acl_user_group_community_librarian},
+
+            {person_knowledge_group_coordinator, hasusergroup, acl_user_group_knowledge_group_coordinator},
 
             {person_dorien, hasregion, region_tilburg},
             {project_thermostaat, hascollabmember, person_dorien},
@@ -642,6 +649,13 @@ get_prod_data() ->
                 {title, {trans, [
                     {nl, <<"Project manager">>},
                     {en, <<"Project manager">>}
+                ]}},
+                {language, [nl,en]}
+            ]},
+            {acl_user_group_knowledge_group_coordinator, acl_user_group, [
+                {title, {trans, [
+                    {nl, <<"Kennisgroepcoördinator (Verbinder)"/utf8>>},
+                    {en, <<"Knowledge group coordinator">>}
                 ]}},
                 {language, [nl,en]}
             ]},
@@ -1426,6 +1440,7 @@ update_usergroup_hierarchy(Context) ->
         {R(acl_user_group_anonymous), [
             {R(acl_user_group_members), [
                 {R(acl_user_group_project_manager), []},
+                {R(acl_user_group_knowledge_group_coordinator), []},
                 {R(acl_user_group_community_librarian), [
                     {R(acl_user_group_editors), [
                         {R(acl_user_group_managers), []}
@@ -1609,6 +1624,7 @@ choice(List) ->
 
 setup_dev_users(Context) ->
     create_identity_if_not_exists(person_community_librarian, "Conny Community Librarian", "123123", [], Context),
+    create_identity_if_not_exists(person_knowledge_group_coordinator, "Vincent Verbinder", "123123", [], Context),
     create_identity_if_not_exists(person_member, "Leo Lid", "123123", [], Context).
 
 %% From mod_ginger_base/support/schema.erl: Set username and password if not set before

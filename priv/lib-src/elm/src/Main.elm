@@ -326,7 +326,7 @@ viewRemarkAvatar profile =
                         CommunityLibrarian ->
                             "person--cl"
 
-                        ProjectLeader ->
+                        Coordinator ->
                             "person--pl"
 
                         Manager ->

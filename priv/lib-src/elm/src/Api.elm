@@ -324,8 +324,8 @@ decodeRole =
                         "community_librarian" ->
                             D.succeed CommunityLibrarian
 
-                        "project_leader" ->
-                            D.succeed ProjectLeader
+                        "coordinator" ->
+                            D.succeed Coordinator
 
                         "manager" ->
                             D.succeed Manager

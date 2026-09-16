@@ -26,7 +26,7 @@
     <div>
         <p>
             Organiseer een bijeenkomst. Kun je hier hulp bij gebruiken?
-            Neem dan contact op met de {% if id.o.hascollabmanager.id.o.hasusergroup.name == "acl_user_group_project_manager" %}projectleider{% else %}Community Librarian{% endif %} van deze kennisgroep.
+            Neem dan contact op met de {% if id.o.hascollabmanager.id.o.hasusergroup.name == "acl_user_group_knowledge_group_coordinator" %}kennisgroepcoördinator{% else %}Community Librarian{% endif %} van deze kennisgroep.
         </p>
         
         <a href="{% url meetup_edit kennisgroep=id.content_group_id auteur=m.acl.user %}" class="btn--primary -icon">

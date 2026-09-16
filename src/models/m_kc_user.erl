@@ -31,7 +31,7 @@
     regions/2,
     specialist_predicates_for/3,
     is_community_librarian/2,
-    is_project_leader_of/3
+    is_coordinator_of/3
 ]).
 
 -behaviour(zotonic_model).
@@ -55,8 +55,8 @@ m_get([<<"activity_inbox">>, <<"alert">> | Rest ] = _Path, _Msg, Context) ->
     {ok, {Alert, Rest}};
 m_get([<<"is_community_librarian">> | Rest ] = _Path, _Msg, Context) ->
     {ok, {is_community_librarian(z_acl:user(Context), Context), Rest}};
-m_get([<<"is_project_leader_of">>, Project | Rest ] = _Path, _Msg, Context) ->
-    {ok, {is_project_leader_of(Project, z_acl:user(Context), Context), Rest}};
+m_get([<<"is_coordinator_of">>, Project | Rest ] = _Path, _Msg, Context) ->
+    {ok, {is_coordinator_of(Project, z_acl:user(Context), Context), Rest}};
 m_get([<<"recommended_knowledge_groups">> | Rest ] = _Path, _Msg, Context) ->
     {ok, {recommended_knowledge_groups(z_acl:user(Context), Context), Rest}};
 
@@ -102,7 +102,7 @@ is_community_librarian(UserId, Context) ->
     CommunityLibrarian = m_rsc:name_lookup(acl_user_group_community_librarian, Context),
     kenniscloud_utils:edge_exists(UserId, hasusergroup, CommunityLibrarian, Context).
 
-is_project_leader_of(GroupId, UserId, Context) ->
+is_coordinator_of(GroupId, UserId, Context) ->
     m_edge:get_id(GroupId, hascollabmanager, UserId, Context) =/= undefined.
 
 knowledge_groups(UserId, Context) ->
