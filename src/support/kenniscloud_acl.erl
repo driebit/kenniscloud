@@ -84,11 +84,11 @@ is_allowed_explained([<<"acl_user_group_managers">> | _UGs], _Query, _Context) -
     undefined;
 is_allowed_explained([<<"acl_user_group_editors">> | _UGs], _Query, _Context) ->
     undefined;
-is_allowed_explained([<<"acl_user_group_knowledge_group_coordinator">> | _UGs],
+is_allowed_explained([<<"acl_user_group_knowledge_group_coordinator">> | UGs],
     #acl_is_allowed{
         action = Action,
         object = Rsc
-    },
+    } = Query,
     Context) when Action =:= view orelse
                   Action =:= insert orelse
                   Action =:= update orelse
@@ -98,10 +98,12 @@ is_allowed_explained([<<"acl_user_group_knowledge_group_coordinator">> | _UGs],
     UserId = z_acl:user(Context),
     ContentGroup = m_rsc:p_no_acl(Rsc, content_group_id, Context),
     IsCollabManager = kenniscloud_utils:edge_exists(ContentGroup, hascollabmanager, UserId, Context),
-    if (IsCollabManager) ->
-        {"Knowledge group coordinator can perform all actions on content within managed groups", true};
-       (true) ->
-        {"Normal ACL rules apply to knowledge group coordinator outside managed groups", undefined}
+    case IsCollabManager of
+        true ->
+            {"Knowledge group coordinator can perform all actions on content within managed groups", true};
+        false ->
+            % Just returning undefined here may disregard other rules that may apply
+            is_allowed_explained(UGs, Query, Context)
     end;
 % Anonymous visitors are not allowed to view private 'acl_collaboration_group'/kennisgroepen.
 % This clause may seem redundant because there are "private rules" set up for
