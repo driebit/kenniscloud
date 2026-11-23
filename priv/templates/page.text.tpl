@@ -11,11 +11,7 @@
 
             {% include "body/body.tpl" id=id %}
 
-            {% include "blocks/blocks.tpl" id=id %}
-
-            {% block attached_media %}
-                {% include "attached-media/attached-media.tpl" id=id %}
-            {% endblock %}
+            {% include "_blocks.tpl" id=id %}
         </article>
     </main>
 {% endblock %}

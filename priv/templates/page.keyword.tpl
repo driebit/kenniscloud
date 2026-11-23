@@ -1,5 +1,4 @@
 {% extends "base.tpl" %}
-{# Note: in Zotonic 0.x this was originally part of mod_ginger_foundation #}
 
 {% block body_class %}t--no-masthead{% endblock %}
 
