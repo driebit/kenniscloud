@@ -21,6 +21,7 @@
 -mod_description("Anonymous Crowd Participants for Meetup Crowd").
 -mod_author("Driebit").
 -mod_schema(1).
+-mod_depends([mod_crowdlink, mod_server_storage]).
 
 -export([
     observe_tick_1h/2,
